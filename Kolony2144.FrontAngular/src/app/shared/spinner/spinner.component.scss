@@ -1,0 +1,23 @@
+.loading-resources {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+div.spinner-border {
+  height: 6rem;
+  width: 6rem;
+}
+
+div.spinner-positioning {
+  padding-top: 10%;
+}
+
+div.absolute-spinner {
+  position: absolute;
+  z-index: 1005;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
