@@ -1,0 +1,47 @@
+.status-bar {
+  background-color: green;
+}
+
+.tile {
+  max-height: 5em;
+  background-color: transparent;
+  min-width: 9em;
+}
+
+.card {
+  min-width: 9em;
+}
+
+.card-body {
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.card-header {
+  width: 100%;
+  text-align: center;
+}
+
+.card-text {
+  background-color: transparent;
+}
+
+.btn {
+  min-width: 5em;
+  border-color: black;
+  color: black;
+  font-family: "code-predators";
+  font-size: xx-large;
+  line-height: 0.8em;
+
+}
+
+td,
+th {
+  // font-size: smaller;
+  // padding: 0px;
+  vertical-align: middle;
+  text-align: center;
+  white-space: nowrap;
+}

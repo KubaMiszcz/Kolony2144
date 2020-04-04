@@ -1,0 +1,37 @@
+.card {
+  // max-width: 18.5rem;
+  // min-width: 18.5rem;
+}
+
+.card-header {
+  // font-size: medium;
+  font-weight: bold;
+}
+
+p {
+  margin: 0px;
+  padding: 0px;
+  // line-height: 0;
+}
+
+img {
+  max-width: 4.75em;
+  max-height: 4.75em;
+  background-size: contain;
+}
+
+table {
+  border: 1px solid darkgreen;
+  min-width: fit-content;
+  margin: 5px;
+}
+
+td,
+th {
+  font-size: smaller;
+  padding: 0px;
+}
+
+// .total {
+//   font-weight: bold;
+// }

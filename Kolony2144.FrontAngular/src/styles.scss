@@ -1,0 +1,112 @@
+/* You can add global styles to this file, and also import other style files */
+$dark-green:#006400;
+$medium-green:#90ee90;
+$light-green:#c5ffc5;
+$bright-green-lime:#00ff00;
+
+@font-face {
+  font-family: LCD14I;
+  // src: url(assets/fonts/lcd.14italic.otf) format("opentype");
+  src: url(assets/fonts/neuropol-x-rg.ttf) format("truetype");
+  // src: url('/fonts/lcd-plain/lcd-plain.ttf') format('truetype'),
+  font-size: inherit;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: code-predators;
+  src: url(assets/fonts/code-predators.regular.ttf) format("truetype");
+  font-size: inherit;
+  font-weight: 600;
+}
+
+
+body {
+  /* background-color: #5faa5f; */
+  background-color: $dark-green;
+  min-height: 100%;
+  max-height: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  // font-family: 'Fira Sans', sans-serif;
+  font-family: 'Jura', 'arial', sans-serif;
+  // font-family: 'LCD14I', 'arial', sans-serif;
+  // font-size: 1em;
+  font-size: inherit;
+  font-weight: 600;
+  overflow-x: hidden;
+}
+
+.shadow-green {
+  box-shadow: 5px 5px 5px #008a00;
+}
+
+.input-group {
+  // box-shadow: 5px 5px 5px #008a00;
+}
+
+.negative-red {
+  color: red;
+}
+
+// .btn {
+//   box-shadow: 5px 5px 5px $dark-green;
+//   vertical-align: middle;
+//   text-align: center;
+// }
+
+.btn,
+.btn-outline-primary {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.card {
+  /* background: #5FAA5F; */
+  background: $light-green;
+  border: 1px solid $dark-green;
+  border-radius: 0.25em;
+  margin: 0.5rem 0rem 0rem 0.5rem;
+  box-shadow: 5px 5px 5px #008a00;
+}
+
+.card-header {
+  /* background: #008021; */
+  background: $dark-green;
+  /* color: #ffe38f; */
+  color: ghostwhite;
+  border-radius: 0.5em 0.5em 0em 0em;
+  padding: 0.25rem 1rem 0.25rem 1rem;
+}
+
+.card-body {
+  background: $light-green;
+  /* color: #ffe38f; */
+  color: black;
+  // margin: 0.5rem 0rem 0rem  0.5rem;
+}
+
+
+td,
+th {
+  font-size: medium;
+  padding: 0px;
+  vertical-align: middle;
+  text-align: right;
+  white-space: nowrap;
+}
+
+th {
+  white-space: normal;
+  text-align: center;
+}
+
+.col-nonumbers {
+  text-align: left;
+  white-space: normal;
+}
+
+.col-numbers {
+  text-align: right;
+  white-space: nowrap;
+}

@@ -1,0 +1,44 @@
+.navbar {
+  // width: 100%;
+  min-height: -webkit-fill-available;
+  background: darkgreen;
+  // background:   #5FAA5F;
+  color: black;
+}
+
+.navbar-logo {
+  min-width: 5em;
+  border-color: black;
+  color: black;
+  font-family: "code-predators";
+  font-size: xx-large;
+  line-height: 0.8em;
+  color: lime;
+  text-align: center;
+}
+
+.menu {
+  align-items: flex-start;
+}
+
+label {
+  // color: rgba(255, 255, 255, .5);
+  color: lime;
+  border: 1px solid lime;
+  background: darkgreen;
+  // border-color: rgba(255,255,255,.5);
+}
+
+.btn-outline-primary {
+  box-shadow: 5px 5px 5px #008a00;
+}
+
+.btn-outline-primary:hover {
+  color: black;
+  background: lime;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled).active {
+  color: black;
+  background: limegreen;
+}
