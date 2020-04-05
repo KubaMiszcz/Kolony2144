@@ -35,7 +35,7 @@ export class SharedService {
     return list.find(i => i.Name === name);
   }
 
-  getUoM(item: ISimpleAsset) {
+  getUoMForSimpleAsset(item: ISimpleAsset) {
     return this.allWikiEntites.find(m => m.Name === item.Name).UoM;
   }
 

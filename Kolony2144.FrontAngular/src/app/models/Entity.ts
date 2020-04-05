@@ -11,7 +11,7 @@ export interface IFullEntity {
   ConsumedItems: ISimpleAsset[];
   ProducedItems: ISimpleAsset[];
   UoM: UoMsEnum;
-  StartQuantity: number;
+  InitialQuantity: number;
 }
 
 export interface IEntity {

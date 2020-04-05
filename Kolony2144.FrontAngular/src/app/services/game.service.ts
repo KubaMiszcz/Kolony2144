@@ -1,59 +1,87 @@
+import { SharedService } from './shared.service';
+import { NewsService } from './news.service';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { IKolony } from '../models/Kolony';
-import { IAsset } from '../models/Entity';
+import { KolonyService } from './kolony.service';
+import { InventoryItemsNames } from '../models/InventoryItem';
+import { CrewNames } from '../models/Crew';
+import { TypesEnum } from '../models/enums/Types.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  // gameNotes = '';
-  // isTurnComputing = false;
   kolony: IKolony;
+  playerNotes = '';
+
+  // isTurnComputing = false;
   // AllAssets: IAsset[];
 
   constructor(
     private router: Router,
-    // private kolonyService: KolonyService,
+    private sharedService: SharedService,
+    private kolonyService: KolonyService,
+    private newsService: NewsService,
   ) {
+    this.kolony = this.kolonyService.kolony;
     // this.AllAssets = JSON.parse(JSON.stringify([...StarterCivilianCrew, ...StarterMachines, ...StarterBuildings]));
     // this.AllAssets.forEach(a => a.Quantity = 0);
     // this.AllInventoryItems = JSON.parse(JSON.stringify([...StarterInventoryItems]));
     // this.AllInventoryItems.forEach(a => a.Quantity = 0);
 
     // this.kolonyService.KolonyBS.subscribe(k => this.kolony = k);
-    // this.nextTurn();
+    this.nextTurn();
   }
+
 
 
 
   nextTurn() {
     console.log('nexturn');
 
-    // this.isTurnComputing.next(true);
     this.router.navigate(['/loading-screen']);
     setTimeout(() => {
-      //   //##########################################
-      //   //#region TURN ENDS
 
-      //   //update production queue, and assets array
-      //   // this.productionService.produceAssetsInQueue(production);
 
-      //   //update construction queue, and assets array
-      //   this.productionService.produceAssetsInQueue();
-
-      //   //#ENDREGION
-      //   //##########################################
+      //##########################################
+      //#region TURN ENDS
+      //update inventory after production
 
 
 
-      //   this.setNextMonth(); console.log('setNextMonth');
+
+      //update production queue, and assets array
+      // this.productionService.produceAssetsInQueue(production);
+
+      //update construction queue, and assets array
+      // this.productionService.produceAssetsInQueue();
+      let previousTurnFoodQty = this.kolonyService.getKolonyAssetByName(InventoryItemsNames.Food).Quantity;
+
+
+      //#ENDREGION
+      //##########################################
+
+
+      {
+        this.setNextMonth(); console.log('setNextMonth');
+        this.newsService.clearNews();
+      }
+
+
+      //##########################################
+      //#REGION NEW TURN BEGINS
+
+      this.kolonyService.updateInventoryDueToConsumingItems();
+      this.kolonyService.updateInventoryDueToProducingItems();
 
 
 
-      //   //##########################################
-      //   //#REGION NEW TURN BEGINS
+
+
+
+
+
 
       //   //zeroingVolatileProperties
       //   this.kolonyService.zeroingVolatileProperties(this.kolony.AllInventoryItemsArray);
@@ -87,8 +115,40 @@ export class GameService {
       //   // this.tradeService.setTradeAnnouncement(); console.log('setTradeAnnouncement');
       //   //   this.kolonyService.setTradeAnnouncement();
       //   //   this.isTurnComputing.next(false);
+
+
+      //update news
+      this.newsService.addNews('## Welcome in new month, current time is: ' + this.kolony.Age.toFixed(1)) + ' of New Era';
+      let msg = '';
+
+
+
+      // news about crew
+      msg = '# Your crew (total ' + this.kolonyService.getAllCrewQuantity() + ' persons):'
+      this.newsService.addNews(msg);
+
+      // news about food
+      let foodAsset = this.kolonyService.getKolonyAssetByName(InventoryItemsNames.Food);
+      let monthlyFoodConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(InventoryItemsNames.Food);
+      msg = '* Eats ' + monthlyFoodConsumption + foodAsset.UoM + ' of ' + foodAsset.Name + '. '
+        + foodAsset.Name + ' is enough for ' + (Math.floor(foodAsset.Quantity / monthlyFoodConsumption)) + ' months';
+      this.newsService.addNews(msg);
+
+      // news about salary
+      let cashAsset = this.kolonyService.getKolonyAssetByName(InventoryItemsNames.Cash);
+      let monthlyCashConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(InventoryItemsNames.Cash);
+      msg = '* Earns ' + monthlyCashConsumption + cashAsset.UoM + ' of ' + cashAsset.Name + '. '
+        + cashAsset.Name + ' is enough for ' + (Math.floor(cashAsset.Quantity / monthlyCashConsumption)) + ' months';
+      this.newsService.addNews(msg);
+
+
+
+
+
+      console.log();
+
       this.router.navigate(['/start']);
-    }, 400);
+    }, 200);
   }
 
   setNextMonth() {

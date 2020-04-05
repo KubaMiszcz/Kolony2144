@@ -20,7 +20,7 @@ export const AllInventoryItems: IFullEntity[] = [
     ConsumedItems: [],
     ProducedItems: [],
     UoM: UoMsEnum.SB,
-    StartQuantity: 5000
+    InitialQuantity: 5000
   },
   {
     Name: InventoryItemsNames.Food,
@@ -31,7 +31,7 @@ export const AllInventoryItems: IFullEntity[] = [
     ConsumedItems: [],
     ProducedItems: [],
     UoM: UoMsEnum.t,
-    StartQuantity: 100
+    InitialQuantity: 100
   },
   {
     Name: InventoryItemsNames.Stone,
@@ -42,7 +42,7 @@ export const AllInventoryItems: IFullEntity[] = [
     ConsumedItems: [],
     ProducedItems: [],
     UoM: UoMsEnum.t,
-    StartQuantity: 1000
+    InitialQuantity: 1000
   },
   {
     Name: InventoryItemsNames.Steel,
@@ -53,6 +53,6 @@ export const AllInventoryItems: IFullEntity[] = [
     ConsumedItems: [],
     ProducedItems: [],
     UoM: UoMsEnum.t,
-    StartQuantity: 1000
+    InitialQuantity: 1000
   }
 ]

@@ -32,7 +32,7 @@ export class WikiTileComponent implements OnInit {
       result.push({
         Name: v.Name,
         Quantity: v.Quantity,
-        UoM: this.SharedService.getUoM(v)
+        UoM: this.SharedService.getUoMForSimpleAsset(v)
       })
     );
     return result;

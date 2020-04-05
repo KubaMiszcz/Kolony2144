@@ -19,6 +19,6 @@ export const AllMachines: IFullEntity[] = [
     ConsumedItems: [],
     ProducedItems: [],
     UoM: UoMsEnum.pcs,
-    StartQuantity: 10
+    InitialQuantity: 10
   }
 ]

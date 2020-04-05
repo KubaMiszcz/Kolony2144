@@ -1,4 +1,5 @@
 import { IAsset } from "./Entity";
+import { InventoryItemsNames } from "./InventoryItem";
 
 export interface IKolony {
   Name: string;
@@ -10,9 +11,9 @@ export interface IKolony {
 export class Kolony implements IKolony {
   Name: string;
   Age: number;
-  Cash: number;
-  Assets: IAsset[];
-  // get Cash(): number { return this.AllInventoryItemsArray.find(m => m.MainType === InventoryItemsMainTypes.Cash).Quantity; }
+  get Cash(): number { return this.Assets.find(m => m.Name === InventoryItemsNames.Cash).Quantity; }
+  set Cash(value: number) { this.Assets.find(m => m.Name === InventoryItemsNames.Cash).Quantity = value; }
+  Assets: IAsset[] = [];
 
   constructor() { }
 

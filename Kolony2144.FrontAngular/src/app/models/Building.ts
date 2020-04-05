@@ -21,7 +21,7 @@ export const AllBuildings: IFullEntity[] = [
     ConsumedItems: [],
     ProducedItems: [],
     UoM: UoMsEnum.pcs,
-    StartQuantity: 10
+    InitialQuantity: 10
   },
   {
     Name: BuildingNames.Warehouse,
@@ -35,5 +35,5 @@ export const AllBuildings: IFullEntity[] = [
     ConsumedItems: [],
     ProducedItems: [],
     UoM: UoMsEnum.pcs,
-    StartQuantity: 10
+    InitialQuantity: 10
   }]

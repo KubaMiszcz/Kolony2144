@@ -1,4 +1,7 @@
+import { GameService } from './../../services/game.service';
 import { Component, OnInit } from '@angular/core';
+import { NewsService } from './../../services/news.service';
+
 
 @Component({
   selector: 'app-news',
@@ -7,16 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsComponent implements OnInit {
   news: string[] = [];
-  notes: string = '';
+  playerNotes: string = '';
 
-  constructor() { }
+  constructor(
+    private gameService: GameService,
+    private newsService: NewsService,
+  ) { }
 
   ngOnInit() {
-    this.news.push('aaaa')
-    this.news.push('a2aaa')
-    this.news.push('aa3aa')
-    this.news.push('aaa4a')
-
+    this.news = this.newsService.news;
+    this.playerNotes = this.gameService.playerNotes;
   }
 
 }
