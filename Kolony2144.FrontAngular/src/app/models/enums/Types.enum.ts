@@ -1,34 +1,34 @@
 export enum AssetTypesEnum {
-  NotSet = "Not Set",
+  NotSet = '',
   Crew = 'Crew',
-  Resource = "Resource",
+  Resource = 'Resource',
   Building = 'Building',
   Machine = 'Machine',
 }
 
 export enum CrewTypesEnum {
-  NotSet = "Not Set",
+  NotSet = '',
   Production = 'Production',
 }
 
 export enum ResourceTypesEnum {
-  NotSet = "Not Set",
-  Cash = "Cash",
-  Energy = "Energy",
+  NotSet = '',
+  Cash = 'Cash',
+  Energy = 'Energy',
   StorageSpace = 'Storage space'
 }
 
 export enum VolatileResourceTypesEnum {
-  Energy = "Energy",
+  Energy = 'Energy',
   StorageSpace = 'Storage space'
 }
 
 export enum BuildingTypesEnum {
-  NotSet = "Not Set",
+  NotSet = '',
   PowerSource = 'PowerSource',
 }
 
 export enum MachineTypesEnum {
-  NotSet = "Not Set",
+  NotSet = '',
   PowerSource = 'PowerSource',
 }
