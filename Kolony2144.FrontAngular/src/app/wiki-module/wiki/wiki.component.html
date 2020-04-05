@@ -1,31 +1,35 @@
-<div class="card mmy-2">
-  <h4 class="card-header "> Kolony Wiki Help</h4>
-  <div class="card-body pp-1">
+<div class="card my-2">
+
+  <div class="card m-2">
+    <h4 class="card-header "> Kolony Wiki Help</h4>
+    <div class="card-body pp-1">
 
 
-    <h4 class=" "> Inventory Items</h4>
-    <div class="row ">
-      <app-wiki-tile *ngFor="let item of inventoryItemsList" class="wiki-tile " [item]="item"></app-wiki-tile>
+      <h4 class=" "> Inventory Items</h4>
+      <div class="row ">
+        <app-wiki-tile *ngFor="let item of inventoryItemsList" class="wiki-tile " [item]="item"></app-wiki-tile>
+      </div>
+      <hr>
+
+      <h4 class=" "> Crew</h4>
+      <div class="row ">
+        <app-wiki-tile *ngFor="let item of crewList" class="wiki-tile " [item]="item"></app-wiki-tile>
+      </div>
+      <hr>
+
+      <h4 class=" "> Buildings</h4>
+      <div class="row ">
+        <app-wiki-tile *ngFor="let item of buildingsList" class="wiki-tile " [item]="item"></app-wiki-tile>
+      </div>
+      <hr>
+
+      <h4 class=" "> Mmachines</h4>
+      <div class="row ">
+        <app-wiki-tile *ngFor="let item of machinesList" class="wiki-tile " [item]="item"></app-wiki-tile>
+      </div>
+      <hr>
+
     </div>
-    <hr>
-
-    <h4 class=" "> Crew</h4>
-    <div class="row ">
-      <app-wiki-tile *ngFor="let item of crewList" class="wiki-tile " [item]="item"></app-wiki-tile>
-    </div>
-    <hr>
-
-    <h4 class=" "> Buildings</h4>
-    <div class="row ">
-      <app-wiki-tile *ngFor="let item of buildingsList" class="wiki-tile " [item]="item"></app-wiki-tile>
-    </div>
-    <hr>
-
-    <h4 class=" "> Mmachines</h4>
-    <div class="row ">
-      <app-wiki-tile *ngFor="let item of machinesList" class="wiki-tile " [item]="item"></app-wiki-tile>
-    </div>
-    <hr>
-
   </div>
+
 </div>

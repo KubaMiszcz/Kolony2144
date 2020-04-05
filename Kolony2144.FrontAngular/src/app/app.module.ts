@@ -1,3 +1,4 @@
+import { BuildingsModule } from './buildings-module/buildings.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,8 +25,9 @@ import { NewsModule } from './news-module/news.module';
     CoreModule,
     SharedModule,
 
-    OverviewModule,
     NewsModule,
+    OverviewModule,
+    BuildingsModule,
     WikiModule
   ],
   exports: [],
