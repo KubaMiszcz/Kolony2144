@@ -17,7 +17,7 @@ prophet
 manticore
 interstella
 namek
-zolw
+zolwdropship
 
 hybrid
 mustache
@@ -26,12 +26,11 @@ sandwormwant to know more?i do my part o your part
 robale
 brainiac
 starship troopers
-news form world random in everyclick 
+news form world random in everyclick
 hero class
 spinner lime
 chemsuit
 spore
-
 
 
 
@@ -53,8 +52,8 @@ Closed Lightfoot
 
 The Feather
 The Spiker
-The Termite
-The Talon
+ The Termite
+ The Talon
 The Eagle Eye
 The Slacker
 The Persuader
@@ -70,15 +69,7 @@ The Tumb Crusher
 
 
 
-
-
-
-
-
-
-
 https://www.google.com/imgres?imgurl=https%3A%2F%2Fimage.flaticon.com%2Ficons%2Fpng%2F512%2F1465%2F1465362.png&imgrefurl=https%3A%2F%2Fwww.flaticon.com%2Fpremium-icon%2Fhabitat_1465362&tbnid=zbKOPc3F1fRavM&vet=12ahUKEwin8vPimr3lAhVMiYsKHRO8CXkQMygQegUIARCQAg..i&docid=cxFieObBufNPWM&w=512&h=512&q=habitat%20icon&ved=2ahUKEwin8vPimr3lAhVMiYsKHRO8CXkQMygQegUIARCQAg
-
 
 
 
