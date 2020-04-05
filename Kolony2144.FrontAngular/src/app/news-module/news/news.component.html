@@ -1,0 +1,25 @@
+<div class="card mmy-2">
+  <h4 class="card-header "> Annoncements</h4>
+  <div class="card-body pp-1">
+    <span *ngFor="let item of news">
+      {{item}}<br>
+    </span> <!-- <app-announcements></app-announcements> -->
+    <p *ngFor="let item of news">
+      {{item}}
+    </p> <!-- <app-announcements></app-announcements> -->
+  </div>
+</div>
+
+<!-- <app-trade-announcement></app-trade-announcement> -->
+
+
+
+<div class="card my-2">
+  <h4 class="card-header "> Player Notes: </h4>
+  <div class="card-body p-0">
+    <!-- <p *ngFor="let item of table" class="card-text m-0">{{item}}</p> -->
+    <!-- <textarea class="form-control" id="exampleFormControlTextarea2" rows="5" [(ngModel)]="notes" placeholder="your notes"></textarea> -->
+
+    <textarea class="form-control" id="exampleFormControlTextarea3" rows="5" [(ngModel)]="notes" placeholder="your notes"></textarea>
+  </div>
+</div>

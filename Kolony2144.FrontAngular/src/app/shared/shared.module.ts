@@ -1,33 +1,24 @@
+import { AppSpinnerComponent } from './spinner/spinner.component';
+import { StatusBarComponent } from './status-bar/status-bar.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { AppSpinnerComponent } from './spinner/spinner.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { StatusBarComponent } from './status-bar/status-bar.component';
+import { NavbarComponent } from './../shared/navbar/navbar.component';
 import { AppRoutingModule } from '../app-routing.module';
-import { prefixUOMPipe } from './pipes/prefixUOM.pipe';
-import { CamelCaseToHumanCasePipe } from './pipes/camelCaseToHumanCase.pipe';
 
 @NgModule({
+  declarations: [
+    NavbarComponent,
+    StatusBarComponent,
+    AppSpinnerComponent
+  ],
   imports: [
     CommonModule,
-    FormsModule,
     AppRoutingModule,
   ],
-  declarations: [
-    AppSpinnerComponent,
-    NavbarComponent,
-    StatusBarComponent,
-    prefixUOMPipe,
-    CamelCaseToHumanCasePipe,
-  ],
   exports: [
-    FormsModule,
-    AppSpinnerComponent,
     NavbarComponent,
     StatusBarComponent,
-    prefixUOMPipe,
-    CamelCaseToHumanCasePipe,
+    AppSpinnerComponent
   ]
 })
 export class SharedModule { }

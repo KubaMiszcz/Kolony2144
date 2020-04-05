@@ -17,9 +17,7 @@
       <div class="card m-1 tile">
         <div class="card-header mx-auto py-0"> <b>Cash </b></div>
         <div class="card-body mx-auto p-1 d-flex">
-          <!-- //TODO befpre CV upload  -->
-          <!-- <p class="card-text align-self-center" [ngClass]="{'negative-red': item<0}">{{kolony.Cash | prefixUOMPipe}}</p> -->
-          <p class="card-text align-self-center">{{kolony.Cash | prefixUOMPipe}}</p>
+          <p class="card-text align-self-center">{{kolony.Cash}}</p>
         </div>
       </div>
       <div class="card m-1 tile">
@@ -34,9 +32,9 @@
                   <td scope="" class="p-0 col-nonumbers">Use</td>
                 </tr>
                 <tr>
-                  <td scope="" class="p-0 ">{{powerStatus[0] }}</td>
-                  <td scope="" class="p-0 ">{{powerStatus[1] }}</td>
-                  <td scope="" class="p-0 ">{{powerStatus[2] }}</td>
+                  <td scope="" class="p-0 ">xxx</td>
+                  <td scope="" class="p-0 ">xxx</td>
+                  <td scope="" class="p-0 ">xxx</td>
                 </tr>
               </tbody>
             </table>
@@ -46,11 +44,6 @@
 
       <button type="button" class="btn btn-lg btn-primary m-1 p-0 ml-auto shadow-green" (click)="nextTurn()">Next<br>Turn</button>
 
-
-      <!-- Crew: string;
- RawMaterials: string;
- Buildings: string;
- Inventory: string; -->
     </div>
   </div>
 </div>

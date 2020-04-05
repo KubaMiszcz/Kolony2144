@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -7,11 +7,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { MainModule } from './main-module/main.module';
+import { WikiModule } from './wiki-module/wiki.module';
+import { OverviewModule } from './overview-module/overview.module';
+import { NewsModule } from './news-module/news.module';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -20,8 +23,12 @@ import { MainModule } from './main-module/main.module';
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    MainModule,
+
+    OverviewModule,
+    NewsModule,
+    WikiModule
   ],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent]
 })

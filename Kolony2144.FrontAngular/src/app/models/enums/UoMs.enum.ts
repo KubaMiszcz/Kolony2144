@@ -1,4 +1,4 @@
-export enum UoMs {
+export enum UoMsEnum {
   SB = 'SB',          //cash
   WU = 'WU',          //abstract
 
@@ -14,7 +14,7 @@ export enum UoMs {
   MW = 'MW'           //Energy
 }
 
-export enum LongUoMs {
+export enum LongUoMsEnum {
   SB = 'Space Beads',
   WU = 'Work Units',
 
