@@ -1,0 +1,47 @@
+<div class="card my-2">
+  <!-- <progressbar [value]="60" [max]="100" class="progress m-2" style="height: 2em;" [striped]="true" [animate]="true">
+  </progressbar> -->
+  <!-- <progressbar [max]="warehouseCapacity" [value]="warehouseUsage" type="primary" [striped]="true" [animate]="true" class="my-2 progress" showValue="true"      style="height: 2em"> <i>{{warehouseUsage}} / {{warehouseCapacity}}</i></progressbar> -->
+  <!-- <h4 class="card-header "> </h4> -->
+
+  <div class="card m-2 ">
+    <h4 class="card-header "> Current Production Queue</h4>
+    <div class="card-body p-1">
+      <div *ngIf="!productionQueue.length" class="d-flex flex-wrap production-queue">
+        <p>Production Queue is empty</p>
+      </div>
+      <div *ngIf="productionQueue.length" class="d-flex flex-wrap production-queue">
+        <app-queue-asset-tile *ngFor="let item of productionQueue" [asset]="item" (click)="removeItemFromProductionQueue(item)">
+        </app-queue-asset-tile>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <!-- <div class="alert alert-warning alert-dismissible fade show m-2" role="alert">
+    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <hr> -->
+
+
+  <div class="card m-2 ">
+    <h4 class="card-header "> Construction Panel</h4>
+    <div class="card-body p-1">
+      <div class="d-flex flex-wrap">
+        <app-asset-tile *ngFor="let item of allConstructionAssets" [asset]="item"></app-asset-tile>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+
+  <div class="card-body p-0">
+    <app-tile-with-table [caption]="'Power Facilities'" [table]="powerFacilitiesList" [isLastRowTotal]="showTotal"></app-tile-with-table>
+    <app-tile-with-table [caption]="'Buildings'" [table]="buildingsList" [isLastRowTotal]="showTotal"></app-tile-with-table>
+  </div>
+
+</div>

@@ -1,5 +1,3 @@
-import { KolonyService } from './services/kolony.service';
-import { IKolony } from './models/Kolony';
 import { Component } from '@angular/core';
 
 @Component({
@@ -9,12 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Kolony2144';
-  kolony: IKolony;
-  kolonytxt: string;
 
   constructor(
-    private kolonyService: KolonyService
-  ) {
-    this.kolony = this.kolonyService.kolony;
-  }
+  ) { }
 }

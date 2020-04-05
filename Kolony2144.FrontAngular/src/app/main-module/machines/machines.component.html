@@ -1,0 +1,17 @@
+<div class="card my-2">
+  <!-- <h4 class="card-header "> </h4> -->
+  <div class="card-body p-0">
+
+    <!-- <progressbar [value]="60" [max]="100" class="progress my-2" style="height: 2em;" [striped]="true" [animate]="true">
+    </progressbar> -->
+
+    <app-tile-with-table [caption]="'Power Sources'" [table]="powerSourcesList" [isLastRowTotal]="showTotal"></app-tile-with-table>
+
+    <app-tile-with-table [caption]="'Robots'" [table]="robotsList" [isLastRowTotal]="showTotal"></app-tile-with-table>
+
+    <!-- <progressbar [max]="warehouseCapacity" [value]="warehouseUsage" type="primary" [striped]="true" [animate]="true" class="my-2 progress" showValue="true"      style="height: 2em"> <i>{{warehouseUsage}} / {{warehouseCapacity}}</i></progressbar> -->
+
+
+
+  </div>
+</div>

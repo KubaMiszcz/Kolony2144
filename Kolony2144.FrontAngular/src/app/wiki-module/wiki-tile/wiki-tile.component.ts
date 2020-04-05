@@ -1,7 +1,9 @@
+import { IAsset, IInventoryItemShort } from '../../models/Entity';
 import { SharedService } from './../../services/shared.service';
-import { IWikiEntity, ISimpleAsset } from './../../models/Entity';
 import { Component, OnInit, Input } from '@angular/core';
-import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
+import { IEntity, IInventoryItem } from 'src/app/models/Entity';
+import { StarterInventoryItems } from 'src/app/models/InventoryItem';
+import { UoMs } from 'src/app/models/enums/UOMs.enum';
 
 @Component({
   selector: 'app-wiki-tile',
@@ -9,38 +11,35 @@ import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
   styleUrls: ['./wiki-tile.component.scss']
 })
 export class WikiTileComponent implements OnInit {
-  @Input() item: IWikiEntity;
-  productionCost: IWikiListItem[] = [];
-  producedItems: IWikiListItem[] = [];
-  consumedItems: IWikiListItem[] = [];
+  @Input() item: IAsset;
+  productionCostList: IproductionCost[] = [];
+  ProducedByList: IproductionCost[] = [];
+  consumedByList: IproductionCost[] = [];
+
+
 
   constructor(
-    private SharedService: SharedService
+    private sharedService: SharedService
   ) { }
 
   ngOnInit() {
-    if (this.item.ProductionCost) this.productionCost = this.fillList(this.item.ProductionCost);
-    if (this.item.ProducedItems) this.producedItems = this.fillList(this.item.ProducedItems);
-    if (this.item.ConsumedItems) this.consumedItems = this.fillList(this.item.ConsumedItems);
-    console.log(this.productionCost);
-
+    this.productionCostList = this.fillList(this.item.ProductionCost);
+    if (this.item.ProducedItems) this.ProducedByList = this.fillList(this.item.ProducedItems);
+    if (this.item.ConsumedItems) this.consumedByList = this.fillList(this.item.ConsumedItems);
   }
 
-  fillList(list: ISimpleAsset[]) {
+  fillList(list: IInventoryItemShort[]) {
     let result = [];
-    list.map(v =>
-      result.push({
-        Name: v.Name,
-        Quantity: v.Quantity,
-        UoM: this.SharedService.getUoM(v)
-      })
-    );
+    list.forEach(pc => {
+      let uom = this.sharedService.getUoM(pc);
+      result.push({ Name: pc.Name, QtyPerUnit: pc.Quantity, UoM: uom });
+    });
     return result;
   }
 }
 
-interface IWikiListItem {
+interface IproductionCost {
   Name: string;
-  Quantity: number;
-  UoM: UoMsEnum
+  QtyPerUnit: number;
+  UoM: UoMs
 }

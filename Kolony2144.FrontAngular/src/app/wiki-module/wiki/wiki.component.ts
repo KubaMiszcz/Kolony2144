@@ -1,7 +1,11 @@
-import { TypesEnum } from './../../models/enums/Types.enum';
-import { SharedService } from './../../services/shared.service';
-import { IWikiEntity } from './../../models/Entity';
+import { DetailedBuildingTypes, DetailedMachineTypes } from './../../models/enums/Types.enum';
+import { InventoryItemsMainTypes, AssetMainTypes } from 'src/app/models/enums/Types.enum';
+import { StarterCivilianCrew } from './../../models/Crew';
 import { Component, OnInit } from '@angular/core';
+import { IEntity } from 'src/app/models/Entity';
+import { StarterInventoryItems } from 'src/app/models/InventoryItem';
+import { StarterMachines } from 'src/app/models/Machine';
+import { StarterBuildings } from 'src/app/models/Building';
 
 @Component({
   selector: 'app-wiki',
@@ -9,22 +13,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./wiki.component.scss']
 })
 export class WikiComponent implements OnInit {
+  propertiesList: IEntity[] = [];
+  inventoryItemsList: IEntity[] = [];
 
-  inventoryItemsList: IWikiEntity[] = [];
+  crewList: IEntity[] = [];
+  machinesList: IEntity[] = [];
+  powersourcesList: IEntity[] = [];
 
-  crewList: IWikiEntity[] = [];
-  buildingsList: IWikiEntity[] = [];
-  machinesList: IWikiEntity[] = [];
+  buildingsList: IEntity[] = [];
+  powerFacilitiesList: IEntity[] = [];
 
   constructor(
-    private sharedService: SharedService
   ) {
-    const list = this.sharedService.allWikiEntites;
-    this.inventoryItemsList = list.filter(i => i.Type === TypesEnum.Resource);
-    this.crewList = list.filter(i => i.Type === TypesEnum.Crew);
-    this.buildingsList = list.filter(i => i.Type === TypesEnum.Building);
-    this.machinesList = list.filter(i => i.Type === TypesEnum.Machine);
+    this.propertiesList = StarterInventoryItems.filter(i => i.MainType === InventoryItemsMainTypes.Energy);
+    this.propertiesList.push(...StarterInventoryItems.filter(i => i.MainType === InventoryItemsMainTypes.Property));
 
+    this.inventoryItemsList = StarterInventoryItems.filter(i => i.MainType === InventoryItemsMainTypes.InventoryItem);
+
+    this.crewList = StarterCivilianCrew;
+
+    this.powersourcesList = StarterMachines.filter(i => i.MainType === AssetMainTypes.Machine && i.DetailedType === DetailedMachineTypes.PowerSource);
+    this.machinesList = StarterMachines.filter(i => i.MainType === AssetMainTypes.Machine && !(i.DetailedType === DetailedMachineTypes.PowerSource));
+
+    this.powerFacilitiesList = StarterBuildings.filter(i => i.MainType === AssetMainTypes.Building && i.DetailedType === DetailedBuildingTypes.PowerSource);;
+    this.buildingsList = StarterBuildings.filter(i => i.MainType === AssetMainTypes.Building && !(i.DetailedType === DetailedBuildingTypes.PowerSource));
   }
 
   ngOnInit() {
