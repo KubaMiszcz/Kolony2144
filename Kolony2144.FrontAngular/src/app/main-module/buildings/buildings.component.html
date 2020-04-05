@@ -7,14 +7,13 @@
   <div class="card m-2 ">
     <h4 class="card-header "> Current Production Queue</h4>
     <div class="card-body p-1">
-      asdasd
-      <!-- <div *ngIf="!productionQueue.length" class="d-flex flex-wrap production-queue">
+      <div *ngIf="!productionQueue.length" class="d-flex flex-wrap production-queue">
         <p>Production Queue is empty</p>
       </div>
       <div *ngIf="productionQueue.length" class="d-flex flex-wrap production-queue">
         <app-queue-asset-tile *ngFor="let item of productionQueue" [asset]="item" (click)="removeItemFromProductionQueue(item)">
         </app-queue-asset-tile>
-      </div> -->
+      </div>
     </div>
   </div>
 
@@ -32,12 +31,17 @@
     <h4 class="card-header "> Construction Panel</h4>
     <div class="card-body p-1">
       <div class="d-flex flex-wrap">
-        asd
-        <!-- <app-asset-tile *ngFor="let item of allConstructionAssets" [asset]="item"></app-asset-tile> -->
+        <app-asset-tile *ngFor="let item of allConstructionAssets" [asset]="item"></app-asset-tile>
       </div>
     </div>
   </div>
 
+  <hr>
+
+
+  <div class="card-body p-0">
+    <app-tile-with-table [caption]="'Power Facilities'" [table]="powerFacilitiesList" [isLastRowTotal]="showTotal"></app-tile-with-table>
+    <app-tile-with-table [caption]="'Buildings'" [table]="buildingsList" [isLastRowTotal]="showTotal"></app-tile-with-table>
+  </div>
+
 </div>
-
-

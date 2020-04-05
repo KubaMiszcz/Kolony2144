@@ -1,49 +1,70 @@
-import { UoMsEnum } from "./enums/UoMs.enum";
-import { TypesEnum } from "./enums/Types.enum";
-
-export interface IFullEntity {
-  Name: string;
-  Description: string;
-  ImageUrl: string;
-  Size: number;
-  Type: TypesEnum;
-  ProductionCost: ISimpleAsset[],
-  ConsumedItems: ISimpleAsset[];
-  ProducedItems: ISimpleAsset[];
-  UoM: UoMsEnum;
-  StartQuantity: number;
-}
+import { UoMs as UoMs } from "./enums/UOMs.enum";
+import { InventoryItemsMainTypes, AssetMainTypes } from "./enums/Types.enum";
 
 export interface IEntity {
   Name: string;
-  Size: number;
-  Type: TypesEnum;
-  ProductionCost: ISimpleAsset[],
-  ConsumedItems: ISimpleAsset[];
-  ProducedItems: ISimpleAsset[];
-  UoM: UoMsEnum;
+  Description: string;
+  ImageUrl: string;
+  MainType: string;
+  DetailedType: string;
+  // Density: string;
+  UoM: UoMs;
+  ProductionCost: IInventoryItemShort[];
 }
 
-export interface IAsset extends IEntity {
-  Quantity: number;
-}
-
-export interface ISimpleAsset {
+export interface IInventoryItemShort {
   Name: string;
   Quantity: number;
 }
 
-export interface IWikiEntity extends IEntity {
-  Description: string;
-  ImageUrl: string;
+export interface IInventoryItem extends IEntity {
+  MainType: InventoryItemsMainTypes;
+  Quantity: number;
 }
 
-// export class Asset implements IAsset {
-//   Name: string;
+export interface IAsset extends IEntity {
+  MainType: AssetMainTypes;
+  Size: number;
+  ConsumedItems: IInventoryItemShort[];
+  ProducedItems: IInventoryItemShort[];
+  Quantity: number;
+}
+
+// export interface IRawDeposit extends IEntity {
+//   MainType: AssetMainTypes;
+//   DetailedType: DetailDepositTypes;
+//   AttachedExtractors: IAsset[];
 //   Quantity: number;
+// }
 
-//   constructor2(n: string, q: number) { this.Name = n; this.Quantity = q; }
 
-//   getEntity(): IEntity { return [...AllBuildings, ...AllCivilianCrew, ...AllInventoryItems].find(e => e.Name === this.Name); }
-//   getUOM(): UOMsEnum { return this.getEntity().UOM; }
+
+
+
+
+// export interface IRawDeposit {
+//   Name: string;
+//   Description: string;
+//   ImageUrl: string;
+//   MainType: string;
+//   UOM: UoMs;
+//   Quantity: number;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export interface IDetailedEntity extends IEntity {
+//   Description: string;
+//   ImageUrl: string;
 // }

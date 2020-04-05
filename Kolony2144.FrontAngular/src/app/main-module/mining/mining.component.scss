@@ -1,0 +1,28 @@
+td,
+th,
+select {
+  font-size: small;
+  vertical-align: middle;
+}
+
+.input-group {
+  width: auto;
+}
+
+.btn,
+input {
+  min-width: 2em;
+  max-width: 8em;
+  max-height: 2em;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0px;
+}
+
+select,
+option {
+  width: auto;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0px;
+}

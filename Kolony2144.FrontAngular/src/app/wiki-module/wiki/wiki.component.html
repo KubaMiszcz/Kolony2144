@@ -1,0 +1,49 @@
+<div class="card mmy-2">
+  <h4 class="card-header "> Kolony Wiki Help</h4>
+  <div class="card-body pp-1">
+
+    <h4 class=" "> {{'powerFacilitiesList' | camelCaseToHumanCasePipe}}</h4>
+    <div class="row ">
+      <app-wiki-tile *ngFor="let item of powerFacilitiesList" class="wiki-tile " [item]="item"></app-wiki-tile>
+    </div>
+    <hr>
+
+    <h4 class=" "> {{'buildingsList' | camelCaseToHumanCasePipe}}</h4>
+    <div class="row ">
+      <app-wiki-tile *ngFor="let item of buildingsList" class="wiki-tile " [item]="item"></app-wiki-tile>
+    </div>
+    <hr>
+
+    <h4 class=" "> {{'propertiesList' | camelCaseToHumanCasePipe}}</h4>
+    <div class="row ">
+      <app-wiki-tile *ngFor="let item of propertiesList" class="wiki-tile " [item]="item"></app-wiki-tile>
+    </div>
+    <hr>
+
+    <h4 class=" "> {{'inventoryItemsList' | camelCaseToHumanCasePipe}}</h4>
+    <div class="row ">
+      <app-wiki-tile *ngFor="let item of inventoryItemsList" class="wiki-tile " [item]="item"></app-wiki-tile>
+    </div>
+    <hr>
+
+    <h4 class=" "> {{'crewList' | camelCaseToHumanCasePipe}}</h4>
+    <div class="row ">
+      <app-wiki-tile *ngFor="let item of crewList" class="wiki-tile " [item]="item"></app-wiki-tile>
+    </div>
+    <hr>
+
+
+    <h4 class=" "> {{'powersourcesList' | camelCaseToHumanCasePipe}}</h4>
+    <div class="row ">
+      <app-wiki-tile *ngFor="let item of powersourcesList" class="wiki-tile " [item]="item"></app-wiki-tile>
+    </div>
+    <hr>
+
+    <h4 class=" "> {{'machinesList' | camelCaseToHumanCasePipe}}</h4>
+    <div class="row ">
+      <app-wiki-tile *ngFor="let item of machinesList" class="wiki-tile " [item]="item"></app-wiki-tile>
+    </div>
+    <hr>
+
+  </div>
+</div>
