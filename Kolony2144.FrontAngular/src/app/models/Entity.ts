@@ -1,70 +1,49 @@
-import { UoMs as UoMs } from "./enums/UOMs.enum";
-import { InventoryItemsMainTypes, AssetMainTypes } from "./enums/Types.enum";
+import { UoMsEnum } from "./enums/UoMs.enum";
+import { TypesEnum } from "./enums/Types.enum";
 
-export interface IEntity {
+export interface IFullEntity {
   Name: string;
   Description: string;
   ImageUrl: string;
-  MainType: string;
-  DetailedType: string;
-  // Density: string;
-  UoM: UoMs;
-  ProductionCost: IInventoryItemShort[];
+  Size: number;
+  Type: TypesEnum;
+  ProductionCost: ISimpleAsset[],
+  ConsumedItems: ISimpleAsset[];
+  ProducedItems: ISimpleAsset[];
+  UoM: UoMsEnum;
+  StartQuantity: number;
 }
 
-export interface IInventoryItemShort {
+export interface IEntity {
+  Name: string;
+  Size: number;
+  Type: TypesEnum;
+  ProductionCost: ISimpleAsset[],
+  ConsumedItems: ISimpleAsset[];
+  ProducedItems: ISimpleAsset[];
+  UoM: UoMsEnum;
+}
+
+export interface IAsset extends IEntity {
+  Quantity: number;
+}
+
+export interface ISimpleAsset {
   Name: string;
   Quantity: number;
 }
 
-export interface IInventoryItem extends IEntity {
-  MainType: InventoryItemsMainTypes;
-  Quantity: number;
+export interface IWikiEntity extends IEntity {
+  Description: string;
+  ImageUrl: string;
 }
 
-export interface IAsset extends IEntity {
-  MainType: AssetMainTypes;
-  Size: number;
-  ConsumedItems: IInventoryItemShort[];
-  ProducedItems: IInventoryItemShort[];
-  Quantity: number;
-}
-
-// export interface IRawDeposit extends IEntity {
-//   MainType: AssetMainTypes;
-//   DetailedType: DetailDepositTypes;
-//   AttachedExtractors: IAsset[];
-//   Quantity: number;
-// }
-
-
-
-
-
-
-// export interface IRawDeposit {
+// export class Asset implements IAsset {
 //   Name: string;
-//   Description: string;
-//   ImageUrl: string;
-//   MainType: string;
-//   UOM: UoMs;
 //   Quantity: number;
-// }
 
+//   constructor2(n: string, q: number) { this.Name = n; this.Quantity = q; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-// export interface IDetailedEntity extends IEntity {
-//   Description: string;
-//   ImageUrl: string;
+//   getEntity(): IEntity { return [...AllBuildings, ...AllCivilianCrew, ...AllInventoryItems].find(e => e.Name === this.Name); }
+//   getUOM(): UOMsEnum { return this.getEntity().UOM; }
 // }

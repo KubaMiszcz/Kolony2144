@@ -1,115 +1,39 @@
-import { ICrew, StarterCivilianCrew } from "./Crew";
-import { IMachine, StarterMachines } from "./Machine";
-import { IBuilding, StarterBuildings } from "./Building";
-import { StarterInventoryItems } from "./InventoryItem";
-import { IInventoryItem, IAsset } from "./Entity";
-import { InventoryItemsMainTypes, AssetMainTypes, DetailedMachineTypes, DetailedBuildingTypes } from "./enums/Types.enum";
+import { IAsset } from "./Entity";
 
 export interface IKolony {
   Name: string;
   Age: number;
   Cash: number;
-
-  AllInventoryItemsArray: IInventoryItem[];
-  AllAssetsArray: IAsset[];
-
-  Properties: IInventoryItem[];
-  Energy: IInventoryItem[];
-  RawResources: IInventoryItem[];
-  InventoryItems: IInventoryItem[];
-
-  Crew: ICrew[];
-  Robots: IMachine[];
-  Machines: IMachine[];
-  PowerSources: IMachine[];
-  Buildings: IBuilding[];
-  PowerFacilities: IBuilding[];
-  AllBuildings: IBuilding[];
-  RawDeposits: IBuilding[];
-
-  // MilitaryCrew: IMilitaryCrew[];
-  // MilitaryMachines: IMilitaryMachine[];
-  // MilitaryFacilities: IBuilding[];
-
-  /*
-  // deposits
-
-  Resources: string;
-
-  Inventory: string;
-
-  Researches: string;
-  Upgrades: string;
-  Improvements: string;
-
-  */
+  Assets: IAsset[]
 }
 
 export class Kolony implements IKolony {
   Name: string;
   Age: number;
-  get Cash(): number { return this.AllInventoryItemsArray.find(m => m.MainType === InventoryItemsMainTypes.Cash).Quantity; }
-
-  AllInventoryItemsArray: IInventoryItem[];
-  AllAssetsArray: IAsset[];
+  Cash: number;
+  Assets: IAsset[];
+  // get Cash(): number { return this.AllInventoryItemsArray.find(m => m.MainType === InventoryItemsMainTypes.Cash).Quantity; }
 
   constructor() { }
 
-  //todo throw ex eption if metareial form list in not in strater set and for building also
-  get Properties(): IInventoryItem[] { return this.AllInventoryItemsArray.filter(m => m.MainType === InventoryItemsMainTypes.Property); }
-  get Energy(): IInventoryItem[] { return this.AllInventoryItemsArray.filter(m => m.MainType === InventoryItemsMainTypes.Energy); }
-  get RawResources(): IInventoryItem[] { return this.AllInventoryItemsArray.filter(m => m.MainType === InventoryItemsMainTypes.RawResource); }
-  get InventoryItems(): IInventoryItem[] { return this.AllInventoryItemsArray.filter(m => m.MainType === InventoryItemsMainTypes.InventoryItem); }
+  // //todo throw ex eption if metareial form list in not in strater set and for building also
+  // get Properties(): IInventoryItem[] { return this.AllInventoryItemsArray.filter(m => m.MainType === InventoryItemsMainTypes.Property); }
+  // get Energy(): IInventoryItem[] { return this.AllInventoryItemsArray.filter(m => m.MainType === InventoryItemsMainTypes.Energy); }
+  // get RawResources(): IInventoryItem[] { return this.AllInventoryItemsArray.filter(m => m.MainType === InventoryItemsMainTypes.RawResource); }
+  // get InventoryItems(): IInventoryItem[] { return this.AllInventoryItemsArray.filter(m => m.MainType === InventoryItemsMainTypes.InventoryItem); }
 
-  get Crew(): IAsset[] { return this.AllAssetsArray.filter(m => m.MainType === AssetMainTypes.Crew); }
-  get Robots(): IAsset[] { return this.AllMachines.filter(m => m.DetailedType === DetailedMachineTypes.Robot); }
+  // get Crew(): IAsset[] { return this.AllAssetsArray.filter(m => m.MainType === AssetMainTypes.Crew); }
+  // get Robots(): IAsset[] { return this.AllMachines.filter(m => m.DetailedType === DetailedMachineTypes.Robot); }
 
-  get AllMachines(): IAsset[] { return this.AllAssetsArray.filter(m => m.MainType === AssetMainTypes.Machine); }
-  get Machines(): IAsset[] { return this.AllMachines.filter(m => m.DetailedType === DetailedMachineTypes.NotSet); }
-  get PowerSources(): IAsset[] { return this.AllMachines.filter(m => m.DetailedType === DetailedMachineTypes.PowerSource); }
+  // get AllMachines(): IAsset[] { return this.AllAssetsArray.filter(m => m.MainType === AssetMainTypes.Machine); }
+  // get Machines(): IAsset[] { return this.AllMachines.filter(m => m.DetailedType === DetailedMachineTypes.NotSet); }
+  // get PowerSources(): IAsset[] { return this.AllMachines.filter(m => m.DetailedType === DetailedMachineTypes.PowerSource); }
 
-  get AllBuildings(): IAsset[] { return this.AllAssetsArray.filter(m => m.MainType === AssetMainTypes.Building); }
-  get Buildings(): IAsset[] { return this.AllBuildings.filter(m => m.DetailedType === DetailedBuildingTypes.NotSet); }
-  get PowerFacilities(): IAsset[] { return this.AllBuildings.filter(m => m.DetailedType === DetailedBuildingTypes.PowerSource); }
+  // get AllBuildings(): IAsset[] { return this.AllAssetsArray.filter(m => m.MainType === AssetMainTypes.Building); }
+  // get Buildings(): IAsset[] { return this.AllBuildings.filter(m => m.DetailedType === DetailedBuildingTypes.NotSet); }
+  // get PowerFacilities(): IAsset[] { return this.AllBuildings.filter(m => m.DetailedType === DetailedBuildingTypes.PowerSource); }
 
-  get RawDeposits(): IAsset[] { return this.AllAssetsArray.filter(m => m.MainType === AssetMainTypes.RawDeposit); }
+  // get RawDeposits(): IAsset[] { return this.AllAssetsArray.filter(m => m.MainType === AssetMainTypes.RawDeposit); }
 }
 
 
-
-
-
-// export const KOLONY: Kolony = {
-//   Name: 'KolonyUno',
-//   Age: 10,
-//   Cash: 10000000,
-
-//   AllInventoryItemsArray: StarterInventoryItems,
-//   AllAssetsArray: [...StarterCivilianCrew, ...StarterMachines, ...StarterBuildings],
-
-//   Properties: [],
-//   Energy: [],
-//   RawResources: [],
-//   InventoryItems: [],
-
-//   Crew: [],
-//   Robots: [],
-
-//   AllMachines: [],
-//   Machines: [],
-//   PowerSources: [],
-
-//   AllBuildings: [],
-//   Buildings: [],
-//   PowerFacilities: [],
-
-
-
-//   // Crew: StarterCivilianCrew,
-//   // Machines: StarterMachines,
-//   // Buildings: StarterBuildings,
-
-//   // MilitaryCrew: StarterMilitaryCrew,
-//   // MilitaryMachines: StarterMilitaryMachines,
-//   // MilitaryFacilities: []
-// }

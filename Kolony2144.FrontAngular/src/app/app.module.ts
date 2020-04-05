@@ -1,4 +1,3 @@
-import { WikiModule } from './wiki-module/wiki.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { MainModule } from './main-module/main.module';
-import { TradeModule } from './trade-module/trade.module';
 
 @NgModule({
   declarations: [
@@ -23,8 +21,6 @@ import { TradeModule } from './trade-module/trade.module';
     CoreModule,
     SharedModule,
     MainModule,
-    TradeModule,
-    WikiModule
   ],
   providers: [],
   bootstrap: [AppComponent]

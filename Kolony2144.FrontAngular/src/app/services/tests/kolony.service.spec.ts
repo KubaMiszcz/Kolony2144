@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { KolonyService } from './kolony.service';
+import { KolonyService } from '../kolony.service';
 
 
 

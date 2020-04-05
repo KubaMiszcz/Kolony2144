@@ -1,49 +1,42 @@
-import { IInventoryItem, IInventoryItemShort, IAsset } from 'src/app/models/Entity';
 import { Injectable } from '@angular/core';
-import { StarterInventoryItems } from '../models/InventoryItem';
+import { IAsset, ISimpleAsset, IWikiEntity } from '../models/Entity';
+import { AllBuildings } from '../models/Building';
+import { AllCivilianCrew } from '../models/Crew';
+import { AllInventoryItems } from '../models/InventoryItem';
+import { AllMachines } from '../models/Machine';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
+  allWikiEntites: IWikiEntity[] = [];
 
-  constructor() { }
-
-
-  getTotalsForTable(table: any[]) {
-    let colNo = table[0].length;
-    let totals = [];
-    for (let index = 0; index < colNo; index++) {
-      totals.push(this.getTotalForColumn(table, index));
-    }
-    return totals;
+  constructor() {
+    this.prepareWikiInitialData();
   }
 
-  getTotalForColumn(table: any[], colNo: number): any {
-    let total = 0;
-    table.forEach(r => total += Number(r[colNo]));
-    return isNaN(total) ? 'n/a' : total;
-  }
-
-  getInventoryItemShortFromListByName(list: IInventoryItemShort[], name: string) {
-    return list.find(i => i.Name === name);
-  }
-
-  getInventoryItemFromListByName(list: IInventoryItem[], name: string) {
-    return list.find(i => i.Name === name);
+  prepareWikiInitialData() {
+    [...AllInventoryItems, ...AllCivilianCrew, ...AllBuildings, ...AllMachines].forEach(i => {
+      this.allWikiEntites.push({
+        Name: i.Name,
+        Description: i.Description,
+        ImageUrl: i.ImageUrl,
+        Size: i.Size,
+        Type: i.Type,
+        ProductionCost: i.ProductionCost,
+        ConsumedItems: i.ConsumedItems,
+        ProducedItems: i.ProducedItems,
+        UoM: i.UoM,
+      })
+    });
   }
 
   getAssetFromListByName(list: IAsset[], name: string) {
     return list.find(i => i.Name === name);
   }
 
-  getQuantityByNameOrDefault(list: IInventoryItemShort[], name: any) {
-    let item = list.find(i => i.Name === name);
-    return !!item ? item.Quantity : 0;
-  }
-
-  getUoM(item: IInventoryItemShort) {
-    return StarterInventoryItems.find(m => m.Name === item.Name).UoM;
+  getUoM(item: ISimpleAsset) {
+    return this.allWikiEntites.find(m => m.Name === item.Name).UoM;
   }
 
   getRandomFromRange(min: number, max: number) {

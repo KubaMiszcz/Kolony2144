@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { SharedService } from './shared.service';
 
+import { MiningService } from '../mining.service';
 
-describe('SharedService', () => {
+describe('MiningService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: SharedService = TestBed.get(SharedService);
+    const service: MiningService = TestBed.get(MiningService);
     expect(service).toBeTruthy();
   });
 });
