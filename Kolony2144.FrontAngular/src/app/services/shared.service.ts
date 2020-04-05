@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IAsset, ISimpleAsset, IWikiEntity } from '../models/Entity';
 import { AllBuildings } from '../models/Building';
 import { AllCivilianCrew } from '../models/Crew';
-import { AllInventoryItems } from '../models/InventoryItem';
+import { AllResources } from '../models/Resource';
 import { AllMachines } from '../models/Machine';
 
 @Injectable({
@@ -16,14 +16,15 @@ export class SharedService {
   }
 
   prepareWikiInitialData() {
-    [...AllInventoryItems, ...AllCivilianCrew, ...AllBuildings, ...AllMachines].forEach(i => {
+    [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines].forEach(i => {
       this.allWikiEntites.push({
         Name: i.Name,
         Description: i.Description,
         ImageUrl: i.ImageUrl,
         Size: i.Size,
         Type: i.Type,
-        ProductionCost: i.ProductionCost,
+        SubType: i.SubType,
+        CreationCost: i.CreationCost,
         ConsumedItems: i.ConsumedItems,
         ProducedItems: i.ProducedItems,
         UoM: i.UoM,

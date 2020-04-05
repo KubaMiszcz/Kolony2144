@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { IKolony } from '../models/Kolony';
 import { KolonyService } from './kolony.service';
-import { InventoryItemsNames } from '../models/InventoryItem';
+import { ResourceNames } from '../models/Resource';
 import { CrewNames } from '../models/Crew';
-import { TypesEnum } from '../models/enums/Types.enum';
+import { AssetTypesEnum } from '../models/enums/Types.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -48,16 +48,11 @@ export class GameService {
       //#region TURN ENDS
       //update inventory after production
 
-
-
-
       //update production queue, and assets array
       // this.productionService.produceAssetsInQueue(production);
 
       //update construction queue, and assets array
       // this.productionService.produceAssetsInQueue();
-      let previousTurnFoodQty = this.kolonyService.getKolonyAssetByName(InventoryItemsNames.Food).Quantity;
-
 
       //#ENDREGION
       //##########################################
@@ -71,16 +66,9 @@ export class GameService {
 
       //##########################################
       //#REGION NEW TURN BEGINS
-
+      this.kolonyService.ClearVolatileResources();
       this.kolonyService.updateInventoryDueToConsumingItems();
       this.kolonyService.updateInventoryDueToProducingItems();
-
-
-
-
-
-
-
 
 
       //   //zeroingVolatileProperties
@@ -116,43 +104,39 @@ export class GameService {
       //   //   this.kolonyService.setTradeAnnouncement();
       //   //   this.isTurnComputing.next(false);
 
-
-      //update news
-      this.newsService.addNews('## Welcome in new month, current time is: ' + this.kolony.Age.toFixed(1)) + ' of New Era';
-      let msg = '';
-
-
-
-      // news about crew
-      msg = '# Your crew (total ' + this.kolonyService.getAllCrewQuantity() + ' persons):'
-      this.newsService.addNews(msg);
-
-      // news about food
-      let foodAsset = this.kolonyService.getKolonyAssetByName(InventoryItemsNames.Food);
-      let monthlyFoodConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(InventoryItemsNames.Food);
-      msg = '* Eats ' + monthlyFoodConsumption + foodAsset.UoM + ' of ' + foodAsset.Name + '. '
-        + foodAsset.Name + ' is enough for ' + (Math.floor(foodAsset.Quantity / monthlyFoodConsumption)) + ' months';
-      this.newsService.addNews(msg);
-
-      // news about salary
-      let cashAsset = this.kolonyService.getKolonyAssetByName(InventoryItemsNames.Cash);
-      let monthlyCashConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(InventoryItemsNames.Cash);
-      msg = '* Earns ' + monthlyCashConsumption + cashAsset.UoM + ' of ' + cashAsset.Name + '. '
-        + cashAsset.Name + ' is enough for ' + (Math.floor(cashAsset.Quantity / monthlyCashConsumption)) + ' months';
-      this.newsService.addNews(msg);
-
-
-
-
-
-      console.log();
-
+      this.updateNews();
       this.router.navigate(['/start']);
     }, 200);
   }
 
+
+
   setNextMonth() {
     this.kolony.Age += 0.1;
+  }
+
+  updateNews() {
+    this.newsService.addNews('## Welcome in new month, current time is: ' + this.kolony.Age.toFixed(1)) + ' of New Era';
+    let msg = '';
+
+    // news about crew
+    msg = '# Your crew (total ' + this.kolonyService.getAllCrewQuantity() + ' persons):'
+    this.newsService.addNews(msg);
+
+    // news about food
+    let foodAsset = this.kolonyService.getKolonyAssetByName(ResourceNames.Food);
+    let monthlyFoodConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(ResourceNames.Food);
+    msg = '* Eats ' + monthlyFoodConsumption + foodAsset.UoM + ' of ' + foodAsset.Name + '. '
+      + foodAsset.Name + ' is enough for ' + (Math.floor(foodAsset.Quantity / monthlyFoodConsumption)) + ' months';
+    this.newsService.addNews(msg);
+
+    // news about salary
+    let cashAsset = this.kolonyService.getKolonyAssetByName(ResourceNames.Cash);
+    let monthlyCashConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(ResourceNames.Cash);
+    msg = '* Earns ' + monthlyCashConsumption + cashAsset.UoM + ' of ' + cashAsset.Name + '. '
+      + cashAsset.Name + ' is enough for ' + (Math.floor(cashAsset.Quantity / monthlyCashConsumption)) + ' months';
+    this.newsService.addNews(msg);
+
   }
 
 }

@@ -1,7 +1,7 @@
 import { IFullEntity } from "./Entity";
 import { UoMsEnum } from "./enums/UoMs.enum";
-import { InventoryItemsNames } from "./InventoryItem";
-import { TypesEnum } from "./enums/Types.enum";
+import { ResourceNames } from "./Resource";
+import { AssetTypesEnum, BuildingTypesEnum } from "./enums/Types.enum";
 
 export enum BuildingNames {
   Habitat = 'Habitat',
@@ -13,10 +13,11 @@ export const AllBuildings: IFullEntity[] = [
     Name: BuildingNames.Habitat,
     Description: '', ImageUrl: '/assets/building.svg',
     Size: 100,
-    Type: TypesEnum.Building,
-    ProductionCost: [
-      { Name: InventoryItemsNames.Stone, Quantity: 20 },
-      { Name: InventoryItemsNames.Steel, Quantity: 5 }
+    Type: AssetTypesEnum.Building,
+    SubType: BuildingTypesEnum.NotSet,
+    CreationCost: [
+      { Name: ResourceNames.Stone, Quantity: 20 },
+      { Name: ResourceNames.Steel, Quantity: 5 }
     ],
     ConsumedItems: [],
     ProducedItems: [],
@@ -27,10 +28,11 @@ export const AllBuildings: IFullEntity[] = [
     Name: BuildingNames.Warehouse,
     Description: '', ImageUrl: '/assets/building.svg',
     Size: 1000,
-    Type: TypesEnum.Building,
-    ProductionCost: [
-      { Name: InventoryItemsNames.Stone, Quantity: 10 },
-      { Name: InventoryItemsNames.Steel, Quantity: 10 }
+    Type: AssetTypesEnum.Building,
+    SubType: BuildingTypesEnum.NotSet,
+    CreationCost: [
+      { Name: ResourceNames.Stone, Quantity: 10 },
+      { Name: ResourceNames.Steel, Quantity: 10 }
     ],
     ConsumedItems: [],
     ProducedItems: [],

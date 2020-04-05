@@ -1,55 +1,59 @@
 import { IFullEntity } from "./Entity";
 import { UoMsEnum } from "./enums/UoMs.enum";
-import { TypesEnum } from "./enums/Types.enum";
+import { AssetTypesEnum, ResourceTypesEnum } from "./enums/Types.enum";
 
-export enum InventoryItemsNames {
+export enum ResourceNames {
   Cash = 'Space Beads',
   Food = 'Food',
   Stone = 'Stone',
   Steel = 'Steel',
 }
 
-export const AllInventoryItems: IFullEntity[] = [
+export const AllResources: IFullEntity[] = [
   //cash
   {
-    Name: InventoryItemsNames.Cash,
+    Name: ResourceNames.Cash,
     Description: 'Space Beads, galactic currency', ImageUrl: '/assets/cash.svg',
     Size: 0,
-    Type: TypesEnum.Resource,
-    ProductionCost: [],
+    Type: AssetTypesEnum.Resource,
+    SubType: ResourceTypesEnum.Cash,
+    CreationCost: [],
     ConsumedItems: [],
     ProducedItems: [],
     UoM: UoMsEnum.SB,
     InitialQuantity: 5000
   },
   {
-    Name: InventoryItemsNames.Food,
+    Name: ResourceNames.Food,
     Description: 'food for feeding your men and animals;]', ImageUrl: '/assets/item.svg',
     Size: 1,
-    Type: TypesEnum.Resource,
-    ProductionCost: [],
+    Type: AssetTypesEnum.Resource,
+    SubType: ResourceTypesEnum.NotSet,
+    CreationCost: [],
     ConsumedItems: [],
     ProducedItems: [],
     UoM: UoMsEnum.t,
     InitialQuantity: 100
   },
   {
-    Name: InventoryItemsNames.Stone,
+    Name: ResourceNames.Stone,
     Description: 'A piece of stone', ImageUrl: '/assets/property.png',
     Size: 1,
-    Type: TypesEnum.Resource,
-    ProductionCost: [],
+    Type: AssetTypesEnum.Resource,
+    SubType: ResourceTypesEnum.NotSet,
+    CreationCost: [],
     ConsumedItems: [],
     ProducedItems: [],
     UoM: UoMsEnum.t,
     InitialQuantity: 1000
   },
   {
-    Name: InventoryItemsNames.Steel,
+    Name: ResourceNames.Steel,
     Description: 'A piece of steel', ImageUrl: '/assets/property.png',
     Size: 1,
-    Type: TypesEnum.Resource,
-    ProductionCost: [],
+    Type: AssetTypesEnum.Resource,
+    SubType: ResourceTypesEnum.NotSet,
+    CreationCost: [],
     ConsumedItems: [],
     ProducedItems: [],
     UoM: UoMsEnum.t,

@@ -19,7 +19,7 @@ export class WikiTileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.item.ProductionCost) this.productionCost = this.fillList(this.item.ProductionCost);
+    if (this.item.CreationCost) this.productionCost = this.fillList(this.item.CreationCost);
     if (this.item.ProducedItems) this.producedItems = this.fillList(this.item.ProducedItems);
     if (this.item.ConsumedItems) this.consumedItems = this.fillList(this.item.ConsumedItems);
     console.log(this.productionCost);

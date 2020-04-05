@@ -1,19 +1,24 @@
 import { IAsset } from "./Entity";
-import { InventoryItemsNames } from "./InventoryItem";
+import { ResourceNames } from "./Resource";
+import { ResourceTypesEnum, AssetTypesEnum } from "./enums/Types.enum";
 
 export interface IKolony {
   Name: string;
   Age: number;
-  Cash: number;
   Assets: IAsset[]
+  Cash: number;
 }
 
 export class Kolony implements IKolony {
   Name: string;
   Age: number;
-  get Cash(): number { return this.Assets.find(m => m.Name === InventoryItemsNames.Cash).Quantity; }
-  set Cash(value: number) { this.Assets.find(m => m.Name === InventoryItemsNames.Cash).Quantity = value; }
   Assets: IAsset[] = [];
+  get Cash(): number { return this.Assets.find(m => m.SubType === ResourceTypesEnum.Cash).Quantity; }
+  // set Cash(value: number) { this.Assets.find(m => m.SubType === ResourceTypesEnum.Cash).Quantity = value; }
+
+  get MaxEnergy(): number { return this.Assets.find(m => m.SubType === ResourceTypesEnum.Energy).Quantity; }
+
+  get Crew(): IAsset[] { return this.Assets.filter(m => m.Type === AssetTypesEnum.Crew); }
 
   constructor() { }
 
@@ -23,7 +28,6 @@ export class Kolony implements IKolony {
   // get RawResources(): IInventoryItem[] { return this.AllInventoryItemsArray.filter(m => m.MainType === InventoryItemsMainTypes.RawResource); }
   // get InventoryItems(): IInventoryItem[] { return this.AllInventoryItemsArray.filter(m => m.MainType === InventoryItemsMainTypes.InventoryItem); }
 
-  // get Crew(): IAsset[] { return this.AllAssetsArray.filter(m => m.MainType === AssetMainTypes.Crew); }
   // get Robots(): IAsset[] { return this.AllMachines.filter(m => m.DetailedType === DetailedMachineTypes.Robot); }
 
   // get AllMachines(): IAsset[] { return this.AllAssetsArray.filter(m => m.MainType === AssetMainTypes.Machine); }

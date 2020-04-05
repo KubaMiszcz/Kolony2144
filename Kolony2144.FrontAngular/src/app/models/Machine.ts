@@ -1,6 +1,6 @@
 import { IFullEntity } from "./Entity";
-import { TypesEnum } from "./enums/Types.enum";
-import { InventoryItemsNames } from "./InventoryItem";
+import { AssetTypesEnum, MachineTypesEnum } from "./enums/Types.enum";
+import { ResourceNames } from "./Resource";
 import { UoMsEnum } from "./enums/UoMs.enum";
 
 export enum MachinesNames {
@@ -12,9 +12,10 @@ export const AllMachines: IFullEntity[] = [
     Name: MachinesNames.PowerGenerator,
     Description: 'simple power coal powered generator', ImageUrl: '/assets/machine.png',
     Size: 10,
-    Type: TypesEnum.Machine,
-    ProductionCost: [
-      { Name: InventoryItemsNames.Steel, Quantity: 5 }
+    Type: AssetTypesEnum.Machine,
+    SubType: MachineTypesEnum.PowerSource,
+    CreationCost: [
+      { Name: ResourceNames.Steel, Quantity: 5 }
     ],
     ConsumedItems: [],
     ProducedItems: [],

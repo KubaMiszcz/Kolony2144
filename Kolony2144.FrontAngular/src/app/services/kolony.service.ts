@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { IKolony, Kolony } from '../models/Kolony';
-import { AllInventoryItems, InventoryItemsNames } from '../models/InventoryItem';
+import { AllResources, ResourceNames } from '../models/Resource';
 import { IAsset } from '../models/Entity';
 import { AllCivilianCrew } from '../models/Crew';
 import { AllBuildings } from '../models/Building';
 import { AllMachines } from '../models/Machine';
-import { TypesEnum } from '../models/enums/Types.enum';
+import { AssetTypesEnum, VolatileResourceTypesEnum } from '../models/enums/Types.enum';
 import { SharedService } from './shared.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -13,8 +13,12 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class KolonyService {
+  ClearVolatileResources() {
+    // let list= VolatileResourceTypesEnum.
 
-  kolony: IKolony;
+  }
+
+  kolony: Kolony;
   // get kolony(): IKolony { return this.kolonyBS.value };
   // kolonyBS = new BehaviorSubject<IKolony>(null);
 
@@ -25,7 +29,6 @@ export class KolonyService {
     kolony.Name = 'KolonyUNO';
     kolony.Assets = this.prepareInitialAssets();
     kolony.Age = 100;
-    kolony.Cash = 1000;
     this.kolony = kolony;
     // this.kolonyBS.next(kolony);
 
@@ -33,14 +36,15 @@ export class KolonyService {
 
   prepareInitialAssets(): IAsset[] {
     let res = [];
-    [...AllInventoryItems, ...AllCivilianCrew, ...AllBuildings, ...AllMachines]
+    [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines]
       .filter(a => a.InitialQuantity > 0)
       .forEach(i => {
         res.push({
           Name: i.Name,
           Size: i.Size,
           Type: i.Type,
-          ProductionCost: i.ProductionCost,
+          SubType: i.SubType,
+          ProductionCost: i.CreationCost,
           ConsumedItems: i.ConsumedItems,
           ProducedItems: i.ProducedItems,
           UoM: i.UoM,
@@ -74,22 +78,23 @@ export class KolonyService {
     return this.kolony.Assets.find(i => i.Name === name);
   }
 
-  getKolonyAssetsByType(type: TypesEnum): IAsset[] {
+  getKolonyAssetsByType(type: AssetTypesEnum): IAsset[] {
     return this.kolony.Assets.filter(i => i.Type === type);
   }
 
 
   getAllCrewQuantity() {
+    this.kolony.Crew
     // let res = 0;
     // this.kolony.Assets.filter(a => a.Type === TypesEnum.Crew).forEach(crew => qty += crew.Quantity);
     // return res;
-    return this.getKolonyAssetsByType(TypesEnum.Crew).filter(a => a.Type === TypesEnum.Crew)
+    return this.kolony.Crew
       .map(crew => crew.Quantity)
       .reduce((acc, next) => acc + next);
   }
 
   getMonthlyFoodConsumption(): number {
-    return this.getMonthlyAssetConsumption(this.getKolonyAssetByName(InventoryItemsNames.Food));
+    return this.getMonthlyAssetConsumption(this.getKolonyAssetByName(ResourceNames.Food));
   };
 
   getMonthlyAssetConsumption(cosnumedAsset: IAsset): number {
@@ -103,7 +108,7 @@ export class KolonyService {
     return consumedQty;
   };
 
-  getMonthlyAssetConsumptionByName(assetName: InventoryItemsNames): number {
+  getMonthlyAssetConsumptionByName(assetName: ResourceNames): number {
     return this.getMonthlyAssetConsumption(this.getKolonyAssetByName(assetName));
   };
 
