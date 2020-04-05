@@ -8,6 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { WikiModule } from './wiki-module/wiki.module';
+import { OverviewModule } from './overview-module/overview.module';
+import { NewsModule } from './news-module/news.module';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { WikiModule } from './wiki-module/wiki.module';
     CoreModule,
     SharedModule,
 
+    OverviewModule,
+    NewsModule,
     WikiModule
   ],
   exports: [],
