@@ -5,7 +5,7 @@ import { AssetTypesEnum, ResourceTypesEnum } from "./enums/Types.enum";
 export enum ResourceNames {
   Cash = 'Space Beads',
   Energy = 'Energy',
-  WorkUnit = 'Work unit',
+  BasicWorkUnit = 'Basic Work Unit',
   StorageSpace = 'Storage space',
   LivingSpace = 'Living space',
   Food = 'Food',
@@ -40,7 +40,7 @@ export const AllResources: IFullEntity[] = [
     InitialQuantity: 0
   },
   {
-    Name: ResourceNames.WorkUnit,
+    Name: ResourceNames.BasicWorkUnit,
     Description: 'WorkUnit', ImageUrl: '/assets/cash.svg',
     Size: 0,
     Type: AssetTypesEnum.Resource,
