@@ -18,7 +18,9 @@ export const AllMachines: IFullEntity[] = [
       { Name: ResourceNames.Steel, Quantity: 5 }
     ],
     ConsumedItems: [],
-    ProducedItems: [],
+    ProducedItems: [
+      { Name: ResourceNames.Energy, Quantity: 100 }
+    ],
     UoM: UoMsEnum.pcs,
     InitialQuantity: 10
   }
