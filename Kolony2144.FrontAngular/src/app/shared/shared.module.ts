@@ -17,6 +17,9 @@ import { AppSpinnerComponent } from './spinner/spinner.component';
     AppRoutingModule,
   ],
   exports: [
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
     AppSpinnerComponent,
     TileWithTableComponent,
   ]
