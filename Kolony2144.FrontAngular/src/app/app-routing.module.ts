@@ -1,3 +1,4 @@
+import { CrewOverviewComponent } from './crew-module/crew-overview/crew-overview.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NewsComponent } from './news-module/news/news.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'start', component: NewsComponent },
   { path: 'news', component: NewsComponent },
   { path: 'overview', component: OverviewComponent },
+  { path: 'crew', component: CrewOverviewComponent },
   { path: 'buildings', component: BuildingsComponent },
   { path: 'wiki', component: WikiComponent },
   { path: 'loading-screen', component: AppSpinnerComponent }
