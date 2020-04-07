@@ -22,8 +22,8 @@ import { NewsModule } from './news-module/news.module';
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    CoreModule,
     SharedModule,
+    CoreModule,
 
     NewsModule,
     OverviewModule,
