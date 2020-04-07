@@ -25,7 +25,9 @@ export const AllCivilianCrew: IFullEntity[] = [
       { Name: ResourceNames.Food, Quantity: 0.2 },
       { Name: ResourceNames.Cash, Quantity: 1 },
     ],
-    ProducedItems: [],
+    ProducedItems: [
+      { Name: ResourceNames.BasicWorkUnit, Quantity: 2 },
+    ],
     UoM: UoMsEnum.pcs,
     InitialQuantity: 20
   },
@@ -40,7 +42,9 @@ export const AllCivilianCrew: IFullEntity[] = [
       { Name: ResourceNames.Food, Quantity: 0.1 },
       { Name: ResourceNames.Cash, Quantity: 2 },
     ],
-    ProducedItems: [],
+    ProducedItems: [
+      { Name: ResourceNames.BasicWorkUnit, Quantity: 1 },
+    ],
     UoM: UoMsEnum.pcs,
     InitialQuantity: 5
   }

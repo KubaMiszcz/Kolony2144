@@ -5,30 +5,36 @@
   <!-- <h4 class="card-header "> </h4> -->
 
   <div class="card m-2 ">
-    <h4 class="card-header "> Crew overviadsw</h4>
+    <h4 class="card-header "> Crew overview</h4>
     <div class="card-body p-1">
-      <app-tile-with-table [caption]="'Crew Summary'" [header]="header" [rows]="crewList" [footer]="footer">
+      <span>razem zra zarcia xxx/mc starczy na xxx miesicy</span><br>
+      <span>razem zarabiaja xxx/mc zarcia starczy na xxx miesicy</span><br>
+      <span>razem zajmuja powierzchni mieskzalnj, tj xx% calosci</span><br>
+      <span>razem wytwarzaja xxxWU basicWU</span><br>
+      <span>razem wytwarzaja xxxWU mediumWU</span><br>
+      <span>razem wytwarzaja xxxWU advancedWU</span>
+    </div>
+
+    <div class="card-body p-1">
+      <app-tile-with-table [caption]="'Crew per unit Summary'" [header]="perUnitHeader" [rows]="perUnitList" [footer]="perUnitFooter">
       </app-tile-with-table>
     </div>
 
-    <hr>
+    <!-- <hr> -->
     <!-- <div class="alert alert-warning alert-dismissible fade show m-2" role="alert">
     <strong>Holy guacamole!</strong> You should check in on some of those fields below.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-  </div>
-  <hr> -->
+  </div>-->
+    <!-- <hr> -->
 
 
-    <div class="card m-2 ">
-      <h4 class="card-header "> Construction Panel</h4>
-      <div class="card-body p-1">
-        <div class="d-flex flex-wrap">
-          CREWWWWWWWWWWWWWWWWWWW
-        </div>
-      </div>
+    <div class="card-body p-1">
+      <app-tile-with-table [caption]="'Crew Total Summary'" [header]="totalHeader" [rows]="totalList" [footer]="totalFooter">
+      </app-tile-with-table>
     </div>
-
-
   </div>
+
+
+</div>

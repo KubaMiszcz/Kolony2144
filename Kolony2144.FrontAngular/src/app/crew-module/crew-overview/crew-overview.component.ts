@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IAsset } from 'src/app/models/Entity';
+import { IAsset, ISimpleAsset } from 'src/app/models/Entity';
 import { IKolony } from 'src/app/models/Kolony';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -14,9 +14,12 @@ import { AssetTypesEnum } from 'src/app/models/enums/Types.enum';
 export class CrewOverviewComponent implements OnInit {
   kolony: IKolony;
 
-  header: any[] = [];
-  crewList: any[][] = [];
-  footer: any[] = [];
+  perUnitHeader: any[] = [];
+  perUnitList: any[][] = [];
+  perUnitFooter: any[] = [];
+  totalHeader: any[] = [];
+  totalList: any[][] = [];
+  totalFooter: any[] = [];
 
   constructor(
     private kolonyService: KolonyService,
@@ -26,47 +29,68 @@ export class CrewOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    // let totals;
+    this.setPerUnitSummary();
+    this.setTotalSummary();
+  }
 
-    this.header = [
+  setPerUnitSummary() {
+    this.perUnitHeader = [
       'Name',
-      // 'Salary per Unit',
-      // ResourceNames.Food + ' Consumption per Unit',
-      // ResourceNames.WorkUnit + ' Production per Unit',
-      'Total Qty'
-      // 'Salary',
-      // 'Total ' + ResourceNames.Food + ' Consumption',
-      // 'Total ' + ResourceNames.WorkUnit + ' Production',
+      'Salary per Unit',
+      ResourceNames.Food + ' Consumption per Unit',
+      ResourceNames.BasicWorkUnit + ' Production per Unit',
+      'Total Qty',
     ];
 
     this.kolonyService.getKolonyAssetsByType(AssetTypesEnum.Crew).forEach(c => {
       let name = c.Name;
-      // let salary = this.sharedService.getQuantityByNameOrDefault(c.ConsumedItems, ResourceNames.Cash);
-      // let foodConsumption = this.sharedService.getQuantityByNameOrDefault(c.ConsumedItems, ResourceNames.Food);
-      // let BasicWU = this.sharedService.getQuantityByNameOrDefault(c.ProducedItems, ResourceNames.BasicWorkUnit);
-      // let AdvWU = this.sharedService.getQuantityByNameOrDefault(c.ProducedItems, ResourceNames.AdvancedWorkUnit);
-      // let ScienceWU = this.sharedService.getQuantityByNameOrDefault(c.ProducedItems, ResourceNames.SciencePack);
+      let salary = this.sharedService.getAssetQuantityFromListByName(c.ConsumedItems, ResourceNames.Cash);
+      let foodConsumption = this.sharedService.getAssetQuantityFromListByName(c.ConsumedItems, ResourceNames.Food);
+      let BasicWU = this.sharedService.getAssetQuantityFromListByName(c.ProducedItems, ResourceNames.BasicWorkUnit);
       let qty = c.Quantity;
-      this.crewList.push([
+      this.perUnitList.push([
         name,
-        // salary,
-        // foodConsumption,
-        // BasicWU,
-        // AdvWU,
-        // ScienceWU,
-        qty
-        // salary * qty,
-        // foodConsumption * qty,
-        // BasicWU * qty,
-        // AdvWU * qty,
-        // ScienceWU * qty
+        salary,
+        foodConsumption,
+        BasicWU,
+        qty,
       ]);
     });
 
-    this.footer = this.header;
+    // this.perUnitFooter = [...(new Array(3)),
+  }
 
-    // totals = this.sharedService.getTotalsForTable(this.crewList.slice(1));
-    // this.crewList.push([...(new Array(5)), 'Total:', ...totals.slice(6)]);
+  setTotalSummary() {
+    this.totalHeader = [
+      'Name',
+      'Total Qty',
+      'Total Salary',
+      'Total ' + ResourceNames.Food + ' Consumption',
+      'Total ' + ResourceNames.BasicWorkUnit + ' Production',
+    ];
+
+    this.kolonyService.getKolonyAssetsByType(AssetTypesEnum.Crew).forEach(c => {
+      let name = c.Name;
+      let salary = this.sharedService.getAssetQuantityFromListByName(c.ConsumedItems, ResourceNames.Cash);
+      let foodConsumption = this.sharedService.getAssetQuantityFromListByName(c.ConsumedItems, ResourceNames.Food);
+      let BasicWU = this.sharedService.getAssetQuantityFromListByName(c.ProducedItems, ResourceNames.BasicWorkUnit);
+      let qty = c.Quantity;
+      this.totalList.push([
+        name,
+        qty,
+        salary * qty,
+        foodConsumption * qty,
+        BasicWU * qty,
+      ]);
+    });
+
+    this.totalFooter = [
+      'Total:',
+      this.sharedService.sumColumnOftable(this.totalList, 1),
+      this.sharedService.sumColumnOftable(this.totalList, 2),
+      this.sharedService.sumColumnOftable(this.totalList, 3),
+      this.sharedService.sumColumnOftable(this.totalList, 4),
+    ]
   }
 
   // Name: CrewNames.Worker,
