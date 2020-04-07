@@ -7,11 +7,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TileWithTableComponent implements OnInit {
   @Input() caption = '';
-  @Input() table: any[] = [];
-  @Input() isLastRowTotal = false;
+  @Input() header: any[] = [];
+  @Input() rows: any[][] = [];
+  @Input() footer: any[] = [];
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
+
 }

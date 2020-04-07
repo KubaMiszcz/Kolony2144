@@ -8,7 +8,7 @@ import { AppSpinnerComponent } from './spinner/spinner.component';
 @NgModule({
   declarations: [
     AppSpinnerComponent,
-    TileWithTableComponent
+    TileWithTableComponent,
   ],
   imports: [
     CommonModule,

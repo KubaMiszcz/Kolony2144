@@ -5,6 +5,7 @@ import { AssetTypesEnum, ResourceTypesEnum } from "./enums/Types.enum";
 export enum ResourceNames {
   Cash = 'Space Beads',
   Energy = 'Energy',
+  WorkUnit = 'Work unit',
   StorageSpace = 'Storage space',
   LivingSpace = 'Living space',
   Food = 'Food',
@@ -36,7 +37,19 @@ export const AllResources: IFullEntity[] = [
     ConsumedItems: [],
     ProducedItems: [],
     UoM: UoMsEnum.kW,
-    InitialQuantity: 1
+    InitialQuantity: 0
+  },
+  {
+    Name: ResourceNames.WorkUnit,
+    Description: 'WorkUnit', ImageUrl: '/assets/cash.svg',
+    Size: 0,
+    Type: AssetTypesEnum.Resource,
+    SubType: ResourceTypesEnum.Volatile,
+    CreationCost: [],
+    ConsumedItems: [],
+    ProducedItems: [],
+    UoM: UoMsEnum.WU,
+    InitialQuantity: 0
   },
   {
     Name: ResourceNames.StorageSpace,
@@ -48,7 +61,7 @@ export const AllResources: IFullEntity[] = [
     ConsumedItems: [],
     ProducedItems: [],
     UoM: UoMsEnum.m2,
-    InitialQuantity: 1
+    InitialQuantity: 0
   },
   {
     Name: ResourceNames.LivingSpace,
@@ -60,7 +73,7 @@ export const AllResources: IFullEntity[] = [
     ConsumedItems: [],
     ProducedItems: [],
     UoM: UoMsEnum.m2,
-    InitialQuantity: 1
+    InitialQuantity: 0
   },
   {
     Name: ResourceNames.Food,
