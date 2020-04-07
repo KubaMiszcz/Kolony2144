@@ -9,7 +9,7 @@ export enum CrewNames {
 }
 
 export interface ICrewFullEntity extends IFullEntity {
-  SubType: CrewTypesEnum;
+  // SubType: CrewTypesEnum;
 }
 
 
@@ -22,7 +22,7 @@ export const AllCivilianCrew: IFullEntity[] = [
     SubType: CrewTypesEnum.Production,
     CreationCost: [],
     ConsumedItems: [
-      { Name: ResourceNames.Food, Quantity: 1 },
+      { Name: ResourceNames.Food, Quantity: 0.2 },
       { Name: ResourceNames.Cash, Quantity: 1 },
     ],
     ProducedItems: [],
@@ -37,7 +37,7 @@ export const AllCivilianCrew: IFullEntity[] = [
     SubType: CrewTypesEnum.Production,
     CreationCost: [],
     ConsumedItems: [
-      { Name: ResourceNames.Food, Quantity: 1 },
+      { Name: ResourceNames.Food, Quantity: 0.1 },
       { Name: ResourceNames.Cash, Quantity: 2 },
     ],
     ProducedItems: [],

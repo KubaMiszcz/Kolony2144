@@ -2,7 +2,7 @@ import { SharedService } from './shared.service';
 import { NewsService } from './news.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { IKolony } from '../models/Kolony';
+import { IKolony, Kolony } from '../models/Kolony';
 import { KolonyService } from './kolony.service';
 import { ResourceNames } from '../models/Resource';
 import { CrewNames } from '../models/Crew';
@@ -12,7 +12,7 @@ import { AssetTypesEnum } from '../models/enums/Types.enum';
   providedIn: 'root'
 })
 export class GameService {
-  kolony: IKolony;
+  kolony: Kolony;
   playerNotes = '';
 
   // isTurnComputing = false;

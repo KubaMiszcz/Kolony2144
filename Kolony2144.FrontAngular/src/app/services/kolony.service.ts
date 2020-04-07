@@ -5,7 +5,7 @@ import { IAsset } from '../models/Entity';
 import { AllCivilianCrew } from '../models/Crew';
 import { AllBuildings } from '../models/Building';
 import { AllMachines } from '../models/Machine';
-import { AssetTypesEnum, VolatileResourceTypesEnum } from '../models/enums/Types.enum';
+import { AssetTypesEnum, ResourceTypesEnum } from '../models/enums/Types.enum';
 import { SharedService } from './shared.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -13,11 +13,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class KolonyService {
-  ClearVolatileResources() {
-    // let list= VolatileResourceTypesEnum.
-
-  }
-
   kolony: Kolony;
   // get kolony(): IKolony { return this.kolonyBS.value };
   // kolonyBS = new BehaviorSubject<IKolony>(null);
@@ -51,7 +46,6 @@ export class KolonyService {
           Quantity: i.InitialQuantity
         })
       });
-    console.log(res);
 
     return res;
   }
@@ -82,20 +76,27 @@ export class KolonyService {
     return this.kolony.Assets.filter(i => i.Type === type);
   }
 
+  getKolonyVolatileAssets(): IAsset[] {
+    return this.kolony.Assets.filter(i => i.SubType === ResourceTypesEnum.Volatile);
+  }
+
+  ClearVolatileResources() {
+    this.getKolonyVolatileAssets().forEach(element => element.Quantity = 0);
+  }
+
+  get GetEnergyProduction(): number {
+    return this.getMonthlyAssetProductionByName(ResourceNames.Energy)
+  }
+
+  get GetEnergyUsage(): number {
+    return this.getMonthlyAssetConsumptionByName(ResourceNames.Energy)
+  }
 
   getAllCrewQuantity() {
-    this.kolony.Crew
-    // let res = 0;
-    // this.kolony.Assets.filter(a => a.Type === TypesEnum.Crew).forEach(crew => qty += crew.Quantity);
-    // return res;
-    return this.kolony.Crew
+    return this.getKolonyAssetsByType(AssetTypesEnum.Crew)
       .map(crew => crew.Quantity)
       .reduce((acc, next) => acc + next);
   }
-
-  getMonthlyFoodConsumption(): number {
-    return this.getMonthlyAssetConsumption(this.getKolonyAssetByName(ResourceNames.Food));
-  };
 
   getMonthlyAssetConsumption(cosnumedAsset: IAsset): number {
     let consumedQty = 0;
@@ -110,6 +111,22 @@ export class KolonyService {
 
   getMonthlyAssetConsumptionByName(assetName: ResourceNames): number {
     return this.getMonthlyAssetConsumption(this.getKolonyAssetByName(assetName));
+  };
+
+
+  getMonthlyAssetProduction(producedAsset: IAsset): number {
+    let producedQty = 0;
+    this.kolony.Assets.forEach(asset => {
+      let producedItem = asset.ProducedItems.find(item => item.Name === producedAsset.Name);
+      if (producedItem) {
+        producedQty += (asset.Quantity * producedItem.Quantity);
+      }
+    });
+    return producedQty;
+  };
+
+  getMonthlyAssetProductionByName(assetName: ResourceNames): number {
+    return this.getMonthlyAssetProduction(this.getKolonyAssetByName(assetName));
   };
 
 }

@@ -6,6 +6,7 @@ import { AssetTypesEnum, BuildingTypesEnum } from "./enums/Types.enum";
 export enum BuildingNames {
   Habitat = 'Habitat',
   Warehouse = 'Warehouse',
+  SolarPanel = 'Solar panel',
 }
 
 export const AllBuildings: IFullEntity[] = [
@@ -14,13 +15,17 @@ export const AllBuildings: IFullEntity[] = [
     Description: '', ImageUrl: '/assets/building.svg',
     Size: 100,
     Type: AssetTypesEnum.Building,
-    SubType: BuildingTypesEnum.NotSet,
+    SubType: BuildingTypesEnum.Maintenance,
     CreationCost: [
       { Name: ResourceNames.Stone, Quantity: 20 },
       { Name: ResourceNames.Steel, Quantity: 5 }
     ],
-    ConsumedItems: [],
-    ProducedItems: [],
+    ConsumedItems: [
+      { Name: ResourceNames.Energy, Quantity: 10 }
+    ],
+    ProducedItems: [
+      { Name: ResourceNames.LivingSpace, Quantity: 10 }
+    ],
     UoM: UoMsEnum.pcs,
     InitialQuantity: 10
   },
@@ -34,8 +39,30 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceNames.Stone, Quantity: 10 },
       { Name: ResourceNames.Steel, Quantity: 10 }
     ],
-    ConsumedItems: [],
-    ProducedItems: [],
+    ConsumedItems: [
+      { Name: ResourceNames.Energy, Quantity: 10 }
+    ],
+    ProducedItems: [
+      { Name: ResourceNames.StorageSpace, Quantity: 500 }
+    ],
+    UoM: UoMsEnum.pcs,
+    InitialQuantity: 10
+  },
+  {
+    Name: BuildingNames.SolarPanel,
+    Description: '', ImageUrl: '/assets/building.svg',
+    Size: 1000,
+    Type: AssetTypesEnum.Building,
+    SubType: BuildingTypesEnum.PowerSource,
+    CreationCost: [
+      { Name: ResourceNames.Stone, Quantity: 10 },
+      { Name: ResourceNames.Steel, Quantity: 20 }
+    ],
+    ConsumedItems: [
+    ],
+    ProducedItems: [
+      { Name: ResourceNames.Energy, Quantity: 500 }
+    ],
     UoM: UoMsEnum.pcs,
     InitialQuantity: 10
   }]
