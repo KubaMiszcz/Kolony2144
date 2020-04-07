@@ -4,12 +4,11 @@ import { CrewOverviewComponent } from './crew-overview/crew-overview.component';
 import { SharedModule } from '../shared/shared.module';
 
 
-
 @NgModule({
   declarations: [CrewOverviewComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
   ], exports: [
     CrewOverviewComponent
   ]

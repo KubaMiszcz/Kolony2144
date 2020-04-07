@@ -1,3 +1,4 @@
+import { CrewModule } from './crew-module/crew.module';
 import { BuildingsModule } from './buildings-module/buildings.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,6 +28,7 @@ import { NewsModule } from './news-module/news.module';
 
     NewsModule,
     OverviewModule,
+    CrewModule,
     BuildingsModule,
     WikiModule
   ],

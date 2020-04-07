@@ -32,7 +32,7 @@ export class KolonyService {
   prepareInitialAssets(): IAsset[] {
     let res = [];
     [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines]
-      .filter(a => a.InitialQuantity > 0)
+      .filter(a => a.InitialQuantity >= 0)
       .forEach(i => {
         res.push({
           Name: i.Name,
