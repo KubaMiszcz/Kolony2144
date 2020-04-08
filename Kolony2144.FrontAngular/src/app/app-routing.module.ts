@@ -1,3 +1,4 @@
+import { PowerOverviewComponent } from './power-module/power-overview/power-overview.component';
 import { CrewOverviewComponent } from './crew-module/crew-overview/crew-overview.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -9,10 +10,11 @@ import { BuildingsComponent } from './buildings-module/buildings/buildings.compo
 
 const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },
-  { path: 'start', component: NewsComponent },
+  { path: 'start', component: PowerOverviewComponent },
   { path: 'news', component: NewsComponent },
   { path: 'overview', component: OverviewComponent },
   { path: 'crew', component: CrewOverviewComponent },
+  { path: 'power', component: PowerOverviewComponent },
   { path: 'buildings', component: BuildingsComponent },
   { path: 'wiki', component: WikiComponent },
   { path: 'loading-screen', component: AppSpinnerComponent }

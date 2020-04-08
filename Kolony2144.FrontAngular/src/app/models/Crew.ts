@@ -21,11 +21,11 @@ export const AllCivilianCrew: IFullEntity[] = [
     Type: AssetTypesEnum.Crew,
     SubType: CrewTypesEnum.Production,
     CreationCost: [],
-    ConsumedItems: [
+    MaintenanceCost: [
       { Name: ResourceNames.Food, Quantity: 0.2 },
       { Name: ResourceNames.Cash, Quantity: 1 },
     ],
-    ProducedItems: [
+    PassiveIncome: [
       { Name: ResourceNames.BasicWorkUnit, Quantity: 2 },
     ],
     UoM: UoMsEnum.pcs,
@@ -38,12 +38,13 @@ export const AllCivilianCrew: IFullEntity[] = [
     Type: AssetTypesEnum.Crew,
     SubType: CrewTypesEnum.Production,
     CreationCost: [],
-    ConsumedItems: [
+    MaintenanceCost: [
       { Name: ResourceNames.Food, Quantity: 0.1 },
       { Name: ResourceNames.Cash, Quantity: 2 },
     ],
-    ProducedItems: [
+    PassiveIncome: [
       { Name: ResourceNames.BasicWorkUnit, Quantity: 1 },
+      { Name: ResourceNames.AdvancedWorkUnit, Quantity: 1 },
     ],
     UoM: UoMsEnum.pcs,
     InitialQuantity: 5

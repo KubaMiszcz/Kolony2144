@@ -40,8 +40,8 @@ export class KolonyService {
           Type: i.Type,
           SubType: i.SubType,
           ProductionCost: i.CreationCost,
-          ConsumedItems: i.ConsumedItems,
-          ProducedItems: i.ProducedItems,
+          MaintenanceCost: i.MaintenanceCost,
+          PassiveIncome: i.PassiveIncome,
           UoM: i.UoM,
           Quantity: i.InitialQuantity
         })
@@ -51,9 +51,9 @@ export class KolonyService {
   }
 
 
-  updateInventoryDueToConsumingItems() {
+  updateInventoryDueToMaintenance() {
     this.kolony.Assets.forEach(asset => {
-      asset.ConsumedItems.forEach(consumedItem => {
+      asset.MaintenanceCost.forEach(consumedItem => {
         this.kolony.Assets.find(a => a.Name == consumedItem.Name).Quantity -= (consumedItem.Quantity * asset.Quantity);
       });
     });
@@ -61,7 +61,7 @@ export class KolonyService {
 
   updateInventoryDueToProducingItems() {
     this.kolony.Assets.forEach(asset => {
-      asset.ProducedItems.forEach(producedItem => {
+      asset.PassiveIncome.forEach(producedItem => {
         this.kolony.Assets.find(a => a.Name == producedItem.Name).Quantity += (producedItem.Quantity * asset.Quantity);
       });
     });
@@ -101,7 +101,7 @@ export class KolonyService {
   getMonthlyAssetConsumption(cosnumedAsset: IAsset): number {
     let consumedQty = 0;
     this.kolony.Assets.forEach(asset => {
-      let consumedItem = asset.ConsumedItems.find(item => item.Name === cosnumedAsset.Name);
+      let consumedItem = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name);
       if (consumedItem) {
         consumedQty += (asset.Quantity * consumedItem.Quantity);
       }
@@ -117,7 +117,7 @@ export class KolonyService {
   getMonthlyAssetProduction(producedAsset: IAsset): number {
     let producedQty = 0;
     this.kolony.Assets.forEach(asset => {
-      let producedItem = asset.ProducedItems.find(item => item.Name === producedAsset.Name);
+      let producedItem = asset.PassiveIncome.find(item => item.Name === producedAsset.Name);
       if (producedItem) {
         producedQty += (asset.Quantity * producedItem.Quantity);
       }

@@ -8,19 +8,22 @@
   <div class="menu collapsde navbar-collsapse" id="navbarNavAltMarkup">
     <div class="navbar-nav flex-column btn-group-toggle" data-toggle="buttons">
       <label [routerLink]="[ '/news']" class="btn btn-outline-primary mx-2 my-1 active">
-        <input type="radio" name="options" id="option0" autocomplete="off" checked>
+        <input type="radio" name="options" id="news" autocomplete="off" checked>
         News </label>
       <label [routerLink]="[ '/overview']" class="btn btn-outline-primary mx-2 my-1 ">
-        <input type="radio" name="options" id="option1" autocomplete="off" checked>
+        <input type="radio" name="options" id="overview" autocomplete="off">
         Overview </label>
+      <label [routerLink]="[ '/power']" class="btn btn-outline-primary mx-2 my-1 ">
+        <input type="radio" name="options" id="power" autocomplete="off" checked>
+        Power </label>
       <label [routerLink]="[ '/crew']" class="btn btn-outline-primary mx-2 my-1">
-        <input type="radio" name="options" id="option3" autocomplete="off">
+        <input type="radio" name="options" id="crew" autocomplete="off">
         Crew </label>
       <label [routerLink]="[ '/buildings']" class="btn btn-outline-primary mx-2 my-1">
-        <input type="radio" name="options" id="option4" autocomplete="off">
+        <input type="radio" name="options" id="buildings" autocomplete="off">
         Buildings </label>
       <label [routerLink]="[ '/wiki']" class="btn btn-outline-primary mx-2 my-1">
-        <input type="radio" name="options" id="option8" autocomplete="off">
+        <input type="radio" name="options" id="wiki" autocomplete="off">
         Wiki </label>
       <!-- <label [routerLink]="[ '/finances']" class="btn btn-outline-primary mx-2 my-1">
         <input type="radio" name="options" id="option2" autocomplete="off">
