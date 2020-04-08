@@ -14,7 +14,9 @@ export class OverviewComponent implements OnInit {
   resourcesList: any[];
 
   constructor(
+    // private gameService: GameService,
     private kolonyService: KolonyService,
+    // private sharedService: SharedService
   ) {
     this.kolony = this.kolonyService.kolony;
   }
