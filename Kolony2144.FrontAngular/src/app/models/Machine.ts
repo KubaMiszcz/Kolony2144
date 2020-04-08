@@ -1,6 +1,6 @@
 import { IFullEntity } from "./Entity";
 import { AssetTypesEnum, MachineTypesEnum } from "./enums/Types.enum";
-import { ResourceNames } from "./Resource";
+import { ResourceName } from "./Resource";
 import { UoMsEnum } from "./enums/UoMs.enum";
 
 export enum MachinesNames {
@@ -15,13 +15,13 @@ export const AllMachines: IFullEntity[] = [
     Type: AssetTypesEnum.Machine,
     SubType: MachineTypesEnum.PowerSource,
     CreationCost: [
-      { Name: ResourceNames.Steel, Quantity: 5 }
+      { Name: ResourceName.Steel, Quantity: 5 }
     ],
     MaintenanceCost: [
-      { Name: ResourceNames.Cash, Quantity: 20 }
+      { Name: ResourceName.Cash, Quantity: 20 }
     ],
     PassiveIncome: [
-      { Name: ResourceNames.Energy, Quantity: 100 }
+      { Name: ResourceName.Energy, Quantity: 100 }
     ],
     UoM: UoMsEnum.pcs,
     InitialQuantity: 10

@@ -20,10 +20,10 @@ export class OverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.resourcesList = this.getResourcesList(this.kolonyService.getKolonyAssetsByType(AssetTypesEnum.Resource));
+    this.resourcesList = this.fillResourcesList(this.kolonyService.getKolonyAssetsByType(AssetTypesEnum.Resource));
   }
 
-  getResourcesList(resources: IAsset[]): any[] {
+  fillResourcesList(resources: IAsset[]): any[] {
     let res = [['name', 'qty'],
     ...resources.map(r => [r.Name, r.Quantity])
     ];

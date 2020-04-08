@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { IKolony, Kolony } from '../models/Kolony';
 import { KolonyService } from './kolony.service';
-import { ResourceNames } from '../models/Resource';
+import { ResourceName } from '../models/Resource';
 import { CrewNames } from '../models/Crew';
 import { AssetTypesEnum } from '../models/enums/Types.enum';
 
@@ -128,15 +128,15 @@ export class GameService {
     this.newsService.addNews(msg);
 
     // news about food
-    let foodAsset = this.kolonyService.getKolonyAssetByName(ResourceNames.Food);
-    let monthlyFoodConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(ResourceNames.Food);
+    let foodAsset = this.kolonyService.getKolonyAssetByName(ResourceName.Food);
+    let monthlyFoodConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(ResourceName.Food);
     msg = '* Eats ' + monthlyFoodConsumption + foodAsset.UoM + ' of ' + foodAsset.Name + '. '
       + foodAsset.Name + ' is enough for ' + (Math.floor(foodAsset.Quantity / monthlyFoodConsumption)) + ' months';
     this.newsService.addNews(msg);
 
     // news about salary
-    let cashAsset = this.kolonyService.getKolonyAssetByName(ResourceNames.Cash);
-    let monthlyCashConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(ResourceNames.Cash);
+    let cashAsset = this.kolonyService.getKolonyAssetByName(ResourceName.Cash);
+    let monthlyCashConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(ResourceName.Cash);
     msg = '* Earns ' + monthlyCashConsumption + cashAsset.UoM + ' of ' + cashAsset.Name + '. '
       + cashAsset.Name + ' is enough for ' + (Math.floor(cashAsset.Quantity / monthlyCashConsumption)) + ' months';
     this.newsService.addNews(msg);

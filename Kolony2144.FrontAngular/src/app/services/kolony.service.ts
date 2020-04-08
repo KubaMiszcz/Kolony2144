@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IKolony, Kolony } from '../models/Kolony';
-import { AllResources, ResourceNames } from '../models/Resource';
-import { IAsset } from '../models/Entity';
+import { AllResources, ResourceName as ResourceName } from '../models/Resource';
+import { IAsset, ISimplifiedResource } from '../models/Entity';
 import { AllCivilianCrew } from '../models/Crew';
 import { AllBuildings } from '../models/Building';
 import { AllMachines } from '../models/Machine';
@@ -13,6 +13,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class KolonyService {
+
   kolony: Kolony;
   // get kolony(): IKolony { return this.kolonyBS.value };
   // kolonyBS = new BehaviorSubject<IKolony>(null);
@@ -39,7 +40,7 @@ export class KolonyService {
           Size: i.Size,
           Type: i.Type,
           SubType: i.SubType,
-          ProductionCost: i.CreationCost,
+          CreationCost: i.CreationCost,
           MaintenanceCost: i.MaintenanceCost,
           PassiveIncome: i.PassiveIncome,
           UoM: i.UoM,
@@ -85,11 +86,11 @@ export class KolonyService {
   }
 
   get GetEnergyProduction(): number {
-    return this.getMonthlyAssetProductionByName(ResourceNames.Energy)
+    return this.getMonthlyAssetProductionByName(ResourceName.Energy)
   }
 
   get GetEnergyUsage(): number {
-    return this.getMonthlyAssetConsumptionByName(ResourceNames.Energy)
+    return this.getMonthlyAssetConsumptionByName(ResourceName.Energy)
   }
 
   getAllCrewQuantity() {
@@ -109,7 +110,7 @@ export class KolonyService {
     return consumedQty;
   };
 
-  getMonthlyAssetConsumptionByName(assetName: ResourceNames): number {
+  getMonthlyAssetConsumptionByName(assetName: ResourceName): number {
     return this.getMonthlyAssetConsumption(this.getKolonyAssetByName(assetName));
   };
 
@@ -125,9 +126,43 @@ export class KolonyService {
     return producedQty;
   };
 
-  getMonthlyAssetProductionByName(assetName: ResourceNames): number {
+  getMonthlyAssetProductionByName(assetName: ResourceName): number {
     return this.getMonthlyAssetProduction(this.getKolonyAssetByName(assetName));
   };
+
+  getAssetListByConsumedAsset(consumedAsset: IAsset): IAsset[] {
+    return this.getAssetsListByConsumedAssetName(consumedAsset.Name as ResourceName);
+  };
+
+  getAssetsListByConsumedAssetName(consumedAssetName: ResourceName): IAsset[] {
+    let res = [];
+    this.kolony.Assets.forEach(asset => {
+      if (!!asset.MaintenanceCost.find(item => item.Name === consumedAssetName)) {
+        res.push(asset);
+      }
+    });
+    return res;
+  };
+
+  findResourceInAssetByName(resourcesList: ISimplifiedResource[], name: ResourceName) {
+    return resourcesList.find(r => r.Name === name);
+  }
+
+  findAssetInListByName(resourcesList: IAsset[], name: string) {
+    return resourcesList.find(i => i.Name === name);
+  }
+
+  getAssetQuantityFromListByName(assetsList: ISimplifiedResource[], name: string) {
+    const asset = assetsList.find(s => s.Name === name);
+    return !!asset ? asset.Quantity : 0;
+  };
+
+  getUoMByName(item: ISimplifiedResource) {
+    // return this.allWikiEntites.find(m => m.Name === item.Name).UoM;
+    console.log('getUoMForSimpleAsset..........................................');
+    return 'fixit';
+  }
+
 
 }
 

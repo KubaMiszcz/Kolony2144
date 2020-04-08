@@ -12,6 +12,7 @@ import { SharedModule } from './shared/shared.module';
 import { WikiModule } from './wiki-module/wiki.module';
 import { OverviewModule } from './overview-module/overview.module';
 import { NewsModule } from './news-module/news.module';
+import { FinancesModule } from './finances-module/finances.module';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { NewsModule } from './news-module/news.module';
 
     NewsModule,
     OverviewModule,
+    FinancesModule,
     CrewModule,
     BuildingsModule,
     WikiModule

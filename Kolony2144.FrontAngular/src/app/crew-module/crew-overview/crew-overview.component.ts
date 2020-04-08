@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IKolony } from 'src/app/models/Kolony';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { SharedService } from 'src/app/services/shared.service';
-import { ResourceNames } from 'src/app/models/Resource';
+import { ResourceName } from 'src/app/models/Resource';
 import { AssetTypesEnum } from 'src/app/models/enums/Types.enum';
 
 @Component({
@@ -28,24 +28,24 @@ export class CrewOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setPerUnitSummary();
-    this.setTotalSummary();
+    this.fillPerUnitSummary();
+    this.fillTotalSummary();
   }
 
-  setPerUnitSummary() {
+  fillPerUnitSummary() {
     this.perUnitHeader = [
       'Name',
       'Salary per Unit',
-      ResourceNames.Food + ' Consumption per Unit',
-      ResourceNames.BasicWorkUnit + ' Production per Unit',
+      ResourceName.Food + ' Consumption per Unit',
+      ResourceName.BasicWorkUnit + ' Production per Unit',
       'Total Qty',
     ];
 
     this.kolonyService.getKolonyAssetsByType(AssetTypesEnum.Crew).forEach(c => {
       let name = c.Name;
-      let salary = this.sharedService.getAssetQuantityFromListByName(c.MaintenanceCost, ResourceNames.Cash);
-      let foodConsumption = this.sharedService.getAssetQuantityFromListByName(c.MaintenanceCost, ResourceNames.Food);
-      let BasicWU = this.sharedService.getAssetQuantityFromListByName(c.PassiveIncome, ResourceNames.BasicWorkUnit);
+      let salary = this.kolonyService.findResourceInAssetByName(c.MaintenanceCost, ResourceName.Cash);
+      let foodConsumption = this.kolonyService.findResourceInAssetByName(c.MaintenanceCost, ResourceName.Food);
+      let BasicWU = this.kolonyService.findResourceInAssetByName(c.PassiveIncome, ResourceName.BasicWorkUnit);
       let qty = c.Quantity;
       this.perUnitList.push([
         name,
@@ -59,20 +59,20 @@ export class CrewOverviewComponent implements OnInit {
     // this.perUnitFooter = [...(new Array(3)),
   }
 
-  setTotalSummary() {
+  fillTotalSummary() {
     this.totalHeader = [
       'Name',
       'Total Qty',
       'Total Salary',
-      'Total ' + ResourceNames.Food + ' Consumption',
-      'Total ' + ResourceNames.BasicWorkUnit + ' Production',
+      'Total ' + ResourceName.Food + ' Consumption',
+      'Total ' + ResourceName.BasicWorkUnit + ' Production',
     ];
 
     this.kolonyService.getKolonyAssetsByType(AssetTypesEnum.Crew).forEach(c => {
       let name = c.Name;
-      let salary = this.sharedService.getAssetQuantityFromListByName(c.MaintenanceCost, ResourceNames.Cash);
-      let foodConsumption = this.sharedService.getAssetQuantityFromListByName(c.MaintenanceCost, ResourceNames.Food);
-      let BasicWU = this.sharedService.getAssetQuantityFromListByName(c.PassiveIncome, ResourceNames.BasicWorkUnit);
+      let salary = this.kolonyService.findResourceInAssetByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
+      let foodConsumption = this.kolonyService.findResourceInAssetByName(c.MaintenanceCost, ResourceName.Food).Quantity;
+      let BasicWU = this.kolonyService.findResourceInAssetByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
       let qty = c.Quantity;
       this.totalList.push([
         name,
