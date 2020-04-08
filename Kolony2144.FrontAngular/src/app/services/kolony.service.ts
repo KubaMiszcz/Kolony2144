@@ -144,6 +144,20 @@ export class KolonyService {
     return res;
   };
 
+  getAssetListByProducedAsset(producedAsset: IAsset): IAsset[] {
+    return this.getAssetsListByProducedAssetName(producedAsset.Name as ResourceName);
+  };
+
+  getAssetsListByProducedAssetName(producedAssetName: ResourceName): IAsset[] {
+    let res = [];
+    this.kolony.Assets.forEach(asset => {
+      if (!!asset.PassiveIncome.find(item => item.Name === producedAssetName)) {
+        res.push(asset);
+      }
+    });
+    return res;
+  };
+
   findResourceInAssetByName(resourcesList: ISimplifiedResource[], name: ResourceName) {
     return resourcesList.find(r => r.Name === name);
   }
@@ -157,7 +171,7 @@ export class KolonyService {
     return !!asset ? asset.Quantity : 0;
   };
 
-  getUoMByName(item: ISimplifiedResource) {
+  getUoMByName(itemName: string) {
     // return this.allWikiEntites.find(m => m.Name === item.Name).UoM;
     console.log('getUoMForSimpleAsset..........................................');
     return 'fixit';
