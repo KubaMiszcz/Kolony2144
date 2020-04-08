@@ -1,6 +1,6 @@
 import { IFullEntity } from "./Entity";
 import { UoMsEnum } from "./enums/UoMs.enum";
-import { ResourceNames } from "./Resource";
+import { ResourceName } from "./Resource";
 import { AssetTypesEnum, BuildingTypesEnum } from "./enums/Types.enum";
 
 export enum BuildingNames {
@@ -19,14 +19,14 @@ export const AllBuildings: IFullEntity[] = [
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.Maintenance,
     CreationCost: [
-      { Name: ResourceNames.Stone, Quantity: 20 },
-      { Name: ResourceNames.Steel, Quantity: 5 }
+      { Name: ResourceName.Stone, Quantity: 20 },
+      { Name: ResourceName.Steel, Quantity: 5 }
     ],
     MaintenanceCost: [
-      { Name: ResourceNames.Energy, Quantity: 10 }
+      { Name: ResourceName.Energy, Quantity: 10 }
     ],
     PassiveIncome: [
-      { Name: ResourceNames.LivingSpace, Quantity: 10 }
+      { Name: ResourceName.LivingSpace, Quantity: 10 }
     ],
     UoM: UoMsEnum.pcs,
     InitialQuantity: 10
@@ -38,14 +38,14 @@ export const AllBuildings: IFullEntity[] = [
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.NotSet,
     CreationCost: [
-      { Name: ResourceNames.Stone, Quantity: 10 },
-      { Name: ResourceNames.Steel, Quantity: 10 }
+      { Name: ResourceName.Stone, Quantity: 10 },
+      { Name: ResourceName.Steel, Quantity: 10 }
     ],
     MaintenanceCost: [
-      { Name: ResourceNames.Energy, Quantity: 10 }
+      { Name: ResourceName.Energy, Quantity: 10 }
     ],
     PassiveIncome: [
-      { Name: ResourceNames.StorageSpace, Quantity: 500 }
+      { Name: ResourceName.StorageSpace, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
     InitialQuantity: 10
@@ -57,13 +57,13 @@ export const AllBuildings: IFullEntity[] = [
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.PowerSource,
     CreationCost: [
-      { Name: ResourceNames.Stone, Quantity: 10 },
-      { Name: ResourceNames.Steel, Quantity: 20 }
+      { Name: ResourceName.Stone, Quantity: 10 },
+      { Name: ResourceName.Steel, Quantity: 20 }
     ],
     MaintenanceCost: [
     ],
     PassiveIncome: [
-      { Name: ResourceNames.Energy, Quantity: 500 }
+      { Name: ResourceName.Energy, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
     InitialQuantity: 10
@@ -75,15 +75,15 @@ export const AllBuildings: IFullEntity[] = [
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.Production,
     CreationCost: [
-      { Name: ResourceNames.Stone, Quantity: 20 },
-      { Name: ResourceNames.Steel, Quantity: 20 }
+      { Name: ResourceName.Stone, Quantity: 20 },
+      { Name: ResourceName.Steel, Quantity: 20 }
     ],
     MaintenanceCost: [
-      { Name: ResourceNames.Cash, Quantity: 100 },
-      { Name: ResourceNames.Energy, Quantity: 100 }
+      { Name: ResourceName.Cash, Quantity: 100 },
+      { Name: ResourceName.Energy, Quantity: 100 }
     ],
     PassiveIncome: [
-      { Name: ResourceNames.BasicWorkUnit, Quantity: 100 }
+      { Name: ResourceName.BasicWorkUnit, Quantity: 100 }
     ],
     UoM: UoMsEnum.pcs,
     InitialQuantity: 10
@@ -95,16 +95,16 @@ export const AllBuildings: IFullEntity[] = [
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.Production,
     CreationCost: [
-      { Name: ResourceNames.Stone, Quantity: 30 },
-      { Name: ResourceNames.Steel, Quantity: 100 }
+      { Name: ResourceName.Stone, Quantity: 30 },
+      { Name: ResourceName.Steel, Quantity: 100 }
     ],
     MaintenanceCost: [
-      { Name: ResourceNames.Cash, Quantity: 500 },
-      { Name: ResourceNames.Energy, Quantity: 500 }
+      { Name: ResourceName.Cash, Quantity: 500 },
+      { Name: ResourceName.Energy, Quantity: 500 }
     ],
     PassiveIncome: [
-      { Name: ResourceNames.BasicWorkUnit, Quantity: 100 },
-      { Name: ResourceNames.AdvancedWorkUnit, Quantity: 500 }
+      { Name: ResourceName.BasicWorkUnit, Quantity: 100 },
+      { Name: ResourceName.AdvancedWorkUnit, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
     InitialQuantity: 10

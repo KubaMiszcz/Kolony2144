@@ -10,9 +10,9 @@ export interface IEntity {
   Size: number;
   Type: AssetTypesEnum;
   SubType: string;
-  CreationCost: ISimpleResource[];
-  MaintenanceCost: ISimpleResource[];
-  PassiveIncome: ISimpleResource[];
+  CreationCost: ISimplifiedResource[];
+  MaintenanceCost: ISimplifiedResource[];
+  PassiveIncome: ISimplifiedResource[];
   UoM: UoMsEnum;
 }
 
@@ -20,7 +20,7 @@ export interface IAsset extends IEntity {
   Quantity: number;
 }
 
-export interface ISimpleResource {
+export interface ISimplifiedResource {
   Name: string;
   Quantity: number;
 }

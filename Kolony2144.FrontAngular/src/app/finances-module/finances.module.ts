@@ -17,4 +17,4 @@ import { FinancesOverviewComponent } from './finances-overview/finances-overview
     FinancesOverviewComponent
   ]
 })
-export class OverviewModule { }
+export class FinancesModule { }

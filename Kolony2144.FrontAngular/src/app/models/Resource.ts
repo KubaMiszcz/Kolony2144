@@ -2,7 +2,7 @@ import { IFullEntity } from "./Entity";
 import { UoMsEnum } from "./enums/UoMs.enum";
 import { AssetTypesEnum, ResourceTypesEnum } from "./enums/Types.enum";
 
-export enum ResourceNames {
+export enum ResourceName {
   Cash = 'Space Beads',
   Energy = 'Energy',
   BasicWorkUnit = 'Basic Work Unit',
@@ -17,7 +17,7 @@ export enum ResourceNames {
 export const AllResources: IFullEntity[] = [
   //cash
   {
-    Name: ResourceNames.Cash,
+    Name: ResourceName.Cash,
     Description: 'Space Beads, galactic currency', ImageUrl: '/assets/cash.svg',
     Size: 0,
     Type: AssetTypesEnum.Resource,
@@ -29,7 +29,7 @@ export const AllResources: IFullEntity[] = [
     InitialQuantity: 5000
   },
   {
-    Name: ResourceNames.Energy,
+    Name: ResourceName.Energy,
     Description: 'Energy', ImageUrl: '/assets/energy.svg',
     Size: 0,
     Type: AssetTypesEnum.Resource,
@@ -41,7 +41,7 @@ export const AllResources: IFullEntity[] = [
     InitialQuantity: 0
   },
   {
-    Name: ResourceNames.BasicWorkUnit,
+    Name: ResourceName.BasicWorkUnit,
     Description: 'BasicWorkUnit', ImageUrl: '/assets/item.svg',
     Size: 0,
     Type: AssetTypesEnum.Resource,
@@ -53,7 +53,7 @@ export const AllResources: IFullEntity[] = [
     InitialQuantity: 0
   },
   {
-    Name: ResourceNames.AdvancedWorkUnit,
+    Name: ResourceName.AdvancedWorkUnit,
     Description: 'AdvancedWorkUnit', ImageUrl: '/assets/item.svg',
     Size: 0,
     Type: AssetTypesEnum.Resource,
@@ -65,7 +65,7 @@ export const AllResources: IFullEntity[] = [
     InitialQuantity: 0
   },
   {
-    Name: ResourceNames.StorageSpace,
+    Name: ResourceName.StorageSpace,
     Description: 'StorageSpace', ImageUrl: '/assets/item.svg',
     Size: 0,
     Type: AssetTypesEnum.Resource,
@@ -77,7 +77,7 @@ export const AllResources: IFullEntity[] = [
     InitialQuantity: 0
   },
   {
-    Name: ResourceNames.LivingSpace,
+    Name: ResourceName.LivingSpace,
     Description: 'Energy', ImageUrl: '/assets/item.svg',
     Size: 0,
     Type: AssetTypesEnum.Resource,
@@ -89,7 +89,7 @@ export const AllResources: IFullEntity[] = [
     InitialQuantity: 0
   },
   {
-    Name: ResourceNames.Food,
+    Name: ResourceName.Food,
     Description: 'food for feeding your men and animals;]', ImageUrl: '/assets/item.svg',
     Size: 1,
     Type: AssetTypesEnum.Resource,
@@ -101,7 +101,7 @@ export const AllResources: IFullEntity[] = [
     InitialQuantity: 100
   },
   {
-    Name: ResourceNames.Stone,
+    Name: ResourceName.Stone,
     Description: 'A piece of stone', ImageUrl: '/assets/item.png',
     Size: 1,
     Type: AssetTypesEnum.Resource,
@@ -113,7 +113,7 @@ export const AllResources: IFullEntity[] = [
     InitialQuantity: 1000
   },
   {
-    Name: ResourceNames.Steel,
+    Name: ResourceName.Steel,
     Description: 'A piece of steel', ImageUrl: '/assets/item.png',
     Size: 1,
     Type: AssetTypesEnum.Resource,
