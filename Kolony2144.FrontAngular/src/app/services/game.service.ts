@@ -67,7 +67,11 @@ export class GameService {
       //##########################################
       //#REGION NEW TURN BEGINS
       this.kolonyService.ClearVolatileResources();
-      this.kolonyService.updateInventoryDueToConsumingItems();
+      this.kolonyService.updateInventoryDueToMaintenance();
+
+
+      console.log('aaa');
+
       this.kolonyService.updateInventoryDueToProducingItems();
 
 

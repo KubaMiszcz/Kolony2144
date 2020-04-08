@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IAsset, ISimpleAsset } from 'src/app/models/Entity';
 import { IKolony } from 'src/app/models/Kolony';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -44,9 +43,9 @@ export class CrewOverviewComponent implements OnInit {
 
     this.kolonyService.getKolonyAssetsByType(AssetTypesEnum.Crew).forEach(c => {
       let name = c.Name;
-      let salary = this.sharedService.getAssetQuantityFromListByName(c.ConsumedItems, ResourceNames.Cash);
-      let foodConsumption = this.sharedService.getAssetQuantityFromListByName(c.ConsumedItems, ResourceNames.Food);
-      let BasicWU = this.sharedService.getAssetQuantityFromListByName(c.ProducedItems, ResourceNames.BasicWorkUnit);
+      let salary = this.sharedService.getAssetQuantityFromListByName(c.MaintenanceCost, ResourceNames.Cash);
+      let foodConsumption = this.sharedService.getAssetQuantityFromListByName(c.MaintenanceCost, ResourceNames.Food);
+      let BasicWU = this.sharedService.getAssetQuantityFromListByName(c.PassiveIncome, ResourceNames.BasicWorkUnit);
       let qty = c.Quantity;
       this.perUnitList.push([
         name,
@@ -71,9 +70,9 @@ export class CrewOverviewComponent implements OnInit {
 
     this.kolonyService.getKolonyAssetsByType(AssetTypesEnum.Crew).forEach(c => {
       let name = c.Name;
-      let salary = this.sharedService.getAssetQuantityFromListByName(c.ConsumedItems, ResourceNames.Cash);
-      let foodConsumption = this.sharedService.getAssetQuantityFromListByName(c.ConsumedItems, ResourceNames.Food);
-      let BasicWU = this.sharedService.getAssetQuantityFromListByName(c.ProducedItems, ResourceNames.BasicWorkUnit);
+      let salary = this.sharedService.getAssetQuantityFromListByName(c.MaintenanceCost, ResourceNames.Cash);
+      let foodConsumption = this.sharedService.getAssetQuantityFromListByName(c.MaintenanceCost, ResourceNames.Food);
+      let BasicWU = this.sharedService.getAssetQuantityFromListByName(c.PassiveIncome, ResourceNames.BasicWorkUnit);
       let qty = c.Quantity;
       this.totalList.push([
         name,

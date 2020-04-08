@@ -7,6 +7,8 @@ export enum BuildingNames {
   Habitat = 'Habitat',
   Warehouse = 'Warehouse',
   SolarPanel = 'Solar panel',
+  Workshop = "SmallFactory",
+  Factory = "Factory"
 }
 
 export const AllBuildings: IFullEntity[] = [
@@ -20,10 +22,10 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceNames.Stone, Quantity: 20 },
       { Name: ResourceNames.Steel, Quantity: 5 }
     ],
-    ConsumedItems: [
+    MaintenanceCost: [
       { Name: ResourceNames.Energy, Quantity: 10 }
     ],
-    ProducedItems: [
+    PassiveIncome: [
       { Name: ResourceNames.LivingSpace, Quantity: 10 }
     ],
     UoM: UoMsEnum.pcs,
@@ -39,10 +41,10 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceNames.Stone, Quantity: 10 },
       { Name: ResourceNames.Steel, Quantity: 10 }
     ],
-    ConsumedItems: [
+    MaintenanceCost: [
       { Name: ResourceNames.Energy, Quantity: 10 }
     ],
-    ProducedItems: [
+    PassiveIncome: [
       { Name: ResourceNames.StorageSpace, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
@@ -58,11 +60,53 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceNames.Stone, Quantity: 10 },
       { Name: ResourceNames.Steel, Quantity: 20 }
     ],
-    ConsumedItems: [
+    MaintenanceCost: [
     ],
-    ProducedItems: [
+    PassiveIncome: [
       { Name: ResourceNames.Energy, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
     InitialQuantity: 10
-  }]
+  },
+  {
+    Name: BuildingNames.Workshop,
+    Description: '', ImageUrl: '/assets/building.svg',
+    Size: 100,
+    Type: AssetTypesEnum.Building,
+    SubType: BuildingTypesEnum.Production,
+    CreationCost: [
+      { Name: ResourceNames.Stone, Quantity: 20 },
+      { Name: ResourceNames.Steel, Quantity: 20 }
+    ],
+    MaintenanceCost: [
+      { Name: ResourceNames.Cash, Quantity: 100 },
+      { Name: ResourceNames.Energy, Quantity: 100 }
+    ],
+    PassiveIncome: [
+      { Name: ResourceNames.BasicWorkUnit, Quantity: 100 }
+    ],
+    UoM: UoMsEnum.pcs,
+    InitialQuantity: 10
+  },
+  {
+    Name: BuildingNames.Factory,
+    Description: '', ImageUrl: '/assets/building.svg',
+    Size: 200,
+    Type: AssetTypesEnum.Building,
+    SubType: BuildingTypesEnum.Production,
+    CreationCost: [
+      { Name: ResourceNames.Stone, Quantity: 30 },
+      { Name: ResourceNames.Steel, Quantity: 100 }
+    ],
+    MaintenanceCost: [
+      { Name: ResourceNames.Cash, Quantity: 500 },
+      { Name: ResourceNames.Energy, Quantity: 500 }
+    ],
+    PassiveIncome: [
+      { Name: ResourceNames.BasicWorkUnit, Quantity: 100 },
+      { Name: ResourceNames.AdvancedWorkUnit, Quantity: 500 }
+    ],
+    UoM: UoMsEnum.pcs,
+    InitialQuantity: 10
+  }
+]

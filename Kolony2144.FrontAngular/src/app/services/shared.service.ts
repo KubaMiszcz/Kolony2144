@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IAsset, ISimpleAsset, IWikiEntity } from '../models/Entity';
+import { IAsset, ISimpleResource, IWikiEntity } from '../models/Entity';
 import { AllBuildings } from '../models/Building';
 import { AllCivilianCrew } from '../models/Crew';
 import { AllResources } from '../models/Resource';
@@ -42,8 +42,8 @@ export class SharedService {
         Type: i.Type,
         SubType: i.SubType,
         CreationCost: i.CreationCost,
-        ConsumedItems: i.ConsumedItems,
-        ProducedItems: i.ProducedItems,
+        MaintenanceCost: i.MaintenanceCost,
+        PassiveIncome: i.PassiveIncome,
         UoM: i.UoM,
       })
     });
@@ -53,12 +53,12 @@ export class SharedService {
   //   return list.find(i => i.Name === name);
   // }
 
-  getAssetQuantityFromListByName(assetsList: ISimpleAsset[], name: string) {
+  getAssetQuantityFromListByName(assetsList: ISimpleResource[], name: string) {
     const asset = assetsList.find(s => s.Name === name);
     return !!asset ? asset.Quantity : 0;
   };
 
-  getUoMForSimpleAsset(item: ISimpleAsset) {
+  getUoMForSimpleAsset(item: ISimpleResource) {
     return this.allWikiEntites.find(m => m.Name === item.Name).UoM;
   }
 

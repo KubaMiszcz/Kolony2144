@@ -17,8 +17,10 @@ export const AllMachines: IFullEntity[] = [
     CreationCost: [
       { Name: ResourceNames.Steel, Quantity: 5 }
     ],
-    ConsumedItems: [],
-    ProducedItems: [
+    MaintenanceCost: [
+      { Name: ResourceNames.Cash, Quantity: 20 }
+    ],
+    PassiveIncome: [
       { Name: ResourceNames.Energy, Quantity: 100 }
     ],
     UoM: UoMsEnum.pcs,
