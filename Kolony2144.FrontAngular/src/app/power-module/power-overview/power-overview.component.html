@@ -6,13 +6,12 @@
 
   <div class="card m-2 ">
     <h4 class="card-header "> Power overview</h4>
+
     <div class="card-body p-1">
-      <span>POWERrazem zra zarcia xxx/mc starczy na xxx miesicy</span><br>
-      <span>razem zarabiaja xxx/mc zarcia starczy na xxx miesicy</span><br>
-      <span>razem zajmuja powierzchni mieskzalnj, tj xx% calosci</span><br>
-      <span>razem wytwarzaja xxxWU basicWU</span><br>
-      <span>razem wytwarzaja xxxWU mediumWU</span><br>
-      <span>razem wytwarzaja xxxWU advancedWU</span>
+      <app-tile-with-table [caption]="'co mi zzera power'" [header]="assetsConsumingList[0]" [rows]="assetsConsumingList.slice(1)">
+      </app-tile-with-table>
+      <app-tile-with-table [caption]="'co mi produkuje power'" [header]="assetsProducingList[0]" [rows]="assetsProducingList.slice(1)">
+      </app-tile-with-table>
     </div>
 
   </div>

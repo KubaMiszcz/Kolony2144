@@ -1,3 +1,4 @@
+import { PowerModule } from './power-module/power.module';
 import { CrewModule } from './crew-module/crew.module';
 import { BuildingsModule } from './buildings-module/buildings.module';
 import { NgModule } from '@angular/core';
@@ -30,6 +31,7 @@ import { FinancesModule } from './finances-module/finances.module';
     NewsModule,
     OverviewModule,
     FinancesModule,
+    PowerModule,
     CrewModule,
     BuildingsModule,
     WikiModule
