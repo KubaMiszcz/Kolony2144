@@ -15,11 +15,6 @@
       <span>razem wytwarzaja xxxWU advancedWU</span>
     </div>
 
-    <div class="card-body p-1">
-      <app-tile-with-table [caption]="'Crew per unit Summary'" [header]="perUnitHeader" [rows]="perUnitList" [footer]="perUnitFooter">
-      </app-tile-with-table>
-    </div>
-
     <!-- <hr> -->
     <!-- <div class="alert alert-warning alert-dismissible fade show m-2" role="alert">
     <strong>Holy guacamole!</strong> You should check in on some of those fields below.
@@ -34,7 +29,16 @@
       <app-tile-with-table [caption]="'Crew Total Summary'" [header]="totalHeader" [rows]="totalList" [footer]="totalFooter">
       </app-tile-with-table>
     </div>
+
+
+    <div class="card-body p-1">
+      <app-tile-with-table [caption]="'Crew per unit Summary'" [header]="perUnitHeader" [rows]="perUnitList" [footer]="perUnitFooter">
+      </app-tile-with-table>
+    </div>
+
+
   </div>
+
 
 
 </div>

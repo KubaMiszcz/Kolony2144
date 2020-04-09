@@ -12,7 +12,6 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { WikiModule } from './wiki-module/wiki.module';
 import { OverviewModule } from './overview-module/overview.module';
-import { NewsModule } from './news-module/news.module';
 import { FinancesModule } from './finances-module/finances.module';
 
 
@@ -28,7 +27,6 @@ import { FinancesModule } from './finances-module/finances.module';
     SharedModule,
     CoreModule,
 
-    NewsModule,
     OverviewModule,
     FinancesModule,
     PowerModule,

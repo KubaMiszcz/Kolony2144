@@ -8,7 +8,7 @@ import { IAsset } from 'src/app/models/Entity';
 @Component({
   selector: 'app-power-overview',
   templateUrl: './power-overview.component.html',
-  styleUrls: ['./power-overview.component.css']
+  styleUrls: ['./power-overview.component.scss']
 })
 export class PowerOverviewComponent implements OnInit {
   kolony: Kolony;
