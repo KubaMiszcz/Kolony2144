@@ -26,7 +26,7 @@ export const AllResources: IFullEntity[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.SB,
-    InitialQuantity: 5000
+    InitialQuantity: 50000
   },
   {
     Name: ResourceName.Energy,

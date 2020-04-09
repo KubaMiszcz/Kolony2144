@@ -43,9 +43,9 @@ export class CrewOverviewComponent implements OnInit {
 
     this.kolonyService.getKolonyAssetsByType(AssetTypesEnum.Crew).forEach(c => {
       let name = c.Name;
-      let salary = this.kolonyService.findResourceInAssetByName(c.MaintenanceCost, ResourceName.Cash);
-      let foodConsumption = this.kolonyService.findResourceInAssetByName(c.MaintenanceCost, ResourceName.Food);
-      let BasicWU = this.kolonyService.findResourceInAssetByName(c.PassiveIncome, ResourceName.BasicWorkUnit);
+      let salary = this.kolonyService.findResourceInAssetByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
+      let foodConsumption = this.kolonyService.findResourceInAssetByName(c.MaintenanceCost, ResourceName.Food).Quantity;
+      let BasicWU = this.kolonyService.findResourceInAssetByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
       let qty = c.Quantity;
       this.perUnitList.push([
         name,

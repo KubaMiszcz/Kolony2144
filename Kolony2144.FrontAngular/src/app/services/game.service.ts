@@ -1,5 +1,4 @@
 import { SharedService } from './shared.service';
-import { NewsService } from './news.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { IKolony, Kolony } from '../models/Kolony';
@@ -7,6 +6,7 @@ import { KolonyService } from './kolony.service';
 import { ResourceName } from '../models/Resource';
 import { CrewNames } from '../models/Crew';
 import { AssetTypesEnum } from '../models/enums/Types.enum';
+import { OverviewService } from './overview.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class GameService {
     private router: Router,
     private sharedService: SharedService,
     private kolonyService: KolonyService,
-    private newsService: NewsService,
+    private overviewService: OverviewService,
   ) {
     this.kolony = this.kolonyService.kolony;
     // this.AllAssets = JSON.parse(JSON.stringify([...StarterCivilianCrew, ...StarterMachines, ...StarterBuildings]));
@@ -60,7 +60,7 @@ export class GameService {
 
       {
         this.setNextMonth(); console.log('setNextMonth');
-        this.newsService.clearNews();
+        this.overviewService.clearNews();
       }
 
 
@@ -120,26 +120,26 @@ export class GameService {
   }
 
   updateNews() {
-    this.newsService.addNews('## Welcome in new month, current time is: ' + this.kolony.Age.toFixed(1)) + ' of New Era';
+    this.overviewService.addNews('## Welcome in new month, current time is: ' + this.kolony.Age.toFixed(1)) + ' of New Era';
     let msg = '';
 
     // news about crew
     msg = '# Your crew (total ' + this.kolonyService.getAllCrewQuantity() + ' persons):'
-    this.newsService.addNews(msg);
+    this.overviewService.addNews(msg);
 
     // news about food
     let foodAsset = this.kolonyService.getKolonyAssetByName(ResourceName.Food);
     let monthlyFoodConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(ResourceName.Food);
     msg = '* Eats ' + monthlyFoodConsumption + foodAsset.UoM + ' of ' + foodAsset.Name + '. '
       + foodAsset.Name + ' is enough for ' + (Math.floor(foodAsset.Quantity / monthlyFoodConsumption)) + ' months';
-    this.newsService.addNews(msg);
+    this.overviewService.addNews(msg);
 
     // news about salary
     let cashAsset = this.kolonyService.getKolonyAssetByName(ResourceName.Cash);
     let monthlyCashConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(ResourceName.Cash);
     msg = '* Earns ' + monthlyCashConsumption + cashAsset.UoM + ' of ' + cashAsset.Name + '. '
       + cashAsset.Name + ' is enough for ' + (Math.floor(cashAsset.Quantity / monthlyCashConsumption)) + ' months';
-    this.newsService.addNews(msg);
+    this.overviewService.addNews(msg);
 
   }
 

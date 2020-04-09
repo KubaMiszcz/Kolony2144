@@ -2,7 +2,6 @@ import { PowerOverviewComponent } from './power-module/power-overview/power-over
 import { CrewOverviewComponent } from './crew-module/crew-overview/crew-overview.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { NewsComponent } from './news-module/news/news.component';
 import { OverviewComponent } from './overview-module/overview/overview.component';
 import { WikiComponent } from './wiki-module/wiki/wiki.component';
 import { AppSpinnerComponent } from './shared/spinner/spinner.component';
@@ -11,8 +10,7 @@ import { FinancesOverviewComponent } from './finances-module/finances-overview/f
 
 const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },
-  { path: 'start', component: PowerOverviewComponent },
-  { path: 'news', component: NewsComponent },
+  { path: 'start', component: OverviewComponent },
   { path: 'overview', component: OverviewComponent },
   { path: 'finances', component: FinancesOverviewComponent },
   { path: 'crew', component: CrewOverviewComponent },
