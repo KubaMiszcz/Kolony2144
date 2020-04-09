@@ -1,25 +1,22 @@
 {
   "folders": [
-	{
-		"path": "src\\app\\main-module"
-	},
-	{
-		"path": "src\\app"
-	},
-	{
-		"path": "src\\app\\models"
-	},
-	{
-		"path": "src"
-	},
-	{
-		"path": "."
-	},
-	{
-		"path": "src\\app\\services"
-	}
-],
-"settings": {
-	"editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace"
-}
+    {
+      "path": "src\\app"
+    },
+    {
+      "path": "src\\app\\models"
+    },
+    {
+      "path": "src"
+    },
+    {
+      "path": "."
+    },
+    {
+      "path": "src\\app\\services"
+    }
+  ],
+  "settings": {
+    "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace"
+  }
 }
