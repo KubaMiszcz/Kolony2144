@@ -16,7 +16,7 @@ export interface ICrewFullEntity extends IFullEntity {
 export const AllCivilianCrew: IFullEntity[] = [
   {
     Name: CrewNames.Worker,
-    Description: 'just peon worker, chop chop he\'s on it, eats many', ImageUrl: '/assets/worker.png',
+    Description: 'just peon worker, chop chop he\'s on it, eats many', ImageUrl: '/assets/wiki-icons/crew-worker.png',
     Size: 1,
     Type: AssetTypesEnum.Crew,
     SubType: CrewTypesEnum.Production,
@@ -33,7 +33,7 @@ export const AllCivilianCrew: IFullEntity[] = [
   },
   {
     Name: CrewNames.Technician,
-    Description: '', ImageUrl: '/assets/worker.png',
+    Description: '', ImageUrl: '/assets/wiki-icons/crew-technician.png',
     Size: 1,
     Type: AssetTypesEnum.Crew,
     SubType: CrewTypesEnum.Production,

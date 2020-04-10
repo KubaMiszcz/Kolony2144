@@ -27,6 +27,6 @@ export enum BuildingTypesEnum {
 export enum MachineTypesEnum {
   NotSet = '',
   Production = 'Production',
-  PowerSource = 'PowerSource',
+  PowerSource = 'Power source',
   Maintenance = 'Maintenance',
 }
