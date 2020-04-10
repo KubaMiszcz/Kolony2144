@@ -37,7 +37,7 @@ export class AssetService {
 
 
 
-  getAssetConsumption(cosnumedAsset: IAsset): number {
+  getAssetConsumptionQty(cosnumedAsset: IAsset): number {
     let consumedQty = 0;
     this.assetList.forEach(asset => {
       let consumedItem = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name);
@@ -48,14 +48,14 @@ export class AssetService {
     return consumedQty;
   }
 
-  getAssetConsumptionByName(assetName: ResourceName): number {
-    return this.getAssetConsumption(this.getAssetByName(assetName));
+  getAssetConsumptionQtyByName(assetName: ResourceName): number {
+    return this.getAssetConsumptionQty(this.getAssetByName(assetName));
   }
 
 
 
 
-  getAssetProduction(producedAsset: IAsset): number {
+  getAssetProductionQty(producedAsset: IAsset): number {
     let producedQty = 0;
     this.assetList.forEach(asset => {
       let producedItem = asset.PassiveIncome.find(item => item.Name === producedAsset.Name);
@@ -66,8 +66,8 @@ export class AssetService {
     return producedQty;
   }
 
-  getAssetProductionByName(assetName: ResourceName): number {
-    return this.getAssetProduction(this.getAssetByName(assetName));
+  getAssetProductionQtyByName(assetName: ResourceName): number {
+    return this.getAssetProductionQty(this.getAssetByName(assetName));
   }
 
 

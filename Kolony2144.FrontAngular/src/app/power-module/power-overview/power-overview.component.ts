@@ -23,8 +23,8 @@ export class PowerOverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.assetsConsumingList = this.fillConsumungAssetList(this.assetService.getAssetsListByConsumedAssetName(ResourceName.Energy))
-    this.assetsProducingList = this.fillProducingAssetList(this.assetService.getAssetsListByProducedAssetName(ResourceName.Energy))
+    this.assetsConsumingList = this.fillConsumungAssetList(this.assetService.getAssetsByConsumedAssetName(ResourceName.Energy))
+    this.assetsProducingList = this.fillProducingAssetList(this.assetService.getAssetsByProducedAssetName(ResourceName.Energy))
   }
 
   fillConsumungAssetList(resources: IAsset[]): any[] {
@@ -33,7 +33,7 @@ export class PowerOverviewComponent implements OnInit {
     ];
 
     resources.forEach(r => {
-      let perUnitUsage = this.assetService.findResourceInAssetByName(r.MaintenanceCost, ResourceName.Energy).Quantity;
+      let perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.MaintenanceCost, ResourceName.Energy).Quantity;
       res.push([
         r.Name,
         perUnitUsage,
@@ -51,7 +51,7 @@ export class PowerOverviewComponent implements OnInit {
     ];
 
     resources.forEach(r => {
-      let perUnitUsage = this.assetService.findResourceInAssetByName(r.PassiveIncome, ResourceName.Energy).Quantity;
+      let perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.PassiveIncome, ResourceName.Energy).Quantity;
       res.push([
         r.Name,
         perUnitUsage,

@@ -16,10 +16,10 @@ export class PowerService {
   }
 
   getEnergyProduction(): number {
-    return this.assetService.getAssetProductionByName(ResourceName.Energy)
+    return this.assetService.getAssetProductionQtyByName(ResourceName.Energy)
   }
 
   getEnergyUsage(): number {
-    return this.assetService.getAssetConsumptionByName(ResourceName.Energy)
+    return this.assetService.getAssetConsumptionQtyByName(ResourceName.Energy)
   }
 }

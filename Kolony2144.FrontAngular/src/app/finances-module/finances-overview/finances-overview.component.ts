@@ -22,7 +22,7 @@ export class FinancesOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.assetList = this.fillAssetList(this.assetService.getAssetsListByConsumedAssetName(ResourceName.Cash))
+    this.assetList = this.fillAssetList(this.assetService.getAssetsByConsumedAssetName(ResourceName.Cash))
   }
 
   fillAssetList(resources: IAsset[]): any[] {
@@ -31,7 +31,7 @@ export class FinancesOverviewComponent implements OnInit {
     ];
 
     resources.forEach(r => {
-      let perUnitUsage = this.assetService.findResourceInAssetByName(r.MaintenanceCost, ResourceName.Cash).Quantity;
+      let perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.MaintenanceCost, ResourceName.Cash).Quantity;
       res.push([
         r.Name,
         perUnitUsage,
