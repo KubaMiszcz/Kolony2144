@@ -38,11 +38,12 @@ export class OverviewComponent implements OnInit {
     return res;
   }
 
-  // toggle(element: HTMLElement) {
-  //   // console.log(element.classList);
-  //   // element.classList.toggle('d-none');
-  //   // return val.classList.contains('show');
+  toggle(element: HTMLElement) {
+    // console.log(element.classList);
+    // element.classList.toggle('collapsing');
+    // element.classList.toggle('show');
+    // // return element.classList.contains('show');
 
-  // }
+  }
 
 }
