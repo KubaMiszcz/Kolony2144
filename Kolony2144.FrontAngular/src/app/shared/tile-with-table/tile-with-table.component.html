@@ -1,6 +1,14 @@
-<div class="card m-2 mb-4">
-  <h4 *ngIf="caption.length>0" class="card-header "> {{caption}} </h4>
-  <div class="card-body p-0">
+<div class="card m-2 mb-4" data-toggle="collapse" [attr.data-target]="'#'+cardid" aria-expanded="true" aria-controls="collapseExample">
+
+  <h4 *ngIf="caption.length>0" class="card-header ">
+    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+    {{caption}}
+  </h4>
+
+
+  <div class="card-body p-0 collapse show" [attr.id]="cardid">
+
 
     <table class="table table-sm table-striped table-bordered  table-hover m-0">
 

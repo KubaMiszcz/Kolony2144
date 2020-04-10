@@ -6,13 +6,23 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./tile-with-table.component.scss']
 })
 export class TileWithTableComponent implements OnInit {
+  cardid: any;
+  collapse: boolean;
   @Input() caption = '';
   @Input() header: any[] = [];
   @Input() rows: any[][] = [];
   @Input() footer: any[] = [];
 
-  constructor() { }
+  constructor() {
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.cardid = this.caption.replace(/ /gi, '-');
+  }
+
+  // toggle() {
+  //   this.chevron = this.chevron === 'fa-chevron-down' ? 'fa-chevron-right' : 'fa-chevron-up';
+  //   return this.chevron;
+  // }
 
 }
