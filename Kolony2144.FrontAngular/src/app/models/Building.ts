@@ -7,14 +7,14 @@ export enum BuildingNames {
   Habitat = 'Habitat',
   Warehouse = 'Warehouse',
   SolarPanel = 'Solar panel',
-  Workshop = "SmallFactory",
+  Workshop = "Small factory",
   Factory = "Factory"
 }
 
 export const AllBuildings: IFullEntity[] = [
   {
     Name: BuildingNames.Habitat,
-    Description: '', ImageUrl: '/assets/building.svg',
+    Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Size: 100,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.Maintenance,
@@ -33,7 +33,7 @@ export const AllBuildings: IFullEntity[] = [
   },
   {
     Name: BuildingNames.Warehouse,
-    Description: '', ImageUrl: '/assets/building.svg',
+    Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Size: 1000,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.NotSet,
@@ -52,7 +52,7 @@ export const AllBuildings: IFullEntity[] = [
   },
   {
     Name: BuildingNames.SolarPanel,
-    Description: '', ImageUrl: '/assets/building.svg',
+    Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Size: 1000,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.PowerSource,
@@ -70,7 +70,7 @@ export const AllBuildings: IFullEntity[] = [
   },
   {
     Name: BuildingNames.Workshop,
-    Description: '', ImageUrl: '/assets/building.svg',
+    Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Size: 100,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.Production,
@@ -90,7 +90,7 @@ export const AllBuildings: IFullEntity[] = [
   },
   {
     Name: BuildingNames.Factory,
-    Description: '', ImageUrl: '/assets/building.svg',
+    Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Size: 200,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.Production,

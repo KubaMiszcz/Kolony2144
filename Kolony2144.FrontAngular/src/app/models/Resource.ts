@@ -6,7 +6,7 @@ export enum ResourceName {
   Cash = 'Space Beads',
   Energy = 'Energy',
   BasicWorkUnit = 'Basic Work Unit',
-  AdvancedWorkUnit = "AdvancedWorkUnit",
+  AdvancedWorkUnit = "Advanced Work Unit",
   StorageSpace = 'Storage space',
   LivingSpace = 'Living space',
   Food = 'Food',
@@ -18,7 +18,7 @@ export const AllResources: IFullEntity[] = [
   //cash
   {
     Name: ResourceName.Cash,
-    Description: 'Space Beads, galactic currency', ImageUrl: '/assets/cash.svg',
+    Description: 'Space Beads, galactic currency', ImageUrl: '/assets/wiki-icons/resource-cash.png',
     Size: 0,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.NotSet,
@@ -30,7 +30,7 @@ export const AllResources: IFullEntity[] = [
   },
   {
     Name: ResourceName.Energy,
-    Description: 'Energy', ImageUrl: '/assets/energy.svg',
+    Description: 'Energy', ImageUrl: '/assets/wiki-icons/resource-energy.png',
     Size: 0,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.Volatile,
@@ -42,7 +42,7 @@ export const AllResources: IFullEntity[] = [
   },
   {
     Name: ResourceName.BasicWorkUnit,
-    Description: 'BasicWorkUnit', ImageUrl: '/assets/item.svg',
+    Description: 'Basic Work Unit', ImageUrl: '/assets/wiki-icons/property.png',
     Size: 0,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.Volatile,
@@ -54,7 +54,7 @@ export const AllResources: IFullEntity[] = [
   },
   {
     Name: ResourceName.AdvancedWorkUnit,
-    Description: 'AdvancedWorkUnit', ImageUrl: '/assets/item.svg',
+    Description: 'Advanced Work Unit', ImageUrl: '/assets/wiki-icons/property.png',
     Size: 0,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.Volatile,
@@ -66,7 +66,7 @@ export const AllResources: IFullEntity[] = [
   },
   {
     Name: ResourceName.StorageSpace,
-    Description: 'StorageSpace', ImageUrl: '/assets/item.svg',
+    Description: 'Storage Space', ImageUrl: '/assets/wiki-icons/property.png',
     Size: 0,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.Volatile,
@@ -78,7 +78,7 @@ export const AllResources: IFullEntity[] = [
   },
   {
     Name: ResourceName.LivingSpace,
-    Description: 'Energy', ImageUrl: '/assets/item.svg',
+    Description: 'Living Space', ImageUrl: '/assets/wiki-icons/property.png',
     Size: 0,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.Volatile,
@@ -90,7 +90,7 @@ export const AllResources: IFullEntity[] = [
   },
   {
     Name: ResourceName.Food,
-    Description: 'food for feeding your men and animals;]', ImageUrl: '/assets/item.svg',
+    Description: 'food for feeding your men and animals;]', ImageUrl: '/assets/wiki-icons/resource.png',
     Size: 1,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.Production,
@@ -102,7 +102,7 @@ export const AllResources: IFullEntity[] = [
   },
   {
     Name: ResourceName.Stone,
-    Description: 'A piece of stone', ImageUrl: '/assets/item.png',
+    Description: 'A piece of stone', ImageUrl: '/assets/wiki-icons/resource.png',
     Size: 1,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.Production,
@@ -114,7 +114,7 @@ export const AllResources: IFullEntity[] = [
   },
   {
     Name: ResourceName.Steel,
-    Description: 'A piece of steel', ImageUrl: '/assets/item.png',
+    Description: 'A piece of steel', ImageUrl: '/assets/wiki-icons/resource.png',
     Size: 1,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.Production,
