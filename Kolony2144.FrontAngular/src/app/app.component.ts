@@ -9,12 +9,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Kolony2144';
-  kolony: IKolony;
-  kolonytxt: string;
 
-  constructor(
-    private kolonyService: KolonyService
-  ) {
-    this.kolony = this.kolonyService.kolony;
-  }
+  constructor() { }
 }

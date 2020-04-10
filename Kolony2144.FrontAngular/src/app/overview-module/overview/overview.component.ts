@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { Kolony } from 'src/app/models/Kolony';
 import { GameService } from 'src/app/services/game.service';
+import { AssetService } from 'src/app/services/asset.service';
 
 @Component({
   selector: 'app-overview',
@@ -12,7 +13,6 @@ import { GameService } from 'src/app/services/game.service';
   styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
-  kolony: Kolony;
   news: string[] = [];
   playerNotes: string = '';
   resourcesList: any[];
@@ -21,15 +21,14 @@ export class OverviewComponent implements OnInit {
     private kolonyService: KolonyService,
     private overviewService: OverviewService,
     private gameService: GameService,
-
+    private assetService: AssetService,
   ) {
-    this.kolony = this.kolonyService.kolony;
   }
 
   ngOnInit() {
     this.news = this.overviewService.news;
     this.playerNotes = this.gameService.playerNotes;
-    this.resourcesList = this.fillResourcesList(this.kolonyService.getKolonyAssetsByType(AssetTypesEnum.Resource));
+    this.resourcesList = this.fillResourcesList(this.assetService.getKolonyAssetsByType(AssetTypesEnum.Resource));
   }
 
   fillResourcesList(resources: IAsset[]): any[] {

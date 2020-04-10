@@ -7,12 +7,13 @@ import { ResourceName } from '../models/Resource';
 import { CrewNames } from '../models/Crew';
 import { AssetTypesEnum } from '../models/enums/Types.enum';
 import { OverviewService } from './overview.service';
+import { AssetService } from './asset.service';
+import { IAsset } from '../models/Entity';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  kolony: Kolony;
   playerNotes = '';
 
   // isTurnComputing = false;
@@ -20,17 +21,10 @@ export class GameService {
 
   constructor(
     private router: Router,
-    private sharedService: SharedService,
     private kolonyService: KolonyService,
     private overviewService: OverviewService,
+    private assetService: AssetService,
   ) {
-    this.kolony = this.kolonyService.kolony;
-    // this.AllAssets = JSON.parse(JSON.stringify([...StarterCivilianCrew, ...StarterMachines, ...StarterBuildings]));
-    // this.AllAssets.forEach(a => a.Quantity = 0);
-    // this.AllInventoryItems = JSON.parse(JSON.stringify([...StarterInventoryItems]));
-    // this.AllInventoryItems.forEach(a => a.Quantity = 0);
-
-    // this.kolonyService.KolonyBS.subscribe(k => this.kolony = k);
     this.nextTurn();
   }
 
@@ -39,10 +33,8 @@ export class GameService {
 
   nextTurn() {
     console.log('nexturn');
-
     this.router.navigate(['/loading-screen']);
     setTimeout(() => {
-
 
       //##########################################
       //#region TURN ENDS
@@ -59,20 +51,16 @@ export class GameService {
 
 
       {
-        this.setNextMonth(); console.log('setNextMonth');
+        this.setNextMonth();
         this.overviewService.clearNews();
       }
 
 
       //##########################################
       //#REGION NEW TURN BEGINS
-      this.kolonyService.ClearVolatileResources();
-      this.kolonyService.updateInventoryDueToMaintenance();
-
-
-      console.log('aaa');
-
-      this.kolonyService.updateInventoryDueToProducingItems();
+      this.ClearVolatileResources();
+      this.updateInventoryDueToMaintenance(this.assetService.getAllAssets());
+      this.updateInventoryDueToProducingItems(this.assetService.getAllAssets());
 
 
       //   //zeroingVolatileProperties
@@ -113,34 +101,53 @@ export class GameService {
     }, 200);
   }
 
-
-
   setNextMonth() {
-    this.kolony.Age += 0.1;
+    console.log('setNextMonth');
+    this.kolonyService.setNextMonth();
   }
 
   updateNews() {
-    this.overviewService.addNews('## Welcome in new month, current time is: ' + this.kolony.Age.toFixed(1)) + ' of New Era';
-    let msg = '';
+    // this.overviewService.addNews('## Welcome in new month, current time is: ' + this.kolony.Age.toFixed(1)) + ' of New Era';
+    // let msg = '';
 
-    // news about crew
-    msg = '# Your crew (total ' + this.kolonyService.getAllCrewQuantity() + ' persons):'
-    this.overviewService.addNews(msg);
+    // // news about crew
+    // msg = '# Your crew (total ' + this.kolonyService.getAllCrewQuantity() + ' persons):'
+    // this.overviewService.addNews(msg);
 
-    // news about food
-    let foodAsset = this.kolonyService.getKolonyAssetByName(ResourceName.Food);
-    let monthlyFoodConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(ResourceName.Food);
-    msg = '* Eats ' + monthlyFoodConsumption + foodAsset.UoM + ' of ' + foodAsset.Name + '. '
-      + foodAsset.Name + ' is enough for ' + (Math.floor(foodAsset.Quantity / monthlyFoodConsumption)) + ' months';
-    this.overviewService.addNews(msg);
+    // // news about food
+    // let foodAsset = this.kolonyService.getKolonyAssetByName(ResourceName.Food);
+    // let monthlyFoodConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(ResourceName.Food);
+    // msg = '* Eats ' + monthlyFoodConsumption + foodAsset.UoM + ' of ' + foodAsset.Name + '. '
+    //   + foodAsset.Name + ' is enough for ' + (Math.floor(foodAsset.Quantity / monthlyFoodConsumption)) + ' months';
+    // this.overviewService.addNews(msg);
 
-    // news about salary
-    let cashAsset = this.kolonyService.getKolonyAssetByName(ResourceName.Cash);
-    let monthlyCashConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(ResourceName.Cash);
-    msg = '* Earns ' + monthlyCashConsumption + cashAsset.UoM + ' of ' + cashAsset.Name + '. '
-      + cashAsset.Name + ' is enough for ' + (Math.floor(cashAsset.Quantity / monthlyCashConsumption)) + ' months';
-    this.overviewService.addNews(msg);
+    // // news about salary
+    // let cashAsset = this.kolonyService.getKolonyAssetByName(ResourceName.Cash);
+    // let monthlyCashConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(ResourceName.Cash);
+    // msg = '* Earns ' + monthlyCashConsumption + cashAsset.UoM + ' of ' + cashAsset.Name + '. '
+    //   + cashAsset.Name + ' is enough for ' + (Math.floor(cashAsset.Quantity / monthlyCashConsumption)) + ' months';
+    // this.overviewService.addNews(msg);
 
+  }
+
+  ClearVolatileResources() {
+    this.assetService.getKolonyVolatileAssets().forEach(element => element.Quantity = 0);
+  }
+
+  updateInventoryDueToMaintenance(assetList: IAsset[]) {
+    assetList.forEach(asset => {
+      asset.MaintenanceCost.forEach(consumedItem => {
+        assetList.find(a => a.Name == consumedItem.Name).Quantity -= (consumedItem.Quantity * asset.Quantity);
+      });
+    });
+  }
+
+  updateInventoryDueToProducingItems(assetList: IAsset[]) {
+    assetList.forEach(asset => {
+      asset.PassiveIncome.forEach(producedItem => {
+        assetList.find(a => a.Name == producedItem.Name).Quantity += (producedItem.Quantity * asset.Quantity);
+      });
+    });
   }
 
 }

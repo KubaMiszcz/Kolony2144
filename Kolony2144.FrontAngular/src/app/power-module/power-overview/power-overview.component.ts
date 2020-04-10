@@ -1,3 +1,4 @@
+import { AssetService } from './../../services/asset.service';
 import { Component, OnInit } from '@angular/core';
 import { Kolony } from 'src/app/models/Kolony';
 import { KolonyService } from 'src/app/services/kolony.service';
@@ -11,20 +12,19 @@ import { IAsset } from 'src/app/models/Entity';
   styleUrls: ['./power-overview.component.scss']
 })
 export class PowerOverviewComponent implements OnInit {
-  kolony: Kolony;
   assetsConsumingList: any[];
   assetsProducingList: any[];
 
   constructor(
     private kolonyService: KolonyService,
     private sharedService: SharedService,
+    private assetService: AssetService,
   ) {
-    this.kolony = this.kolonyService.kolony;
   }
 
   ngOnInit(): void {
-    this.assetsConsumingList = this.fillConsumungAssetList(this.kolonyService.getAssetsListByConsumedAssetName(ResourceName.Energy))
-    this.assetsProducingList = this.fillProducingAssetList(this.kolonyService.getAssetsListByProducedAssetName(ResourceName.Energy))
+    this.assetsConsumingList = this.fillConsumungAssetList(this.assetService.getAssetsListByConsumedAssetName(ResourceName.Energy))
+    this.assetsProducingList = this.fillProducingAssetList(this.assetService.getAssetsListByProducedAssetName(ResourceName.Energy))
   }
 
   fillConsumungAssetList(resources: IAsset[]): any[] {
@@ -33,7 +33,7 @@ export class PowerOverviewComponent implements OnInit {
     ];
 
     resources.forEach(r => {
-      let perUnitUsage = this.kolonyService.findResourceInAssetByName(r.MaintenanceCost, ResourceName.Energy).Quantity;
+      let perUnitUsage = this.assetService.findResourceInAssetByName(r.MaintenanceCost, ResourceName.Energy).Quantity;
       res.push([
         r.Name,
         perUnitUsage,
@@ -51,7 +51,7 @@ export class PowerOverviewComponent implements OnInit {
     ];
 
     resources.forEach(r => {
-      let perUnitUsage = this.kolonyService.findResourceInAssetByName(r.PassiveIncome, ResourceName.Energy).Quantity;
+      let perUnitUsage = this.assetService.findResourceInAssetByName(r.PassiveIncome, ResourceName.Energy).Quantity;
       res.push([
         r.Name,
         perUnitUsage,
