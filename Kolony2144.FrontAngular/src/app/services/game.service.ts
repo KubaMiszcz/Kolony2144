@@ -9,6 +9,7 @@ import { AssetTypesEnum } from '../models/enums/Types.enum';
 import { OverviewService } from './overview.service';
 import { AssetService } from './asset.service';
 import { IAsset } from '../models/Entity';
+import { PowerService } from './power.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class GameService {
     private kolonyService: KolonyService,
     private overviewService: OverviewService,
     private assetService: AssetService,
+    private powerService: PowerService,
   ) {
     this.nextTurn();
   }
@@ -107,31 +109,45 @@ export class GameService {
   }
 
   updateNews() {
-    this.overviewService.addNews('## Welcome in new month, current time is: ' + this.kolonyService.getAge() + ' of New Era');
-    let msg = '';
+    let resource: IAsset;
+    let consumption;
+    let production;
+    let msg;
+    this.overviewService.addNews('Welcome in new month, current time is: ' + this.kolonyService.getAge() + ' of New Era');
+    this.overviewService.addNews('');
 
-    // finances
-    // msg = 'Last month expenses: ' + this.assetService.getAssetConsumptionByName(ResourceName.Cash) + 'SB'
-    // + ', cash is enough for ';
+    // news about cash
+    resource = this.assetService.getAssetByName(ResourceName.Cash);
+    consumption = this.assetService.getAssetConsumptionQty(resource);
+    if (resource.Quantity < 0) {
+      this.overviewService.addNews('!!! CASH RUNS OUT, BAILIFF IS COMING TO KOLONY !!!');
+    }
+    msg = 'Last month expenses: ' + consumption + resource.UoM
+      + ', ' + resource.Name + ' is enough for ' + (Math.floor(resource.Quantity / consumption)) + ' months';
+    this.overviewService.addNews(msg);
 
-    // + (Math.floor(this.assetService.ge.Quantity / monthlyFoodConsumption)) + ' months';
-    // this.overviewService.addNews(msg);
+    // news about food
+    resource = this.assetService.getAssetByName(ResourceName.Food);
+    consumption = this.assetService.getAssetConsumptionQty(resource);
+    if (resource.Quantity < 0) {
+      this.overviewService.addNews('!!! HUNGER IN KOLONY !!!');
+    }
+    msg = 'Your Crew last month ate: ' + consumption + resource.UoM
+      + ', ' + resource.Name + ' is enough for ' + (Math.floor(resource.Quantity / consumption)) + ' months';
+    this.overviewService.addNews(msg);
 
-    // msg = 'Last month expenses:# Your crew (total ' + this.kolonyService.getAllCrewQuantity() + ' persons):'
-
-    // // news about food
-    // let foodAsset = this.kolonyService.getKolonyAssetByName(ResourceName.Food);
-    // let monthlyFoodConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(ResourceName.Food);
-    // msg = '* Eats ' + monthlyFoodConsumption + foodAsset.UoM + ' of ' + foodAsset.Name + '. '
-    //   + foodAsset.Name + ' is enough for ' + (Math.floor(foodAsset.Quantity / monthlyFoodConsumption)) + ' months';
-    // this.overviewService.addNews(msg);
-
-    // // news about salary
-    // let cashAsset = this.kolonyService.getKolonyAssetByName(ResourceName.Cash);
-    // let monthlyCashConsumption = this.kolonyService.getMonthlyAssetConsumptionByName(ResourceName.Cash);
-    // msg = '* Earns ' + monthlyCashConsumption + cashAsset.UoM + ' of ' + cashAsset.Name + '. '
-    //   + cashAsset.Name + ' is enough for ' + (Math.floor(cashAsset.Quantity / monthlyCashConsumption)) + ' months';
-    // this.overviewService.addNews(msg);
+    // news about power
+    resource = this.assetService.getAssetByName(ResourceName.Energy);
+    consumption = this.powerService.getEnergyUsage();
+    production = this.powerService.getEnergyProduction();
+    if (consumption > production) {
+      msg = '!!! ' + (((consumption / production) * 100) - 100).toFixed(1) + '%  OVERPOWERED !!!'
+      this.overviewService.addNews(msg);
+    }
+    // Your kolony Energy usage 6200kW is 120 % of total production 6000kW
+    msg = 'Your kolony ' + resource.Name + ' usage ' + consumption + resource.UoM
+      + ' (' + ((consumption / production) * 100).toFixed(1) + '%) of total ' + production + resource.UoM;
+    this.overviewService.addNews(msg);
 
   }
 

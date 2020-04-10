@@ -27,7 +27,7 @@ export class KolonyService {
   }
 
   getName(): string { return this.kolony.Name; }
-  getAge(): number { return this.kolony.Age; }
+  getAge(): number { return Math.round(this.kolony.Age * 10) / 10; }
   getAllAssets(): IAsset[] { return this.kolony.Assets }
 
 

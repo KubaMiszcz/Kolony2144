@@ -28,7 +28,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.news = this.overviewService.news;
     this.playerNotes = this.gameService.playerNotes;
-    this.resourcesList = this.fillResourcesList(this.assetService.getKolonyAssetsByType(AssetTypesEnum.Resource));
+    this.resourcesList = this.fillResourcesList(this.assetService.getAssetsByType(AssetTypesEnum.Resource));
   }
 
   ngOnDestroy(): void {

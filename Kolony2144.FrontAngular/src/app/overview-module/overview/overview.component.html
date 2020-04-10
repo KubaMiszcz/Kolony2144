@@ -4,17 +4,15 @@
     <h4 class="card-header "> Kolony Overview</h4>
 
     <div class="card m-2" data-toggle="collapse" data-target="#idannouncements">
-      <h5 class="card-header "> <i class="fas fa-chevron-right"></i> Announcements </h5> -->
+      <h5 class="card-header "> <i class="fas fa-chevron-right"></i> Announcements </h5>
 
       <div #announcements class="card-body p-1 collapse show" id="idannouncements">
-        wydatki:XX sb, starczy na xxx mcy<br>
-        zaloga zezarla: xx SB, starczy na xxx mcy<br>
-        zuzycie prady xxkW, xx% maxykamlne mocy<br>
+        <span *ngFor="let item of news" [ngClass]="{'warning-news': item.startsWith('!!!')}"> {{item}}<br></span>
+        <!-- <br>
         przy okazji:<br>
         wyladowal statek<br>
         stalo sie jakies wydarzenie<br>
-        cos znaleziono<br>
-        <!-- <span *ngFor="let item of news"> {{item}}<br></span> -->
+        cos znaleziono<br> -->
       </div>
     </div>
 

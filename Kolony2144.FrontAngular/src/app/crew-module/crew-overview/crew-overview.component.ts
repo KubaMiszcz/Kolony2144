@@ -37,11 +37,11 @@ export class CrewOverviewComponent implements OnInit {
       'Total Qty',
     ];
 
-    this.assetService.getKolonyAssetsByType(AssetTypesEnum.Crew).forEach(c => {
+    this.assetService.getAssetsByType(AssetTypesEnum.Crew).forEach(c => {
       let name = c.Name;
-      let salary = this.assetService.findResourceInAssetByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
-      let foodConsumption = this.assetService.findResourceInAssetByName(c.MaintenanceCost, ResourceName.Food).Quantity;
-      let BasicWU = this.assetService.findResourceInAssetByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
+      let salary = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
+      let foodConsumption = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
+      let BasicWU = this.assetService.findSimplifiedResourceInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
       let qty = c.Quantity;
       this.perUnitList.push([
         name,
@@ -64,11 +64,11 @@ export class CrewOverviewComponent implements OnInit {
       'Total ' + ResourceName.BasicWorkUnit + ' Production',
     ];
 
-    this.assetService.getKolonyAssetsByType(AssetTypesEnum.Crew).forEach(c => {
+    this.assetService.getAssetsByType(AssetTypesEnum.Crew).forEach(c => {
       let name = c.Name;
-      let salary = this.assetService.findResourceInAssetByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
-      let foodConsumption = this.assetService.findResourceInAssetByName(c.MaintenanceCost, ResourceName.Food).Quantity;
-      let BasicWU = this.assetService.findResourceInAssetByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
+      let salary = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
+      let foodConsumption = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
+      let BasicWU = this.assetService.findSimplifiedResourceInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
       let qty = c.Quantity;
       this.totalList.push([
         name,
