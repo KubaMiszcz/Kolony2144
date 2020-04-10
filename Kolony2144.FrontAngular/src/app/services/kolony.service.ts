@@ -14,8 +14,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class KolonyService {
   private kolony: Kolony;
-  // get kolony(): IKolony { return this.kolonyBS.value };
-  // kolonyBS = new BehaviorSubject<IKolony>(null);
 
   constructor(
     private sharedService: SharedService,
