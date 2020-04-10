@@ -13,8 +13,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class KolonyService {
-
-  kolony: Kolony;
+  private kolony: Kolony;
   // get kolony(): IKolony { return this.kolonyBS.value };
   // kolonyBS = new BehaviorSubject<IKolony>(null);
 
@@ -23,12 +22,16 @@ export class KolonyService {
   ) {
     let kolony = new Kolony();
     kolony.Name = 'KolonyUNO';
-    kolony.Assets = this.prepareInitialAssets();
     kolony.Age = 100;
+    kolony.Assets = this.prepareInitialAssets();
     this.kolony = kolony;
-    // this.kolonyBS.next(kolony);
 
   }
+
+  getName(): string { return this.kolony.Name; }
+  getAge(): number { return this.kolony.Age; }
+  getAllAssets(): IAsset[] { return this.kolony.Assets }
+
 
   prepareInitialAssets(): IAsset[] {
     let res = [];
@@ -51,125 +54,9 @@ export class KolonyService {
     return res;
   }
 
-
-  updateInventoryDueToMaintenance() {
-    this.kolony.Assets.forEach(asset => {
-      asset.MaintenanceCost.forEach(consumedItem => {
-        this.kolony.Assets.find(a => a.Name == consumedItem.Name).Quantity -= (consumedItem.Quantity * asset.Quantity);
-      });
-    });
+  setNextMonth() {
+    this.kolony.Age += 0.1;
   }
-
-  updateInventoryDueToProducingItems() {
-    this.kolony.Assets.forEach(asset => {
-      asset.PassiveIncome.forEach(producedItem => {
-        this.kolony.Assets.find(a => a.Name == producedItem.Name).Quantity += (producedItem.Quantity * asset.Quantity);
-      });
-    });
-  }
-
-
-  getKolonyAssetByName(name: string): IAsset {
-    return this.kolony.Assets.find(i => i.Name === name);
-  }
-
-  getKolonyAssetsByType(type: AssetTypesEnum): IAsset[] {
-    return this.kolony.Assets.filter(i => i.Type === type);
-  }
-
-  getKolonyVolatileAssets(): IAsset[] {
-    return this.kolony.Assets.filter(i => i.SubType === ResourceTypesEnum.Volatile);
-  }
-
-  ClearVolatileResources() {
-    this.getKolonyVolatileAssets().forEach(element => element.Quantity = 0);
-  }
-
-  get GetEnergyProduction(): number {
-    return this.getMonthlyAssetProductionByName(ResourceName.Energy)
-  }
-
-  get GetEnergyUsage(): number {
-    return this.getMonthlyAssetConsumptionByName(ResourceName.Energy)
-  }
-
-  getAllCrewQuantity() {
-    return this.getKolonyAssetsByType(AssetTypesEnum.Crew)
-      .map(crew => crew.Quantity)
-      .reduce((acc, next) => acc + next);
-  }
-
-  getMonthlyAssetConsumption(cosnumedAsset: IAsset): number {
-    let consumedQty = 0;
-    this.kolony.Assets.forEach(asset => {
-      let consumedItem = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name);
-      if (consumedItem) {
-        consumedQty += (asset.Quantity * consumedItem.Quantity);
-      }
-    });
-    return consumedQty;
-  };
-
-  getMonthlyAssetConsumptionByName(assetName: ResourceName): number {
-    return this.getMonthlyAssetConsumption(this.getKolonyAssetByName(assetName));
-  };
-
-
-  getMonthlyAssetProduction(producedAsset: IAsset): number {
-    let producedQty = 0;
-    this.kolony.Assets.forEach(asset => {
-      let producedItem = asset.PassiveIncome.find(item => item.Name === producedAsset.Name);
-      if (producedItem) {
-        producedQty += (asset.Quantity * producedItem.Quantity);
-      }
-    });
-    return producedQty;
-  };
-
-  getMonthlyAssetProductionByName(assetName: ResourceName): number {
-    return this.getMonthlyAssetProduction(this.getKolonyAssetByName(assetName));
-  };
-
-  getAssetListByConsumedAsset(consumedAsset: IAsset): IAsset[] {
-    return this.getAssetsListByConsumedAssetName(consumedAsset.Name as ResourceName);
-  };
-
-  getAssetsListByConsumedAssetName(consumedAssetName: ResourceName): IAsset[] {
-    let res = [];
-    this.kolony.Assets.forEach(asset => {
-      if (!!asset.MaintenanceCost.find(item => item.Name === consumedAssetName)) {
-        res.push(asset);
-      }
-    });
-    return res;
-  };
-
-  getAssetListByProducedAsset(producedAsset: IAsset): IAsset[] {
-    return this.getAssetsListByProducedAssetName(producedAsset.Name as ResourceName);
-  };
-
-  getAssetsListByProducedAssetName(producedAssetName: ResourceName): IAsset[] {
-    let res = [];
-    this.kolony.Assets.forEach(asset => {
-      if (!!asset.PassiveIncome.find(item => item.Name === producedAssetName)) {
-        res.push(asset);
-      }
-    });
-    return res;
-  };
-
-  findResourceInAssetByName(resourcesList: ISimplifiedResource[], name: ResourceName) {
-    return resourcesList.find(r => r.Name === name);
-  }
-
-  findAssetInListByName(resourcesList: IAsset[], name: string) {
-    return resourcesList.find(i => i.Name === name);
-  }
-
-  getAssetQuantityFromListByName(assetsList: ISimplifiedResource[], name: string) {
-    const asset = assetsList.find(s => s.Name === name);
-    return !!asset ? asset.Quantity : 0;
-  };
 
   getUoMByName(itemName: string) {
     // return this.allWikiEntites.find(m => m.Name === item.Name).UoM;

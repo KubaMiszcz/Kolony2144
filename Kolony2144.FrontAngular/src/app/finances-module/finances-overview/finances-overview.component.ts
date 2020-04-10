@@ -1,3 +1,4 @@
+import { AssetService } from './../../services/asset.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { SharedModule } from './../../shared/shared.module';
 import { Component, OnInit } from '@angular/core';
@@ -12,18 +13,16 @@ import { IAsset } from 'src/app/models/Entity';
   styleUrls: ['./finances-overview.component.scss']
 })
 export class FinancesOverviewComponent implements OnInit {
-  kolony: Kolony;
   assetList: any[];
 
   constructor(
     private kolonyService: KolonyService,
     private sharedService: SharedService,
-  ) {
-    this.kolony = this.kolonyService.kolony;
-  }
+    private assetService: AssetService,
+  ) { }
 
   ngOnInit(): void {
-    this.assetList = this.fillAssetList(this.kolonyService.getAssetsListByConsumedAssetName(ResourceName.Cash))
+    this.assetList = this.fillAssetList(this.assetService.getAssetsListByConsumedAssetName(ResourceName.Cash))
   }
 
   fillAssetList(resources: IAsset[]): any[] {
@@ -32,7 +31,7 @@ export class FinancesOverviewComponent implements OnInit {
     ];
 
     resources.forEach(r => {
-      let perUnitUsage = this.kolonyService.findResourceInAssetByName(r.MaintenanceCost, ResourceName.Cash).Quantity;
+      let perUnitUsage = this.assetService.findResourceInAssetByName(r.MaintenanceCost, ResourceName.Cash).Quantity;
       res.push([
         r.Name,
         perUnitUsage,

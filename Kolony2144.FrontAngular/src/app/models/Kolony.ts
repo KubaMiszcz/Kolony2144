@@ -6,14 +6,13 @@ export interface IKolony {
   Name: string;
   Age: number;
   Assets: IAsset[]
-  Cash: number;
 }
 
 export class Kolony implements IKolony {
   Name: string;
   Age: number;
   Assets: IAsset[] = [];
-  get Cash(): number { return this.Assets.find(m => m.Name === ResourceName.Cash).Quantity; }
+  // get Cash(): number { return this.Assets.find(m => m.Name === ResourceName.Cash).Quantity; }
   // set Cash(value: number) { this.Assets.find(m => m.SubType === ResourceTypesEnum.Cash).Quantity = value; }
 
   // get MaxEnergy(): number { return this.Assets.find(m => m.SubType === ResourceTypesEnum.Energy).Quantity; }
