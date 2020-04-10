@@ -12,7 +12,7 @@ export class CrewService {
   constructor(
     private assetService: AssetService,
   ) {
-    this.crewList = this.assetService.getKolonyAssetsByType(AssetTypesEnum.Crew);
+    this.crewList = this.assetService.getAssetsByType(AssetTypesEnum.Crew);
   }
 
   getAllCrewQuantity() {

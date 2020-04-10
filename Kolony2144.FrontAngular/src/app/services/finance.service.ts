@@ -12,7 +12,7 @@ export class FinanceService {
   constructor(
     private assetService: AssetService,
   ) {
-    this.cash = this.assetService.getKolonyAssetByName(ResourceName.Cash);
+    this.cash = this.assetService.getAssetByName(ResourceName.Cash);
   }
 
   getCashQuantity(): number {

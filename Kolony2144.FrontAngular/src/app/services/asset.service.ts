@@ -25,15 +25,19 @@ export class AssetService {
     return this.assetList.filter(i => i.SubType === ResourceTypesEnum.Volatile);
   }
 
-  getKolonyAssetByName(name: string): IAsset {
+
+
+  getAssetByName(name: string): IAsset {
     return this.assetList.find(i => i.Name === name);
   }
 
-  getKolonyAssetsByType(type: AssetTypesEnum): IAsset[] {
+  getAssetsByType(type: AssetTypesEnum): IAsset[] {
     return this.assetList.filter(i => i.Type === type);
   }
 
-  getMonthlyAssetConsumption(cosnumedAsset: IAsset): number {
+
+
+  getAssetConsumption(cosnumedAsset: IAsset): number {
     let consumedQty = 0;
     this.assetList.forEach(asset => {
       let consumedItem = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name);
@@ -44,12 +48,14 @@ export class AssetService {
     return consumedQty;
   }
 
-  getMonthlyAssetConsumptionByName(assetName: ResourceName): number {
-    return this.getMonthlyAssetConsumption(this.getKolonyAssetByName(assetName));
+  getAssetConsumptionByName(assetName: ResourceName): number {
+    return this.getAssetConsumption(this.getAssetByName(assetName));
   }
 
 
-  getMonthlyAssetProduction(producedAsset: IAsset): number {
+
+
+  getAssetProduction(producedAsset: IAsset): number {
     let producedQty = 0;
     this.assetList.forEach(asset => {
       let producedItem = asset.PassiveIncome.find(item => item.Name === producedAsset.Name);
@@ -60,15 +66,17 @@ export class AssetService {
     return producedQty;
   }
 
-  getMonthlyAssetProductionByName(assetName: ResourceName): number {
-    return this.getMonthlyAssetProduction(this.getKolonyAssetByName(assetName));
+  getAssetProductionByName(assetName: ResourceName): number {
+    return this.getAssetProduction(this.getAssetByName(assetName));
   }
 
-  getAssetListByConsumedAsset(consumedAsset: IAsset): IAsset[] {
-    return this.getAssetsListByConsumedAssetName(consumedAsset.Name as ResourceName);
+
+
+  getAssetsByConsumedAsset(consumedAsset: IAsset): IAsset[] {
+    return this.getAssetsByConsumedAssetName(consumedAsset.Name as ResourceName);
   }
 
-  getAssetsListByConsumedAssetName(consumedAssetName: ResourceName): IAsset[] {
+  getAssetsByConsumedAssetName(consumedAssetName: ResourceName): IAsset[] {
     let res = [];
     this.assetList.forEach(asset => {
       if (!!asset.MaintenanceCost.find(item => item.Name === consumedAssetName)) {
@@ -78,11 +86,13 @@ export class AssetService {
     return res;
   }
 
-  getAssetListByProducedAsset(producedAsset: IAsset): IAsset[] {
-    return this.getAssetsListByProducedAssetName(producedAsset.Name as ResourceName);
+
+
+  getAssetByProducedAsset(producedAsset: IAsset): IAsset[] {
+    return this.getAssetsByProducedAssetName(producedAsset.Name as ResourceName);
   }
 
-  getAssetsListByProducedAssetName(producedAssetName: ResourceName): IAsset[] {
+  getAssetsByProducedAssetName(producedAssetName: ResourceName): IAsset[] {
     let res = [];
     this.assetList.forEach(asset => {
       if (!!asset.PassiveIncome.find(item => item.Name === producedAssetName)) {
@@ -92,16 +102,35 @@ export class AssetService {
     return res;
   }
 
-  findResourceInAssetByName(resourcesList: ISimplifiedResource[], name: ResourceName) {
+
+
+  findSimplifiedResourceInListByName(resourcesList: ISimplifiedResource[], name: ResourceName): ISimplifiedResource {
     return resourcesList.find(r => r.Name === name);
   }
 
-  findAssetInListByName(resourcesList: IAsset[], name: string) {
-    return resourcesList.find(i => i.Name === name);
+
+
+  // findAssetInListByName(resourcesList: IAsset[], name: string): IAsset {
+  //   return resourcesList.find(i => i.Name === name);
+  // }
+
+  // getAssetQuantityFromListByName(assetsList: ISimplifiedResource[], name: string) {
+  //   const asset = assetsList.find(s => s.Name === name);
+  //   return !!asset ? asset.Quantity : 0;
+  // }
+
+
+  convertSimplifiedResourceToAsset(resource: ISimplifiedResource): IAsset {
+    return this.convertSimplifiedResourceToAssetByName(resource.Name);
   }
 
-  getAssetQuantityFromListByName(assetsList: ISimplifiedResource[], name: string) {
-    const asset = assetsList.find(s => s.Name === name);
-    return !!asset ? asset.Quantity : 0;
-  };
+  convertSimplifiedResourceToAssetByName(resourceName: string): IAsset {
+    return this.assetList.find(a => a.Name === resourceName);
+  }
+
+
+
+
+
+
 }

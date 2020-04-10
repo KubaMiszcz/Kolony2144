@@ -107,12 +107,17 @@ export class GameService {
   }
 
   updateNews() {
-    // this.overviewService.addNews('## Welcome in new month, current time is: ' + this.kolony.Age.toFixed(1)) + ' of New Era';
-    // let msg = '';
+    this.overviewService.addNews('## Welcome in new month, current time is: ' + this.kolonyService.getAge() + ' of New Era');
+    let msg = '';
 
-    // // news about crew
-    // msg = '# Your crew (total ' + this.kolonyService.getAllCrewQuantity() + ' persons):'
+    // finances
+    // msg = 'Last month expenses: ' + this.assetService.getAssetConsumptionByName(ResourceName.Cash) + 'SB'
+    // + ', cash is enough for ';
+
+    // + (Math.floor(this.assetService.ge.Quantity / monthlyFoodConsumption)) + ' months';
     // this.overviewService.addNews(msg);
+
+    // msg = 'Last month expenses:# Your crew (total ' + this.kolonyService.getAllCrewQuantity() + ' persons):'
 
     // // news about food
     // let foodAsset = this.kolonyService.getKolonyAssetByName(ResourceName.Food);
