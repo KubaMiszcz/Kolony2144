@@ -1,15 +1,12 @@
-import { SharedService } from './shared.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { IKolony, Kolony } from '../models/Kolony';
 import { KolonyService } from './kolony.service';
 import { ResourceName } from '../models/Resource';
-import { CrewNames } from '../models/Crew';
-import { AssetTypesEnum } from '../models/enums/Types.enum';
 import { OverviewService } from './overview.service';
 import { AssetService } from './asset.service';
 import { IAsset } from '../models/Entity';
 import { PowerService } from './power.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -141,7 +138,7 @@ export class GameService {
     consumption = this.powerService.getEnergyUsage();
     production = this.powerService.getEnergyProduction();
     if (consumption > production) {
-      msg = '!!! ' + (((consumption / production) * 100) - 100).toFixed(1) + '%  OVERPOWERED !!!'
+      msg = '!!! ' + (((consumption / production) * 100) - 100).toFixed(1) + '%  OVERLOADED !!!'
       this.overviewService.addNews(msg);
     }
     // Your kolony Energy usage 6200kW is 120 % of total production 6000kW

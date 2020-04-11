@@ -13,8 +13,8 @@ export class StatusBarComponent implements OnInit {
   Age: number;
   Name: string;
   Cash: number;
-  kolonyEnergyProduction: number;
-  kolonyEnergyUsage: number;
+  energyProduction: number;
+  energyUsage: number;
 
   constructor(
     private KolonyService: KolonyService,
@@ -25,8 +25,8 @@ export class StatusBarComponent implements OnInit {
     this.Age = this.KolonyService.getAge();
     this.Name = this.KolonyService.getName();
     this.Cash = this.financeService.getCashQuantity();
-    this.kolonyEnergyProduction = this.powerService.getEnergyProduction();
-    this.kolonyEnergyUsage = this.powerService.getEnergyUsage();
+    this.energyProduction = this.powerService.getEnergyProduction();
+    this.energyUsage = this.powerService.getEnergyUsage();
   }
 
   ngOnInit() {
@@ -34,6 +34,12 @@ export class StatusBarComponent implements OnInit {
 
   nextTurn() {
     this.gameService.nextTurn();
+    //TODO make it subject
+    this.Age = this.KolonyService.getAge();
+    this.Name = this.KolonyService.getName();
+    this.Cash = this.financeService.getCashQuantity();
+    this.energyProduction = this.powerService.getEnergyProduction();
+    this.energyUsage = this.powerService.getEnergyUsage();
     // this.kolonyEnergyProduction = this.kolonyService.kolonyEnergyProduction;
     // this.kolonyEnergyUsage = this.kolonyService.kolonyEnergyUsage;
     // this.gameService.SaveGame();
