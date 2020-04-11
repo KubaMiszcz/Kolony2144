@@ -24,7 +24,6 @@ export class WikiComponent implements OnInit {
     this.crewList = list.filter(i => i.Type === AssetTypesEnum.Crew);
     this.buildingsList = list.filter(i => i.Type === AssetTypesEnum.Building);
     this.machinesList = list.filter(i => i.Type === AssetTypesEnum.Machine);
-
   }
 
   ngOnInit() {

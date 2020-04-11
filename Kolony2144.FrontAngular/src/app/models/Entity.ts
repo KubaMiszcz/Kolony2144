@@ -10,6 +10,7 @@ export interface IEntity {
   Size: number;
   Type: AssetTypesEnum;
   SubType: string;
+  InitialPrice: number;
   CreationCost: ISimplifiedResource[];
   MaintenanceCost: ISimplifiedResource[];
   PassiveIncome: ISimplifiedResource[];
@@ -18,6 +19,7 @@ export interface IEntity {
 
 export interface IAsset extends IEntity {
   Quantity: number;
+  // HistoricalPrices: number[];
 }
 
 export interface ISimplifiedResource {
