@@ -41,6 +41,7 @@ export class KolonyService {
           Size: i.Size,
           Type: i.Type,
           SubType: i.SubType,
+          InitialPrice: i.InitialPrice,
           CreationCost: i.CreationCost,
           MaintenanceCost: i.MaintenanceCost,
           PassiveIncome: i.PassiveIncome,
