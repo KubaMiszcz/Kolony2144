@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { IKolony, Kolony } from '../models/Kolony';
+import { Kolony } from '../models/Kolony';
 import { AllResources, ResourceName as ResourceName } from '../models/Resource';
-import { IAsset, ISimplifiedResource, Asset } from '../models/Entity';
+import { IAsset, Asset } from '../models/Entity';
 import { AllCivilianCrew } from '../models/Crew';
 import { AllBuildings } from '../models/Building';
 import { AllMachines } from '../models/Machine';
-import { AssetTypesEnum, ResourceTypesEnum } from '../models/enums/Types.enum';
 import { SharedService } from './shared.service';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +21,6 @@ export class KolonyService {
     kolony.Age = 100;
     kolony.Assets = this.prepareInitialAssets();
     this.kolony = kolony;
-
   }
 
   getName(): string { return this.kolony.Name; }
@@ -39,22 +36,7 @@ export class KolonyService {
         let a = new Asset().Deserialize(i);
         a.Quantity = i.InitialQuantity;
         res.push(a);
-        // res.push({
-        // Name: i.Name,
-        // Size: i.Size,
-        // Type: i.Type,
-        // SubType: i.SubType,
-        // InitialPrice: i.InitialPrice,
-        // CreationCost: i.CreationCost,
-        // MaintenanceCost: i.MaintenanceCost,
-        // PassiveIncome: i.PassiveIncome,
-        // UoM: i.UoM,
-        // Quantity: i.InitialQuantity
-        // });
       });
-
-    // res.forEach(r => r.)
-
     return res;
   }
 
@@ -70,36 +52,3 @@ export class KolonyService {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
