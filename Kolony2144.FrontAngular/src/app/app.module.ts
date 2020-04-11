@@ -13,6 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { WikiModule } from './wiki-module/wiki.module';
 import { OverviewModule } from './overview-module/overview.module';
 import { FinancesModule } from './finances-module/finances.module';
+import { TradeModule } from './trade-module/trade.module';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { FinancesModule } from './finances-module/finances.module';
     CoreModule,
 
     OverviewModule,
+    TradeModule,
     FinancesModule,
     PowerModule,
     CrewModule,
