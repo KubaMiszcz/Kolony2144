@@ -14,6 +14,7 @@ export const AllMachines: IFullEntity[] = [
     Size: 10,
     Type: AssetTypesEnum.Machine,
     SubType: MachineTypesEnum.PowerSource,
+    InitialPrice: 5000,
     CreationCost: [
       { Name: ResourceName.Steel, Quantity: 5 }
     ],

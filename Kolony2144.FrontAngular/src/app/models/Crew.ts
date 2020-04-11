@@ -20,6 +20,7 @@ export const AllCivilianCrew: IFullEntity[] = [
     Size: 1,
     Type: AssetTypesEnum.Crew,
     SubType: CrewTypesEnum.Production,
+    InitialPrice: 50,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.Food, Quantity: 0.2 },
@@ -37,6 +38,7 @@ export const AllCivilianCrew: IFullEntity[] = [
     Size: 1,
     Type: AssetTypesEnum.Crew,
     SubType: CrewTypesEnum.Production,
+    InitialPrice: 100,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.Food, Quantity: 0.1 },

@@ -18,6 +18,7 @@ export const AllBuildings: IFullEntity[] = [
     Size: 100,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.Maintenance,
+    InitialPrice: 0,
     CreationCost: [
       { Name: ResourceName.Stone, Quantity: 20 },
       { Name: ResourceName.Steel, Quantity: 5 }
@@ -37,6 +38,7 @@ export const AllBuildings: IFullEntity[] = [
     Size: 1000,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.NotSet,
+    InitialPrice: 0,
     CreationCost: [
       { Name: ResourceName.Stone, Quantity: 10 },
       { Name: ResourceName.Steel, Quantity: 10 }
@@ -56,6 +58,7 @@ export const AllBuildings: IFullEntity[] = [
     Size: 1000,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.PowerSource,
+    InitialPrice: 0,
     CreationCost: [
       { Name: ResourceName.Stone, Quantity: 10 },
       { Name: ResourceName.Steel, Quantity: 20 }
@@ -74,6 +77,7 @@ export const AllBuildings: IFullEntity[] = [
     Size: 100,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.Production,
+    InitialPrice: 0,
     CreationCost: [
       { Name: ResourceName.Stone, Quantity: 20 },
       { Name: ResourceName.Steel, Quantity: 20 }
@@ -94,6 +98,7 @@ export const AllBuildings: IFullEntity[] = [
     Size: 200,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.Production,
+    InitialPrice: 0,
     CreationCost: [
       { Name: ResourceName.Stone, Quantity: 30 },
       { Name: ResourceName.Steel, Quantity: 100 }
