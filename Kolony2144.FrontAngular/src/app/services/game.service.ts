@@ -149,7 +149,7 @@ export class GameService {
   }
 
   ClearVolatileResources() {
-    this.assetService.getKolonyVolatileAssets().forEach(element => element.Quantity = 0);
+    this.assetService.getVolatileAssets().forEach(element => element.Quantity = 0);
   }
 
   updateInventoryDueToMaintenance(assetList: IAsset[]) {

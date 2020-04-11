@@ -1,1 +1,119 @@
-<p>trade-overview works!</p>
+<div class="card my-2">
+
+  <div class="card m-2">
+    <h4 class="card-header "> Trade Overview</h4>
+
+    <h4>wyaldowal statek varg-1500 z planety name bla bkl abla</h4>
+
+    <div class="card m-2" data-toggle="collapse" data-target="#trade">
+      <h5 class="card-header "> <i class="fas fa-chevron-right"></i> Trade Panel </h5>
+
+      <div #trade class="card-body p-1 collapse show" id="idannouncements">
+
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-resources" role="tab" aria-controls="nav-resources"
+              aria-selected="true">Resources</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-crew" role="tab" aria-controls="nav-crew"
+              aria-selected="false">Crew</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#navnav-machines" role="tab" aria-controls="navnav-machines"
+              aria-selected="false">Machines</a>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-resources" role="tabpanel" aria-labelledby="nav-home-tab">
+            <!-- todo ostyluj tabelke -->
+            <table class="table table-sm table-striped table-bordered  table-hover m-0">
+
+              <thead class="thead-dark">
+                <tr>
+                  <!-- <th *ngFor="let item of header" scope="col" class=" "> {{item}}</th> -->
+                  <th scope="col" class=" "> Name </th>
+                  <th scope="col" class=" "> Stock<br>Qty </th>
+                  <th scope="col" class=" "> AVG<br>buy<br>price </th>
+                  <th scope="col" class=" "> </th>
+                  <th scope="col" class=" "> Qty<br>on<br>table</th>
+                  <th scope="col" class=" "> Value<br>on<br>table </th>
+                  <th scope="col" class=" "> </th>
+                  <th scope="col" class=" "> Ship<br>qty </th>
+                  <th scope="col" class=" "> Price </th>
+                  <th scope="col" class=" "> -1M<br>price<br>change</th>
+                  <th scope="col" class=" "> -6M<br>price<br>change</th>
+                  <th scope="col" class=" "> -12M<br>price<br>change</th>
+                </tr>
+              </thead>
+
+              <tbody *ngIf="resourcesList">
+                <tr *ngFor="let row of resourcesList">
+                  <td scope="row" class="col-nonumbers-align-left"> {{row.Name}} </td>
+                  <td scope="row" class=""> {{row.Quantity}}{{row.UoM}} </td>
+                  <td scope="row" class=""> 123 </td>
+                  <td scope="row" class="">
+                    <div class="btn-group trade-btn-group" role="group1" aria-label="Basic example1">
+                      <button type="button" class="btn btn-sm btn-success trade-btn">
+                        Max
+                      </button>
+                      <button type="button" class="btn btn-sm btn-success trade-btn">
+                        <i class="fas fa-chevron-right    "></i>
+                        <i class="fas fa-chevron-right    "></i>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-success trade-btn">
+                        <i class="fas fa-chevron-right    "></i>
+                      </button>
+                    </div>
+                  </td>
+                  <td scope="row" class=""> 123 </td>
+                  <td scope="row" class=""> 1230 </td>
+                  <td scope="row" class="">
+                    <div class="btn-group trade-btn-group" role="group2" aria-label="Basic example2">
+                      <button type="button" class="btn btn-sm btn-success trade-btn">
+                        <i class="fas fa-chevron-left    "></i>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-success trade-btn">
+                        <i class="fas fa-chevron-left    "></i>
+                        <i class="fas fa-chevron-left    "></i>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-success trade-btn">
+                        Max
+                      </button>
+                    </div>
+                  </td>
+                  <td scope="row" class=""> 456{{row.UoM}} </td>
+                  <td scope="row" class=""> 98 </td>
+                  <td scope="row" class=" ">+12 (2.5%) </td>
+                  <td scope="row" class=" ">+32 (32.5%) </td>
+                  <td scope="row" class=" ">+52 (22.5%) </td>
+                  <!-- <td *ngFor="let item of row | slice:1" scope="row" [ngClass]="{'negative-red': item<0}"> {{item}} </td> -->
+                </tr>
+              </tbody>
+
+              <!-- <thead class="thead-dark"> -->
+              <!-- TODO: make nhClass -->
+              <!-- <tr *ngIf="footer"> -->
+              <!-- <b *ngFor="let item of footer" scope="row"><b> {{item}} </b></td> -->
+              <!-- </tr> -->
+              <!-- </thead> -->
+
+            </table>
+
+          </div>
+          <div class="tab-pane fade" id="nav-crew" role="tabpanel" aria-labelledby="nav-profile-tab">..ssss.</div>
+          <div class="tab-pane fade" id="navnav-machines" role="tabpanel" aria-labelledby="nav-contact-tab">.xxx..</div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+    <div class="card m-2">
+      <h4 class="card-header "> Player Notes: </h4>
+      <div class="card-body p-1 m-1">
+        <textarea class="form-control m-2 player-notes" id="playerNotesTextArea" rows="5" [(ngModel)]="playerNotes"
+          placeholder="your notes"></textarea>
+      </div>
+    </div>
+
+  </div>
+
+</div>

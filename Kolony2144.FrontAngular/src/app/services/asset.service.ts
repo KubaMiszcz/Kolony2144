@@ -21,11 +21,13 @@ export class AssetService {
     return this.assetList;
   }
 
-  getKolonyVolatileAssets(): IAsset[] {
+  getVolatileAssets(): IAsset[] {
     return this.assetList.filter(i => i.SubType === ResourceTypesEnum.Volatile);
   }
 
-
+  getNonVolatileAssets(): IAsset[] {
+    return this.assetList.filter(i => i.SubType !== ResourceTypesEnum.Volatile);
+  }
 
   getAssetByName(name: string): IAsset {
     return this.assetList.find(i => i.Name === name);
