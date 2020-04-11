@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IKolony, Kolony } from '../models/Kolony';
 import { AllResources, ResourceName as ResourceName } from '../models/Resource';
-import { IAsset, ISimplifiedResource } from '../models/Entity';
+import { IAsset, ISimplifiedResource, Asset } from '../models/Entity';
 import { AllCivilianCrew } from '../models/Crew';
 import { AllBuildings } from '../models/Building';
 import { AllMachines } from '../models/Machine';
@@ -32,23 +32,28 @@ export class KolonyService {
 
 
   prepareInitialAssets(): IAsset[] {
-    let res = [];
+    let res: IAsset[] = [];
     [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines]
       .filter(a => a.InitialQuantity >= 0)
       .forEach(i => {
-        res.push({
-          Name: i.Name,
-          Size: i.Size,
-          Type: i.Type,
-          SubType: i.SubType,
-          InitialPrice: i.InitialPrice,
-          CreationCost: i.CreationCost,
-          MaintenanceCost: i.MaintenanceCost,
-          PassiveIncome: i.PassiveIncome,
-          UoM: i.UoM,
-          Quantity: i.InitialQuantity
-        })
+        let a = new Asset().Deserialize(i);
+        a.Quantity = i.InitialQuantity;
+        res.push(a);
+        // res.push({
+        // Name: i.Name,
+        // Size: i.Size,
+        // Type: i.Type,
+        // SubType: i.SubType,
+        // InitialPrice: i.InitialPrice,
+        // CreationCost: i.CreationCost,
+        // MaintenanceCost: i.MaintenanceCost,
+        // PassiveIncome: i.PassiveIncome,
+        // UoM: i.UoM,
+        // Quantity: i.InitialQuantity
+        // });
       });
+
+    // res.forEach(r => r.)
 
     return res;
   }
