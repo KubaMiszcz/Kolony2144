@@ -1,5 +1,6 @@
 export enum AssetTypesEnum {
   NotSet = '',
+  // Property = 'Property',
   Crew = 'Crew',
   Resource = 'Resource',
   Building = 'Building',
