@@ -1,17 +1,7 @@
 import { UoMsEnum } from "./enums/UoMs.enum";
-import { AssetTypesEnum } from "./enums/Types.enum";
+import { AssetTypesEnum, ResourceTypesEnum, MachineTypesEnum } from "./enums/Types.enum";
 
-export interface IFullEntity {
-  Name: string;
-  Description: string;
-  ImageUrl: string;
-  Size: number;
-  Type: AssetTypesEnum;
-  SubType: string;
-  CreationCost: ISimpleAsset[],
-  ConsumedItems: ISimpleAsset[];
-  ProducedItems: ISimpleAsset[];
-  UoM: UoMsEnum;
+export interface IFullEntity extends IEntity, IWikiEntity {
   InitialQuantity: number;
 }
 
@@ -20,17 +10,19 @@ export interface IEntity {
   Size: number;
   Type: AssetTypesEnum;
   SubType: string;
-  CreationCost: ISimpleAsset[],
-  ConsumedItems: ISimpleAsset[];
-  ProducedItems: ISimpleAsset[];
+  InitialPrice: number;
+  CreationCost: ISimplifiedResource[];
+  MaintenanceCost: ISimplifiedResource[];
+  PassiveIncome: ISimplifiedResource[];
   UoM: UoMsEnum;
 }
 
 export interface IAsset extends IEntity {
   Quantity: number;
+  // HistoricalPrices: number[];
 }
 
-export interface ISimpleAsset {
+export interface ISimplifiedResource {
   Name: string;
   Quantity: number;
 }

@@ -1,0 +1,40 @@
+table {
+  // max-width: 17em;
+  // min-width: 17rem;
+  // border: 1px solid darkgreen;
+}
+
+td,
+th {
+  font-size: smaller;
+  padding: 0px;
+  vertical-align: middle;
+  text-align: right;
+  white-space: nowrap;
+}
+
+th {
+  white-space: normal;
+  text-align: center;
+}
+
+.col-nonumbers-align-left {
+  text-align: left;
+  white-space: normal;
+}
+
+.total {
+  font-weight: bold;
+}
+
+.card-header {
+  font-size: medium;
+}
+
+div[aria-expanded=true] .fa-chevron-right {
+  display: none;
+}
+
+div[aria-expanded=false] .fa-chevron-down {
+  display: none;
+}

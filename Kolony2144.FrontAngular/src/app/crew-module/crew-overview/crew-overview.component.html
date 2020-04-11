@@ -1,0 +1,44 @@
+<div class="card my-2">
+  <!-- <progressbar [value]="60" [max]="100" class="progress m-2" style="height: 2em;" [striped]="true" [animate]="true">
+  </progressbar> -->
+  <!-- <progressbar [max]="warehouseCapacity" [value]="warehouseUsage" type="primary" [striped]="true" [animate]="true" class="my-2 progress" showValue="true"      style="height: 2em"> <i>{{warehouseUsage}} / {{warehouseCapacity}}</i></progressbar> -->
+  <!-- <h4 class="card-header "> </h4> -->
+
+  <div class="card m-2 ">
+    <h4 class="card-header "> Crew overview</h4>
+    <div class="card-body p-1">
+      <span>razem zra zarcia xxx/mc starczy na xxx miesicy</span><br>
+      <span>razem zarabiaja xxx/mc zarcia starczy na xxx miesicy</span><br>
+      <span>razem zajmuja powierzchni mieskzalnj, tj xx% calosci</span><br>
+      <span>razem wytwarzaja xxxWU basicWU</span><br>
+      <span>razem wytwarzaja xxxWU mediumWU</span><br>
+      <span>razem wytwarzaja xxxWU advancedWU</span>
+    </div>
+
+    <!-- <hr> -->
+    <!-- <div class="alert alert-warning alert-dismissible fade show m-2" role="alert">
+    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>-->
+    <!-- <hr> -->
+
+
+    <div class="card-body p-1">
+      <app-tile-with-table [caption]="'Crew Total Summary'" [header]="totalHeader" [rows]="totalList" [footer]="totalFooter">
+      </app-tile-with-table>
+    </div>
+
+
+    <div class="card-body p-1">
+      <app-tile-with-table [caption]="'Crew per unit Summary'" [header]="perUnitHeader" [rows]="perUnitList" [footer]="perUnitFooter">
+      </app-tile-with-table>
+    </div>
+
+
+  </div>
+
+
+
+</div>

@@ -1,7 +1,7 @@
-import { AssetTypesEnum } from './../../models/enums/Types.enum';
-import { SharedService } from './../../services/shared.service';
-import { IWikiEntity } from './../../models/Entity';
 import { Component, OnInit } from '@angular/core';
+import { AssetTypesEnum } from './../../models/enums/Types.enum';
+import { WikiService } from './../../services/wiki.service';
+import { IWikiEntity } from './../../models/Entity';
 
 @Component({
   selector: 'app-wiki',
@@ -17,14 +17,13 @@ export class WikiComponent implements OnInit {
   machinesList: IWikiEntity[] = [];
 
   constructor(
-    private sharedService: SharedService
+    private wikiService: WikiService
   ) {
-    const list = this.sharedService.allWikiEntites;
+    const list = this.wikiService.allWikiEntites;
     this.inventoryItemsList = list.filter(i => i.Type === AssetTypesEnum.Resource);
     this.crewList = list.filter(i => i.Type === AssetTypesEnum.Crew);
     this.buildingsList = list.filter(i => i.Type === AssetTypesEnum.Building);
     this.machinesList = list.filter(i => i.Type === AssetTypesEnum.Machine);
-
   }
 
   ngOnInit() {

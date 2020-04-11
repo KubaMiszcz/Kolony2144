@@ -1,24 +1,22 @@
 import { IAsset } from "./Entity";
-import { ResourceNames } from "./Resource";
+import { ResourceName } from "./Resource";
 import { ResourceTypesEnum, AssetTypesEnum } from "./enums/Types.enum";
 
 export interface IKolony {
   Name: string;
   Age: number;
   Assets: IAsset[]
-  Cash: number;
 }
 
 export class Kolony implements IKolony {
   Name: string;
   Age: number;
   Assets: IAsset[] = [];
-  get Cash(): number { return this.Assets.find(m => m.SubType === ResourceTypesEnum.Cash).Quantity; }
+  // get Cash(): number { return this.Assets.find(m => m.Name === ResourceName.Cash).Quantity; }
   // set Cash(value: number) { this.Assets.find(m => m.SubType === ResourceTypesEnum.Cash).Quantity = value; }
 
-  get MaxEnergy(): number { return this.Assets.find(m => m.SubType === ResourceTypesEnum.Energy).Quantity; }
-
-  get Crew(): IAsset[] { return this.Assets.filter(m => m.Type === AssetTypesEnum.Crew); }
+  // get MaxEnergy(): number { return this.Assets.find(m => m.SubType === ResourceTypesEnum.Energy).Quantity; }
+  // get AllCrew(): IAsset[] { return this.Assets.filter(m => m.Type === AssetTypesEnum.Crew); }
 
   constructor() { }
 

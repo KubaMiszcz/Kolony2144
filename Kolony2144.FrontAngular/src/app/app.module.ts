@@ -1,3 +1,5 @@
+import { PowerModule } from './power-module/power.module';
+import { CrewModule } from './crew-module/crew.module';
 import { BuildingsModule } from './buildings-module/buildings.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,7 +12,8 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { WikiModule } from './wiki-module/wiki.module';
 import { OverviewModule } from './overview-module/overview.module';
-import { NewsModule } from './news-module/news.module';
+import { FinancesModule } from './finances-module/finances.module';
+import { TradeModule } from './trade-module/trade.module';
 
 
 @NgModule({
@@ -22,11 +25,14 @@ import { NewsModule } from './news-module/news.module';
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    CoreModule,
     SharedModule,
+    CoreModule,
 
-    NewsModule,
     OverviewModule,
+    TradeModule,
+    FinancesModule,
+    PowerModule,
+    CrewModule,
     BuildingsModule,
     WikiModule
   ],

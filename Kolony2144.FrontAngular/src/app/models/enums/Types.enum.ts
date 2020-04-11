@@ -1,5 +1,6 @@
 export enum AssetTypesEnum {
   NotSet = '',
+  // Property = 'Property',
   Crew = 'Crew',
   Resource = 'Resource',
   Building = 'Building',
@@ -13,22 +14,20 @@ export enum CrewTypesEnum {
 
 export enum ResourceTypesEnum {
   NotSet = '',
-  Cash = 'Cash',
-  Energy = 'Energy',
-  StorageSpace = 'Storage space'
-}
-
-export enum VolatileResourceTypesEnum {
-  Energy = 'Energy',
-  StorageSpace = 'Storage space'
+  Volatile = 'Volatile',
+  Production = 'Production',
 }
 
 export enum BuildingTypesEnum {
   NotSet = '',
-  PowerSource = 'PowerSource',
+  Production = 'Production',
+  PowerSource = 'Power source',
+  Maintenance = 'Maintenance',
 }
 
 export enum MachineTypesEnum {
   NotSet = '',
-  PowerSource = 'PowerSource',
+  Production = 'Production',
+  PowerSource = 'Power source',
+  Maintenance = 'Maintenance',
 }

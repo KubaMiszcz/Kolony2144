@@ -1,5 +1,6 @@
+import { KolonyService } from 'src/app/services/kolony.service';
 import { SharedService } from './../../services/shared.service';
-import { IWikiEntity, ISimpleAsset } from './../../models/Entity';
+import { IWikiEntity, ISimplifiedResource } from './../../models/Entity';
 import { Component, OnInit, Input } from '@angular/core';
 import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
 
@@ -15,24 +16,24 @@ export class WikiTileComponent implements OnInit {
   consumedItems: IWikiListItem[] = [];
 
   constructor(
-    private SharedService: SharedService
+    private kolonyService: KolonyService,
   ) { }
 
   ngOnInit() {
     if (this.item.CreationCost) this.productionCost = this.fillList(this.item.CreationCost);
-    if (this.item.ProducedItems) this.producedItems = this.fillList(this.item.ProducedItems);
-    if (this.item.ConsumedItems) this.consumedItems = this.fillList(this.item.ConsumedItems);
+    if (this.item.PassiveIncome) this.producedItems = this.fillList(this.item.PassiveIncome);
+    if (this.item.MaintenanceCost) this.consumedItems = this.fillList(this.item.MaintenanceCost);
     console.log(this.productionCost);
 
   }
 
-  fillList(list: ISimpleAsset[]) {
+  fillList(list: ISimplifiedResource[]) {
     let result = [];
     list.map(v =>
       result.push({
         Name: v.Name,
         Quantity: v.Quantity,
-        UoM: this.SharedService.getUoMForSimpleAsset(v)
+        UoM: this.kolonyService.getUoMByName(v.Name)
       })
     );
     return result;
