@@ -1,3 +1,4 @@
+import { TradeOverviewComponent } from './trade-module/trade-overview/trade-overview.component';
 import { PowerOverviewComponent } from './power-module/power-overview/power-overview.component';
 import { CrewOverviewComponent } from './crew-module/crew-overview/crew-overview.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -10,7 +11,8 @@ import { FinancesOverviewComponent } from './finances-module/finances-overview/f
 
 const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },
-  { path: 'start', component: OverviewComponent },
+  { path: 'start', component: TradeOverviewComponent },
+  { path: 'trade', component: TradeOverviewComponent },
   { path: 'overview', component: OverviewComponent },
   { path: 'finances', component: FinancesOverviewComponent },
   { path: 'crew', component: CrewOverviewComponent },
