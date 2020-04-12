@@ -6,7 +6,7 @@ import { IBuilding } from "./Building";
 export interface IFullEntity extends IEntity, IAsset, IBuilding {
   Description: string;
   ImageUrl: string;
-  InitialPrice: number;
+  Price: number;
 }
 
 export interface IEntity {
@@ -14,6 +14,7 @@ export interface IEntity {
   Size: number;
   Type: AssetTypesEnum;
   SubType: string;
+  Tags: string[];
   CreationCost: ISimplifiedResource[];
   MaintenanceCost: ISimplifiedResource[];
   PassiveIncome: ISimplifiedResource[];
@@ -23,7 +24,7 @@ export interface IEntity {
 
 
 export interface IAsset extends IEntity {
-  InitialPrice: number;
+  Price: number;
   Quantity: number;
   // HistoricalPrices: number[];
 }
@@ -33,7 +34,8 @@ export class Asset implements IAsset, IDeserializable {
   Size: number;
   Type: AssetTypesEnum;
   SubType: string;
-  InitialPrice: number;
+  Tags: string[];
+  Price: number;
   CreationCost: ISimplifiedResource[];
   MaintenanceCost: ISimplifiedResource[];
   PassiveIncome: ISimplifiedResource[];

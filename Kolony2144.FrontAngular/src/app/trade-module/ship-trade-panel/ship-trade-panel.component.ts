@@ -8,6 +8,7 @@ import { IAsset } from 'src/app/models/Entity';
 })
 export class ShipTradePanelComponent implements OnInit {
   @Input() resourcesList: IAsset[];
+  @Input() shipResourcesList: IAsset[];
 
   constructor() { }
 

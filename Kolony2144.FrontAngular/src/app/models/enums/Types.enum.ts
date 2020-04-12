@@ -7,6 +7,12 @@ export enum AssetTypesEnum {
   Machine = 'Machine',
 }
 
+export enum GenericTypesEnum {
+  NotSet = '',
+  Tradeable = 'Tradeable'
+}
+
+
 export enum CrewTypesEnum {
   NotSet = '',
   Production = 'Production',
@@ -15,7 +21,7 @@ export enum CrewTypesEnum {
 export enum ResourceTypesEnum {
   NotSet = '',
   Volatile = 'Volatile',
-  Production = 'Production',
+  Production = 'Production'
 }
 
 export enum BuildingTypesEnum {

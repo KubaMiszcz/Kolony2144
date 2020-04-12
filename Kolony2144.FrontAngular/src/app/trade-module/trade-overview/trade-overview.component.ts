@@ -1,3 +1,4 @@
+import { BuildingNames } from './../../models/Building';
 import { TradeService } from './../../services/trade.service';
 import { IAsset } from 'src/app/models/Entity';
 import { Component, OnInit } from '@angular/core';
@@ -17,6 +18,7 @@ export class TradeOverviewComponent implements OnInit {
   crewList: IAsset[];
   resourcesList: IAsset[];
   machinesList: IAsset[];
+  isShipIncoming: boolean;
 
   constructor(
     private kolonyService: KolonyService,
@@ -28,9 +30,15 @@ export class TradeOverviewComponent implements OnInit {
 
   ngOnInit() {
     this.playerNotes = this.gameService.playerNotes;
-    this.crewList = this.tradeService.getTradeableCrew();
-    this.resourcesList = this.tradeService.getTradeableResources();
-    this.machinesList = this.tradeService.getTradeableMachines();
+    this.isShipIncoming = this.tradeService.isShipIncoming;
+    this.isShipIncoming = true;
+    if (this.isShipIncoming) {
+      let stockResources = this.assetService.getAllResources();
+      this.resourcesList = this.tradeService.tradeableResources;
+
+      this.crewList = this.tradeService.getTradeableCrew();
+      this.machinesList = this.tradeService.getTradeableMachines();
+    }
   }
 
   ngOnDestroy(): void {
@@ -38,3 +46,14 @@ export class TradeOverviewComponent implements OnInit {
   }
 
 }
+
+export interface ITradePanelData {
+  Name: string;
+  StockQty: number
+  AVGBuyPrice: number
+  // QtyOnTable: number;
+  ShipQqty: number
+  ShipPrice: number
+  // PriceChange
+}
+

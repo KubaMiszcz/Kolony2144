@@ -21,6 +21,10 @@ export class AssetService {
     return this.assetList;
   }
 
+  getAllResources(): IAsset[] {
+    return this.assetList.filter(i => i.Type === AssetTypesEnum.Resource);
+  }
+
   getVolatileAssets(): IAsset[] {
     return this.assetList.filter(i => i.SubType === ResourceTypesEnum.Volatile);
   }

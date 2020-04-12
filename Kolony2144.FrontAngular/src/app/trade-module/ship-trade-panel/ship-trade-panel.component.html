@@ -23,7 +23,7 @@
       <tr *ngFor="let row of resourcesList">
         <td scope="row" class="col-nonumbers-align-left td-name"> {{row.Name}} </td>
         <td scope="row" class=""> {{row.Quantity}}{{row.UoM}} </td>
-        <td scope="row" class=""> {{row.InitialPrice}} </td>
+        <td scope="row" class=""> {{row.Price}} </td>
         <td scope="row" class="">
           <div class="btn-group trade-btn-group" role="group1" aria-label="Basic example1">
             <button type="button" class="btn btn-sm btn-success trade-btn">
@@ -61,7 +61,7 @@
           </div>
         </td>
         <td scope="row" class=""> 456{{row.UoM}} </td>
-        <td scope="row" class=""> {{row.InitialPrice}} </td>
+        <td scope="row" class=""> {{row.Price}} </td>
         <td scope="row" class=" ">
           <span>1M +12 (2.5%) </span><br>
           <span>6M +12 (2.5%) </span><br>

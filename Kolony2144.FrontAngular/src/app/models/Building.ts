@@ -8,8 +8,9 @@ export enum BuildingNames {
   Habitat = 'Habitat',
   Warehouse = 'Warehouse',
   SolarPanel = 'Solar panel',
-  Workshop = "Small factory",
-  Factory = "Factory"
+  Workshop = "Workshop",
+  Factory = "Factory",
+  CargoBay = "Cargo bay"
 }
 
 export interface IBuilding extends IEntity {
@@ -18,6 +19,7 @@ export interface IBuilding extends IEntity {
 }
 
 export class Building implements IBuilding, IDeserializable {
+  Tags: string[];
   Quantity: number;
   Name: string;
   Size: number;
@@ -41,7 +43,8 @@ export const AllBuildings: IFullEntity[] = [
     Size: 100,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.Maintenance,
-    InitialPrice: 0,
+    Tags: [BuildingTypesEnum.Maintenance],
+    Price: 0,
     CreationCost: [
       { Name: ResourceName.Stone, Quantity: 20 },
       { Name: ResourceName.Steel, Quantity: 5 }
@@ -61,7 +64,8 @@ export const AllBuildings: IFullEntity[] = [
     Size: 1000,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.NotSet,
-    InitialPrice: 0,
+    Tags: [BuildingTypesEnum.NotSet],
+    Price: 0,
     CreationCost: [
       { Name: ResourceName.Stone, Quantity: 10 },
       { Name: ResourceName.Steel, Quantity: 10 }
@@ -81,7 +85,8 @@ export const AllBuildings: IFullEntity[] = [
     Size: 1000,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.PowerSource,
-    InitialPrice: 0,
+    Tags: [BuildingTypesEnum.PowerSource],
+    Price: 0,
     CreationCost: [
       { Name: ResourceName.Stone, Quantity: 10 },
       { Name: ResourceName.Steel, Quantity: 20 }
@@ -100,7 +105,8 @@ export const AllBuildings: IFullEntity[] = [
     Size: 100,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.Production,
-    InitialPrice: 0,
+    Tags: [BuildingTypesEnum.Production],
+    Price: 0,
     CreationCost: [
       { Name: ResourceName.Stone, Quantity: 20 },
       { Name: ResourceName.Steel, Quantity: 20 }
@@ -121,7 +127,31 @@ export const AllBuildings: IFullEntity[] = [
     Size: 200,
     Type: AssetTypesEnum.Building,
     SubType: BuildingTypesEnum.Production,
-    InitialPrice: 0,
+    Tags: [BuildingTypesEnum.Production],
+    Price: 0,
+    CreationCost: [
+      { Name: ResourceName.Stone, Quantity: 30 },
+      { Name: ResourceName.Steel, Quantity: 100 }
+    ],
+    MaintenanceCost: [
+      { Name: ResourceName.Cash, Quantity: 500 },
+      { Name: ResourceName.Energy, Quantity: 500 }
+    ],
+    PassiveIncome: [
+      { Name: ResourceName.BasicWorkUnit, Quantity: 100 },
+      { Name: ResourceName.AdvancedWorkUnit, Quantity: 500 }
+    ],
+    UoM: UoMsEnum.pcs,
+    Quantity: 10
+  },
+  {
+    Name: BuildingNames.CargoBay,
+    Description: '', ImageUrl: '/assets/wiki-icons/building.png',
+    Size: 200,
+    Type: AssetTypesEnum.Building,
+    SubType: BuildingTypesEnum.Production,
+    Tags: [BuildingTypesEnum.Production],
+    Price: 0,
     CreationCost: [
       { Name: ResourceName.Stone, Quantity: 30 },
       { Name: ResourceName.Steel, Quantity: 100 }

@@ -6,6 +6,7 @@ import { OverviewService } from './overview.service';
 import { AssetService } from './asset.service';
 import { IAsset } from '../models/Entity';
 import { PowerService } from './power.service';
+import { TradeService } from './trade.service';
 
 
 @Injectable({
@@ -23,6 +24,7 @@ export class GameService {
     private overviewService: OverviewService,
     private assetService: AssetService,
     private powerService: PowerService,
+    private tradeService: TradeService,
   ) {
     this.nextTurn();
   }
@@ -61,7 +63,7 @@ export class GameService {
       this.updateInventoryDueToMaintenance(this.assetService.getAllAssets());
       this.updateInventoryDueToProducingItems(this.assetService.getAllAssets());
 
-
+      this.tradeService.prepareIncomingShip();
       //   //zeroingVolatileProperties
       //   this.kolonyService.zeroingVolatileProperties(this.kolony.AllInventoryItemsArray);
 

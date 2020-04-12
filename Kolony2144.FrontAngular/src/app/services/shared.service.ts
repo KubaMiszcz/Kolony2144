@@ -9,8 +9,14 @@ export class SharedService {
   }
 
   getRandomFromRange(min: number, max: number) {
+    //inputs: integers, output: integer
     return Math.round(min + Math.random() * (max - min));
   }
+
+  getRandomBoolean() {
+    return Math.random() > 0.5 ? true : false;
+  }
+
 
   getRandomValueFromEnum(list: string[]): string {
     let count = list.length;
