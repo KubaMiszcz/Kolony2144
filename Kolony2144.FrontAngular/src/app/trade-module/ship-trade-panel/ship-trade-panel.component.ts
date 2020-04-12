@@ -1,3 +1,4 @@
+import { ITradePanelData } from './../trade-overview/trade-overview.component';
 import { Component, OnInit, Input } from '@angular/core';
 import { IAsset } from 'src/app/models/Entity';
 
@@ -7,10 +8,19 @@ import { IAsset } from 'src/app/models/Entity';
   styleUrls: ['./ship-trade-panel.component.scss']
 })
 export class ShipTradePanelComponent implements OnInit {
-  @Input() resourcesList: IAsset[] = [];
-  @Input() shipResourcesList: IAsset[] = [];
+  @Input() tradePanelData: ITradePanelData[] = [];
 
   constructor() { }
 
   ngOnInit() { }
+
+  updateTableQty(row: ITradePanelData, val) {
+    // if (val === 'buymax') {
+    //   row.QtyOnTable += 100;
+    // } else if (val==='sellmax'){
+    //   row.QtyOnTable += 100;
+    // } else {
+    row.QtyOnTable += val;
+    // }
+  }
 }

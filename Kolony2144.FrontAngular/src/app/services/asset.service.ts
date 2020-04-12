@@ -17,7 +17,8 @@ import { WikiService } from './wiki.service';
   providedIn: 'root'
 })
 export class AssetService {
-  private assetList: IAsset[]=[];
+
+  private assetList: IAsset[] = [];
 
   constructor(
     private sharedService: SharedService,

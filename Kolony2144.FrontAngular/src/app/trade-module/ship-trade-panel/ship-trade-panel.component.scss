@@ -3,6 +3,7 @@
 .trade-btn {
   border-color: $dark-green;
   width: -webkit-fill-available;
+  max-width: fit-content;
 }
 
 .trade-btn-group {
@@ -14,4 +15,8 @@ th,
 .td-name {
   max-width: 6rem;
   white-space: normal;
+}
+
+.td-table {
+  width: 25%;
 }

@@ -1,3 +1,4 @@
+import { GenericTypesEnum } from './../../models/enums/Types.enum';
 import { BuildingNames } from './../../models/Building';
 import { TradeService } from './../../services/trade.service';
 import { IAsset } from 'src/app/models/Entity';
@@ -7,6 +8,8 @@ import { OverviewService } from 'src/app/services/overview.service';
 import { GameService } from 'src/app/services/game.service';
 import { AssetService } from 'src/app/services/asset.service';
 import { AssetTypesEnum } from 'src/app/models/enums/Types.enum';
+import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
+
 
 @Component({
   selector: 'app-trade-overview',
@@ -16,7 +19,7 @@ import { AssetTypesEnum } from 'src/app/models/enums/Types.enum';
 export class TradeOverviewComponent implements OnInit {
   playerNotes: string = '';
   crewList: IAsset[] = [];
-  resourcesList: IAsset[] = [];
+  tradeResourcesPanelValuesFIXNAME: ITradePanelData[] = [];
   machinesList: IAsset[] = [];
   isShipIncoming: boolean;
 
@@ -33,27 +36,57 @@ export class TradeOverviewComponent implements OnInit {
     this.isShipIncoming = this.tradeService.isShipIncoming;
     this.isShipIncoming = true;
     if (this.isShipIncoming) {
-      let stockResources = this.assetService.getAllResources();
-      this.resourcesList = this.tradeService.tradeableResources;
+      let stockResources = this.assetService.getAllResources().filter(r => r.Tags.includes(GenericTypesEnum.Tradeable));
+      let shipResources = this.tradeService.tradeableResources.filter(r => r.Quantity !== 0);
+      shipResources.forEach(r => {
+
+        this.tradeResourcesPanelValuesFIXNAME.push(
+          {
+            Name: r.Name,
+            StockQty: this.getStockQtyForShipAsset(r),
+            UoM: r.UoM,
+            AVGBuyPrice: this.getStockPriceForShipAsset(r),
+            QtyOnTable: 0,
+            ShipPrice: r.Price,
+            ShipQty: r.Quantity
+          }
+        );
+      });
 
       this.crewList = this.tradeService.getTradeableCrew();
       this.machinesList = this.tradeService.getTradeableMachines();
     }
   }
 
-  ngOnDestroy(): void {
-    this.gameService.playerNotes = this.playerNotes;
+  getStockPriceForShipAsset(asset: IAsset): number {
+    let kolonyAsset = this.assetService.getAssetByName(asset.Name);
+    return !!kolonyAsset ? kolonyAsset.Price : 0;
   }
 
+
+  getStockQtyForShipAsset(asset: IAsset): number {
+    let kolonyAsset = this.assetService.getAssetByName(asset.Name);
+    return !!kolonyAsset ? kolonyAsset.Quantity : 0;
+  }
+
+
+
+
+
+  ngOnDestroy(): void {
+    this.gameService.playerNotes = this.playerNotes;
+    this.gameService.saveGame();
+  }
 }
 
 export interface ITradePanelData {
   Name: string;
-  StockQty: number
-  AVGBuyPrice: number
-  // QtyOnTable: number;
-  ShipQqty: number
-  ShipPrice: number
+  StockQty: number;
+  UoM: UoMsEnum;
+  AVGBuyPrice: number;
+  QtyOnTable: number;
+  ShipQty: number;
+  ShipPrice: number;
   // PriceChange
 }
 

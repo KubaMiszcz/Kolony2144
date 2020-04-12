@@ -17,8 +17,8 @@ import { WikiService } from './wiki.service';
 export class TradeService {
   tradeableResources: IAsset[] = [];
   isShipIncoming: boolean;
-  shipVariationPercent: number = 20;
-  priceVariationPercent: number = 20;
+  shipVariationPercent: number = 20;  //future  depend on shipsize?
+  priceVariationPercent: number = 20; //future  depend on asset
 
 
   constructor(
@@ -44,11 +44,11 @@ export class TradeService {
   updateResourcesPrices() {
     let shipSize: number = 100;
     this.tradeableResources.forEach(r => {
-      let isResourceOnCurrentShip = this.sharedService.getRandomBoolean();
-      if (isResourceOnCurrentShip) {
-        r.Quantity = shipSize * this.sharedService.getRandomFromRange(100 - this.shipVariationPercent, 100 + this.shipVariationPercent) / 100;
-      } else {
+      let tradeType = this.sharedService.getRandomFromRange(-1, 1);
+      if (tradeType === 0) {
         r.Quantity = 0;
+      } else {
+        r.Quantity = tradeType * shipSize * this.sharedService.getRandomFromRange(100 - this.shipVariationPercent, 100 + this.shipVariationPercent) / 100;
       }
       //!! todo check if prices too low and variations cant change it
       r.Price = Math.round(r.Price * this.sharedService.getRandomFromRange(100 - this.priceVariationPercent, 100 + this.priceVariationPercent) / 100);

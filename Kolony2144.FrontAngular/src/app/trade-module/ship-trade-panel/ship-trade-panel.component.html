@@ -8,9 +8,7 @@
         <th scope="col" class=" "> Name </th>
         <th scope="col" class=" "> Stock Qty </th>
         <th scope="col" class=" "> AVG buy price </th>
-        <th scope="col" class=" "> </th>
-        <th scope="col" class=" "> Qty on table</th>
-        <th scope="col" class=" "> </th>
+        <th scope="col" class=" "> Table</th>
         <th scope="col" class=" "> Ship qty </th>
         <th scope="col" class=" "> Ship price </th>
         <th scope="col" class=" "> Price change</th>
@@ -19,49 +17,62 @@
       </tr>
     </thead>
 
-    <tbody *ngIf="resourcesList">
-      <tr *ngFor="let row of resourcesList">
+    <tbody *ngIf="tradePanelData">
+      <tr *ngFor="let row of tradePanelData">
         <td scope="row" class="col-nonumbers-align-left td-name"> {{row.Name}} </td>
-        <td scope="row" class=""> {{row.Quantity}}{{row.UoM}} </td>
-        <td scope="row" class=""> {{row.Price}} </td>
-        <td scope="row" class="">
-          <div class="btn-group trade-btn-group" role="group1" aria-label="Basic example1">
-            <button type="button" class="btn btn-sm btn-success trade-btn">
-              Max
-            </button>
-            <button type="button" class="btn btn-sm btn-success trade-btn">
-              <i class="fas fa-chevron-right    "></i>
-              <i class="fas fa-chevron-right    "></i>
-            </button>
-            <button type="button" class="btn btn-sm btn-success trade-btn">
-              <i class="fas fa-chevron-right    "></i>
-            </button>
-          </div>
-        </td>
-        <td scope="row" class="">
-          <!-- <div class="form-group"> -->
-          <input type="number" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-          <label for="exampleFormControlInput1">value: 1123489</label>
+        <td scope="row" class=""> {{row.StockQty}}{{row.UoM}} </td>
+        <td scope="row" class=""> {{row.AVGBuyPrice}} </td>
 
-          <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
-          <!-- </div> -->
-        </td>
-        <td scope="row" class="">
-          <div class="btn-group trade-btn-group" role="group2" aria-label="Basic example2">
-            <button type="button" class="btn btn-sm btn-success trade-btn">
-              <i class="fas fa-chevron-left    "></i>
-            </button>
-            <button type="button" class="btn btn-sm btn-success trade-btn">
-              <i class="fas fa-chevron-left    "></i>
-              <i class="fas fa-chevron-left    "></i>
-            </button>
-            <button type="button" class="btn btn-sm btn-success trade-btn">
-              Max
-            </button>
+
+        <td scope="row " class="td-table p-1">
+          <div class="forrm-group">
+
+            <div class="row mb-1">
+              <div class="col">
+                <input type="number" class="form-control col" name="" id="" aria-describedby="helpId" placeholder="" [(ngModel)]="row.QtyOnTable">
+              </div>
+              <div class="col">
+                <span class="">value: {{row.ShipPrice*row.QtyOnTable}}</span>
+              </div>
+            </div>
+
+            <div class="btn-group trade-btn-group" role="group1" aria-label="Basic example1">
+              <button type="button" class="btn btn-sm btn-success trade-btn"> Max </button>
+              <button type="button" class="btn btn-sm btn-success trade-btn" (click)="updateTableQty(row,10)">
+                <i class="fas fa-chevron-right    "></i> <i class="fas fa-chevron-right    "></i>
+              </button>
+              <button type="button" class="btn btn-sm btn-success trade-btn" (click)="updateTableQty(row,1)">
+                <i class="fas fa-chevron-right    "></i>
+              </button>
+
+
+              <button *ngIf="row.ShipQty>0" type="button" class="btn btn-sm btn-success trade-btn">
+                <i class="fas fa-chevron-right    "></i> Sell <i class="fas fa-chevron-right    "></i>
+              </button>
+              <button *ngIf="row.ShipQty<0" type="button" class="btn btn-sm btn-success trade-btn">
+                <i class="fas fa-chevron-left    "></i> Buy <i class="fas fa-chevron-left    "></i>
+              </button>
+
+
+              <button type="button" class="btn btn-sm btn-success trade-btn" (click)="updateTableQty(row,-1)">
+                <i class="fas fa-chevron-left    "></i>
+              </button>
+              <button type="button" class="btn btn-sm btn-success trade-btn" (click)="updateTableQty(row,-10)">
+                <i class="fas fa-chevron-left    "></i> <i class="fas fa-chevron-left    "></i>
+              </button>
+              <button type="button" class="btn btn-sm btn-success trade-btn"> Max </button>
+
+
+
+            </div>
+            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
           </div>
         </td>
-        <td scope="row" class=""> 456{{row.UoM}} </td>
-        <td scope="row" class=""> {{row.Price}} </td>
+
+
+
+        <td scope="row" class=""> {{row.ShipQty}}{{row.UoM}} </td>
+        <td scope="row" class=""> {{row.ShipPrice}} </td>
         <td scope="row" class=" ">
           <span>1M +12 (2.5%) </span><br>
           <span>6M +12 (2.5%) </span><br>

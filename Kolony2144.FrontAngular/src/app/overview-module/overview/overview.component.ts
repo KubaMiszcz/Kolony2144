@@ -33,6 +33,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.gameService.playerNotes = this.playerNotes;
+    this.gameService.saveGame();
   }
 
   fillResourcesList(resources: IAsset[]): any[] {

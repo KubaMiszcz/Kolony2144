@@ -12,6 +12,7 @@ export enum ResourceName {
   Food = 'Food',
   Stone = 'Stone',
   Steel = 'Steel',
+  Diamonds = 'Diamonds',
 }
 
 export const AllResources: IFullEntity[] = [
@@ -132,5 +133,18 @@ export const AllResources: IFullEntity[] = [
     PassiveIncome: [],
     UoM: UoMsEnum.t,
     Quantity: 1000
+  },
+  {
+    Name: ResourceName.Diamonds,
+    Description: 'A piece of Diamond', ImageUrl: '/assets/wiki-icons/resource.png',
+    Size: 1,
+    Type: AssetTypesEnum.Resource,
+    Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
+    Price: 1000,
+    CreationCost: [],
+    MaintenanceCost: [],
+    PassiveIncome: [],
+    UoM: UoMsEnum.pcs,
+    Quantity: 0
   }
 ]

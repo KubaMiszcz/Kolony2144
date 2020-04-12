@@ -21,6 +21,7 @@ import { AssetTypesEnum, GenericTypesEnum } from '../models/enums/Types.enum';
   providedIn: 'root'
 })
 export class GameService {
+
   playerNotes = '';
   private age = 100;
   get Age(): number { return Math.round(this.age * 10) / 10; }
@@ -42,6 +43,7 @@ export class GameService {
     private tradeService: TradeService,
     private wikiService: WikiService,
   ) {
+    this.playerNotes = sessionStorage.getItem('savedState')
     this.ALL_ASSETS_LIST = this.getAllInitialGameAssets()
     this.tradeService.tradeableResources = this.getTradeableResources();
     this.nextTurn();
@@ -181,6 +183,10 @@ export class GameService {
     return a;
   }
 
+  saveGame() {
+    //fixit save all game and read it on init components withplayer notes
+    localStorage.setItem('savedState', this.playerNotes);
+  }
 
 }
 
