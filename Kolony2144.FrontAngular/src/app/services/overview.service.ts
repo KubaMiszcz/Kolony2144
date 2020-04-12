@@ -4,17 +4,17 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class OverviewService {
-  private _news: string[] = []
+  private news: string[] = []
 
   constructor() { }
 
-  get news() { return this._news }
+  get News() { return this.news }
 
   clearNews() {
-    this._news = [];
+    this.news = [];
   }
 
   addNews(val: string) {
-    this._news.push(val);
+    this.news.push(val);
   }
 }
