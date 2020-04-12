@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { KolonyService } from './kolony.service';
-import { ResourceName } from '../models/Resource';
+import { ResourceName, AllResources } from '../models/Resource';
 import { OverviewService } from './overview.service';
 import { AssetService } from './asset.service';
-import { IAsset } from '../models/Entity';
+import { IAsset, Asset } from '../models/Entity';
 import { PowerService } from './power.service';
 import { TradeService } from './trade.service';
+import { AllCivilianCrew } from '../models/Crew';
+import { AllBuildings } from '../models/Building';
+import { AllMachines } from '../models/Machine';
+import { CrewService } from './crew.service';
+import { FinanceService } from './finance.service';
+import { SharedService } from './shared.service';
+import { WikiService } from './wiki.service';
 
 
 @Injectable({
@@ -17,19 +24,35 @@ export class GameService {
   private age = 100;
   get Age(): number { return Math.round(this.age * 10) / 10; }
   set Age(value: number) { this.age += 0.1; }
+  ALL_ASSETS_LIST: IAsset[];
+
 
   // isTurnComputing = false;
   // AllAssets: IAsset[];
 
   constructor(
     private router: Router,
+    private AssetService: AssetService,
+    private crewService: CrewService,
+    private financeService: FinanceService,
     private kolonyService: KolonyService,
     private overviewService: OverviewService,
-    private assetService: AssetService,
     private powerService: PowerService,
+    private sharedService: SharedService,
     private tradeService: TradeService,
+    private wikiService: WikiService,
   ) {
     this.nextTurn();
+    this.ALL_ASSETS_LIST = this.getAllInitialAssets()
+  }
+
+  getAllInitialAssets(): IAsset[] {
+    let res = [];
+    [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines]
+      .forEach(i => {
+        res.push(new Asset().Deserialize(i));
+      });
+    return
   }
 
 

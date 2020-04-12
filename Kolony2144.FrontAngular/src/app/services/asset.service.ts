@@ -4,6 +4,14 @@ import { IAsset, ISimplifiedResource } from '../models/Entity';
 import { ResourceTypesEnum, AssetTypesEnum } from '../models/enums/Types.enum';
 import { Kolony } from '../models/Kolony';
 import { ResourceName } from '../models/Resource';
+import { OverviewService } from './overview.service';
+import { PowerService } from './power.service';
+import { CrewService } from './crew.service';
+import { FinanceService } from './finance.service';
+import { GameService } from './game.service';
+import { SharedService } from './shared.service';
+import { TradeService } from './trade.service';
+import { WikiService } from './wiki.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +20,15 @@ export class AssetService {
   private assetList: IAsset[];
 
   constructor(
+    private crewService: CrewService,
+    private financeService: FinanceService,
+    private gameService: GameService,
     private kolonyService: KolonyService,
+    private overviewService: OverviewService,
+    private powerService: PowerService,
+    private sharedService: SharedService,
+    private tradeService: TradeService,
+    private wikiService: WikiService,
   ) {
     this.assetList = this.kolonyService.getAllAssets();
   }
