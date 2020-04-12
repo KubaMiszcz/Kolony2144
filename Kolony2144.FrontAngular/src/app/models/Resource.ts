@@ -1,6 +1,6 @@
 import { IFullEntity } from "./Entity";
 import { UoMsEnum } from "./enums/UoMs.enum";
-import { AssetTypesEnum, ResourceTypesEnum } from "./enums/Types.enum";
+import { AssetTypesEnum, ResourceTypesEnum, GenericTypesEnum } from "./enums/Types.enum";
 
 export enum ResourceName {
   Cash = 'Space Beads',
@@ -22,7 +22,7 @@ export const AllResources: IFullEntity[] = [
     Size: 0,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.NotSet,
-    Tags: [],
+    Tags: [GenericTypesEnum.Property],
     Price: 0,
     CreationCost: [],
     MaintenanceCost: [],
@@ -36,7 +36,7 @@ export const AllResources: IFullEntity[] = [
     Size: 0,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.Volatile,
-    Tags: [],
+    Tags: [GenericTypesEnum.Property, GenericTypesEnum.Volatile],
     Price: 0,
     CreationCost: [],
     MaintenanceCost: [],
@@ -50,7 +50,7 @@ export const AllResources: IFullEntity[] = [
     Size: 0,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.Volatile,
-    Tags: [],
+    Tags: [GenericTypesEnum.Property, GenericTypesEnum.Volatile],
     Price: 0,
     CreationCost: [],
     MaintenanceCost: [],
@@ -64,7 +64,7 @@ export const AllResources: IFullEntity[] = [
     Size: 0,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.Volatile,
-    Tags: [],
+    Tags: [GenericTypesEnum.Property, GenericTypesEnum.Volatile],
     Price: 0,
     CreationCost: [],
     MaintenanceCost: [],
@@ -78,7 +78,7 @@ export const AllResources: IFullEntity[] = [
     Size: 0,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.Volatile,
-    Tags: [],
+    Tags: [GenericTypesEnum.Property, GenericTypesEnum.Volatile],
     Price: 0,
     CreationCost: [],
     MaintenanceCost: [],
@@ -92,7 +92,7 @@ export const AllResources: IFullEntity[] = [
     Size: 0,
     Type: AssetTypesEnum.Resource,
     SubType: ResourceTypesEnum.Volatile,
-    Tags: [],
+    Tags: [GenericTypesEnum.Property, GenericTypesEnum.Volatile],
     Price: 0,
     CreationCost: [],
     MaintenanceCost: [],

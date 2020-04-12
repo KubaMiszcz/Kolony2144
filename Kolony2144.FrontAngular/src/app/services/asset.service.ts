@@ -20,15 +20,8 @@ export class AssetService {
   private assetList: IAsset[];
 
   constructor(
-    private crewService: CrewService,
-    private financeService: FinanceService,
-    private gameService: GameService,
-    private kolonyService: KolonyService,
-    private overviewService: OverviewService,
-    private powerService: PowerService,
     private sharedService: SharedService,
-    private tradeService: TradeService,
-    private wikiService: WikiService,
+    private kolonyService: KolonyService,
   ) {
     this.assetList = this.kolonyService.getAllKolonyAssets();
   }
@@ -39,11 +32,11 @@ export class AssetService {
 
 
   getVolatileAssets(): IAsset[] {
-    return this.assetList.filter(i => i.SubType === ResourceTypesEnum.Volatile);
+    return this.assetList.filter(i => i.Tags.includes(ResourceTypesEnum.Volatile));
   }
 
   getNonVolatileAssets(): IAsset[] {
-    return this.assetList.filter(i => i.SubType !== ResourceTypesEnum.Volatile);
+    return this.assetList.filter(i => !i.Tags.includes(ResourceTypesEnum.Volatile));
   }
 
   ClearVolatileResources() {

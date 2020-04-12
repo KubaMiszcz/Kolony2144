@@ -32,13 +32,12 @@ export class GameService {
 
   constructor(
     private router: Router,
+    private sharedService: SharedService,
     private assetService: AssetService,
     private crewService: CrewService,
     private financeService: FinanceService,
-    private kolonyService: KolonyService,
     private overviewService: OverviewService,
     private powerService: PowerService,
-    private sharedService: SharedService,
     private tradeService: TradeService,
     private wikiService: WikiService,
   ) {
@@ -166,9 +165,9 @@ export class GameService {
       this.overviewService.addNews(msg);
     }
     // Your kolony Energy usage 6200kW is 120 % of total production 6000kW
-    msg = 'Your kolony ' + resource.Name + ' usage ' + consumption + resource.UoM
-      + ' (' + ((consumption / production) * 100).toFixed(1) + '%) of total ' + production + resource.UoM;
-    this.overviewService.addNews(msg);
+    // msg = 'Your kolony ' + resource.Name + ' usage ' + consumption + resource.UoM
+    //   + ' (' + ((consumption / production) * 100).toFixed(1) + '%) of total ' + production + resource.UoM;
+    // this.overviewService.addNews(msg);
 
   }
 

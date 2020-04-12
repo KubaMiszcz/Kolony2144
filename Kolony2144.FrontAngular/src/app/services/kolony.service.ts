@@ -14,6 +14,7 @@ import { PowerService } from './power.service';
 import { TradeService } from './trade.service';
 import { WikiService } from './wiki.service';
 import { AssetService } from './asset.service';
+import { GenericTypesEnum } from '../models/enums/Types.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -23,15 +24,7 @@ export class KolonyService {
   get Name(): string { return this.kolony.Name; }
 
   constructor(
-    private assetService: AssetService,
-    private crewService: CrewService,
-    private financeService: FinanceService,
-    private gameService: GameService,
-    private overviewService: OverviewService,
-    private powerService: PowerService,
     private sharedService: SharedService,
-    private tradeService: TradeService,
-    private wikiService: WikiService,
   ) {
     let kolony = new Kolony();
     kolony.Name = 'KolonyUNO';
@@ -45,7 +38,7 @@ export class KolonyService {
   setInitialKolonyAssets(): IAsset[] {
     let res: IAsset[] = [];
     [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines]
-      .filter(a => a.Quantity > 0)
+      .filter(a => a.Quantity > 0 || a.Tags.includes(GenericTypesEnum.Property))
       .forEach(i => {
         res.push(new Asset().Deserialize(i));
       });

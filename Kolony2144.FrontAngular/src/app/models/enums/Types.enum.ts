@@ -9,7 +9,9 @@ export enum AssetTypesEnum {
 
 export enum GenericTypesEnum {
   NotSet = '',
-  Tradeable = 'Tradeable'
+  Tradeable = 'Tradeable',
+  Property = 'Property',
+  Volatile = 'Volatile',
 }
 
 

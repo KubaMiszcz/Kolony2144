@@ -18,15 +18,8 @@ export class CrewService {
   private crewList: IAsset[]
 
   constructor(
-    private assetService: AssetService,
-    private financeService: FinanceService,
-    private gameService: GameService,
-    private kolonyService: KolonyService,
-    private overviewService: OverviewService,
-    private powerService: PowerService,
     private sharedService: SharedService,
-    private tradeService: TradeService,
-    private wikiService: WikiService,
+    private assetService: AssetService,
   ) {
     this.crewList = this.assetService.getAssetsByType(AssetTypesEnum.Crew);
   }

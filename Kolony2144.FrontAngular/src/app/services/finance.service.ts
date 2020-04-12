@@ -18,15 +18,8 @@ export class FinanceService {
   private cash: IAsset;
 
   constructor(
-    private assetService: AssetService,
-    private crewService: CrewService,
-    private gameService: GameService,
-    private kolonyService: KolonyService,
-    private overviewService: OverviewService,
-    private powerService: PowerService,
     private sharedService: SharedService,
-    private tradeService: TradeService,
-    private wikiService: WikiService,
+    private assetService: AssetService,
   ) {
     this.cash = this.assetService.getAssetByName(ResourceName.Cash);
   }

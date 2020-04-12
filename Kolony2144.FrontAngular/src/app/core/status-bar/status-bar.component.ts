@@ -25,6 +25,7 @@ export class StatusBarComponent implements OnInit {
     this.Age = this.gameService.Age;
     this.Name = this.KolonyService.Name;
     this.Cash = this.financeService.getCashQuantity();
+
     this.energyProduction = this.powerService.getEnergyProduction();
     this.energyUsage = this.powerService.getEnergyUsage();
   }
@@ -40,8 +41,5 @@ export class StatusBarComponent implements OnInit {
     this.Cash = this.financeService.getCashQuantity();
     this.energyProduction = this.powerService.getEnergyProduction();
     this.energyUsage = this.powerService.getEnergyUsage();
-    // this.kolonyEnergyProduction = this.kolonyService.kolonyEnergyProduction;
-    // this.kolonyEnergyUsage = this.kolonyService.kolonyEnergyUsage;
-    // this.gameService.SaveGame();
   }
 }

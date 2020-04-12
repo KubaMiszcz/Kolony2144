@@ -45,15 +45,8 @@ export class TradeService {
 
 
   constructor(
-    private assetService: AssetService,
-    private crewService: CrewService,
-    private financeService: FinanceService,
-    private gameService: GameService,
-    private kolonyService: KolonyService,
-    private overviewService: OverviewService,
-    private powerService: PowerService,
     private sharedService: SharedService,
-    private wikiService: WikiService,
+    private assetService: AssetService,
   ) {
     // this.tradeableResources = assetService.getAllResources().filter(r => r.Tags.includes(GenericTypesEnum.Tradeable));
     this.tradeableResources = this.assetService.getNonVolatileAssets().filter(a => a.Type === AssetTypesEnum.Resource && a.SubType === ResourceTypesEnum.Production);

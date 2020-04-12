@@ -19,15 +19,9 @@ export class PowerService {
   private powerAssets: IAsset[];
 
   constructor(
-    private assetService: AssetService,
-    private crewService: CrewService,
-    private financeService: FinanceService,
-    private gameService: GameService,
-    private kolonyService: KolonyService,
-    private overviewService: OverviewService,
     private sharedService: SharedService,
-    private tradeService: TradeService,
-    private wikiService: WikiService, ) {
+    private assetService: AssetService,
+  ) {
   }
 
   getEnergyProduction(): number {
