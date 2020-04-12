@@ -1,7 +1,8 @@
-import { IFullEntity } from "./Entity";
+import { IFullEntity, IEntity, ISimplifiedResource } from "./Entity";
 import { UoMsEnum } from "./enums/UoMs.enum";
 import { ResourceName } from "./Resource";
 import { AssetTypesEnum, BuildingTypesEnum } from "./enums/Types.enum";
+import { IDeserializable } from "../core/interfaces/deserializable";
 
 export enum BuildingNames {
   Habitat = 'Habitat',
@@ -9,6 +10,28 @@ export enum BuildingNames {
   SolarPanel = 'Solar panel',
   Workshop = "Small factory",
   Factory = "Factory"
+}
+
+export interface IBuilding extends IEntity {
+  Quantity: number;
+  // HistoricalPrices: number[];
+}
+
+export class Building implements IBuilding, IDeserializable {
+  Quantity: number;
+  Name: string;
+  Size: number;
+  Type: AssetTypesEnum;
+  SubType: string;
+  CreationCost: ISimplifiedResource[];
+  MaintenanceCost: ISimplifiedResource[];
+  PassiveIncome: ISimplifiedResource[];
+  UoM: UoMsEnum;
+
+  Deserialize(input: any): this {
+    Object.assign(this, input);
+    return this;
+  }
 }
 
 export const AllBuildings: IFullEntity[] = [
