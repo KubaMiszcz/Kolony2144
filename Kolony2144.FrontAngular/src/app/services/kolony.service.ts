@@ -12,19 +12,17 @@ import { SharedService } from './shared.service';
 })
 export class KolonyService {
   private kolony: Kolony;
+  get Name(): string { return this.kolony.Name; }
 
   constructor(
     private sharedService: SharedService,
   ) {
     let kolony = new Kolony();
     kolony.Name = 'KolonyUNO';
-    kolony.Age = 100;
     kolony.Assets = this.prepareInitialAssets();
     this.kolony = kolony;
   }
 
-  getName(): string { return this.kolony.Name; }
-  getAge(): number { return Math.round(this.kolony.Age * 10) / 10; }
   getAllAssets(): IAsset[] { return this.kolony.Assets }
 
 
@@ -38,10 +36,6 @@ export class KolonyService {
         res.push(a);
       });
     return res;
-  }
-
-  setNextMonth() {
-    this.kolony.Age += 0.1;
   }
 
   getUoMByName(itemName: string) {

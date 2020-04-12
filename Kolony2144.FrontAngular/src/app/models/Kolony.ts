@@ -1,16 +1,15 @@
 import { IAsset } from "./Entity";
 import { ResourceName } from "./Resource";
 import { ResourceTypesEnum, AssetTypesEnum } from "./enums/Types.enum";
+import { IDeserializable } from "../core/interfaces/deserializable";
 
 export interface IKolony {
   Name: string;
-  Age: number;
   Assets: IAsset[]
 }
 
-export class Kolony implements IKolony {
+export class Kolony implements IKolony, IDeserializable {
   Name: string;
-  Age: number;
   Assets: IAsset[] = [];
   // get Cash(): number { return this.Assets.find(m => m.Name === ResourceName.Cash).Quantity; }
   // set Cash(value: number) { this.Assets.find(m => m.SubType === ResourceTypesEnum.Cash).Quantity = value; }
@@ -37,6 +36,11 @@ export class Kolony implements IKolony {
   // get PowerFacilities(): IAsset[] { return this.AllBuildings.filter(m => m.DetailedType === DetailedBuildingTypes.PowerSource); }
 
   // get RawDeposits(): IAsset[] { return this.AllAssetsArray.filter(m => m.MainType === AssetMainTypes.RawDeposit); }
+
+  Deserialize(input: any): this {
+    Object.assign(this, input);
+    return this;
+  }
 }
 
 

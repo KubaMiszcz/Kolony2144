@@ -14,6 +14,9 @@ import { TradeService } from './trade.service';
 })
 export class GameService {
   playerNotes = '';
+  private age = 100;
+  get Age(): number { return Math.round(this.age * 10) / 10; }
+  set Age(value: number) { this.age += 0.1; }
 
   // isTurnComputing = false;
   // AllAssets: IAsset[];
@@ -52,7 +55,8 @@ export class GameService {
 
 
       {
-        this.setNextMonth();
+        console.log('newMonthBegins');
+        this.Age += 0.1;
         this.overviewService.clearNews();
       }
 
@@ -102,17 +106,12 @@ export class GameService {
     }, 200);
   }
 
-  setNextMonth() {
-    console.log('setNextMonth');
-    this.kolonyService.setNextMonth();
-  }
-
   updateNews() {
     let resource: IAsset;
     let consumption;
     let production;
     let msg;
-    this.overviewService.addNews('Welcome in new month, current time is: ' + this.kolonyService.getAge() + ' of New Era');
+    this.overviewService.addNews('Welcome in new month, current time is: ' + this.Age + ' of New Era');
     this.overviewService.addNews('');
 
     // news about cash
