@@ -13,7 +13,6 @@ export interface IEntity {
   Name: string;
   Size: number;
   Type: AssetTypesEnum;
-  SubType: string;
   Tags: string[];
   CreationCost: ISimplifiedResource[];
   MaintenanceCost: ISimplifiedResource[];
@@ -33,7 +32,6 @@ export class Asset implements IAsset, IDeserializable {
   Name: string;
   Size: number;
   Type: AssetTypesEnum;
-  SubType: string;
   Tags: string[];
   Price: number;
   CreationCost: ISimplifiedResource[];

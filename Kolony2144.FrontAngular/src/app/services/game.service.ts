@@ -14,6 +14,7 @@ import { CrewService } from './crew.service';
 import { FinanceService } from './finance.service';
 import { SharedService } from './shared.service';
 import { WikiService } from './wiki.service';
+import { AssetTypesEnum, GenericTypesEnum } from '../models/enums/Types.enum';
 
 
 @Injectable({
@@ -24,11 +25,11 @@ export class GameService {
   private age = 100;
   get Age(): number { return Math.round(this.age * 10) / 10; }
   set Age(value: number) { this.age += 0.1; }
-  ALL_ASSETS_LIST: IAsset[];
+  ALL_ASSETS_LIST: IAsset[] = [];
 
 
   // isTurnComputing = false;
-  // AllAssets: IAsset[];
+  // AllAssets: IAsset[]=[];
 
   constructor(
     private router: Router,
@@ -41,8 +42,9 @@ export class GameService {
     private tradeService: TradeService,
     private wikiService: WikiService,
   ) {
-    this.nextTurn();
     this.ALL_ASSETS_LIST = this.getAllInitialGameAssets()
+    this.tradeService.tradeableResources = this.getTradeableResources();
+    this.nextTurn();
   }
 
   getAllInitialGameAssets(): IAsset[] {
@@ -51,7 +53,7 @@ export class GameService {
       .forEach(i => {
         res.push(new Asset().Deserialize(i));
       });
-    return
+    return res;
   }
 
 
@@ -174,7 +176,10 @@ export class GameService {
 
 
 
-
+  getTradeableResources(): IAsset[] {
+    let a = this.ALL_ASSETS_LIST.filter(a => a.Type === AssetTypesEnum.Resource && a.Tags.includes(GenericTypesEnum.Tradeable));
+    return a;
+  }
 
 
 }

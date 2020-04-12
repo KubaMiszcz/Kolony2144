@@ -42,7 +42,6 @@ export const AllBuildings: IFullEntity[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Size: 100,
     Type: AssetTypesEnum.Building,
-    SubType: BuildingTypesEnum.Maintenance,
     Tags: [BuildingTypesEnum.Maintenance],
     Price: 0,
     CreationCost: [
@@ -63,8 +62,7 @@ export const AllBuildings: IFullEntity[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Size: 1000,
     Type: AssetTypesEnum.Building,
-    SubType: BuildingTypesEnum.NotSet,
-    Tags: [BuildingTypesEnum.NotSet],
+    Tags: [],
     Price: 0,
     CreationCost: [
       { Name: ResourceName.Stone, Quantity: 10 },
@@ -84,7 +82,6 @@ export const AllBuildings: IFullEntity[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Size: 1000,
     Type: AssetTypesEnum.Building,
-    SubType: BuildingTypesEnum.PowerSource,
     Tags: [BuildingTypesEnum.PowerSource],
     Price: 0,
     CreationCost: [
@@ -104,7 +101,6 @@ export const AllBuildings: IFullEntity[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Size: 100,
     Type: AssetTypesEnum.Building,
-    SubType: BuildingTypesEnum.Production,
     Tags: [BuildingTypesEnum.Production],
     Price: 0,
     CreationCost: [
@@ -126,7 +122,6 @@ export const AllBuildings: IFullEntity[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Size: 200,
     Type: AssetTypesEnum.Building,
-    SubType: BuildingTypesEnum.Production,
     Tags: [BuildingTypesEnum.Production],
     Price: 0,
     CreationCost: [
@@ -149,20 +144,17 @@ export const AllBuildings: IFullEntity[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Size: 200,
     Type: AssetTypesEnum.Building,
-    SubType: BuildingTypesEnum.Production,
-    Tags: [BuildingTypesEnum.Production],
+    Tags: [],
     Price: 0,
     CreationCost: [
       { Name: ResourceName.Stone, Quantity: 30 },
       { Name: ResourceName.Steel, Quantity: 100 }
     ],
     MaintenanceCost: [
-      { Name: ResourceName.Cash, Quantity: 500 },
-      { Name: ResourceName.Energy, Quantity: 500 }
+      { Name: ResourceName.Cash, Quantity: 50 },
+      { Name: ResourceName.Energy, Quantity: 50 }
     ],
     PassiveIncome: [
-      { Name: ResourceName.BasicWorkUnit, Quantity: 100 },
-      { Name: ResourceName.AdvancedWorkUnit, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
     Quantity: 10

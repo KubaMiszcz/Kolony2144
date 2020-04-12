@@ -15,10 +15,26 @@ import { WikiService } from './wiki.service';
   providedIn: 'root'
 })
 export class TradeService {
-  tradeableResources: IAsset[];
+  tradeableResources: IAsset[] = [];
   isShipIncoming: boolean;
   shipVariationPercent: number = 20;
   priceVariationPercent: number = 20;
+
+
+  constructor(
+    private sharedService: SharedService,
+    private assetService: AssetService,
+  ) {
+
+  }
+
+  getTradeableCrew(): IAsset[] {
+    return this.assetService.getNonVolatileAssets().filter(a => a.Type === AssetTypesEnum.Crew);
+  }
+
+  getTradeableMachines(): IAsset[] {
+    return this.assetService.getNonVolatileAssets().filter(a => a.Type === AssetTypesEnum.Machine);
+  }
 
   prepareIncomingShip() {
     this.isShipIncoming = this.sharedService.getRandomBoolean();
@@ -35,28 +51,8 @@ export class TradeService {
         r.Quantity = 0;
       }
       //!! todo check if prices too low and variations cant change it
-      r.Price = r.Price * this.sharedService.getRandomFromRange(100 - this.priceVariationPercent, 100 + this.priceVariationPercent) / 100;
+      r.Price = Math.round(r.Price * this.sharedService.getRandomFromRange(100 - this.priceVariationPercent, 100 + this.priceVariationPercent) / 100);
     });
   }
 
-
-
-
-
-
-  constructor(
-    private sharedService: SharedService,
-    private assetService: AssetService,
-  ) {
-    // this.tradeableResources = assetService.getAllResources().filter(r => r.Tags.includes(GenericTypesEnum.Tradeable));
-    this.tradeableResources = this.assetService.getNonVolatileAssets().filter(a => a.Type === AssetTypesEnum.Resource && a.SubType === ResourceTypesEnum.Production);
-  }
-
-  getTradeableCrew(): IAsset[] {
-    return this.assetService.getNonVolatileAssets().filter(a => a.Type === AssetTypesEnum.Crew);
-  }
-
-  getTradeableMachines(): IAsset[] {
-    return this.assetService.getNonVolatileAssets().filter(a => a.Type === AssetTypesEnum.Machine);
-  }
 }

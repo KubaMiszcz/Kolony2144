@@ -15,9 +15,9 @@ import { AssetTypesEnum } from 'src/app/models/enums/Types.enum';
 })
 export class TradeOverviewComponent implements OnInit {
   playerNotes: string = '';
-  crewList: IAsset[];
-  resourcesList: IAsset[];
-  machinesList: IAsset[];
+  crewList: IAsset[] = [];
+  resourcesList: IAsset[] = [];
+  machinesList: IAsset[] = [];
   isShipIncoming: boolean;
 
   constructor(

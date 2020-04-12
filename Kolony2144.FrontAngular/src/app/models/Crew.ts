@@ -19,8 +19,7 @@ export const AllCivilianCrew: IFullEntity[] = [
     Description: 'just peon worker, chop chop he\'s on it, eats many', ImageUrl: '/assets/wiki-icons/crew-worker.png',
     Size: 1,
     Type: AssetTypesEnum.Crew,
-    SubType: CrewTypesEnum.Production,
-    Tags: [],
+    Tags: [CrewTypesEnum.Production],
     Price: 50,
     CreationCost: [],
     MaintenanceCost: [
@@ -38,8 +37,7 @@ export const AllCivilianCrew: IFullEntity[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/crew-technician.png',
     Size: 1,
     Type: AssetTypesEnum.Crew,
-    SubType: CrewTypesEnum.Production,
-    Tags: [],
+    Tags: [CrewTypesEnum.Production],
     Price: 100,
     CreationCost: [],
     MaintenanceCost: [

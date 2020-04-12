@@ -7,8 +7,8 @@ import { IAsset } from 'src/app/models/Entity';
   styleUrls: ['./ship-trade-panel.component.scss']
 })
 export class ShipTradePanelComponent implements OnInit {
-  @Input() resourcesList: IAsset[];
-  @Input() shipResourcesList: IAsset[];
+  @Input() resourcesList: IAsset[] = [];
+  @Input() shipResourcesList: IAsset[] = [];
 
   constructor() { }
 

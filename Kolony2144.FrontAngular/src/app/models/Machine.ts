@@ -13,8 +13,7 @@ export const AllMachines: IFullEntity[] = [
     Description: 'simple power coal powered generator', ImageUrl: '/assets/wiki-icons/machine.png',
     Size: 10,
     Type: AssetTypesEnum.Machine,
-    SubType: MachineTypesEnum.PowerSource,
-    Tags: [],
+    Tags: [MachineTypesEnum.PowerSource],
     Price: 5000,
     CreationCost: [
       { Name: ResourceName.Steel, Quantity: 5 }

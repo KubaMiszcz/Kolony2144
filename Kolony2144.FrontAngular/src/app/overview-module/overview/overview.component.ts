@@ -28,7 +28,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.news = this.overviewService.News;
     this.playerNotes = this.gameService.playerNotes;
-    this.resourcesList = this.fillResourcesList(this.assetService.getAssetsByType(AssetTypesEnum.Resource));
+    this.resourcesList = this.fillResourcesList(this.assetService.getAllResources());
   }
 
   ngOnDestroy(): void {
@@ -40,14 +40,6 @@ export class OverviewComponent implements OnInit, OnDestroy {
     ...resources.map(r => [r.Name, r.Quantity])
     ];
     return res;
-  }
-
-  toggle(element: HTMLElement) {
-    // console.log(element.classList);
-    // element.classList.toggle('collapsing');
-    // element.classList.toggle('show');
-    // // return element.classList.contains('show');
-
   }
 
 }
