@@ -30,16 +30,13 @@ export class AssetService {
     private tradeService: TradeService,
     private wikiService: WikiService,
   ) {
-    this.assetList = this.kolonyService.getAllAssets();
+    this.assetList = this.kolonyService.getAllKolonyAssets();
   }
 
-  getAllAssets(): IAsset[] {
-    return this.assetList;
-  }
 
-  getAllResources(): IAsset[] {
-    return this.assetList.filter(i => i.Type === AssetTypesEnum.Resource);
-  }
+
+
+
 
   getVolatileAssets(): IAsset[] {
     return this.assetList.filter(i => i.SubType === ResourceTypesEnum.Volatile);
@@ -49,6 +46,49 @@ export class AssetService {
     return this.assetList.filter(i => i.SubType !== ResourceTypesEnum.Volatile);
   }
 
+  ClearVolatileResources() {
+    this.getVolatileAssets().forEach(element => element.Quantity = 0);
+  }
+
+
+
+
+
+
+
+
+  updateInventoryDueToMaintenance() {
+    this.assetList.forEach(asset => {
+      asset.MaintenanceCost.forEach(consumedItem => {
+        this.assetList.find(a => a.Name == consumedItem.Name).Quantity -= (consumedItem.Quantity * asset.Quantity);
+      });
+    });
+  }
+
+  updateInventoryDueToProducingItems() {
+    this.assetList.forEach(asset => {
+      asset.PassiveIncome.forEach(producedItem => {
+        this.assetList.find(a => a.Name == producedItem.Name).Quantity += (producedItem.Quantity * asset.Quantity);
+      });
+    });
+  }
+
+
+
+  /////////////////////////
+  /////////////////////////
+  /////////////////////////
+  /////////////////////////
+  /////////////////////////
+
+  getAllAssets(): IAsset[] {
+    return this.assetList;
+  }
+
+  getAllResources(): IAsset[] {
+    return this.assetList.filter(i => i.Type === AssetTypesEnum.Resource);
+  }
+
   getAssetByName(name: string): IAsset {
     return this.assetList.find(i => i.Name === name);
   }
@@ -56,6 +96,9 @@ export class AssetService {
   getAssetsByType(type: AssetTypesEnum): IAsset[] {
     return this.assetList.filter(i => i.Type === type);
   }
+
+
+
 
 
 
@@ -153,6 +196,10 @@ export class AssetService {
 
 
 
-
+  getUoMByName(itemName: string) {
+    // return this.allWikiEntites.find(m => m.Name === item.Name).UoM;
+    console.log('getUoMForSimpleAsset..........................................');
+    return 'fixit';
+  }
 
 }

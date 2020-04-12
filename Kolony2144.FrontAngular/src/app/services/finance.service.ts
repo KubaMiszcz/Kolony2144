@@ -18,7 +18,7 @@ export class FinanceService {
   private cash: IAsset;
 
   constructor(
-    private AssetService: AssetService,
+    private assetService: AssetService,
     private crewService: CrewService,
     private gameService: GameService,
     private kolonyService: KolonyService,

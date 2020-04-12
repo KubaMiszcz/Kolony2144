@@ -18,7 +18,7 @@ export class CrewService {
   private crewList: IAsset[]
 
   constructor(
-    private AssetService: AssetService,
+    private assetService: AssetService,
     private financeService: FinanceService,
     private gameService: GameService,
     private kolonyService: KolonyService,

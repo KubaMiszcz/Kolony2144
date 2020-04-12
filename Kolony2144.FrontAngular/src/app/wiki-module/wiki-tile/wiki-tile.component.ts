@@ -1,3 +1,4 @@
+import { AssetService } from 'src/app/services/asset.service';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { SharedService } from './../../services/shared.service';
 import { IFullEntity, ISimplifiedResource } from './../../models/Entity';
@@ -17,6 +18,7 @@ export class WikiTileComponent implements OnInit {
 
   constructor(
     private kolonyService: KolonyService,
+    private assetService: AssetService,
   ) { }
 
   ngOnInit() {
@@ -33,7 +35,7 @@ export class WikiTileComponent implements OnInit {
       result.push({
         Name: v.Name,
         Quantity: v.Quantity,
-        UoM: this.kolonyService.getUoMByName(v.Name)
+        UoM: this.assetService.getUoMByName(v.Name)
       })
     );
     return result;

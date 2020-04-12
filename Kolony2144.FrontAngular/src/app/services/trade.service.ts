@@ -45,7 +45,7 @@ export class TradeService {
 
 
   constructor(
-    private AssetService: AssetService,
+    private assetService: AssetService,
     private crewService: CrewService,
     private financeService: FinanceService,
     private gameService: GameService,

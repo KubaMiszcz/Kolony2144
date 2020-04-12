@@ -32,7 +32,7 @@ export class GameService {
 
   constructor(
     private router: Router,
-    private AssetService: AssetService,
+    private assetService: AssetService,
     private crewService: CrewService,
     private financeService: FinanceService,
     private kolonyService: KolonyService,
@@ -43,10 +43,10 @@ export class GameService {
     private wikiService: WikiService,
   ) {
     this.nextTurn();
-    this.ALL_ASSETS_LIST = this.getAllInitialAssets()
+    this.ALL_ASSETS_LIST = this.getAllInitialGameAssets()
   }
 
-  getAllInitialAssets(): IAsset[] {
+  getAllInitialGameAssets(): IAsset[] {
     let res = [];
     [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines]
       .forEach(i => {
@@ -86,9 +86,9 @@ export class GameService {
 
       //##########################################
       //#REGION NEW TURN BEGINS
-      this.ClearVolatileResources();
-      this.updateInventoryDueToMaintenance(this.assetService.getAllAssets());
-      this.updateInventoryDueToProducingItems(this.assetService.getAllAssets());
+      this.assetService.ClearVolatileResources();
+      this.assetService.updateInventoryDueToMaintenance();
+      this.assetService.updateInventoryDueToProducingItems();
 
       this.tradeService.prepareIncomingShip();
       //   //zeroingVolatileProperties
@@ -172,25 +172,11 @@ export class GameService {
 
   }
 
-  ClearVolatileResources() {
-    this.assetService.getVolatileAssets().forEach(element => element.Quantity = 0);
-  }
 
-  updateInventoryDueToMaintenance(assetList: IAsset[]) {
-    assetList.forEach(asset => {
-      asset.MaintenanceCost.forEach(consumedItem => {
-        assetList.find(a => a.Name == consumedItem.Name).Quantity -= (consumedItem.Quantity * asset.Quantity);
-      });
-    });
-  }
 
-  updateInventoryDueToProducingItems(assetList: IAsset[]) {
-    assetList.forEach(asset => {
-      asset.PassiveIncome.forEach(producedItem => {
-        assetList.find(a => a.Name == producedItem.Name).Quantity += (producedItem.Quantity * asset.Quantity);
-      });
-    });
-  }
+
+
+
 
 }
 

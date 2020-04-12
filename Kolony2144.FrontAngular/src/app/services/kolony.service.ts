@@ -13,6 +13,7 @@ import { OverviewService } from './overview.service';
 import { PowerService } from './power.service';
 import { TradeService } from './trade.service';
 import { WikiService } from './wiki.service';
+import { AssetService } from './asset.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class KolonyService {
   get Name(): string { return this.kolony.Name; }
 
   constructor(
-    private AssetService: AssetService,
+    private assetService: AssetService,
     private crewService: CrewService,
     private financeService: FinanceService,
     private gameService: GameService,
@@ -30,33 +31,25 @@ export class KolonyService {
     private powerService: PowerService,
     private sharedService: SharedService,
     private tradeService: TradeService,
-    private wikiService: WikiService, ) {
+    private wikiService: WikiService,
+  ) {
     let kolony = new Kolony();
     kolony.Name = 'KolonyUNO';
-    kolony.Assets = this.prepareInitialAssets();
+    kolony.Assets = this.setInitialKolonyAssets();
     this.kolony = kolony;
   }
 
-  getAllAssets(): IAsset[] { return this.kolony.Assets }
+  getAllKolonyAssets(): IAsset[] { return this.kolony.Assets }
 
 
-  prepareInitialAssets(): IAsset[] {
+  setInitialKolonyAssets(): IAsset[] {
     let res: IAsset[] = [];
     [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines]
-      .filter(a => a.Quantity >= 0)
+      .filter(a => a.Quantity > 0)
       .forEach(i => {
-        let a = new Asset().Deserialize(i);
-        a.Quantity = i.Quantity;
-        res.push(a);
+        res.push(new Asset().Deserialize(i));
       });
     return res;
   }
-
-  getUoMByName(itemName: string) {
-    // return this.allWikiEntites.find(m => m.Name === item.Name).UoM;
-    console.log('getUoMForSimpleAsset..........................................');
-    return 'fixit';
-  }
-
 
 }
