@@ -31,10 +31,10 @@ export class KolonyService {
   prepareInitialAssets(): IAsset[] {
     let res: IAsset[] = [];
     [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines]
-      .filter(a => a.InitialQuantity >= 0)
+      .filter(a => a.Quantity >= 0)
       .forEach(i => {
         let a = new Asset().Deserialize(i);
-        a.Quantity = i.InitialQuantity;
+        a.Quantity = i.Quantity;
         res.push(a);
       });
     return res;

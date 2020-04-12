@@ -30,7 +30,7 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceName.LivingSpace, Quantity: 10 }
     ],
     UoM: UoMsEnum.pcs,
-    InitialQuantity: 10
+    Quantity: 10
   },
   {
     Name: BuildingNames.Warehouse,
@@ -50,7 +50,7 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceName.StorageSpace, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
-    InitialQuantity: 10
+    Quantity: 10
   },
   {
     Name: BuildingNames.SolarPanel,
@@ -69,7 +69,7 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceName.Energy, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
-    InitialQuantity: 10
+    Quantity: 10
   },
   {
     Name: BuildingNames.Workshop,
@@ -90,7 +90,7 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceName.BasicWorkUnit, Quantity: 100 }
     ],
     UoM: UoMsEnum.pcs,
-    InitialQuantity: 10
+    Quantity: 10
   },
   {
     Name: BuildingNames.Factory,
@@ -112,6 +112,6 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceName.AdvancedWorkUnit, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
-    InitialQuantity: 10
+    Quantity: 10
   }
 ]

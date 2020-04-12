@@ -25,6 +25,6 @@ export const AllMachines: IFullEntity[] = [
       { Name: ResourceName.Energy, Quantity: 100 }
     ],
     UoM: UoMsEnum.pcs,
-    InitialQuantity: 10
+    Quantity: 10
   }
 ]

@@ -27,7 +27,7 @@ export const AllResources: IFullEntity[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.SB,
-    InitialQuantity: 50000
+    Quantity: 50000
   },
   {
     Name: ResourceName.Energy,
@@ -40,7 +40,7 @@ export const AllResources: IFullEntity[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.kW,
-    InitialQuantity: 0
+    Quantity: 0
   },
   {
     Name: ResourceName.BasicWorkUnit,
@@ -53,7 +53,7 @@ export const AllResources: IFullEntity[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.WU,
-    InitialQuantity: 0
+    Quantity: 0
   },
   {
     Name: ResourceName.AdvancedWorkUnit,
@@ -66,7 +66,7 @@ export const AllResources: IFullEntity[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.WU,
-    InitialQuantity: 0
+    Quantity: 0
   },
   {
     Name: ResourceName.StorageSpace,
@@ -79,7 +79,7 @@ export const AllResources: IFullEntity[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.m2,
-    InitialQuantity: 0
+    Quantity: 0
   },
   {
     Name: ResourceName.LivingSpace,
@@ -92,7 +92,7 @@ export const AllResources: IFullEntity[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.m2,
-    InitialQuantity: 0
+    Quantity: 0
   },
   {
     Name: ResourceName.Food,
@@ -105,7 +105,7 @@ export const AllResources: IFullEntity[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.t,
-    InitialQuantity: 100
+    Quantity: 100
   },
   {
     Name: ResourceName.Stone,
@@ -118,7 +118,7 @@ export const AllResources: IFullEntity[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.t,
-    InitialQuantity: 1000
+    Quantity: 1000
   },
   {
     Name: ResourceName.Steel,
@@ -131,6 +131,6 @@ export const AllResources: IFullEntity[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.t,
-    InitialQuantity: 1000
+    Quantity: 1000
   }
 ]

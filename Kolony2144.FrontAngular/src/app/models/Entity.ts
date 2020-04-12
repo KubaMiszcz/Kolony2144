@@ -1,9 +1,11 @@
 import { UoMsEnum } from "./enums/UoMs.enum";
-import { AssetTypesEnum, ResourceTypesEnum, MachineTypesEnum } from "./enums/Types.enum";
+import { AssetTypesEnum } from "./enums/Types.enum";
 import { IDeserializable } from "../core/interfaces/deserializable";
 
-export interface IFullEntity extends IEntity, IWikiEntity {
-  InitialQuantity: number;
+export interface IFullEntity extends IEntity, IAsset, IBuilding {
+  Description: string;
+  ImageUrl: string;
+  InitialPrice: number;
 }
 
 export interface IEntity {
@@ -11,7 +13,6 @@ export interface IEntity {
   Size: number;
   Type: AssetTypesEnum;
   SubType: string;
-  InitialPrice: number;
   CreationCost: ISimplifiedResource[];
   MaintenanceCost: ISimplifiedResource[];
   PassiveIncome: ISimplifiedResource[];
@@ -19,8 +20,14 @@ export interface IEntity {
 }
 
 
+export interface IBuilding extends IEntity {
+  Quantity: number;
+  // HistoricalPrices: number[];
+}
+
 
 export interface IAsset extends IEntity {
+  InitialPrice: number;
   Quantity: number;
   // HistoricalPrices: number[];
 }
@@ -40,9 +47,6 @@ export class Asset implements IAsset, IDeserializable {
 
   Deserialize(input: any): this {
     Object.assign(this, input);
-    // this.CreationCost = input.CreationCost;
-    // this.MaintenanceCost = input.MaintenanceCost;
-    // this.PassiveIncome = input.PassiveIncome;
     return this;
   }
 }
@@ -71,10 +75,7 @@ export interface ISimplifiedResource {
 
 
 
-export interface IWikiEntity extends IEntity {
-  Description: string;
-  ImageUrl: string;
-}
+
 
 // export class Asset implements IAsset {
 //   Name: string;

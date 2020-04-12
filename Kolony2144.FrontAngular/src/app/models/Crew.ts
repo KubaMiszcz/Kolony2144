@@ -30,7 +30,7 @@ export const AllCivilianCrew: IFullEntity[] = [
       { Name: ResourceName.BasicWorkUnit, Quantity: 2 },
     ],
     UoM: UoMsEnum.pcs,
-    InitialQuantity: 20
+    Quantity: 20
   },
   {
     Name: CrewNames.Technician,
@@ -49,7 +49,7 @@ export const AllCivilianCrew: IFullEntity[] = [
       { Name: ResourceName.AdvancedWorkUnit, Quantity: 1 },
     ],
     UoM: UoMsEnum.pcs,
-    InitialQuantity: 5
+    Quantity: 5
   }
 ]
 
