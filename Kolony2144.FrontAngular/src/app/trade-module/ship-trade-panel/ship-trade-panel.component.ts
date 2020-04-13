@@ -15,12 +15,16 @@ export class ShipTradePanelComponent implements OnInit {
   ngOnInit() { }
 
   updateTableQty(row: ITradePanelData, val) {
-    // if (val === 'buymax') {
-    //   row.QtyOnTable += 100;
-    // } else if (val==='sellmax'){
-    //   row.QtyOnTable += 100;
-    // } else {
-    row.QtyOnTable += val;
-    // }
+    if (val === 'max') {
+      row.QtyOnTable = row.MaxQty;
+    } else if (val === 0) {
+      row.QtyOnTable = 0;
+    } else {
+      row.QtyOnTable += val;
+    }
   }
+
+
+
+
 }

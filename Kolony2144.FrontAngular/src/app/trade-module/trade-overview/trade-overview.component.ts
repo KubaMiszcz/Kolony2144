@@ -36,41 +36,33 @@ export class TradeOverviewComponent implements OnInit {
     this.isShipIncoming = this.tradeService.isShipIncoming;
     this.isShipIncoming = true;
     if (this.isShipIncoming) {
-      let stockResources = this.assetService.getAllResources().filter(r => r.Tags.includes(GenericTypesEnum.Tradeable));
       let shipResources = this.tradeService.tradeableResources.filter(r => r.Quantity !== 0);
-      shipResources.forEach(r => {
+      shipResources.forEach(shipAsset => {
+        let a = new Object() as ITradePanelData;
+        a.Name = shipAsset.Name;
+        a.QtyOnTable = 0;
+        a.ShipPrice = shipAsset.Price;
+        a.ShipQty = shipAsset.Quantity;
+        a.UoM = shipAsset.UoM;
 
-        this.tradeResourcesPanelValuesFIXNAME.push(
-          {
-            Name: r.Name,
-            StockQty: this.getStockQtyForShipAsset(r),
-            UoM: r.UoM,
-            AVGBuyPrice: this.getStockPriceForShipAsset(r),
-            QtyOnTable: 0,
-            ShipPrice: r.Price,
-            ShipQty: r.Quantity
-          }
-        );
+        let kolonyAsset = this.assetService.getAssetByName(shipAsset.Name);
+        if (!kolonyAsset) {
+          a.StockQty = 0;
+          a.AVGBuyPrice = shipAsset.Price;
+          a.MaxQty = Math.round(Math.abs(shipAsset.Quantity));
+        } else {
+          a.StockQty = kolonyAsset.Quantity;
+          a.AVGBuyPrice = kolonyAsset.Price;
+          a.MaxQty = Math.round(Math.min(kolonyAsset.Quantity, Math.abs(shipAsset.Quantity)));
+        }
+
+        this.tradeResourcesPanelValuesFIXNAME.push(a);
       });
 
       this.crewList = this.tradeService.getTradeableCrew();
       this.machinesList = this.tradeService.getTradeableMachines();
     }
   }
-
-  getStockPriceForShipAsset(asset: IAsset): number {
-    let kolonyAsset = this.assetService.getAssetByName(asset.Name);
-    return !!kolonyAsset ? kolonyAsset.Price : 0;
-  }
-
-
-  getStockQtyForShipAsset(asset: IAsset): number {
-    let kolonyAsset = this.assetService.getAssetByName(asset.Name);
-    return !!kolonyAsset ? kolonyAsset.Quantity : 0;
-  }
-
-
-
 
 
   ngOnDestroy(): void {
@@ -87,6 +79,7 @@ export interface ITradePanelData {
   QtyOnTable: number;
   ShipQty: number;
   ShipPrice: number;
+  MaxQty: number;
   // PriceChange
 }
 

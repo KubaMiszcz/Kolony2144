@@ -1,9 +1,16 @@
 @import "src/_global";
 
+.trade-input {
+  //fixit not percent
+  width: max-content;
+}
+
 .trade-btn {
   border-color: $dark-green;
   width: -webkit-fill-available;
-  max-width: fit-content;
+  min-width: -webkit-fill-available;
+  max-width: -webkit-fill-available;
+  height: 100%;
 }
 
 .trade-btn-group {
@@ -18,5 +25,19 @@ th,
 }
 
 .td-table {
-  width: 25%;
+  width: 21%;
+}
+
+
+// disable up/down arrows in input field
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
