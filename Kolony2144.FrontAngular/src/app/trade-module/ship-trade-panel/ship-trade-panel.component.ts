@@ -31,6 +31,10 @@ export class ShipTradePanelComponent implements OnInit {
 
   doTransaction(row: ITradePanelData) {
     //todo make update rowmaxqty on table
+    // update row values for kolony qty
+    // check sell if no stockqty
+    // check buy if no cash etc
+    //check buy if no shipqty
     //todo make other validation to not sell negative values etc
     row.ShipQty -= row.QtyOnTable;
     this.tradeService.DoTransaction(row.Type, row.Name, row.QtyOnTable, row.ShipPrice);

@@ -61,10 +61,10 @@ export class TradeService {
   DoTransaction(transactionType: TransactionTypeEnum, shipAssetName: string, QtyOnTable: number, price: number) {
     let asset = this.assetService.getAssetByName(shipAssetName);
     if (transactionType === TransactionTypeEnum.Buy) {
-      this.financeService.cash.Quantity -= (QtyOnTable * price);
+      this.financeService.Cash.Quantity -= (QtyOnTable * price);
       asset.Quantity += QtyOnTable;
     } else {
-      this.financeService.cash.Quantity += (QtyOnTable * price);
+      this.financeService.Cash.Quantity += (QtyOnTable * price);
       asset.Quantity -= QtyOnTable;
     }
   }

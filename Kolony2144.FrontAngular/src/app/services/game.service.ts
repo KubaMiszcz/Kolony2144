@@ -128,6 +128,7 @@ export class GameService {
       //   //   this.isTurnComputing.next(false);
 
       this.updateNews();
+      this.financeService.emitCurrentCash();
       this.router.navigate(['/start']);
     }, 200);
   }

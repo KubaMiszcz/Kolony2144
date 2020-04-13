@@ -10,18 +10,25 @@ import { PowerService } from './power.service';
 import { SharedService } from './shared.service';
 import { TradeService } from './trade.service';
 import { WikiService } from './wiki.service';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FinanceService {
   cash: IAsset;
+  get Cash() { return this.cash; };
+  set Cash(value) { this.cash = value; this.CashBS.next(value) };
+  CashBS = new Subject<IAsset>();
 
   constructor(
     private sharedService: SharedService,
     private assetService: AssetService,
   ) {
-    this.cash = this.assetService.getAssetByName(ResourceName.Cash);
+    this.Cash = this.assetService.getAssetByName(ResourceName.Cash);
   }
 
+  emitCurrentCash() {
+    this.CashBS.next(this.cash);
+  }
 }

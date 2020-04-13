@@ -94,7 +94,7 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceName.Energy, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 10
+    Quantity: 20
   },
   {
     Name: BuildingNames.Workshop,
@@ -157,6 +157,6 @@ export const AllBuildings: IFullEntity[] = [
     PassiveIncome: [
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 10
+    Quantity: 35
   }
 ]
