@@ -15,6 +15,7 @@ import { WikiService } from './wiki.service';
   providedIn: 'root'
 })
 export class TradeService {
+
   tradeableResources: IAsset[] = [];
   isShipIncoming: boolean;
   shipVariationPercent: number = 20;  //future  depend on shipsize?
@@ -24,6 +25,7 @@ export class TradeService {
   constructor(
     private sharedService: SharedService,
     private assetService: AssetService,
+    private financeService: FinanceService,
   ) {
 
   }
@@ -55,4 +57,22 @@ export class TradeService {
     });
   }
 
+
+  DoTransaction(transactionType: TransactionTypeEnum, shipAssetName: string, QtyOnTable: number, price: number) {
+    let asset = this.assetService.getAssetByName(shipAssetName);
+    if (transactionType === TransactionTypeEnum.Buy) {
+      this.financeService.cash.Quantity -= (QtyOnTable * price);
+      asset.Quantity += QtyOnTable;
+    } else {
+      this.financeService.cash.Quantity += (QtyOnTable * price);
+      asset.Quantity -= QtyOnTable;
+    }
+  }
+
+}
+
+
+export enum TransactionTypeEnum {
+  Buy,
+  Sell
 }

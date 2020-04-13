@@ -24,7 +24,7 @@ export class StatusBarComponent implements OnInit {
   ) {
     this.Age = this.gameService.Age;
     this.Name = this.KolonyService.Name;
-    this.Cash = this.financeService.getCashQuantity();
+    this.Cash = this.financeService.cash.Quantity;
 
     this.energyProduction = this.powerService.getEnergyProduction();
     this.energyUsage = this.powerService.getEnergyUsage();
@@ -38,7 +38,7 @@ export class StatusBarComponent implements OnInit {
     //TODO make it subject and subscribe
     this.Age = this.gameService.Age;
     this.Name = this.KolonyService.Name;
-    this.Cash = this.financeService.getCashQuantity();
+    this.Cash = this.financeService.cash.Quantity;
     this.energyProduction = this.powerService.getEnergyProduction();
     this.energyUsage = this.powerService.getEnergyUsage();
   }

@@ -15,20 +15,13 @@ import { WikiService } from './wiki.service';
   providedIn: 'root'
 })
 export class FinanceService {
-  private cash: IAsset;
+  cash: IAsset;
 
   constructor(
     private sharedService: SharedService,
     private assetService: AssetService,
   ) {
     this.cash = this.assetService.getAssetByName(ResourceName.Cash);
-  }
-
-  getCashQuantity(): number {
-    return this.getCash().Quantity;
-  }
-  getCash(): IAsset {
-    return this.cash;
   }
 
 }

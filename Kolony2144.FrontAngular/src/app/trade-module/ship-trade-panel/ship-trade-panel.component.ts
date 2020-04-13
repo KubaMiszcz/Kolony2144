@@ -1,6 +1,7 @@
 import { ITradePanelData } from './../trade-overview/trade-overview.component';
 import { Component, OnInit, Input } from '@angular/core';
 import { IAsset } from 'src/app/models/Entity';
+import { TradeService, TransactionTypeEnum } from './../../services/trade.service';
 
 @Component({
   selector: 'app-ship-trade-panel',
@@ -9,8 +10,12 @@ import { IAsset } from 'src/app/models/Entity';
 })
 export class ShipTradePanelComponent implements OnInit {
   @Input() tradePanelData: ITradePanelData[] = [];
+  typeBuy = TransactionTypeEnum.Buy;
+  typeSell = TransactionTypeEnum.Sell;
 
-  constructor() { }
+  constructor(
+    private tradeService: TradeService,
+  ) { }
 
   ngOnInit() { }
 
@@ -24,7 +29,11 @@ export class ShipTradePanelComponent implements OnInit {
     }
   }
 
-
-
+  doTransaction(row: ITradePanelData) {
+    //todo make update rowmaxqty on table
+    //todo make other validation to not sell negative values etc
+    row.ShipQty -= row.QtyOnTable;
+    this.tradeService.DoTransaction(row.Type, row.Name, row.QtyOnTable, row.ShipPrice);
+  }
 
 }

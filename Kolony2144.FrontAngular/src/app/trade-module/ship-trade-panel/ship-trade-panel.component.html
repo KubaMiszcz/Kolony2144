@@ -65,10 +65,10 @@
 
               <div class="mx-1">
                 <!-- <div class="trade-btn-group"> -->
-                <button *ngIf="row.ShipQty<0" type="button" class="btn btn-sm btn-success trade-btn">
+                <button *ngIf="row.Type===typeSell" type="button" class="btn btn-sm btn-success trade-btn" (click)="doTransaction(row)">
                   <i class="fas fa-chevron-right    "></i> Sell <i class="fas fa-chevron-right    "></i>
                 </button>
-                <button *ngIf="row.ShipQty>0" type="button" class="btn btn-sm btn-success trade-btn">
+                <button *ngIf="row.Type===typeBuy" type="button" class="btn btn-sm btn-success trade-btn" (click)="doTransaction(row)">
                   <i class="fas fa-chevron-left    "></i> Buy <i class="fas fa-chevron-left    "></i>
                 </button>
                 <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
@@ -81,7 +81,10 @@
 
 
 
-        <td scope="row" class=""> {{row.ShipQty}}{{row.UoM}} </td>
+        <td scope="row" class="">
+          <i *ngIf="row.Type===typeBuy" class="fas fa-chevron-circle-left    "></i>
+          <i *ngIf="row.Type===typeSell" class="fas fa-chevron-circle-right    "></i>
+          {{row.ShipQty}}{{row.UoM}} </td>
         <td scope="row" class=""> {{row.ShipPrice}} </td>
         <td scope="row" class=" ">
           <span>1M +12 (2.5%) </span><br>

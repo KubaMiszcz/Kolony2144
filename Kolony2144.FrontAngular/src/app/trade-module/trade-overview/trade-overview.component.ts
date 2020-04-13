@@ -1,6 +1,6 @@
 import { GenericTypesEnum } from './../../models/enums/Types.enum';
 import { BuildingNames } from './../../models/Building';
-import { TradeService } from './../../services/trade.service';
+import { TradeService, TransactionTypeEnum } from './../../services/trade.service';
 import { IAsset } from 'src/app/models/Entity';
 import { Component, OnInit } from '@angular/core';
 import { KolonyService } from 'src/app/services/kolony.service';
@@ -42,8 +42,9 @@ export class TradeOverviewComponent implements OnInit {
         a.Name = shipAsset.Name;
         a.QtyOnTable = 0;
         a.ShipPrice = shipAsset.Price;
-        a.ShipQty = shipAsset.Quantity;
+        a.ShipQty = Math.abs(shipAsset.Quantity);
         a.UoM = shipAsset.UoM;
+        a.Type = shipAsset.Quantity > 0 ? TransactionTypeEnum.Buy : TransactionTypeEnum.Sell;
 
         let kolonyAsset = this.assetService.getAssetByName(shipAsset.Name);
         if (!kolonyAsset) {
@@ -80,6 +81,9 @@ export interface ITradePanelData {
   ShipQty: number;
   ShipPrice: number;
   MaxQty: number;
+  Type: TransactionTypeEnum
   // PriceChange
 }
+
+
 
