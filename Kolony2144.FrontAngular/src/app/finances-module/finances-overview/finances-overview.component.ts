@@ -22,24 +22,24 @@ export class FinancesOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.assetList = this.fillAssetList(this.assetService.getAssetsByConsumedAssetName(ResourceName.Cash))
+    this.assetList = this.fillAssetList(this.assetService.getAssetsByConsumedAssetName(ResourceName.Cash));
   }
 
   fillAssetList(resources: IAsset[]): any[] {
-    let res: any[] = [
+    const res: any[] = [
       ['name', 'per unit', 'qty', 'total']
     ];
 
     resources.forEach(r => {
-      let perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.MaintenanceCost, ResourceName.Cash).Quantity;
+      const perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.MaintenanceCost, ResourceName.Cash).Quantity;
       res.push([
         r.Name,
         perUnitUsage,
         r.Quantity,
         r.Quantity * perUnitUsage
       ]);
-    })
-    res.push(['', '', 'Total', this.sharedService.sumColumnOftable(res.slice(1), 3)])
+    });
+    res.push(['', '', 'Total', this.sharedService.sumColumnOftable(res.slice(1), 3)]);
     return res;
   }
 

@@ -16,9 +16,9 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class FinanceService {
-  cash: IAsset;
-  get Cash() { return this.cash; };
-  set Cash(value) { this.cash = value; this.CashBS.next(value) };
+  private cash: IAsset;
+  get Cash() { return this.cash; }
+  set Cash(value) { this.cash = value; this.CashBS.next(value); }
   CashBS = new Subject<IAsset>();
 
   constructor(
@@ -28,6 +28,7 @@ export class FinanceService {
     this.Cash = this.assetService.getAssetByName(ResourceName.Cash);
   }
 
+  // todo remove it
   emitCurrentCash() {
     this.CashBS.next(this.cash);
   }

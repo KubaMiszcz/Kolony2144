@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Kolony } from '../models/Kolony';
+import { Kolony, IKolony } from '../models/Kolony';
 import { AllResources, ResourceName as ResourceName } from '../models/Resource';
 import { IAsset, Asset } from '../models/Entity';
 import { AllCivilianCrew } from '../models/Crew';
@@ -20,23 +20,24 @@ import { GenericTypesEnum } from '../models/enums/Types.enum';
   providedIn: 'root'
 })
 export class KolonyService {
+
   private kolony: Kolony;
   get Name(): string { return this.kolony.Name; }
 
   constructor(
     private sharedService: SharedService,
   ) {
-    let kolony = new Kolony();
+    const kolony = new Kolony();
     kolony.Name = 'KolonyUNO';
     kolony.Assets = this.setInitialKolonyAssets();
     this.kolony = kolony;
   }
 
-  getAllKolonyAssets(): IAsset[] { return this.kolony.Assets }
+  getAllKolonyAssets(): IAsset[] { return this.kolony.Assets; }
 
 
   setInitialKolonyAssets(): IAsset[] {
-    let res: IAsset[] = [];
+    const res: IAsset[] = [];
     [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines]
       .filter(a => a.Quantity > 0 || a.Tags.includes(GenericTypesEnum.Property))
       .forEach(i => {
@@ -44,5 +45,14 @@ export class KolonyService {
       });
     return res;
   }
+
+  getKolonyState(): IKolony {
+    return this.kolony;
+  }
+
+  setKolonyState(kolony: Kolony) {
+    // this.kolony = kolony as Kolony;
+  }
+
 
 }

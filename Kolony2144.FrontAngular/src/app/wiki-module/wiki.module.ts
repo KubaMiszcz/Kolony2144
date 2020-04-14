@@ -14,10 +14,6 @@ import { WikiTileComponent } from './wiki-tile/wiki-tile.component';
   imports: [
     CommonModule,
     SharedModule
-  ],
-  exports: [
-    WikiComponent,
-    WikiTileComponent
   ]
 })
 export class WikiModule { }

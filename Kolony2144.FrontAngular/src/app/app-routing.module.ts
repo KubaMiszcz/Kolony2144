@@ -8,10 +8,11 @@ import { WikiComponent } from './wiki-module/wiki/wiki.component';
 import { AppSpinnerComponent } from './shared/spinner/spinner.component';
 import { BuildingsComponent } from './buildings-module/buildings/buildings.component';
 import { FinancesOverviewComponent } from './finances-module/finances-overview/finances-overview.component';
+import { DevTabComponent } from './core/dev-tab/dev-tab.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },
-  { path: 'start', component: TradeOverviewComponent },
+  { path: 'start', component: DevTabComponent },
   { path: 'trade', component: TradeOverviewComponent },
   { path: 'overview', component: OverviewComponent },
   { path: 'finances', component: FinancesOverviewComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'power', component: PowerOverviewComponent },
   { path: 'buildings', component: BuildingsComponent },
   { path: 'wiki', component: WikiComponent },
+  { path: 'devtab', component: DevTabComponent },
   { path: 'loading-screen', component: AppSpinnerComponent }
 ];
 

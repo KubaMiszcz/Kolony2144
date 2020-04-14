@@ -11,9 +11,6 @@ import { BuildingsComponent } from './buildings/buildings.component';
   imports: [
     CommonModule,
     SharedModule
-  ],
-  exports: [
-    BuildingsComponent
   ]
 })
 export class BuildingsModule { }

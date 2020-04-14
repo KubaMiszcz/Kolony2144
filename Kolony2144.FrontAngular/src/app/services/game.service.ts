@@ -15,6 +15,8 @@ import { FinanceService } from './finance.service';
 import { SharedService } from './shared.service';
 import { WikiService } from './wiki.service';
 import { AssetTypesEnum, GenericTypesEnum } from '../models/enums/Types.enum';
+import { IKolony } from '../models/Kolony';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -22,7 +24,13 @@ import { AssetTypesEnum, GenericTypesEnum } from '../models/enums/Types.enum';
 })
 export class GameService {
 
-  playerNotes = '';
+  private playerNotes = '';
+  get PlayerNotes() { return this.playerNotes; }
+  set PlayerNotes(value) { this.playerNotes = value; this.PlayerNotesBS.next(value); }
+  PlayerNotesBS = new BehaviorSubject<string>('');
+
+
+
   private age = 100;
   get Age(): number { return Math.round(this.age * 10) / 10; }
   set Age(value: number) { this.age += 0.1; }
@@ -35,6 +43,7 @@ export class GameService {
   constructor(
     private router: Router,
     private sharedService: SharedService,
+    private kolonyService: KolonyService,
     private assetService: AssetService,
     private crewService: CrewService,
     private financeService: FinanceService,
@@ -43,14 +52,14 @@ export class GameService {
     private tradeService: TradeService,
     private wikiService: WikiService,
   ) {
-    this.playerNotes = sessionStorage.getItem('savedState')
-    this.ALL_ASSETS_LIST = this.getAllInitialGameAssets()
+    this.playerNotes = sessionStorage.getItem('savedState');
+    this.ALL_ASSETS_LIST = this.getAllInitialGameAssets();
     this.tradeService.tradeableResources = this.getTradeableResources();
     this.nextTurn();
   }
 
   getAllInitialGameAssets(): IAsset[] {
-    let res = [];
+    const res = [];
     [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines]
       .forEach(i => {
         res.push(new Asset().Deserialize(i));
@@ -66,18 +75,18 @@ export class GameService {
     this.router.navigate(['/loading-screen']);
     setTimeout(() => {
 
-      //##########################################
+      // ##########################################
       //#region TURN ENDS
-      //update inventory after production
+      // update inventory after production
 
-      //update production queue, and assets array
+      // update production queue, and assets array
       // this.productionService.produceAssetsInQueue(production);
 
-      //update construction queue, and assets array
+      // update construction queue, and assets array
       // this.productionService.produceAssetsInQueue();
 
-      //#ENDREGION
-      //##########################################
+      // #ENDREGION
+      // ##########################################
 
 
       {
@@ -87,8 +96,8 @@ export class GameService {
       }
 
 
-      //##########################################
-      //#REGION NEW TURN BEGINS
+      // ##########################################
+      // #REGION NEW TURN BEGINS
       this.assetService.ClearVolatileResources();
       this.assetService.updateInventoryDueToMaintenance();
       this.assetService.updateInventoryDueToProducingItems();
@@ -166,7 +175,7 @@ export class GameService {
     consumption = this.powerService.getEnergyUsage();
     production = this.powerService.getEnergyProduction();
     if (consumption > production) {
-      msg = '!!! ' + (((consumption / production) * 100) - 100).toFixed(1) + '%  OVERLOADED !!!'
+      msg = '!!! ' + (((consumption / production) * 100) - 100).toFixed(1) + '%  OVERLOADED !!!';
       this.overviewService.addNews(msg);
     }
     // Your kolony Energy usage 6200kW is 120 % of total production 6000kW
@@ -180,15 +189,32 @@ export class GameService {
 
 
   getTradeableResources(): IAsset[] {
-    let a = this.ALL_ASSETS_LIST.filter(a => a.Type === AssetTypesEnum.Resource && a.Tags.includes(GenericTypesEnum.Tradeable));
-    return a;
+    return this.ALL_ASSETS_LIST.filter(a => a.Type === AssetTypesEnum.Resource && a.Tags.includes(GenericTypesEnum.Tradeable));
   }
 
   saveGame() {
-    //fixit save all game and read it on init components withplayer notes
-    localStorage.setItem('savedState', this.playerNotes);
+    let gameState = new Object() as IGameState;
+    gameState = {
+      Age: this.age,
+      playerNotes: this.playerNotes,
+      kolony: this.kolonyService.getKolonyState()
+    };
+    localStorage.setItem('savedGameState', JSON.stringify(gameState));
   }
 
+  loadGame() {
+    const gameState: IGameState = JSON.parse(localStorage.getItem('savedGameState'));
+    this.Age = gameState.Age;
+    this.PlayerNotes = gameState.playerNotes;
+    // this.kolonyService.setKolonyState(gameState.kolony);
+  }
+
+}
+
+interface IGameState {
+  Age: number;
+  playerNotes: string;
+  kolony: IKolony;
 }
 
 

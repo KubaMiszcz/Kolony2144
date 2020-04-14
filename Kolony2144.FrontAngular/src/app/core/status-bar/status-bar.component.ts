@@ -1,4 +1,4 @@
-import { IAsset } from 'src/app/models/Entity';
+import { IAsset, Asset } from 'src/app/models/Entity';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { GameService } from 'src/app/services/game.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,18 +13,18 @@ import { FinanceService } from 'src/app/services/finance.service';
 export class StatusBarComponent implements OnInit {
   Age: number;
   Name: string;
-  Cash: IAsset;
+  Cash: IAsset = new Asset();
   energyProduction: number;
   energyUsage: number;
 
   constructor(
-    private KolonyService: KolonyService,
+    private kolonyService: KolonyService,
     private powerService: PowerService,
     private gameService: GameService,
     private financeService: FinanceService
   ) {
     this.Age = this.gameService.Age;
-    this.Name = this.KolonyService.Name;
+    this.Name = this.kolonyService.Name;
 
     this.financeService.CashBS.subscribe(c => this.Cash = c);
 
@@ -37,9 +37,9 @@ export class StatusBarComponent implements OnInit {
 
   nextTurn() {
     this.gameService.nextTurn();
-    //TODO make it subject and subscribe
+    // TODO make it subject and subscribe
     this.Age = this.gameService.Age;
-    this.Name = this.KolonyService.Name;
+    this.Name = this.kolonyService.Name;
     this.energyProduction = this.powerService.getEnergyProduction();
     this.energyUsage = this.powerService.getEnergyUsage();
   }

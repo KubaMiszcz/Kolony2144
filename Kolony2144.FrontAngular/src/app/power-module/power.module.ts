@@ -10,9 +10,6 @@ import { PowerOverviewComponent } from './power-overview/power-overview.componen
   imports: [
     CommonModule,
     SharedModule
-  ],
-  exports: [
-    PowerOverviewComponent
   ]
 })
 export class PowerModule { }

@@ -12,9 +12,6 @@ import { FinancesOverviewComponent } from './finances-overview/finances-overview
   imports: [
     CommonModule,
     SharedModule
-  ],
-  exports: [
-    FinancesOverviewComponent
   ]
 })
 export class FinancesModule { }

@@ -2,7 +2,7 @@ import { GenericTypesEnum } from './../../models/enums/Types.enum';
 import { BuildingNames } from './../../models/Building';
 import { TradeService, TransactionTypeEnum } from './../../services/trade.service';
 import { IAsset } from 'src/app/models/Entity';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { OverviewService } from 'src/app/services/overview.service';
 import { GameService } from 'src/app/services/game.service';
@@ -16,8 +16,8 @@ import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
   templateUrl: './trade-overview.component.html',
   styleUrls: ['./trade-overview.component.scss']
 })
-export class TradeOverviewComponent implements OnInit {
-  playerNotes: string = '';
+export class TradeOverviewComponent implements OnInit, OnDestroy {
+  playerNotes = '';
   crewList: IAsset[] = [];
   tradeResourcesPanelValuesFIXNAME: ITradePanelData[] = [];
   machinesList: IAsset[] = [];
@@ -32,13 +32,13 @@ export class TradeOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.playerNotes = this.gameService.playerNotes;
+    this.gameService.PlayerNotesBS.subscribe(c => this.playerNotes = c);
     this.isShipIncoming = this.tradeService.isShipIncoming;
     this.isShipIncoming = true;
     if (this.isShipIncoming) {
-      let shipResources = this.tradeService.tradeableResources.filter(r => r.Quantity !== 0);
+      const shipResources = this.tradeService.tradeableResources.filter(r => r.Quantity !== 0);
       shipResources.forEach(shipAsset => {
-        let a = new Object() as ITradePanelData;
+        const a = new Object() as ITradePanelData;
         a.Name = shipAsset.Name;
         a.QtyOnTable = 0;
         a.ShipPrice = shipAsset.Price;
@@ -46,7 +46,7 @@ export class TradeOverviewComponent implements OnInit {
         a.UoM = shipAsset.UoM;
         a.Type = shipAsset.Quantity > 0 ? TransactionTypeEnum.Buy : TransactionTypeEnum.Sell;
 
-        let kolonyAsset = this.assetService.getAssetByName(shipAsset.Name);
+        const kolonyAsset = this.assetService.getAssetByName(shipAsset.Name);
         if (!kolonyAsset) {
           a.StockQty = 0;
           a.AVGBuyPrice = shipAsset.Price;
@@ -67,8 +67,7 @@ export class TradeOverviewComponent implements OnInit {
 
 
   ngOnDestroy(): void {
-    this.gameService.playerNotes = this.playerNotes;
-    this.gameService.saveGame();
+    this.gameService.PlayerNotes = this.playerNotes;
   }
 }
 
@@ -81,7 +80,7 @@ export interface ITradePanelData {
   ShipQty: number;
   ShipPrice: number;
   MaxQty: number;
-  Type: TransactionTypeEnum
+  Type: TransactionTypeEnum;
   // PriceChange
 }
 

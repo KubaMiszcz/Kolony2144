@@ -14,7 +14,7 @@ import { AssetService } from 'src/app/services/asset.service';
 })
 export class OverviewComponent implements OnInit, OnDestroy {
   news: string[] = [];
-  playerNotes: string = '';
+  playerNotes = '';
   resourcesList: any[];
 
   constructor(
@@ -27,17 +27,16 @@ export class OverviewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.news = this.overviewService.News;
-    this.playerNotes = this.gameService.playerNotes;
+    this.gameService.PlayerNotesBS.subscribe(c => this.playerNotes = c);
     this.resourcesList = this.fillResourcesList(this.assetService.getAllResources());
   }
 
   ngOnDestroy(): void {
-    this.gameService.playerNotes = this.playerNotes;
-    this.gameService.saveGame();
+    this.gameService.PlayerNotes = this.playerNotes;
   }
 
   fillResourcesList(resources: IAsset[]): any[] {
-    let res = [['name', 'qty'],
+    const res = [['name', 'qty'],
     ...resources.map(r => [r.Name, r.Quantity])
     ];
     return res;
