@@ -1,11 +1,11 @@
-import { IAsset } from "./Entity";
-import { ResourceName } from "./Resource";
-import { ResourceTypesEnum, AssetTypesEnum } from "./enums/Types.enum";
-import { IDeserializable } from "../core/interfaces/deserializable";
+import { IAsset } from './Entity';
+import { ResourceName } from './Resource';
+import { ResourceTypesEnum, AssetTypesEnum } from './enums/Types.enum';
+import { IDeserializable } from '../core/interfaces/deserializable';
 
 export interface IKolony {
   Name: string;
-  Assets: IAsset[]
+  Assets: IAsset[];
 }
 
 export class Kolony implements IKolony, IDeserializable {

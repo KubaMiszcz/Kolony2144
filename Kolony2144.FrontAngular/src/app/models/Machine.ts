@@ -1,7 +1,7 @@
-import { IFullEntity } from "./Entity";
-import { AssetTypesEnum, MachineTypesEnum } from "./enums/Types.enum";
-import { ResourceName } from "./Resource";
-import { UoMsEnum } from "./enums/UoMs.enum";
+import { IFullEntity } from './Entity';
+import { AssetTypesEnum, MachineTypesEnum } from './enums/Types.enum';
+import { ResourceName } from './Resource';
+import { UoMsEnum } from './enums/UoMs.enum';
 
 export enum MachinesNames {
   PowerGenerator = 'Power Generator',
@@ -27,4 +27,4 @@ export const AllMachines: IFullEntity[] = [
     UoM: UoMsEnum.pcs,
     Quantity: 21
   }
-]
+];

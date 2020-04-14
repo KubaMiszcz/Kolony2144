@@ -1,7 +1,25 @@
-import { ITradePanelData } from './../trade-overview/trade-overview.component';
-import { Component, OnInit, Input } from '@angular/core';
+import { SharedService } from './../../services/shared.service';
+import { GameService } from './../../services/game.service';
+import { FinanceService } from './../../services/finance.service';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { IAsset } from 'src/app/models/Entity';
 import { TradeService, TransactionTypeEnum } from './../../services/trade.service';
+import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
+import { AssetService } from 'src/app/services/asset.service';
+
+export interface ITradePanelData {
+  Name: string;
+  KolonyQty: number;
+  UoM: UoMsEnum;
+  AVGBuyPrice: number;
+  QtyOnTable: number;
+  ShipQty: number;
+  ShipPrice: number;
+  MaxQty: number;
+  Type: TransactionTypeEnum;
+  // PriceChange
+}
+
 
 @Component({
   selector: 'app-ship-trade-panel',
@@ -12,32 +30,74 @@ export class ShipTradePanelComponent implements OnInit {
   @Input() tradePanelData: ITradePanelData[] = [];
   typeBuy = TransactionTypeEnum.Buy;
   typeSell = TransactionTypeEnum.Sell;
+  // @ViewChild('tableQtyRef') tableQty: ElementRef;
 
   constructor(
+    private sharedService: SharedService,
     private tradeService: TradeService,
+    private assetService: AssetService,
+    private gameService: GameService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.tradePanelData.forEach(row => this.updateMaxTableQty(row));
+  }
 
-  updateTableQty(row: ITradePanelData, val) {
-    if (val === 'max') {
-      row.QtyOnTable = row.MaxQty;
-    } else if (val === 0) {
-      row.QtyOnTable = 0;
+  updateMaxTableQty(row: ITradePanelData) {
+    if (row.Type === TransactionTypeEnum.Buy) {
+      row.MaxQty = Math.floor(row.ShipQty);
     } else {
-      row.QtyOnTable += val;
+      row.MaxQty = Math.floor(Math.min(row.KolonyQty, row.ShipQty));
     }
   }
 
+  updateOnTableQty(row: ITradePanelData, val) {
+    if (val === 0) {
+      row.QtyOnTable = 0;
+      return;
+    } else {
+      row.QtyOnTable += val;
+      this.getCheckedMinMaxQtyOnTable(row);
+    }
+  }
+
+  getCheckedMinMaxQtyOnTable(row: ITradePanelData) {
+    if (row.QtyOnTable > row.MaxQty) {
+      row.QtyOnTable = row.MaxQty;
+    } else if (row.QtyOnTable < 0) {
+      row.QtyOnTable = 0;
+    }
+    return row.QtyOnTable;
+  }
+
   doTransaction(row: ITradePanelData) {
-    //todo make update rowmaxqty on table
-    // update row values for kolony qty
-    // check sell if no stockqty
-    // check buy if no cash etc
-    //check buy if no shipqty
-    //todo make other validation to not sell negative values etc
+    // todo check buy if no cash etc
+    row.QtyOnTable = this.getCheckedMinMaxQtyOnTable(row);
     row.ShipQty -= row.QtyOnTable;
-    this.tradeService.DoTransaction(row.Type, row.Name, row.QtyOnTable, row.ShipPrice);
+
+    // add if doesnt exist in kolony
+    let asset = this.assetService.getAssetByName(row.Name);
+    if (!asset) {
+      // todo create new isnatnce of all assets list in trade service
+      const newAsset = this.gameService.getAssetByName(row.Name); // get from all
+      asset = this.assetService.addNewAssetToInventory(newAsset); // get newly added from kolony assets
+    }
+
+    let factor = 0;
+    if (row.Type === TransactionTypeEnum.Buy) {
+      factor = 1;
+    } else {
+      factor = -1;
+    }
+
+    row.KolonyQty += (factor * row.QtyOnTable);
+    this.tradeService.proceedTransaction(row.Type, asset, (factor * row.QtyOnTable), row.ShipPrice);
+    row.AVGBuyPrice = this.assetService.getAssetByName(row.Name).Price;
+
+    this.updateMaxTableQty(row);
+    // this.tableQty.nativeElement.value = 0;
   }
 
 }
+
+

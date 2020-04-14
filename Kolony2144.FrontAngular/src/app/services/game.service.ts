@@ -67,7 +67,9 @@ export class GameService {
     return res;
   }
 
-
+  getAssetByName(name: string): IAsset {
+    return this.ALL_ASSETS_LIST.find(i => i.Name === name);
+  }
 
 
   nextTurn() {

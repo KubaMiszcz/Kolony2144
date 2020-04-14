@@ -1,7 +1,7 @@
-import { IFullEntity, IAsset } from "./Entity";
-import { UoMsEnum } from "./enums/UoMs.enum";
-import { ResourceName } from "./Resource";
-import { AssetTypesEnum, CrewTypesEnum, BuildingTypesEnum } from "./enums/Types.enum";
+import { IFullEntity, IAsset } from './Entity';
+import { UoMsEnum } from './enums/UoMs.enum';
+import { ResourceName } from './Resource';
+import { AssetTypesEnum, CrewTypesEnum, BuildingTypesEnum } from './enums/Types.enum';
 
 export enum CrewNames {
   Worker = 'Worker',
@@ -51,7 +51,7 @@ export const AllCivilianCrew: IFullEntity[] = [
     UoM: UoMsEnum.pcs,
     Quantity: 5
   }
-]
+];
 
 
 

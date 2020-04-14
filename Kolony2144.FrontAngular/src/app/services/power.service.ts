@@ -17,7 +17,7 @@ import { WikiService } from './wiki.service';
 })
 export class PowerService {
   private powerAssets: IAsset[] = [];
-
+  // todo add brownou and blackout when overload
   constructor(
     private sharedService: SharedService,
     private assetService: AssetService,
@@ -25,10 +25,10 @@ export class PowerService {
   }
 
   getEnergyProduction(): number {
-    return this.assetService.getAssetProductionQtyByName(ResourceName.Energy)
+    return this.assetService.getAssetProductionQtyByName(ResourceName.Energy);
   }
 
   getEnergyUsage(): number {
-    return this.assetService.getAssetConsumptionQtyByName(ResourceName.Energy)
+    return this.assetService.getAssetConsumptionQtyByName(ResourceName.Energy);
   }
 }

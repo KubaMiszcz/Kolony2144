@@ -27,6 +27,7 @@ export class DevTabComponent implements OnInit, OnDestroy {
   }
 
   saveGame() {
+    this.gameService.PlayerNotes = this.playerNotes;
     this.gameService.saveGame();
   }
 

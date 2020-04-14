@@ -1,12 +1,12 @@
-import { IFullEntity } from "./Entity";
-import { UoMsEnum } from "./enums/UoMs.enum";
-import { AssetTypesEnum, ResourceTypesEnum, GenericTypesEnum } from "./enums/Types.enum";
+import { IFullEntity } from './Entity';
+import { UoMsEnum } from './enums/UoMs.enum';
+import { AssetTypesEnum, ResourceTypesEnum, GenericTypesEnum } from './enums/Types.enum';
 
 export enum ResourceName {
   Cash = 'Space Beads',
   Energy = 'Energy',
   BasicWorkUnit = 'Basic Work Unit',
-  AdvancedWorkUnit = "Advanced Work Unit",
+  AdvancedWorkUnit = 'Advanced Work Unit',
   StorageSpace = 'Storage space',
   LivingSpace = 'Living space',
   Food = 'Food',
@@ -16,7 +16,7 @@ export enum ResourceName {
 }
 
 export const AllResources: IFullEntity[] = [
-  //cash
+  // cash
   {
     Name: ResourceName.Cash,
     Description: 'Space Beads, galactic currency', ImageUrl: '/assets/wiki-icons/resource-cash.png',
@@ -28,7 +28,7 @@ export const AllResources: IFullEntity[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.SB,
-    Quantity: 50000
+    Quantity: 100000
   },
   {
     Name: ResourceName.Energy,
@@ -147,4 +147,4 @@ export const AllResources: IFullEntity[] = [
     UoM: UoMsEnum.pcs,
     Quantity: 0
   }
-]
+];

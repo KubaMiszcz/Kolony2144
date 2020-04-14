@@ -11,6 +11,12 @@ import { OverviewService } from './overview.service';
 import { PowerService } from './power.service';
 import { WikiService } from './wiki.service';
 
+export enum TransactionTypeEnum {
+  Buy,
+  Sell
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,8 +24,8 @@ export class TradeService {
 
   tradeableResources: IAsset[] = [];
   isShipIncoming: boolean;
-  shipVariationPercent: number = 20;  //future  depend on shipsize?
-  priceVariationPercent: number = 20; //future  depend on asset
+  shipVariationPercent = 20;  // future  depend on shipsize?
+  priceVariationPercent = 20; // future  depend on asset
 
 
   constructor(
@@ -44,35 +50,42 @@ export class TradeService {
   }
 
   updateResourcesPrices() {
-    let shipSize: number = 100;
+    const shipSize = 1000;
     this.tradeableResources.forEach(r => {
-      let tradeType = this.sharedService.getRandomFromRange(-1, 1);
+      const tradeType = this.sharedService.getRandomFromRange(-1, 1);
       if (tradeType === 0) {
         r.Quantity = 0;
       } else {
-        r.Quantity = tradeType * shipSize * this.sharedService.getRandomFromRange(100 - this.shipVariationPercent, 100 + this.shipVariationPercent) / 100;
+        r.Quantity = tradeType * shipSize
+          * this.sharedService.getRandomFromRange(100 - this.shipVariationPercent, 100 + this.shipVariationPercent) / 100;
       }
-      //!! todo check if prices too low and variations cant change it
-      r.Price = Math.round(r.Price * this.sharedService.getRandomFromRange(100 - this.priceVariationPercent, 100 + this.priceVariationPercent) / 100);
+      // !! fixit check if prices too low and variations cant change it
+      r.Price = Math.round(
+        r.Price * this.sharedService.getRandomFromRange(100 - this.priceVariationPercent, 100 + this.priceVariationPercent) / 100
+      );
     });
   }
 
 
-  DoTransaction(transactionType: TransactionTypeEnum, shipAssetName: string, QtyOnTable: number, price: number) {
-    let asset = this.assetService.getAssetByName(shipAssetName);
-    if (transactionType === TransactionTypeEnum.Buy) {
-      this.financeService.Cash.Quantity -= (QtyOnTable * price);
-      asset.Quantity += QtyOnTable;
-    } else {
-      this.financeService.Cash.Quantity += (QtyOnTable * price);
-      asset.Quantity -= QtyOnTable;
+  proceedTransaction(type: TransactionTypeEnum, asset: IAsset, qtyOnTable: number, price: number) {
+    this.financeService.Cash.Quantity -= (qtyOnTable * price);
+    if (type === TransactionTypeEnum.Buy) {
+      asset.Price = this.getUpdatedAVGPrice(asset.Quantity, asset.Price, qtyOnTable, price);
     }
+    asset.Quantity += qtyOnTable;
+    if (asset.Quantity === 0) {
+      asset.Price = 0;
+    }
+  }
+
+  getUpdatedAVGPrice(curentQty: number, currentPrice: number, addedQty: number, addedPrice: number) {
+    const oldValue = curentQty * currentPrice;
+    const newValue = oldValue + (addedQty * addedPrice);
+    const newQty = curentQty + addedQty;
+    const newAVGPrice = newQty === 0 ? 0 : newValue / newQty;
+    return this.sharedService.Round(newAVGPrice, 1);
   }
 
 }
 
 
-export enum TransactionTypeEnum {
-  Buy,
-  Sell
-}

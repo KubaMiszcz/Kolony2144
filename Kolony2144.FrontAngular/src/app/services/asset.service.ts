@@ -54,7 +54,7 @@ export class AssetService {
   updateInventoryDueToMaintenance() {
     this.assetList.forEach(asset => {
       asset.MaintenanceCost.forEach(consumedItem => {
-        this.assetList.find(a => a.Name == consumedItem.Name).Quantity -= (consumedItem.Quantity * asset.Quantity);
+        this.assetList.find(a => a.Name === consumedItem.Name).Quantity -= (consumedItem.Quantity * asset.Quantity);
       });
     });
   }
@@ -62,7 +62,7 @@ export class AssetService {
   updateInventoryDueToProducingItems() {
     this.assetList.forEach(asset => {
       asset.PassiveIncome.forEach(producedItem => {
-        this.assetList.find(a => a.Name == producedItem.Name).Quantity += (producedItem.Quantity * asset.Quantity);
+        this.assetList.find(a => a.Name === producedItem.Name).Quantity += (producedItem.Quantity * asset.Quantity);
       });
     });
   }
@@ -92,6 +92,13 @@ export class AssetService {
   }
 
 
+  addNewAssetToInventory(newAsset: IAsset): IAsset {
+    const asset = this.sharedService.cloneObject(newAsset) as IAsset;
+    asset.Quantity = 0;
+    asset.Price = 0;
+    this.assetList.push(asset);
+    return asset;
+  }
 
 
 
@@ -99,7 +106,7 @@ export class AssetService {
   getAssetConsumptionQty(cosnumedAsset: IAsset): number {
     let consumedQty = 0;
     this.assetList.forEach(asset => {
-      let consumedItem = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name);
+      const consumedItem = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name);
       if (consumedItem) {
         consumedQty += (asset.Quantity * consumedItem.Quantity);
       }
@@ -117,7 +124,7 @@ export class AssetService {
   getAssetProductionQty(producedAsset: IAsset): number {
     let producedQty = 0;
     this.assetList.forEach(asset => {
-      let producedItem = asset.PassiveIncome.find(item => item.Name === producedAsset.Name);
+      const producedItem = asset.PassiveIncome.find(item => item.Name === producedAsset.Name);
       if (producedItem) {
         producedQty += (asset.Quantity * producedItem.Quantity);
       }
@@ -136,7 +143,7 @@ export class AssetService {
   }
 
   getAssetsByConsumedAssetName(consumedAssetName: ResourceName): IAsset[] {
-    let res = [];
+    const res = [];
     this.assetList.forEach(asset => {
       if (!!asset.MaintenanceCost.find(item => item.Name === consumedAssetName)) {
         res.push(asset);
@@ -152,7 +159,7 @@ export class AssetService {
   }
 
   getAssetsByProducedAssetName(producedAssetName: ResourceName): IAsset[] {
-    let res = [];
+    const res = [];
     this.assetList.forEach(asset => {
       if (!!asset.PassiveIncome.find(item => item.Name === producedAssetName)) {
         res.push(asset);

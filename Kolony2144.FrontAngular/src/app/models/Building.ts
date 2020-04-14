@@ -1,16 +1,16 @@
-import { IFullEntity, IEntity, ISimplifiedResource } from "./Entity";
-import { UoMsEnum } from "./enums/UoMs.enum";
-import { ResourceName } from "./Resource";
-import { AssetTypesEnum, BuildingTypesEnum } from "./enums/Types.enum";
-import { IDeserializable } from "../core/interfaces/deserializable";
+import { IFullEntity, IEntity, ISimplifiedResource } from './Entity';
+import { UoMsEnum } from './enums/UoMs.enum';
+import { ResourceName } from './Resource';
+import { AssetTypesEnum, BuildingTypesEnum } from './enums/Types.enum';
+import { IDeserializable } from '../core/interfaces/deserializable';
 
 export enum BuildingNames {
   Habitat = 'Habitat',
   Warehouse = 'Warehouse',
   SolarPanel = 'Solar panel',
-  Workshop = "Workshop",
-  Factory = "Factory",
-  CargoBay = "Cargo bay"
+  Workshop = 'Workshop',
+  Factory = 'Factory',
+  CargoBay = 'Cargo bay'
 }
 
 export interface IBuilding extends IEntity {
@@ -159,4 +159,4 @@ export const AllBuildings: IFullEntity[] = [
     UoM: UoMsEnum.pcs,
     Quantity: 35
   }
-]
+];

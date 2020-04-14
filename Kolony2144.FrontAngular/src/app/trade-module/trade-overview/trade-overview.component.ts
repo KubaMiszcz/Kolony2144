@@ -9,6 +9,7 @@ import { GameService } from 'src/app/services/game.service';
 import { AssetService } from 'src/app/services/asset.service';
 import { AssetTypesEnum } from 'src/app/models/enums/Types.enum';
 import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
+import { ITradePanelData } from '../ship-trade-panel/ship-trade-panel.component';
 
 
 @Component({
@@ -48,13 +49,11 @@ export class TradeOverviewComponent implements OnInit, OnDestroy {
 
         const kolonyAsset = this.assetService.getAssetByName(shipAsset.Name);
         if (!kolonyAsset) {
-          a.StockQty = 0;
-          a.AVGBuyPrice = shipAsset.Price;
-          a.MaxQty = Math.round(Math.abs(shipAsset.Quantity));
+          a.KolonyQty = 0;
+          a.AVGBuyPrice = 0;
         } else {
-          a.StockQty = kolonyAsset.Quantity;
+          a.KolonyQty = kolonyAsset.Quantity;
           a.AVGBuyPrice = kolonyAsset.Price;
-          a.MaxQty = Math.round(Math.min(kolonyAsset.Quantity, Math.abs(shipAsset.Quantity)));
         }
 
         this.tradeResourcesPanelValuesFIXNAME.push(a);
@@ -71,18 +70,7 @@ export class TradeOverviewComponent implements OnInit, OnDestroy {
   }
 }
 
-export interface ITradePanelData {
-  Name: string;
-  StockQty: number;
-  UoM: UoMsEnum;
-  AVGBuyPrice: number;
-  QtyOnTable: number;
-  ShipQty: number;
-  ShipPrice: number;
-  MaxQty: number;
-  Type: TransactionTypeEnum;
-  // PriceChange
-}
+
 
 
 

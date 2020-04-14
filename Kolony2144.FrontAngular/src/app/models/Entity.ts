@@ -1,7 +1,7 @@
-import { UoMsEnum } from "./enums/UoMs.enum";
-import { AssetTypesEnum } from "./enums/Types.enum";
-import { IDeserializable } from "../core/interfaces/deserializable";
-import { IBuilding } from "./Building";
+import { UoMsEnum } from './enums/UoMs.enum';
+import { AssetTypesEnum } from './enums/Types.enum';
+import { IDeserializable } from '../core/interfaces/deserializable';
+import { IBuilding } from './Building';
 
 export interface IFullEntity extends IEntity, IAsset, IBuilding {
   Description: string;
