@@ -13,27 +13,106 @@
       "app",
       "kebab-case"
     ],
+    //==========================
+    // about formatting
+    //==========================
+    "eofline": true,
+    "no-consecutive-blank-lines": [
+      true,
+      8
+    ],
+    "comment-format": [
+      true,
+      "check-space"
+    ],
+    "max-line-length": false,
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "space-before-function-paren": [
+      true,
+      "never"
+    ],
+    "no-trailing-whitespace": [
+      true,
+      "always"
+    ],
+    "type-literal-delimiter": true,
+    "number-literal-format": true,
+    "align": [
+      true,
+      "arguments",
+      "elements",
+      // "members",
+      "parameters",
+      "statements"
+    ],
+    "newline-before-return": true,
+    "no-irregular-whitespace": true,
+    "one-line": [
+      true,
+      "check-open-brace",
+      "check-whitespace",
+      "check-else",
+      "check-catch",
+      "check-finally"
+    ],
+    // "object-literal-sort-keys": true,
+    "object-literal-shorthand": false,
+    //================================
+    // about code
+    //================================
+    "curly": true,
+    "semicolon": [
+      true,
+      "always"
+      // "ignore-interfaces",
+      // "ignore-bound-class-methods"
+    ],
     "prefer-const": [
       true,
       {
         "destructuring": "any"
       }
     ],
-    "no-trailing-whitespace": [
+    "no-bitwise": true,
+    "no-var-keyword": true,
+    "no-eval": true,
+    // "no-empty": true,
+    "use-isnan": true,
+    "no-angle-bracket-type-assertion": true,
+    "no-boolean-literal-compare": true,
+    "no-conditional-assignment": true,
+    "one-variable-per-declaration": [
       true,
-      "always"
+      "ignore-for-loop"
     ],
-    "semicolon": [
+    "prefer-function-over-method": [
       true,
-      "always"
+      "allow-public"
+      // "allow-protected"
     ],
-    "space-before-function-paren": [
+    "return-undefined": true,
+    "class-name": true,
+    "triple-equals": [
       true,
-      "never"
+      [
+        // "allow-null-check",
+        // "allow-undefined-check"
+      ]
     ],
-    "quotemark": [
+    "unnecessary-else": [
       true,
-      "single"
+      {
+        "allow-else-if": true
+      }
+    ],
+    "no-duplicate-imports": [
+      true,
+      {
+        "allow-namespace-imports": true
+      }
     ]
   }
 }
