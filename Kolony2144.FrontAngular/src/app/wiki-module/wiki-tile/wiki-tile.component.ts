@@ -22,15 +22,15 @@ export class WikiTileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.item.CreationCost) this.productionCost = this.fillList(this.item.CreationCost);
-    if (this.item.PassiveIncome) this.producedItems = this.fillList(this.item.PassiveIncome);
-    if (this.item.MaintenanceCost) this.consumedItems = this.fillList(this.item.MaintenanceCost);
+    if (this.item.CreationCost) { this.productionCost = this.fillList(this.item.CreationCost); }
+    if (this.item.PassiveIncome) { this.producedItems = this.fillList(this.item.PassiveIncome); }
+    if (this.item.MaintenanceCost) { this.consumedItems = this.fillList(this.item.MaintenanceCost); }
     console.log(this.productionCost);
 
   }
 
   fillList(list: ISimplifiedResource[]) {
-    let result = [];
+    const result = [];
     list.map(v =>
       result.push({
         Name: v.Name,
@@ -38,6 +38,7 @@ export class WikiTileComponent implements OnInit {
         UoM: this.assetService.getUoMByName(v.Name)
       })
     );
+
     return result;
   }
 }
@@ -45,5 +46,5 @@ export class WikiTileComponent implements OnInit {
 interface IWikiListItem {
   Name: string;
   Quantity: number;
-  UoM: UoMsEnum
+  UoM: UoMsEnum;
 }

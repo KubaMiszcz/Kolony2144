@@ -15,7 +15,7 @@ import { WikiService } from './wiki.service';
   providedIn: 'root'
 })
 export class CrewService {
-  private crewList: IAsset[]
+  private crewList: IAsset[];
 
   constructor(
     private sharedService: SharedService,

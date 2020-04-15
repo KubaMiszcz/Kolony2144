@@ -97,6 +97,7 @@ export class AssetService {
     asset.Quantity = 0;
     asset.Price = 0;
     this.assetList.push(asset);
+
     return asset;
   }
 
@@ -149,6 +150,7 @@ export class AssetService {
         res.push(asset);
       }
     });
+
     return res;
   }
 

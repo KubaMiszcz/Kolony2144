@@ -141,7 +141,7 @@ export class GameService {
       this.updateNews();
       this.financeService.emitCurrentCash();
       this.router.navigate(['/start']);
-    }, 200);
+    },         200);
   }
 
   updateNews() {

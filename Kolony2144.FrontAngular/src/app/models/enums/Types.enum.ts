@@ -1,5 +1,5 @@
 export enum AssetTypesEnum {
-  //todo remove 'notset'
+  // todo remove 'notset'
   NotSet = '',
   // Property = 'Property',
   Crew = 'Crew',

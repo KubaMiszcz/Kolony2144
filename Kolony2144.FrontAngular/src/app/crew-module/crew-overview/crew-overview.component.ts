@@ -38,11 +38,11 @@ export class CrewOverviewComponent implements OnInit {
     ];
 
     this.assetService.getAssetsByType(AssetTypesEnum.Crew).forEach(c => {
-      let name = c.Name;
-      let salary = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
-      let foodConsumption = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
-      let BasicWU = this.assetService.findSimplifiedResourceInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
-      let qty = c.Quantity;
+      const name = c.Name;
+      const salary = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
+      const foodConsumption = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
+      const BasicWU = this.assetService.findSimplifiedResourceInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
+      const qty = c.Quantity;
       this.perUnitList.push([
         name,
         salary,
@@ -65,11 +65,11 @@ export class CrewOverviewComponent implements OnInit {
     ];
 
     this.assetService.getAssetsByType(AssetTypesEnum.Crew).forEach(c => {
-      let name = c.Name;
-      let salary = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
-      let foodConsumption = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
-      let BasicWU = this.assetService.findSimplifiedResourceInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
-      let qty = c.Quantity;
+      const name = c.Name;
+      const salary = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
+      const foodConsumption = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
+      const BasicWU = this.assetService.findSimplifiedResourceInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
+      const qty = c.Quantity;
       this.totalList.push([
         name,
         qty,
@@ -85,7 +85,7 @@ export class CrewOverviewComponent implements OnInit {
       this.sharedService.sumColumnOftable(this.totalList, 2),
       this.sharedService.sumColumnOftable(this.totalList, 3),
       this.sharedService.sumColumnOftable(this.totalList, 4),
-    ]
+    ];
   }
 
   // Name: CrewNames.Worker,

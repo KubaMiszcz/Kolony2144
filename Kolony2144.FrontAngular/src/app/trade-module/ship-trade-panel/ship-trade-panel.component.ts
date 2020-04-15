@@ -54,7 +54,6 @@ export class ShipTradePanelComponent implements OnInit {
   updateOnTableQty(row: ITradePanelData, val) {
     if (val === 0) {
       row.QtyOnTable = 0;
-      return;
     } else {
       row.QtyOnTable += val;
       this.getCheckedMinMaxQtyOnTable(row);
@@ -67,6 +66,7 @@ export class ShipTradePanelComponent implements OnInit {
     } else if (row.QtyOnTable < 0) {
       row.QtyOnTable = 0;
     }
+
     return row.QtyOnTable;
   }
 

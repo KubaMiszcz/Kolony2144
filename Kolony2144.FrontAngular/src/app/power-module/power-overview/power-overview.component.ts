@@ -23,43 +23,43 @@ export class PowerOverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.assetsConsumingList = this.fillConsumungAssetList(this.assetService.getAssetsByConsumedAssetName(ResourceName.Energy))
-    this.assetsProducingList = this.fillProducingAssetList(this.assetService.getAssetsByProducedAssetName(ResourceName.Energy))
+    this.assetsConsumingList = this.fillConsumungAssetList(this.assetService.getAssetsByConsumedAssetName(ResourceName.Energy));
+    this.assetsProducingList = this.fillProducingAssetList(this.assetService.getAssetsByProducedAssetName(ResourceName.Energy));
   }
 
   fillConsumungAssetList(resources: IAsset[]): any[] {
-    let res: any[] = [
+    const res: any[] = [
       ['name', 'per unit', 'qty', 'total']
     ];
 
     resources.forEach(r => {
-      let perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.MaintenanceCost, ResourceName.Energy).Quantity;
+      const perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.MaintenanceCost, ResourceName.Energy).Quantity;
       res.push([
         r.Name,
         perUnitUsage,
         r.Quantity,
         r.Quantity * perUnitUsage
       ]);
-    })
-    res.push(['', '', 'Total', this.sharedService.sumColumnOftable(res.slice(1), 3)])
+    });
+    res.push(['', '', 'Total', this.sharedService.sumColumnOftable(res.slice(1), 3)]);
     return res;
   }
 
   fillProducingAssetList(resources: IAsset[]): any[] {
-    let res: any[] = [
+    const res: any[] = [
       ['name', 'per unit', 'qty', 'total']
     ];
 
     resources.forEach(r => {
-      let perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.PassiveIncome, ResourceName.Energy).Quantity;
+      const perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.PassiveIncome, ResourceName.Energy).Quantity;
       res.push([
         r.Name,
         perUnitUsage,
         r.Quantity,
         r.Quantity * perUnitUsage
       ]);
-    })
-    res.push(['', '', 'Total', this.sharedService.sumColumnOftable(res.slice(1), 3)])
+    });
+    res.push(['', '', 'Total', this.sharedService.sumColumnOftable(res.slice(1), 3)]);
     return res;
   }
 

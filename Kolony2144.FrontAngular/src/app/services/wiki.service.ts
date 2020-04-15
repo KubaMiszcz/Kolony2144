@@ -17,7 +17,7 @@ export class WikiService {
 
   prepareWikiInitialData() {
     [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines].forEach(i => {
-      let a = new Object() as IFullEntity;
+      const a = new Object() as IFullEntity;
       Object.assign(a, i);
       this.allWikiEntites.push(a);
       // this.allWikiEntites.push({

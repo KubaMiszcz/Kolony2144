@@ -1,6 +1,6 @@
 export enum UoMsEnum {
-  SB = 'SB',          //cash
-  WU = 'WU',          //abstract
+  SB = 'SB',          // cash
+  WU = 'WU',          // abstract
 
   kg = 'kg',
   t = 't',
@@ -10,8 +10,8 @@ export enum UoMsEnum {
   m2 = 'm2',
   m3 = 'm3',
 
-  kW = 'kW',           //Energy
-  MW = 'MW'           //Energy
+  kW = 'kW',           // Energy
+  MW = 'MW'           // Energy
 }
 
 export enum LongUoMsEnum {
