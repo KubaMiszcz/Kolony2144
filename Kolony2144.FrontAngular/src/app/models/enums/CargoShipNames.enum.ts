@@ -1,4 +1,4 @@
-export enum SpaceCargoShipNames {
+export enum CargoShipNames {
   TheProvidence = 'The Providence',
   TheHappening = 'The Happening',
   TheDauntless = 'The Dauntless',

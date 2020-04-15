@@ -1,6 +1,6 @@
 import { GenericTypesEnum } from './../../models/enums/Types.enum';
 import { BuildingNames } from './../../models/Building';
-import { TradeService, TransactionTypeEnum } from './../../services/trade.service';
+import { TradeService, TransactionTypeEnum, ICargoShip } from './../../services/trade.service';
 import { IAsset } from 'src/app/models/Entity';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { KolonyService } from 'src/app/services/kolony.service';
@@ -19,10 +19,13 @@ import { ITradePanelData } from '../ship-trade-panel/ship-trade-panel.component'
 })
 export class TradeOverviewComponent implements OnInit, OnDestroy {
   playerNotes = '';
-  crewList: IAsset[] = [];
-  tradeResourcesPanelValuesFIXNAME: ITradePanelData[] = [];
-  machinesList: IAsset[] = [];
   isShipIncoming: boolean;
+  cargoShip: ICargoShip;
+
+  cargoResources: ITradePanelData[] = [];
+  resourcesTradePanelValues: ITradePanelData[] = [];
+  crewTradePanelValues: ITradePanelData[] = [];
+  machinesTradePanelValues: ITradePanelData[] = [];
 
   constructor(
     private kolonyService: KolonyService,
@@ -34,33 +37,35 @@ export class TradeOverviewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.gameService.PlayerNotesBS.subscribe(c => this.playerNotes = c);
-    this.isShipIncoming = this.tradeService.isShipIncoming;
-    this.isShipIncoming = true;
-    if (this.isShipIncoming) {
-      const shipResources = this.tradeService.tradeableResources.filter(r => r.Quantity !== 0);
-      shipResources.forEach(shipAsset => {
-        const a = new Object() as ITradePanelData;
-        a.Name = shipAsset.Name;
-        a.QtyOnTable = 0;
-        a.ShipPrice = shipAsset.Price;
-        a.ShipQty = Math.abs(shipAsset.Quantity);
-        a.UoM = shipAsset.UoM;
-        a.Type = shipAsset.Quantity > 0 ? TransactionTypeEnum.Buy : TransactionTypeEnum.Sell;
 
-        const kolonyAsset = this.assetService.getAssetByName(shipAsset.Name);
+    this.isShipIncoming = this.tradeService.isShipLanded;
+    if (this.isShipIncoming) {
+      this.tradeService.landedShip.Cargo.forEach(cargoItem => {
+        const row = new Object() as ITradePanelData;
+        row.Name = cargoItem.Name;
+        row.QtyOnTable = 0;
+        row.ShipPrice = cargoItem.Price;
+        row.ShipQty = Math.abs(cargoItem.Quantity);
+        row.UoM = cargoItem.UoM;
+        row.Type = cargoItem.Quantity > 0 ? TransactionTypeEnum.Buy : TransactionTypeEnum.Sell;
+
+        const kolonyAsset = this.assetService.getAssetByName(cargoItem.Name);
         if (!kolonyAsset) {
-          a.KolonyQty = 0;
-          a.AVGBuyPrice = 0;
+          row.KolonyQty = 0;
+          row.AVGBuyPrice = 0;
         } else {
-          a.KolonyQty = kolonyAsset.Quantity;
-          a.AVGBuyPrice = kolonyAsset.Price;
+          row.KolonyQty = kolonyAsset.Quantity;
+          row.AVGBuyPrice = kolonyAsset.Price;
         }
 
-        this.tradeResourcesPanelValuesFIXNAME.push(a);
+        if (cargoItem.Type === AssetTypesEnum.Resource) {
+          this.resourcesTradePanelValues.push(row);
+        } else if (cargoItem.Type === AssetTypesEnum.Crew) {
+          this.crewTradePanelValues.push(row);
+        } else if (cargoItem.Type === AssetTypesEnum.Machine) {
+          this.machinesTradePanelValues.push(row);
+        }
       });
-
-      this.crewList = this.tradeService.getTradeableCrew();
-      this.machinesList = this.tradeService.getTradeableMachines();
     }
   }
 

@@ -52,7 +52,7 @@ export class GameService {
   ) {
     this.playerNotes = sessionStorage.getItem('savedState');
     this.ALL_ASSETS_LIST = this.getAllInitialGameAssets();
-    this.tradeService.tradeableResources = this.getTradeableResources();
+    this.tradeService.tradeableCargo = this.getTradeableAssets();
     this.nextTurn();
   }
 
@@ -167,8 +167,10 @@ export class GameService {
 
 
 
-  getTradeableResources(): IAsset[] {
-    return this.ALL_ASSETS_LIST.filter(a => a.Type === AssetTypesEnum.Resource && a.Tags.includes(GenericTypesEnum.Tradeable));
+  getTradeableAssets(): IAsset[] {
+    const list = this.sharedService.cloneObject<IAsset[]>(this.ALL_ASSETS_LIST);
+
+    return list.filter(a => a.Tags.includes(GenericTypesEnum.Tradeable));
   }
 
   saveGame() {

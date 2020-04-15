@@ -1,5 +1,5 @@
 import { IFullEntity } from './Entity';
-import { AssetTypesEnum, MachineTypesEnum } from './enums/Types.enum';
+import { AssetTypesEnum, MachineTypesEnum, GenericTypesEnum } from './enums/Types.enum';
 import { ResourceName } from './Resource';
 import { UoMsEnum } from './enums/UoMs.enum';
 
@@ -13,7 +13,7 @@ export const AllMachines: IFullEntity[] = [
     Description: 'simple power coal powered generator', ImageUrl: '/assets/wiki-icons/machine.png',
     Size: 10,
     Type: AssetTypesEnum.Machine,
-    Tags: [MachineTypesEnum.PowerSource],
+    Tags: [MachineTypesEnum.PowerSource, , GenericTypesEnum.Tradeable],
     Price: 5000,
     CreationCost: [
       { Name: ResourceName.Steel, Quantity: 5 }

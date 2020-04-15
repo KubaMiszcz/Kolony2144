@@ -10,61 +10,38 @@ import { KolonyService } from './kolony.service';
 import { OverviewService } from './overview.service';
 import { PowerService } from './power.service';
 import { WikiService } from './wiki.service';
+import { CargoShipNames } from '../models/enums/CargoShipNames.enum';
+import { CompanyNames } from '../models/enums/CompanyNames.enum';
+import { PlanetNames } from '../models/enums/PlanetNames.enum';
 
-export enum TransactionTypeEnum {
-  Buy,
-  Sell
-}
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TradeService {
-
-  tradeableResources: IAsset[] = [];
-  isShipIncoming: boolean;
-  shipVariationPercent = 20;  // future  depend on shipsize?
-  priceVariationPercent = 20; // future  depend on asset
+  tradeAnnouncement = '';
+  tradeableCargo: IAsset[] = [];
+  isShipLanded: boolean;
+  landingProbability = 0.99;
+  shipSizeVariation = 0.2;  // future  depend on shipsize?
+  priceVariation = 0.2; // future  depend on asset
+  landedShip: ICargoShip;
 
 
   constructor(
     private sharedService: SharedService,
     private assetService: AssetService,
     private financeService: FinanceService,
-  ) {
-
-  }
-
-  getTradeableCrew(): IAsset[] {
-    return this.assetService.getNonVolatileAssets().filter(a => a.Type === AssetTypesEnum.Crew);
-  }
-
-  getTradeableMachines(): IAsset[] {
-    return this.assetService.getNonVolatileAssets().filter(a => a.Type === AssetTypesEnum.Machine);
-  }
-
-  prepareIncomingShip() {
-    this.isShipIncoming = this.sharedService.getRandomBoolean();
-    this.updateResourcesPrices();
-  }
+  ) { }
 
   updateResourcesPrices() {
-    const shipSize = 1000;
-    this.tradeableResources.forEach(r => {
-      const tradeType = this.sharedService.getRandomFromRange(-1, 1);
-      if (tradeType === 0) {
-        r.Quantity = 0;
-      } else {
-        r.Quantity = tradeType * shipSize
-          * this.sharedService.getRandomFromRange(100 - this.shipVariationPercent, 100 + this.shipVariationPercent) / 100;
-      }
-      // !! fixit check if prices too low and variations cant change it
-      r.Price = Math.round(
-        r.Price * this.sharedService.getRandomFromRange(100 - this.priceVariationPercent, 100 + this.priceVariationPercent) / 100
-      );
+    // !! fixit check if prices too low and variations cant change it
+    this.tradeableCargo.forEach(r => {
+      r.Price = this.sharedService.getRandomIntAroundValue(r.Price, r.Price * this.priceVariation);
     });
   }
+
 
 
   proceedTransaction(type: TransactionTypeEnum, asset: IAsset, qtyOnTable: number, price: number) {
@@ -87,6 +64,73 @@ export class TradeService {
     return this.sharedService.Round(newAVGPrice, 1);
   }
 
+
+  // todo
+  setTradeAnnouncement() {
+    // let cargoBaysQty = this.kolony.Buildings.find(b => b.Name === BuildingNames.CargoBay.valueOf()).StockQuantity;
+    // let shipSize = this.getSizeLandedShip(cargoBaysQty, this.landingProbability);
+
+    // if (shipSize > 0) {
+    //   let announcement = new TradeAnnouncement();
+    //   announcement.shipSize = shipSize;
+    //   announcement.shipName = this.sharedService.getRandomValueFromEnum(Object.values(SpaceCargoShipNames));
+    //   announcement.companyName = this.sharedService.getRandomValueFromEnum(Object.values(CompanyNames));
+    //   announcement.originPlanetName = this.sharedService.getRandomValueFromEnum(Object.values(PlanetNames));
+    //   announcement.destinationPlanetName = this.sharedService.getRandomValueFromEnum(Object.values(PlanetNames));
+    //   this.tradeAnnouncement = announcement;
+    //   console.log('fromservice', announcement);
+    //   return announcement;
+    // }
+  }
+
+
+  prepareIncomingShip() {
+    this.isShipLanded = this.sharedService.getRandomBoolean();
+    this.updateResourcesPrices();
+
+    if (this.isShipLanded) {
+      const ship = new Object() as ICargoShip;
+      ship.Size = this.getSizeLandedShip(1000); // todo 1000 is cargobays number
+      ship.Name = this.sharedService.getRandomValueFromEnum(Object.values(CargoShipNames));
+      ship.CompanyName = this.sharedService.getRandomValueFromEnum(Object.values(CompanyNames));
+      ship.OriginPlanetName = this.sharedService.getRandomValueFromEnum(Object.values(PlanetNames));
+      ship.DestinationPlanetName = this.sharedService.getRandomValueFromEnum(Object.values(PlanetNames));
+      ship.Cargo = this.getShipCargo(ship.Size);
+      this.landedShip = ship;
+    }
+  }
+
+  getShipCargo(shipSize: number): IAsset[] {
+    this.tradeableCargo.forEach(r => {
+      const tradeType = this.sharedService.getRandomIntFromRange(-1, 1);
+      if (tradeType === 0) {
+        r.Quantity = 0;
+      } else {
+        r.Quantity = tradeType * this.sharedService.getRandomIntAroundValue(shipSize, shipSize * this.shipSizeVariation);
+      }
+    });
+
+    return this.tradeableCargo.filter(r => r.Quantity !== 0);
+  }
+
+  getSizeLandedShip(cargoBaysQty: number): number {
+    return this.sharedService.getRandomIntAroundValue(cargoBaysQty, cargoBaysQty * this.shipSizeVariation);
+  }
+
+
+
 }
 
+export interface ICargoShip {
+  Size: number;
+  Name: string;
+  CompanyName: string;
+  OriginPlanetName: string;
+  DestinationPlanetName: string;
+  Cargo: IAsset[];
+}
 
+export enum TransactionTypeEnum {
+  Buy,
+  Sell
+}

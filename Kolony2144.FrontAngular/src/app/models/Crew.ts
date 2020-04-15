@@ -1,7 +1,7 @@
 import { IFullEntity, IAsset } from './Entity';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
-import { AssetTypesEnum, CrewTypesEnum, BuildingTypesEnum } from './enums/Types.enum';
+import { AssetTypesEnum, CrewTypesEnum, BuildingTypesEnum, GenericTypesEnum } from './enums/Types.enum';
 
 export enum CrewNames {
   Worker = 'Worker',
@@ -19,7 +19,7 @@ export const AllCivilianCrew: IFullEntity[] = [
     Description: 'just peon worker, chop chop he\'s on it, eats many', ImageUrl: '/assets/wiki-icons/crew-worker.png',
     Size: 1,
     Type: AssetTypesEnum.Crew,
-    Tags: [CrewTypesEnum.Production],
+    Tags: [CrewTypesEnum.Production, GenericTypesEnum.Tradeable],
     Price: 50,
     CreationCost: [],
     MaintenanceCost: [
@@ -37,7 +37,7 @@ export const AllCivilianCrew: IFullEntity[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/crew-technician.png',
     Size: 1,
     Type: AssetTypesEnum.Crew,
-    Tags: [CrewTypesEnum.Production],
+    Tags: [CrewTypesEnum.Production, GenericTypesEnum.Tradeable],
     Price: 100,
     CreationCost: [],
     MaintenanceCost: [

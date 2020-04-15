@@ -6,13 +6,25 @@ import { IAsset } from '../models/Entity';
 })
 export class SharedService {
 
-
   constructor() {
   }
 
-  getRandomFromRange(min: number, max: number) {
+  getRandomFloatFromRange(min: number, max: number) {
+    // inputs: floats, output: float
+    return min + Math.random() * (max - min);
+  }
+
+  getRandomFloatAroundValue(baseValue: number, aroundValue: number): number {
+    return this.getRandomFloatFromRange(baseValue - aroundValue, baseValue + aroundValue);
+  }
+
+  getRandomIntFromRange(min: number, max: number) {
     // inputs: integers, output: integer
     return Math.round(min + Math.random() * (max - min));
+  }
+
+  getRandomIntAroundValue(baseValue: number, aroundValue: number): number {
+    return this.getRandomIntFromRange(baseValue - aroundValue, baseValue + aroundValue);
   }
 
   getRandomBoolean() {
@@ -39,8 +51,7 @@ export class SharedService {
       .reduce((total, i) => total + i);
   }
 
-  cloneObject(asset: IAsset): any {
-    return JSON.parse(JSON.stringify(asset));
+  cloneObject<T>(object: T): T {
+    return JSON.parse(JSON.stringify(object)) as T;
   }
-
 }

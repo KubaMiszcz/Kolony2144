@@ -3,7 +3,21 @@
   <div class="card m-2">
     <h4 class="card-header "> Trade Overview</h4>
 
-    <h4>wyaldowal statek varg-1500 z planety name bla bkl abla</h4>
+    <div class="card my-2">
+      <h4 class="card-header "> Annoncements</h4>
+      <div class="card-body p-1">
+        <h5 *ngIf="isShipIncoming">
+          <p class="card-text m-0">Cargo Ship 'VARG-1230' owned by companyName on route from <i>originPlanetName</i> to
+            <i>destinationPlanetName</i> is landed.</p>
+        </h5>
+        <h3 *ngIf="!isShipIncoming">There is no Space Cargo Ship landed.</h3>
+      </div>
+    </div>
+
+
+
+
+
 
     <div *ngIf="isShipIncoming" class="card m-2" data-toggle="collapse" data-target="#trade">
       <h5 class="card-header "> <i class="fas fa-chevron-right"></i> Trade Panel </h5>
@@ -22,13 +36,13 @@
         </nav>
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-resources" role="tabpanel" aria-labelledby="nav-home-tab">
-            <app-ship-trade-panel [tradePanelData]="tradeResourcesPanelValuesFIXNAME"></app-ship-trade-panel>
+            <app-ship-trade-panel [tradePanelData]="resourcesTradePanelValues"></app-ship-trade-panel>
           </div>
           <div class="tab-pane fade" id="nav-crew" role="tabpanel" aria-labelledby="nav-profile-tab">
-            <!-- <app-ship-trade-panel [resourcesList]="crewList"></app-ship-trade-panel> -->
+            <app-ship-trade-panel [tradePanelData]="crewTradePanelValues"></app-ship-trade-panel>
           </div>
           <div class="tab-pane fade" id="navnav-machines" role="tabpanel" aria-labelledby="nav-contact-tab">
-            <!-- <app-ship-trade-panel [resourcesList]="machinesList"></app-ship-trade-panel> -->
+            <app-ship-trade-panel [tradePanelData]="machinesTradePanelValues"></app-ship-trade-panel>
           </div>
         </div>
 
