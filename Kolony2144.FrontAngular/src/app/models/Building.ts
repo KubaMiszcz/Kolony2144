@@ -116,7 +116,7 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceName.BasicWorkUnit, Quantity: 100 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 10
+    Quantity: 3
   },
   {
     Name: BuildingNames.Factory,
@@ -138,7 +138,7 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceName.AdvancedWorkUnit, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 10
+    Quantity: 1
   },
   {
     Name: BuildingNames.CargoBay,
@@ -158,6 +158,6 @@ export const AllBuildings: IFullEntity[] = [
     PassiveIncome: [
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 35
+    Quantity: 10
   }
 ];

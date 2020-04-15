@@ -65,22 +65,17 @@ export class TradeService {
   }
 
 
-  // todo
   setTradeAnnouncement() {
-    // let cargoBaysQty = this.kolony.Buildings.find(b => b.Name === BuildingNames.CargoBay.valueOf()).StockQuantity;
-    // let shipSize = this.getSizeLandedShip(cargoBaysQty, this.landingProbability);
-
-    // if (shipSize > 0) {
-    //   let announcement = new TradeAnnouncement();
-    //   announcement.shipSize = shipSize;
-    //   announcement.shipName = this.sharedService.getRandomValueFromEnum(Object.values(SpaceCargoShipNames));
-    //   announcement.companyName = this.sharedService.getRandomValueFromEnum(Object.values(CompanyNames));
-    //   announcement.originPlanetName = this.sharedService.getRandomValueFromEnum(Object.values(PlanetNames));
-    //   announcement.destinationPlanetName = this.sharedService.getRandomValueFromEnum(Object.values(PlanetNames));
-    //   this.tradeAnnouncement = announcement;
-    //   console.log('fromservice', announcement);
-    //   return announcement;
-    // }
+    if (this.isShipLanded) {
+      const ship = this.landedShip;
+      // Cargo Ship 'VARG-1230' owned by companyName on route from originPlanetName to destinationPlanetName is landed.
+      this.tradeAnnouncement = 'Cargo Ship \'' + ship.Name + '-' + ship.Size
+        + '\' owned by company \'' + ship.CompanyName
+        + '\' on route from planet \'' + ship.OriginPlanetName
+        + '\' to \'' + ship.DestinationPlanetName + '\' is landed.';
+    } else {
+      this.tradeAnnouncement = 'There is no Space Cargo Ship landed.';
+    }
   }
 
 
@@ -97,6 +92,8 @@ export class TradeService {
       ship.DestinationPlanetName = this.sharedService.getRandomValueFromEnum(Object.values(PlanetNames));
       ship.Cargo = this.getShipCargo(ship.Size);
       this.landedShip = ship;
+      console.log(ship);
+
     }
   }
 
