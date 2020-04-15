@@ -59,7 +59,7 @@ export class AssetService {
     });
   }
 
-  updateInventoryDueToProducingItems() {
+  updateInventoryDueToPassiveProducedItems() {
     this.assetList.forEach(asset => {
       asset.PassiveIncome.forEach(producedItem => {
         this.assetList.find(a => a.Name === producedItem.Name).Quantity += (producedItem.Quantity * asset.Quantity);

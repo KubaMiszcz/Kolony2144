@@ -23,7 +23,7 @@ export class StatusBarComponent implements OnInit {
     private gameService: GameService,
     private financeService: FinanceService
   ) {
-    this.Age = this.gameService.Age;
+    this.gameService.AgeBS.subscribe(c => this.Age = c);
     this.Name = this.kolonyService.Name;
 
     this.financeService.CashBS.subscribe(c => this.Cash = c);

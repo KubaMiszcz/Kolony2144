@@ -1,6 +1,4 @@
 export enum AssetTypesEnum {
-  // todo remove 'notset'
-  NotSet = '',
   // Property = 'Property',
   Crew = 'Crew',
   Resource = 'Resource',
@@ -17,7 +15,6 @@ export enum GenericTypesEnum {
 
 
 export enum ResourceTypesEnum {
-  NotSet = '',
   Volatile = 'Volatile',
   Production = 'Production',
 }

@@ -24,21 +24,19 @@ import { Subject, BehaviorSubject } from 'rxjs';
 })
 export class GameService {
 
+  private age = 100;
+  get Age(): number { return Math.round(this.age * 10) / 10; }
+  set Age(value) { this.age = value; this.AgeBS.next(value); }
+  AgeBS = new BehaviorSubject<number>(100);
+
   private playerNotes = '';
   get PlayerNotes() { return this.playerNotes; }
   set PlayerNotes(value) { this.playerNotes = value; this.PlayerNotesBS.next(value); }
   PlayerNotesBS = new BehaviorSubject<string>('');
 
-
-
-  private age = 100;
-  get Age(): number { return Math.round(this.age * 10) / 10; }
-  set Age(value: number) { this.age += 0.1; }
   ALL_ASSETS_LIST: IAsset[] = [];
 
-
   // isTurnComputing = false;
-  // AllAssets: IAsset[]=[];
 
   constructor(
     private router: Router,
@@ -79,7 +77,7 @@ export class GameService {
     setTimeout(() => {
 
       // ##########################################
-      //#region TURN ENDS
+      // #region TURN ENDS
       // update inventory after production
 
       // update production queue, and assets array
@@ -103,44 +101,22 @@ export class GameService {
       // #REGION NEW TURN BEGINS
       this.assetService.ClearVolatileResources();
       this.assetService.updateInventoryDueToMaintenance();
-      this.assetService.updateInventoryDueToProducingItems();
+      // todo MINING       // this.MiningService.mining
+      this.assetService.updateInventoryDueToPassiveProducedItems();
 
       this.tradeService.prepareIncomingShip();
-      //   //zeroingVolatileProperties
-      //   this.kolonyService.zeroingVolatileProperties(this.kolony.AllInventoryItemsArray);
-
-      //   //PRODUCE inventory items, power status and work hours
-      //   phase = ProcessingPhasesNames.Production;
-      //   this.kolonyService.updateStockQuantityForAssetsList(this.kolony.PowerSources, phase);
-      //   this.kolonyService.updateStockQuantityForAssetsList(this.kolony.PowerFacilities, phase);
-      //   this.kolonyService.updateStockQuantityForAssetsList(this.kolony.Crew, phase);
-      //   this.kolonyService.updateStockQuantityForAssetsList(this.kolony.Machines, phase);
-      //   this.kolonyService.updateStockQuantityForAssetsList(this.kolony.Buildings, phase);
-
-      //   //MINING
-      //   //this.MiningService.mining
-
-      //   //CONSUMING inventory items
-      //   phase = ProcessingPhasesNames.Consuming;
-      //   this.kolonyService.updateStockQuantityForAssetsList(this.kolony.Crew, phase);
-      //   this.kolonyService.updateStockQuantityForAssetsList(this.kolony.Machines, phase);
-      //   this.kolonyService.updateStockQuantityForAssetsList(this.kolony.PowerSources, phase);
-      //   this.kolonyService.updateStockQuantityForAssetsList(this.kolony.Buildings, phase);
-      //   this.kolonyService.updateStockQuantityForAssetsList(this.kolony.PowerFacilities, phase);
 
       //   //UPDATE powerstatus with newly produced assets
       //   this.powerService.updatePowerStatus();
 
-      //   //#ENDREGION
-      //   //##########################################
+      // ##########################################
 
 
-      //   // this.tradeService.setTradeAnnouncement(); console.log('setTradeAnnouncement');
-      //   //   this.kolonyService.setTradeAnnouncement();
-      //   //   this.isTurnComputing.next(false);
+      // this.tradeService.setTradeAnnouncement(); console.log('setTradeAnnouncement');
+      // this.kolonyService.setTradeAnnouncement();
+      // this.isTurnComputing.next(false);
 
       this.updateNews();
-      this.financeService.emitCurrentCash();
       this.router.navigate(['/start']);
     }, 200);
   }
