@@ -1,5 +1,9 @@
 @import "src/_global";
 
+td {
+  border-color: #343a4066;
+}
+
 .trade-input {
   //fixit not percent
   width: max-content;
