@@ -20,9 +20,10 @@ import { ITradePanelData } from '../ship-trade-panel/ship-trade-panel.component'
 export class TradeOverviewComponent implements OnInit, OnDestroy {
   playerNotes = '';
   isShipIncoming: boolean;
+  tradeAnnouncement = '';
   cargoShip: ICargoShip;
 
-  cargoResources: ITradePanelData[] = [];
+
   resourcesTradePanelValues: ITradePanelData[] = [];
   crewTradePanelValues: ITradePanelData[] = [];
   machinesTradePanelValues: ITradePanelData[] = [];
@@ -38,6 +39,7 @@ export class TradeOverviewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.gameService.PlayerNotesBS.subscribe(c => this.playerNotes = c);
 
+    this.tradeAnnouncement = this.tradeService.tradeAnnouncement;
     this.isShipIncoming = this.tradeService.isShipLanded;
     if (this.isShipIncoming) {
       this.tradeService.landedShip.Cargo.forEach(cargoItem => {

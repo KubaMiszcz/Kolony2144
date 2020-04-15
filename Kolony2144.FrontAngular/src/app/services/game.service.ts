@@ -105,6 +105,8 @@ export class GameService {
       this.assetService.updateInventoryDueToPassiveProducedItems();
 
       this.tradeService.prepareIncomingShip();
+      this.tradeService.setTradeAnnouncement();
+
 
       //   //UPDATE powerstatus with newly produced assets
       //   this.powerService.updatePowerStatus();
@@ -128,6 +130,10 @@ export class GameService {
     let msg;
     this.overviewService.addNews('Welcome in new month, current time is: ' + this.Age + ' of New Era');
     this.overviewService.addNews('');
+
+    // news about ship
+    this.overviewService.addNews(this.tradeService.tradeAnnouncement);
+
 
     // news about cash
     resource = this.assetService.getAssetByName(ResourceName.Cash);
