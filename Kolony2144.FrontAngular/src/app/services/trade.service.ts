@@ -83,6 +83,7 @@ export class TradeService {
     const newValue = oldValue + (addedQty * addedPrice);
     const newQty = curentQty + addedQty;
     const newAVGPrice = newQty === 0 ? 0 : newValue / newQty;
+
     return this.sharedService.Round(newAVGPrice, 1);
   }
 

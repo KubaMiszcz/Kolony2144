@@ -39,6 +39,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
     const res = [['name', 'qty'],
                  ...resources.map(r => [r.Name, r.Quantity])
     ];
+
     return res;
   }
 

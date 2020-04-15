@@ -64,6 +64,7 @@ export class GameService {
       .forEach(i => {
         res.push(new Asset().Deserialize(i));
       });
+
     return res;
   }
 
@@ -141,7 +142,7 @@ export class GameService {
       this.updateNews();
       this.financeService.emitCurrentCash();
       this.router.navigate(['/start']);
-    },         200);
+    }, 200);
   }
 
   updateNews() {

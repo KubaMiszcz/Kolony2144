@@ -42,7 +42,7 @@
     "number-literal-format": true,
     "align": [
       true,
-      "arguments",
+      // "arguments",
       "elements",
       // "members",
       "parameters",

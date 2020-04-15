@@ -42,6 +42,7 @@ export class PowerOverviewComponent implements OnInit {
       ]);
     });
     res.push(['', '', 'Total', this.sharedService.sumColumnOftable(res.slice(1), 3)]);
+
     return res;
   }
 
@@ -60,6 +61,7 @@ export class PowerOverviewComponent implements OnInit {
       ]);
     });
     res.push(['', '', 'Total', this.sharedService.sumColumnOftable(res.slice(1), 3)]);
+
     return res;
   }
 

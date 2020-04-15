@@ -43,6 +43,7 @@ export class Asset implements IAsset, IDeserializable {
 
   Deserialize(input: any): this {
     Object.assign(this, input);
+
     return this;
   }
 }

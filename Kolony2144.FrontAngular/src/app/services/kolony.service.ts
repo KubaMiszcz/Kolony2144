@@ -43,6 +43,7 @@ export class KolonyService {
       .forEach(i => {
         res.push(new Asset().Deserialize(i));
       });
+
     return res;
   }
 

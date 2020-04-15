@@ -32,6 +32,7 @@ export class Building implements IBuilding, IDeserializable {
 
   Deserialize(input: any): this {
     Object.assign(this, input);
+
     return this;
   }
 }

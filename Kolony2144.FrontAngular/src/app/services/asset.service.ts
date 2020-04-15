@@ -112,6 +112,7 @@ export class AssetService {
         consumedQty += (asset.Quantity * consumedItem.Quantity);
       }
     });
+
     return consumedQty;
   }
 
@@ -130,6 +131,7 @@ export class AssetService {
         producedQty += (asset.Quantity * producedItem.Quantity);
       }
     });
+
     return producedQty;
   }
 
@@ -167,6 +169,7 @@ export class AssetService {
         res.push(asset);
       }
     });
+
     return res;
   }
 
@@ -202,6 +205,7 @@ export class AssetService {
   getUoMByName(itemName: string) {
     // return this.allWikiEntites.find(m => m.Name === item.Name).UoM;
     console.log('getUoMForSimpleAsset..........................................');
+
     return 'fixit';
   }
 

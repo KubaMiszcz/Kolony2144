@@ -23,11 +23,13 @@ export class SharedService {
   getRandomValueFromEnum(list: string[]): string {
     const count = list.length;
     const n = Math.round(Math.random() * count);
+
     return list[n];
   }
 
   Round(val: number, precision: number): number {
     const base = Math.pow(10, precision);
+
     return Math.round((val * base)) / base;
   }
 

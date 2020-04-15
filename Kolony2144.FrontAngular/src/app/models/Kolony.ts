@@ -39,6 +39,7 @@ export class Kolony implements IKolony, IDeserializable {
 
   Deserialize(input: any): this {
     Object.assign(this, input);
+
     return this;
   }
 }

@@ -40,6 +40,7 @@ export class FinancesOverviewComponent implements OnInit {
       ]);
     });
     res.push(['', '', 'Total', this.sharedService.sumColumnOftable(res.slice(1), 3)]);
+
     return res;
   }
 
