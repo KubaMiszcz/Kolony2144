@@ -8,7 +8,6 @@ export interface IFullEntity extends IEntity, IAsset, IBuilding, IWikiEntity {
 
 export interface IEntity {
   Name: string;
-  Size: number;
   Type: AssetTypesEnum;
   Tags: string[];
   CreationCost: ISimplifiedResource[];
@@ -30,7 +29,6 @@ export interface IAsset extends IEntity {
 
 export class Asset implements IAsset, IDeserializable {
   Name: string;
-  Size: number;
   Type: AssetTypesEnum;
   Tags: string[];
   Price: number;

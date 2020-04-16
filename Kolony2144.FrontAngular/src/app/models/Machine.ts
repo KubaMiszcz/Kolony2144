@@ -11,7 +11,7 @@ export const AllMachines: IFullEntity[] = [
   {
     Name: MachinesNames.PowerGenerator,
     Description: 'simple power coal powered generator', ImageUrl: '/assets/wiki-icons/machine.png',
-    Size: 10,
+
     Type: AssetTypesEnum.Machine,
     Tags: [MachineTypesEnum.PowerSource, , GenericTypesEnum.Tradeable],
     Price: 5000,

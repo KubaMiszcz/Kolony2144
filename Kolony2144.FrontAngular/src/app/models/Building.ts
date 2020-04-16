@@ -21,7 +21,6 @@ export class Building implements IBuilding, IDeserializable {
   Tags: string[];
   Quantity: number;
   Name: string;
-  Size: number;
   Type: AssetTypesEnum;
   SubType: string;
   CreationCost: ISimplifiedResource[];
@@ -40,7 +39,6 @@ export const AllBuildings: IFullEntity[] = [
   {
     Name: BuildingNames.Habitat,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
-    Size: 100,
     Type: AssetTypesEnum.Building,
     Tags: [BuildingTypesEnum.Maintenance],
     Price: 0,
@@ -60,7 +58,6 @@ export const AllBuildings: IFullEntity[] = [
   {
     Name: BuildingNames.Warehouse,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
-    Size: 1000,
     Type: AssetTypesEnum.Building,
     Tags: [],
     Price: 0,
@@ -80,7 +77,7 @@ export const AllBuildings: IFullEntity[] = [
   {
     Name: BuildingNames.SolarPanel,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
-    Size: 1000,
+
     Type: AssetTypesEnum.Building,
     Tags: [BuildingTypesEnum.PowerSource],
     Price: 0,
@@ -99,7 +96,7 @@ export const AllBuildings: IFullEntity[] = [
   {
     Name: BuildingNames.Workshop,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
-    Size: 100,
+
     Type: AssetTypesEnum.Building,
     Tags: [BuildingTypesEnum.Production],
     Price: 0,
@@ -120,7 +117,7 @@ export const AllBuildings: IFullEntity[] = [
   {
     Name: BuildingNames.Factory,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
-    Size: 200,
+
     Type: AssetTypesEnum.Building,
     Tags: [BuildingTypesEnum.Production],
     Price: 0,
@@ -142,7 +139,7 @@ export const AllBuildings: IFullEntity[] = [
   {
     Name: BuildingNames.CargoBay,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
-    Size: 200,
+
     Type: AssetTypesEnum.Building,
     Tags: [],
     Price: 0,
