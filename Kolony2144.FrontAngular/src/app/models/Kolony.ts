@@ -2,15 +2,18 @@ import { IAsset } from './Entity';
 import { ResourceName } from './Resource';
 import { ResourceTypesEnum, AssetTypesEnum } from './enums/Types.enum';
 import { IDeserializable } from '../core/interfaces/deserializable';
+import { IBuilding } from './Building';
 
 export interface IKolony {
   Name: string;
   Assets: IAsset[];
+  Buildings: IBuilding[];
 }
 
 export class Kolony implements IKolony, IDeserializable {
   Name: string;
   Assets: IAsset[] = [];
+  Buildings: IBuilding[] = [];
   // get Cash(): number { return this.Assets.find(m => m.Name === ResourceName.Cash).Quantity; }
   // set Cash(value: number) { this.Assets.find(m => m.SubType === ResourceTypesEnum.Cash).Quantity = value; }
 

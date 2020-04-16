@@ -8,7 +8,7 @@ import { IAsset, Asset } from '../models/Entity';
 import { PowerService } from './power.service';
 import { TradeService } from './trade.service';
 import { AllCivilianCrew } from '../models/Crew';
-import { AllBuildings } from '../models/Building';
+import { AllBuildings, IBuilding, Building } from '../models/Building';
 import { AllMachines } from '../models/Machine';
 import { CrewService } from './crew.service';
 import { FinanceService } from './finance.service';
@@ -16,7 +16,7 @@ import { SharedService } from './shared.service';
 import { WikiService } from './wiki.service';
 import { AssetTypesEnum, GenericTypesEnum } from '../models/enums/Types.enum';
 import { IKolony } from '../models/Kolony';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -26,15 +26,16 @@ export class GameService {
 
   private age = 100;
   get Age(): number { return Math.round(this.age * 10) / 10; }
-  set Age(value) { this.age = value; this.AgeBS.next(value); }
+  set Age(value: number) { this.age = value; this.AgeBS.next(value); }
   AgeBS = new BehaviorSubject<number>(100);
 
   private playerNotes = '';
   get PlayerNotes() { return this.playerNotes; }
-  set PlayerNotes(value) { this.playerNotes = value; this.PlayerNotesBS.next(value); }
+  set PlayerNotes(value: string) { this.playerNotes = value; this.PlayerNotesBS.next(value); }
   PlayerNotesBS = new BehaviorSubject<string>('');
 
   ALL_ASSETS_LIST: IAsset[] = [];
+  ALL_BUILDINGS_LIST: IBuilding[] = [];
 
   // isTurnComputing = false;
 
@@ -52,16 +53,25 @@ export class GameService {
   ) {
     this.playerNotes = sessionStorage.getItem('savedState');
     this.ALL_ASSETS_LIST = this.getAllInitialGameAssets();
+    this.ALL_BUILDINGS_LIST = this.getAllInitialGameBuildings();
     this.tradeService.tradeableCargo = this.getTradeableAssets();
     this.nextTurn();
   }
 
   getAllInitialGameAssets(): IAsset[] {
     const res = [];
-    [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines]
-      .forEach(i => {
-        res.push(new Asset().Deserialize(i));
-      });
+    [...AllResources, ...AllCivilianCrew, ...AllMachines].forEach(i => {
+      res.push(new Asset().Deserialize(i));
+    });
+
+    return res;
+  }
+
+  getAllInitialGameBuildings(): IBuilding[] {
+    const res = [];
+    [...AllBuildings].forEach(i => {
+      res.push(new Building().Deserialize(i));
+    });
 
     return res;
   }
