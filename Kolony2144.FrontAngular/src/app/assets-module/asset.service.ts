@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { KolonyService } from '../services/kolony.service';
-import { IAsset, ISimplifiedResource } from '../models/Entity';
+import { IAsset, ISimplifiedAsset, ICountableEntity } from '../models/Entity';
 import { ResourceTypesEnum, AssetTypesEnum } from '../models/enums/Types.enum';
 import { Kolony } from '../models/Kolony';
 import { ResourceName } from '../models/Resource';
@@ -17,13 +17,13 @@ import { WikiService } from '../wiki-module/wiki.service';
 })
 export class AssetService {
 
-  private assetList: IAsset[] = [];
+  kolonyAssetList: IAsset[] = [];
 
   constructor(
     private sharedService: SharedService,
     private kolonyService: KolonyService,
   ) {
-    this.assetList = this.kolonyService.getAllKolonyAssets();
+    this.kolonyAssetList = this.kolonyService.getAllKolonyAssets();
   }
 
 
@@ -32,11 +32,11 @@ export class AssetService {
 
 
   getVolatileAssets(): IAsset[] {
-    return this.assetList.filter(i => i.Tags.includes(ResourceTypesEnum.Volatile));
+    return this.kolonyAssetList.filter(i => i.Tags.includes(ResourceTypesEnum.Volatile));
   }
 
   getNonVolatileAssets(): IAsset[] {
-    return this.assetList.filter(i => !i.Tags.includes(ResourceTypesEnum.Volatile));
+    return this.kolonyAssetList.filter(i => !i.Tags.includes(ResourceTypesEnum.Volatile));
   }
 
   ClearVolatileResources() {
@@ -50,18 +50,20 @@ export class AssetService {
 
 
 
-  updateInventoryDueToMaintenance() {
-    this.assetList.forEach(asset => {
+  updateInventoryDueToMaintenance(assetList: ICountableEntity[]) {
+    assetList.forEach(asset => {
       asset.MaintenanceCost.forEach(consumedItem => {
-        this.assetList.find(a => a.Name === consumedItem.Name).Quantity -= (consumedItem.Quantity * asset.Quantity);
+        // fix what if  asset isnt exist in inventory? yyy??? error?
+        this.kolonyAssetList.find(a => a.Name === consumedItem.Name).Quantity -= (consumedItem.Quantity * asset.Quantity);
       });
     });
   }
 
-  updateInventoryDueToPassiveProducedItems() {
-    this.assetList.forEach(asset => {
+  updateInventoryDueToPassiveProducedItemsByAssets(assetList: ICountableEntity[]) {
+    assetList.forEach(asset => {
       asset.PassiveIncome.forEach(producedItem => {
-        this.assetList.find(a => a.Name === producedItem.Name).Quantity += (producedItem.Quantity * asset.Quantity);
+        // fix what if  asset isnt exist in inventory? add new asset to list
+        this.kolonyAssetList.find(a => a.Name === producedItem.Name).Quantity += (producedItem.Quantity * asset.Quantity);
       });
     });
   }
@@ -74,20 +76,20 @@ export class AssetService {
   /////////////////////////
   /////////////////////////
 
-  getAllAssets(): IAsset[] {
-    return this.assetList;
+  xgetAllAssets(): IAsset[] {
+    return this.kolonyAssetList;
   }
 
   getAllResources(): IAsset[] {
-    return this.assetList.filter(i => i.Type === AssetTypesEnum.Resource);
+    return this.kolonyAssetList.filter(i => i.Type === AssetTypesEnum.Resource);
   }
 
   getAssetByName(name: string): IAsset {
-    return this.assetList.find(i => i.Name === name);
+    return this.kolonyAssetList.find(i => i.Name === name);
   }
 
   getAssetsByType(type: AssetTypesEnum): IAsset[] {
-    return this.assetList.filter(i => i.Type === type);
+    return this.kolonyAssetList.filter(i => i.Type === type);
   }
 
 
@@ -95,7 +97,7 @@ export class AssetService {
     const asset = this.sharedService.cloneObject(newAsset) as IAsset;
     asset.Quantity = 0;
     asset.Price = 0;
-    this.assetList.push(asset);
+    this.kolonyAssetList.push(asset);
 
     return asset;
   }
@@ -105,7 +107,7 @@ export class AssetService {
 
   getAssetConsumptionQty(cosnumedAsset: IAsset): number {
     let consumedQty = 0;
-    this.assetList.forEach(asset => {
+    this.kolonyAssetList.forEach(asset => {
       const consumedItem = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name);
       if (consumedItem) {
         consumedQty += (asset.Quantity * consumedItem.Quantity);
@@ -124,7 +126,7 @@ export class AssetService {
 
   getAssetProductionQty(producedAsset: IAsset): number {
     let producedQty = 0;
-    this.assetList.forEach(asset => {
+    this.kolonyAssetList.forEach(asset => {
       const producedItem = asset.PassiveIncome.find(item => item.Name === producedAsset.Name);
       if (producedItem) {
         producedQty += (asset.Quantity * producedItem.Quantity);
@@ -146,7 +148,7 @@ export class AssetService {
 
   getAssetsByConsumedAssetName(consumedAssetName: ResourceName): IAsset[] {
     const res = [];
-    this.assetList.forEach(asset => {
+    this.kolonyAssetList.forEach(asset => {
       if (!!asset.MaintenanceCost.find(item => item.Name === consumedAssetName)) {
         res.push(asset);
       }
@@ -163,7 +165,7 @@ export class AssetService {
 
   getAssetsByProducedAssetName(producedAssetName: ResourceName): IAsset[] {
     const res = [];
-    this.assetList.forEach(asset => {
+    this.kolonyAssetList.forEach(asset => {
       if (!!asset.PassiveIncome.find(item => item.Name === producedAssetName)) {
         res.push(asset);
       }
@@ -174,7 +176,7 @@ export class AssetService {
 
 
 
-  findSimplifiedResourceInListByName(resourcesList: ISimplifiedResource[], name: ResourceName): ISimplifiedResource {
+  findSimplifiedResourceInListByName(resourcesList: ISimplifiedAsset[], name: ResourceName): ISimplifiedAsset {
     return resourcesList.find(r => r.Name === name);
   }
 
@@ -190,12 +192,12 @@ export class AssetService {
   // }
 
 
-  convertSimplifiedResourceToAsset(resource: ISimplifiedResource): IAsset {
+  convertSimplifiedResourceToAsset(resource: ISimplifiedAsset): IAsset {
     return this.convertSimplifiedResourceToAssetByName(resource.Name);
   }
 
   convertSimplifiedResourceToAssetByName(resourceName: string): IAsset {
-    return this.assetList.find(a => a.Name === resourceName);
+    return this.kolonyAssetList.find(a => a.Name === resourceName);
   }
 
 

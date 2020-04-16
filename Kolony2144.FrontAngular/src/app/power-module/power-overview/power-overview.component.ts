@@ -23,11 +23,11 @@ export class PowerOverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.assetsConsumingList = this.fillConsumungAssetList(this.assetService.getAssetsByConsumedAssetName(ResourceName.Energy));
+    this.assetsConsumingList = this.fillConsumingAssetList(this.assetService.getAssetsByConsumedAssetName(ResourceName.Energy));
     this.assetsProducingList = this.fillProducingAssetList(this.assetService.getAssetsByProducedAssetName(ResourceName.Energy));
   }
 
-  fillConsumungAssetList(resources: IAsset[]): any[] {
+  fillConsumingAssetList(resources: IAsset[]): any[] {
     const res: any[] = [
       ['name', 'per unit', 'qty', 'total']
     ];

@@ -10,17 +10,20 @@ export interface IEntity {
   Name: string;
   Type: AssetTypesEnum;
   Tags: string[];
-  CreationCost: ISimplifiedResource[];
-  MaintenanceCost: ISimplifiedResource[];
-  PassiveIncome: ISimplifiedResource[];
+  CreationCost: ISimplifiedAsset[];
+  MaintenanceCost: ISimplifiedAsset[];
+  PassiveIncome: ISimplifiedAsset[];
   UoM: UoMsEnum;
 }
 
-
-
-export interface IAsset extends IEntity {
-  Price: number;
+export interface ICountableEntity extends IEntity, ISimplifiedAsset {
   Quantity: number;
+  // HistoricalPrices: number[];
+}
+
+
+export interface IAsset extends IEntity, ICountableEntity {
+  Price: number;
   // HistoricalPrices: number[];
 }
 
@@ -32,9 +35,9 @@ export class Asset implements IAsset, IDeserializable {
   Type: AssetTypesEnum;
   Tags: string[];
   Price: number;
-  CreationCost: ISimplifiedResource[];
-  MaintenanceCost: ISimplifiedResource[];
-  PassiveIncome: ISimplifiedResource[];
+  CreationCost: ISimplifiedAsset[];
+  MaintenanceCost: ISimplifiedAsset[];
+  PassiveIncome: ISimplifiedAsset[];
   UoM: UoMsEnum;
   Quantity: number;
   // HistoricalPrices: number[];
@@ -53,7 +56,7 @@ export interface IWikiEntity {
 }
 
 
-export interface ISimplifiedResource {
+export interface ISimplifiedAsset {
   Name: string;
   Quantity: number;
 }

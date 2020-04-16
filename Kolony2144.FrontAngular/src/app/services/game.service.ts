@@ -17,6 +17,7 @@ import { AssetTypesEnum, GenericTypesEnum } from '../models/enums/Types.enum';
 import { IKolony } from '../models/Kolony';
 import { BehaviorSubject } from 'rxjs';
 import { PowerService } from '../power-module/power.service';
+import { BuildingService } from '../buildings-module/building.service';
 
 
 @Injectable({
@@ -50,6 +51,7 @@ export class GameService {
     private powerService: PowerService,
     private tradeService: TradeService,
     private wikiService: WikiService,
+    private buildingService: BuildingService,
   ) {
     this.playerNotes = sessionStorage.getItem('savedState');
     this.ALL_ASSETS_LIST = this.getAllInitialGameAssets();
@@ -110,9 +112,11 @@ export class GameService {
       // ##########################################
       // #REGION NEW TURN BEGINS
       this.assetService.ClearVolatileResources();
-      this.assetService.updateInventoryDueToMaintenance();
+      this.assetService.updateInventoryDueToMaintenance(this.assetService.kolonyAssetList);
+      this.assetService.updateInventoryDueToMaintenance(this.buildingService.kolonyBuildingsList);
       // todo MINING       // this.MiningService.mining
-      this.assetService.updateInventoryDueToPassiveProducedItems();
+      this.assetService.updateInventoryDueToPassiveProducedItemsByAssets(this.assetService.kolonyAssetList);
+      this.assetService.updateInventoryDueToPassiveProducedItemsByAssets(this.buildingService.kolonyBuildingsList);
 
       this.tradeService.prepareIncomingShip();
       this.tradeService.setTradeAnnouncement();

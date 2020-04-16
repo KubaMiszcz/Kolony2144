@@ -21,7 +21,7 @@ export class BuildingsOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.buildingsList = this.fillBuildingsList(this.buildingService.buildingList);
+    this.buildingsList = this.fillBuildingsList(this.buildingService.kolonyBuildingsList);
   }
 
   fillBuildingsList(resources: IBuilding[]): any[] {
