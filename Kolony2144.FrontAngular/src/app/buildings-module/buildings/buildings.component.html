@@ -1,8 +1,4 @@
 <div class="card my-2">
-  <!-- <progressbar [value]="60" [max]="100" class="progress m-2" style="height: 2em;" [striped]="true" [animate]="true">
-  </progressbar> -->
-  <!-- <progressbar [max]="warehouseCapacity" [value]="warehouseUsage" type="primary" [striped]="true" [animate]="true" class="my-2 progress" showValue="true"      style="height: 2em"> <i>{{warehouseUsage}} / {{warehouseCapacity}}</i></progressbar> -->
-  <!-- <h4 class="card-header "> </h4> -->
 
   <div class="card m-2 ">
     <h4 class="card-header "> Buildings overview</h4>
@@ -10,13 +6,12 @@
 
 
       <div class="card m-2 ">
-        <h4 class="card-header "> Buildings List</h4>
-        <div class="card-body p-1">
-          tabelka z budynkami wszystkimi jakie mam
-          <!-- <div class="d-flex flex-wrap"> -->
-          <!-- </div> -->
-        </div>
+        <app-tile-with-table [caption]="'Buildings List'" [header]="buildingsList[0]" [rows]="buildingsList.slice(1)"></app-tile-with-table>
       </div>
+
+
+
+
 
       <div class="card m-2 ">
         <h4 class="card-header "> Construction Panel</h4>

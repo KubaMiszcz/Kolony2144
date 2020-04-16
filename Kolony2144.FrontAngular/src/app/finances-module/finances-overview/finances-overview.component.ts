@@ -13,7 +13,7 @@ import { IAsset } from 'src/app/models/Entity';
   styleUrls: ['./finances-overview.component.scss']
 })
 export class FinancesOverviewComponent implements OnInit {
-  assetList: any[];
+  assetList: any[] = [];
 
   constructor(
     private kolonyService: KolonyService,

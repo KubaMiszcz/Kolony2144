@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./buildings.component.scss']
 })
 export class BuildingsComponent implements OnInit {
+  buildingsList: any[] = [];
+
   constructor(
 
   ) {

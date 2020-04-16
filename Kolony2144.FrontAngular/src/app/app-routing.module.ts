@@ -12,7 +12,7 @@ import { DevTabComponent } from './core/dev-tab/dev-tab.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },
-  { path: 'start', component: TradeOverviewComponent },
+  { path: 'start', component: BuildingsComponent },
   { path: 'trade', component: TradeOverviewComponent },
   { path: 'overview', component: OverviewComponent },
   { path: 'finances', component: FinancesOverviewComponent },
