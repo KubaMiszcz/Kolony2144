@@ -16,11 +16,17 @@
         <h4 class="card-header "> building list</h4>
         <div class="card-body p-1">
           kafelki z budynkami i dodawanie dokolejki
+          <div class="d-flex flex-wrap">
+            <app-asset-tile *ngFor="let item of allBuildingsList" [asset]="item"></app-asset-tile>
+          </div>
         </div>
       </div>
 
 
-      <app-tile-with-table [caption]="'Buildings List'" [header]="buildingsList[0]" [rows]="buildingsList.slice(1)"></app-tile-with-table>
+
+
+      <app-tile-with-table [caption]="'Buildings List'" [header]="kolonyBuildingsList[0]" [rows]="kolonyBuildingsList.slice(1)">
+      </app-tile-with-table>
 
 
 

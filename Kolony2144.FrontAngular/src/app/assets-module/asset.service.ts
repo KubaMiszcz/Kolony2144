@@ -11,6 +11,7 @@ import { GameService } from '../services/game.service';
 import { SharedService } from '../services/shared.service';
 import { TradeService } from '../trade-module/trade.service';
 import { WikiService } from '../wiki-module/wiki.service';
+import { UoMsEnum } from '../models/enums/UoMs.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -203,11 +204,11 @@ export class AssetService {
 
 
 
-  getUoMByName(itemName: string) {
+  getUoMByName(itemName: string): UoMsEnum {
     // return this.allWikiEntites.find(m => m.Name === item.Name).UoM;
     console.log('getUoMForSimpleAsset..........................................');
 
-    return 'fixit';
+    return 'fixit' as UoMsEnum;
   }
 
 }
