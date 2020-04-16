@@ -4,52 +4,31 @@
     <h4 class="card-header "> Buildings overview</h4>
     <div class="card-body p-1">
 
-
       <div class="card m-2 ">
-        <app-tile-with-table [caption]="'Buildings List'" [header]="buildingsList[0]" [rows]="buildingsList.slice(1)"></app-tile-with-table>
+        <h4 class="card-header "> Current Production Queue</h4>
+        <div class="card-body p-1">
+          kolejka budowy
+        </div>
       </div>
 
 
-
-
-
       <div class="card m-2 ">
-        <h4 class="card-header "> Construction Panel</h4>
+        <h4 class="card-header "> building list</h4>
         <div class="card-body p-1">
+          kafelki z budynkami i dodawanie dokolejki
+        </div>
+      </div>
 
-          <div class="card m-2 ">
-            <h4 class="card-header "> Current Production Queue</h4>
-            <div class="card-body p-1">
-              kolejka budowy
-            </div>
-          </div>
 
-          <div class="card m-2 ">
-            <h4 class="card-header "> building list</h4>
-            <div class="card-body p-1">
-              kafelki z budynkami i dodawanie dokolejki
-            </div>
-          </div>
+      <app-tile-with-table [caption]="'Buildings List'" [header]="buildingsList[0]" [rows]="buildingsList.slice(1)"></app-tile-with-table>
 
 
 
-          <div class="card m-2 ">
-            <h4 class="card-header ">
-              <i class="fa fa-chevron-right" aria-hidden="true"></i>
-              <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
-              <i class="fa fa-chevron-down" aria-hidden="true"></i>
-              <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
-              <i class="fas fa-chevron-circle-down    "></i>
-              <i class="fas fa-chevron-circle-right    "></i>
-              <i class="fas fa-chevron-down    "></i>
-              <i class="fas fa-chevron-right    "></i>
-              Current Production Queue</h4>
-            <div class="card-body p-1">
-              aaaaaaaaaaaaa
-            </div>
-          </div>
 
-          <!-- <div class="alert alert-warning alert-dismissible fade show m-2" role="alert">
+
+
+
+      <!-- <div class="alert alert-warning alert-dismissible fade show m-2" role="alert">
     <strong>Holy guacamole!</strong> You should check in on some of those fields below.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
@@ -61,8 +40,6 @@
 
 
 
-        </div>
-      </div>
     </div>
   </div>
 </div>

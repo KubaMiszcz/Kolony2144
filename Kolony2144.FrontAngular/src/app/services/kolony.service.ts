@@ -35,6 +35,8 @@ export class KolonyService {
 
   getAllKolonyAssets(): IAsset[] { return this.kolony.Assets; }
 
+  getAllKolonyBuildings(): IBuilding[] { return this.kolony.Buildings; }
+
 
   setInitialKolonyAssets(): IAsset[] {
     const res: IAsset[] = [];
