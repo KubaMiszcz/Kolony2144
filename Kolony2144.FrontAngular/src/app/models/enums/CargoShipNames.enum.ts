@@ -48,7 +48,7 @@ export enum CargoShipNames {
   Agememnon = 'Agememnon',
   Condor = 'Condor',
   Ingenuity = 'Ingenuity',
-  Minotuar = 'Minotuar',
+  Minotaur = 'Minotaur',
   Avius = 'Avius',
   Relentless = 'Relentless',
   Trailblazer = 'ISS Trailblazer',
