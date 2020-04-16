@@ -6,19 +6,19 @@ import { NgModule } from '@angular/core';
 import { OverviewComponent } from './overview-module/overview/overview.component';
 import { WikiComponent } from './wiki-module/wiki/wiki.component';
 import { AppSpinnerComponent } from './shared/spinner/spinner.component';
-import { BuildingsComponent } from './buildings-module/buildings/buildings.component';
+import { BuildingsOverviewComponent } from './buildings-module/buildings-overview/buildings-overview.component';
 import { FinancesOverviewComponent } from './finances-module/finances-overview/finances-overview.component';
 import { DevTabComponent } from './core/dev-tab/dev-tab.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },
-  { path: 'start', component: BuildingsComponent },
+  { path: 'start', component: BuildingsOverviewComponent },
   { path: 'trade', component: TradeOverviewComponent },
   { path: 'overview', component: OverviewComponent },
   { path: 'finances', component: FinancesOverviewComponent },
   { path: 'crew', component: CrewOverviewComponent },
   { path: 'power', component: PowerOverviewComponent },
-  { path: 'buildings', component: BuildingsComponent },
+  { path: 'buildings', component: BuildingsOverviewComponent },
   { path: 'wiki', component: WikiComponent },
   { path: 'devtab', component: DevTabComponent },
   { path: 'loading-screen', component: AppSpinnerComponent }
