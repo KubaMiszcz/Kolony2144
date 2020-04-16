@@ -80,7 +80,7 @@ export class TradeService {
 
 
   prepareIncomingShip() {
-    this.isShipLanded = this.sharedService.getRandomBoolean();
+    this.isShipLanded = this.sharedService.getRandomBoolean(this.landingProbability);
     this.updateResourcesPrices();
 
     if (this.isShipLanded) {
