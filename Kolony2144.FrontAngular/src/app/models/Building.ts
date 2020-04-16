@@ -1,4 +1,4 @@
-import { IFullEntity, IEntity, ISimplifiedResource } from './Entity';
+import { IFullEntity, IEntity, ISimplifiedResource, IWikiEntity } from './Entity';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
 import { AssetTypesEnum, BuildingTypesEnum } from './enums/Types.enum';
@@ -15,7 +15,6 @@ export enum BuildingNames {
 
 export interface IBuilding extends IEntity {
   Quantity: number;
-  // HistoricalPrices: number[];
 }
 
 export class Building implements IBuilding, IDeserializable {

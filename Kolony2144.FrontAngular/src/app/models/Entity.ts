@@ -3,10 +3,7 @@ import { AssetTypesEnum } from './enums/Types.enum';
 import { IDeserializable } from '../core/interfaces/deserializable';
 import { IBuilding } from './Building';
 
-export interface IFullEntity extends IEntity, IAsset, IBuilding {
-  Description: string;
-  ImageUrl: string;
-  Price: number;
+export interface IFullEntity extends IEntity, IAsset, IBuilding, IWikiEntity {
 }
 
 export interface IEntity {
@@ -27,6 +24,9 @@ export interface IAsset extends IEntity {
   Quantity: number;
   // HistoricalPrices: number[];
 }
+
+
+
 
 export class Asset implements IAsset, IDeserializable {
   Name: string;
@@ -49,7 +49,10 @@ export class Asset implements IAsset, IDeserializable {
 }
 
 
-
+export interface IWikiEntity {
+  Description: string;
+  ImageUrl: string;
+}
 
 
 export interface ISimplifiedResource {
