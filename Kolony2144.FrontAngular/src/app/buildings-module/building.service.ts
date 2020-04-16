@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { KolonyService } from './kolony.service';
+import { KolonyService } from '../services/kolony.service';
 import { IBuilding } from '../models/Building';
 
 @Injectable({

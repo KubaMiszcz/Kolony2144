@@ -1,18 +1,15 @@
-import { SharedService } from './shared.service';
+import { SharedService } from '../services/shared.service';
 import { Injectable } from '@angular/core';
-import { AssetService } from './asset.service';
+import { AssetService } from '../assets-module/asset.service';
 import { AssetTypesEnum, ResourceTypesEnum, GenericTypesEnum } from '../models/enums/Types.enum';
 import { IAsset } from '../models/Entity';
-import { CrewService } from './crew.service';
-import { FinanceService } from './finance.service';
-import { GameService } from './game.service';
-import { KolonyService } from './kolony.service';
-import { OverviewService } from './overview.service';
-import { PowerService } from './power.service';
-import { WikiService } from './wiki.service';
+import { GameService } from '../services/game.service';
+import { KolonyService } from '../services/kolony.service';
+import { OverviewService } from '../overview-module/overview.service';
 import { CargoShipNames } from '../models/enums/CargoShipNames.enum';
 import { CompanyNames } from '../models/enums/CompanyNames.enum';
 import { PlanetNames } from '../models/enums/PlanetNames.enum';
+import { FinanceService } from '../finances-module/finance.service';
 
 
 

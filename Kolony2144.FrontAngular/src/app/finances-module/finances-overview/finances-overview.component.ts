@@ -1,4 +1,4 @@
-import { AssetService } from './../../services/asset.service';
+import { AssetService } from '../../assets-module/asset.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { SharedModule } from './../../shared/shared.module';
 import { Component, OnInit } from '@angular/core';

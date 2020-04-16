@@ -70,8 +70,8 @@
     "align": [
       true,
       // "arguments",
-      "elements",
-      // "members",
+      // "elements",
+      "members",
       "parameters",
       "statements"
     ],

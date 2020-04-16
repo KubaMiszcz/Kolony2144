@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { IAsset } from '../models/Entity';
 import { AssetService } from '../assets-module/asset.service';
 import { ResourceName } from '../models/Resource';
-import { CrewService } from '../crew-module/crew.service';
-import { GameService } from './game.service';
-import { KolonyService } from './kolony.service';
-import { SharedService } from './shared.service';
+import { GameService } from '../services/game.service';
+import { KolonyService } from '../services/kolony.service';
+import { OverviewService } from '../overview-module/overview.service';
+import { SharedService } from '../services/shared.service';
+import { TradeService } from '../trade-module/trade.service';
 import { WikiService } from '../wiki-module/wiki.service';
 import { BehaviorSubject } from 'rxjs';
 

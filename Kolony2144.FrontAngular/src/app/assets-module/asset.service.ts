@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import { KolonyService } from './kolony.service';
+import { KolonyService } from '../services/kolony.service';
 import { IAsset, ISimplifiedResource } from '../models/Entity';
 import { ResourceTypesEnum, AssetTypesEnum } from '../models/enums/Types.enum';
 import { Kolony } from '../models/Kolony';
 import { ResourceName } from '../models/Resource';
-import { OverviewService } from './overview.service';
-import { PowerService } from './power.service';
-import { CrewService } from './crew.service';
-import { FinanceService } from './finance.service';
-import { GameService } from './game.service';
-import { SharedService } from './shared.service';
-import { TradeService } from './trade.service';
-import { WikiService } from './wiki.service';
+import { OverviewService } from '../overview-module/overview.service';
+import { CrewService } from '../crew-module/crew.service';
+import { FinanceService } from '../finances-module/finance.service';
+import { GameService } from '../services/game.service';
+import { SharedService } from '../services/shared.service';
+import { TradeService } from '../trade-module/trade.service';
+import { WikiService } from '../wiki-module/wiki.service';
 
 @Injectable({
   providedIn: 'root'

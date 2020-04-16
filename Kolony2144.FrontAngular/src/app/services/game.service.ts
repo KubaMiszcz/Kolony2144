@@ -2,21 +2,21 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { KolonyService } from './kolony.service';
 import { ResourceName, AllResources } from '../models/Resource';
-import { OverviewService } from './overview.service';
-import { AssetService } from './asset.service';
+import { OverviewService } from '../overview-module/overview.service';
+import { AssetService } from '../assets-module/asset.service';
 import { IAsset, Asset } from '../models/Entity';
-import { PowerService } from './power.service';
-import { TradeService } from './trade.service';
+import { TradeService } from '../trade-module/trade.service';
 import { AllCivilianCrew } from '../models/Crew';
 import { AllBuildings, IBuilding, Building } from '../models/Building';
 import { AllMachines } from '../models/Machine';
-import { CrewService } from './crew.service';
-import { FinanceService } from './finance.service';
+import { CrewService } from '../crew-module/crew.service';
+import { FinanceService } from '../finances-module/finance.service';
 import { SharedService } from './shared.service';
-import { WikiService } from './wiki.service';
+import { WikiService } from '../wiki-module/wiki.service';
 import { AssetTypesEnum, GenericTypesEnum } from '../models/enums/Types.enum';
 import { IKolony } from '../models/Kolony';
 import { BehaviorSubject } from 'rxjs';
+import { PowerService } from '../power-module/power.service';
 
 
 @Injectable({

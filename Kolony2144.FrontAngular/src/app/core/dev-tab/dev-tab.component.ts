@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FinanceService } from 'src/app/services/finance.service';
+import { FinanceService } from 'src/app/finances-module/finance.service';
 import { GameService } from 'src/app/services/game.service';
 import { KolonyService } from 'src/app/services/kolony.service';
 

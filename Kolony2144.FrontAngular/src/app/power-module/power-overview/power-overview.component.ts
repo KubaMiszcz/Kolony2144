@@ -1,4 +1,4 @@
-import { AssetService } from './../../services/asset.service';
+import { AssetService } from '../../assets-module/asset.service';
 import { Component, OnInit } from '@angular/core';
 import { Kolony } from 'src/app/models/Kolony';
 import { KolonyService } from 'src/app/services/kolony.service';

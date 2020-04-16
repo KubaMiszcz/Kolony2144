@@ -1,12 +1,12 @@
 import { GenericTypesEnum } from './../../models/enums/Types.enum';
 import { BuildingNames } from './../../models/Building';
-import { TradeService, TransactionTypeEnum, ICargoShip } from './../../services/trade.service';
+import { TradeService, TransactionTypeEnum, ICargoShip } from '../trade.service';
 import { IAsset } from 'src/app/models/Entity';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { KolonyService } from 'src/app/services/kolony.service';
-import { OverviewService } from 'src/app/services/overview.service';
+import { OverviewService } from 'src/app/overview-module/overview.service';
 import { GameService } from 'src/app/services/game.service';
-import { AssetService } from 'src/app/services/asset.service';
+import { AssetService } from 'src/app/assets-module/asset.service';
 import { AssetTypesEnum } from 'src/app/models/enums/Types.enum';
 import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
 import { ITradePanelData } from '../ship-trade-panel/ship-trade-panel.component';

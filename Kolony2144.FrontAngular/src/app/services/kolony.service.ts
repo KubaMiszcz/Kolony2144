@@ -6,14 +6,13 @@ import { AllCivilianCrew } from '../models/Crew';
 import { AllBuildings, IBuilding } from '../models/Building';
 import { AllMachines } from '../models/Machine';
 import { SharedService } from './shared.service';
-import { CrewService } from './crew.service';
-import { FinanceService } from './finance.service';
+import { CrewService } from '../crew-module/crew.service';
+import { FinanceService } from '../finances-module/finance.service';
 import { GameService } from './game.service';
-import { OverviewService } from './overview.service';
-import { PowerService } from './power.service';
-import { TradeService } from './trade.service';
-import { WikiService } from './wiki.service';
-import { AssetService } from './asset.service';
+import { OverviewService } from '../overview-module/overview.service';
+import { TradeService } from '../trade-module/trade.service';
+import { WikiService } from '../wiki-module/wiki.service';
+import { AssetService } from '../assets-module/asset.service';
 import { GenericTypesEnum } from '../models/enums/Types.enum';
 
 @Injectable({

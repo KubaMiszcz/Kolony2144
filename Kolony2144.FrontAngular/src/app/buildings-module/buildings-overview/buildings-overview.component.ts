@@ -1,6 +1,6 @@
 import { IBuilding } from './../../models/Building';
 import { Component, OnInit } from '@angular/core';
-import { BuildingService } from 'src/app/services/building.service';
+import { BuildingService } from 'src/app/buildings-module/building.service';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { ResourceName } from 'src/app/models/Resource';

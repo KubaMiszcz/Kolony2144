@@ -1,11 +1,11 @@
 import { SharedService } from './../../services/shared.service';
 import { GameService } from './../../services/game.service';
-import { FinanceService } from './../../services/finance.service';
+import { FinanceService } from '../../finances-module/finance.service';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { IAsset } from 'src/app/models/Entity';
-import { TradeService, TransactionTypeEnum } from './../../services/trade.service';
+import { TradeService, TransactionTypeEnum } from '../trade.service';
 import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
-import { AssetService } from 'src/app/services/asset.service';
+import { AssetService } from 'src/app/assets-module/asset.service';
 
 export interface ITradePanelData {
   Name: string;
@@ -51,7 +51,7 @@ export class ShipTradePanelComponent implements OnInit {
     }
   }
 
-  updateOnTableQty(row: ITradePanelData, val) {
+  updateOnTableQty(row: ITradePanelData, val: number) {
     if (val === 0) {
       row.QtyOnTable = 0;
     } else {

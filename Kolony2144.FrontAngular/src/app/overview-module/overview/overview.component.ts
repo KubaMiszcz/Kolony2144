@@ -1,11 +1,11 @@
-import { OverviewService } from './../../services/overview.service';
+import { OverviewService } from '../overview.service';
 import { AssetTypesEnum } from 'src/app/models/enums/Types.enum';
 import { IAsset } from './../../models/Entity';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { Kolony } from 'src/app/models/Kolony';
 import { GameService } from 'src/app/services/game.service';
-import { AssetService } from 'src/app/services/asset.service';
+import { AssetService } from 'src/app/assets-module/asset.service';
 
 @Component({
   selector: 'app-overview',
@@ -37,7 +37,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
 
   fillResourcesList(resources: IAsset[]): any[] {
     const res = [['name', 'qty'],
-                 ...resources.map(r => [r.Name, r.Quantity])
+    ...resources.map(r => [r.Name, r.Quantity])
     ];
 
     return res;

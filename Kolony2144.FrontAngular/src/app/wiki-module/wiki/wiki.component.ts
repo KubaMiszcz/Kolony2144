@@ -1,7 +1,7 @@
 import { IFullEntity } from './../../models/Entity';
 import { Component, OnInit } from '@angular/core';
 import { AssetTypesEnum } from './../../models/enums/Types.enum';
-import { WikiService } from './../../services/wiki.service';
+import { WikiService } from '../wiki.service';
 
 @Component({
   selector: 'app-wiki',

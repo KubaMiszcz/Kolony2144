@@ -2,8 +2,8 @@ import { IAsset, Asset } from 'src/app/models/Entity';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { GameService } from 'src/app/services/game.service';
 import { Component, OnInit } from '@angular/core';
-import { PowerService } from './../../services/power.service';
-import { FinanceService } from 'src/app/services/finance.service';
+import { FinanceService } from 'src/app/finances-module/finance.service';
+import { PowerService } from 'src/app/power-module/power.service';
 
 @Component({
   selector: 'app-status-bar',
