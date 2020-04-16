@@ -27,8 +27,8 @@ export class SharedService {
     return this.getRandomIntFromRange(baseValue - aroundValue, baseValue + aroundValue);
   }
 
-  getRandomBoolean() {
-    return Math.random() > 0.5 ? true : false;
+  getRandomBoolean(factor: number = 0.5) {
+    return Math.random() < factor ? true : false;
   }
 
 
