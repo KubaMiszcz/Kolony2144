@@ -96,7 +96,7 @@ export enum CompanyNames {
   Aurarts = 'Aurarts',
   Thorecords = 'Thorecords',
   Jupitelligence = 'Jupitelligence',
-  Twilightechnologies = 'Twilightechnologies',
+  TwilighTechnologies = 'Twiligh Technologies',
   Boarphone = 'Boarphone',
   Apacheman = 'Apacheman',
   Rhinolight = 'Rhinolight'
