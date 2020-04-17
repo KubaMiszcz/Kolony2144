@@ -27,6 +27,10 @@ export interface IAsset extends IEntity, ICountableEntity {
   // HistoricalPrices: number[];
 }
 
+export interface ITradeableAsset extends IAsset {
+  HistoricalPrices: number[];
+}
+
 
 
 
