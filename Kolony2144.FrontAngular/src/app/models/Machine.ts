@@ -5,6 +5,7 @@ import { UoMsEnum } from './enums/UoMs.enum';
 
 export enum MachinesNames {
   PowerGenerator = 'Power Generator',
+  TeslaCoil = 'Tesla Coil',
 }
 
 export const AllMachines: IFullEntity[] = [
@@ -25,6 +26,24 @@ export const AllMachines: IFullEntity[] = [
       { Name: ResourceName.Energy, Quantity: 100 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 21
+    Quantity: 10
+  },
+  {
+    Name: MachinesNames.TeslaCoil,
+    Description: 'sparks', ImageUrl: '/assets/wiki-icons/machine.png',
+
+    Type: AssetTypesEnum.Machine,
+    Tags: [GenericTypesEnum.Tradeable],
+    Price: 100,
+    CreationCost: [
+      { Name: ResourceName.Steel, Quantity: 50 }
+    ],
+    MaintenanceCost: [
+      { Name: ResourceName.Energy, Quantity: 10 }
+    ],
+    PassiveIncome: [
+    ],
+    UoM: UoMsEnum.pcs,
+    Quantity: 5
   }
 ];
