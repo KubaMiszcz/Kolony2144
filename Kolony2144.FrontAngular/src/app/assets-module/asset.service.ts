@@ -45,7 +45,7 @@ export class AssetService {
 
 
 
-  getAssetConsumptionQtyByName(assetName: string): number {
+  getEntityConsumptionQtyByName(assetName: string): number {
     const cosnumedAsset = this.getEntityByName(assetName);
     let consumedQty = 0;
     this.kolonyAssetList.forEach(asset => {
@@ -58,7 +58,7 @@ export class AssetService {
     return consumedQty;
   }
 
-  getAssetProductionQtyByName(assetName: string): number {
+  getEntityProductionQtyByName(assetName: string): number {
     const producedAsset = this.getEntityByName(assetName);
     let producedQty = 0;
     this.kolonyAssetList.forEach(asset => {
@@ -69,6 +69,30 @@ export class AssetService {
     });
 
     return producedQty;
+  }
+
+
+  getEntitiesByConsumedAssetName(consumedAssetName: ResourceName): ICountableEntity[] {
+    const res = [];
+    this.kolonyAssetList.forEach(asset => {
+      if (!!asset.MaintenanceCost.find(item => item.Name === consumedAssetName)) {
+        res.push(asset);
+      }
+    });
+
+    return res;
+  }
+
+
+  getEntitiesByProducedAssetName(producedAssetName: ResourceName): ICountableEntity[] {
+    const res = [];
+    this.kolonyAssetList.forEach(asset => {
+      if (!!asset.PassiveIncome.find(item => item.Name === producedAssetName)) {
+        res.push(asset);
+      }
+    });
+
+    return res;
   }
 
 
@@ -155,28 +179,10 @@ export class AssetService {
 
 
 
-  getAssetsByConsumedAsset(consumedAsset: IAsset): IAsset[] {
-    return this.getAssetsByConsumedAssetName(consumedAsset.Name as ResourceName);
-  }
-
-  getAssetsByConsumedAssetName(consumedAssetName: ResourceName): IAsset[] {
-    const res = [];
-    this.kolonyAssetList.forEach(asset => {
-      if (!!asset.MaintenanceCost.find(item => item.Name === consumedAssetName)) {
-        res.push(asset);
-      }
-    });
-
-    return res;
-  }
 
 
 
-  getAssetByProducedAsset(producedAsset: IAsset): IAsset[] {
-    return this.getAssetsByProducedAssetName(producedAsset.Name as ResourceName);
-  }
-
-  getAssetsByProducedAssetName(producedAssetName: ResourceName): IAsset[] {
+  getAssetsByProducedAssetNameDEPR(producedAssetName: ResourceName): IAsset[] {
     const res = [];
     this.kolonyAssetList.forEach(asset => {
       if (!!asset.PassiveIncome.find(item => item.Name === producedAssetName)) {
@@ -186,6 +192,8 @@ export class AssetService {
 
     return res;
   }
+
+
 
 
 

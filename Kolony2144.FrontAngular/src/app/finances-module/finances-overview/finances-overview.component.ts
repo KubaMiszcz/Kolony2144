@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Kolony } from 'src/app/models/Kolony';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { ResourceName } from 'src/app/models/Resource';
-import { IAsset } from 'src/app/models/Entity';
+import { IAsset, ICountableEntity } from 'src/app/models/Entity';
 
 @Component({
   selector: 'app-finances-overview',
@@ -13,7 +13,7 @@ import { IAsset } from 'src/app/models/Entity';
   styleUrls: ['./finances-overview.component.scss']
 })
 export class FinancesOverviewComponent implements OnInit {
-  assetList: any[] = [];
+  financeItemsTableRows: any[] = [];
 
   constructor(
     private kolonyService: KolonyService,
@@ -22,26 +22,29 @@ export class FinancesOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.assetList = this.fillAssetList(this.assetService.getAssetsByConsumedAssetName(ResourceName.Cash));
+    this.fillAssetList(this.assetService.getEntitiesByConsumedAssetName(ResourceName.Cash));
   }
 
-  fillAssetList(resources: IAsset[]): any[] {
+  fillAssetList(resources: ICountableEntity[]) {
     const res: any[] = [
-      ['name', 'per unit', 'qty', 'total']
+      ['name', 'type', 'per unit', 'qty', 'total']
     ];
 
     resources.forEach(r => {
       const perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.MaintenanceCost, ResourceName.Cash).Quantity;
       res.push([
         r.Name,
+        r.Type,
         perUnitUsage,
         r.Quantity,
         r.Quantity * perUnitUsage
       ]);
     });
-    res.push(['', '', 'Total', this.commonService.sumColumnOftable(res.slice(1), 3)]);
 
-    return res;
+    const colNo = res[0].indexOf('total');
+    res.push(['', '', '', 'Total', this.commonService.sumColumnOftable(res.slice(1), colNo)]);
+
+    this.financeItemsTableRows = res;
   }
 
 }

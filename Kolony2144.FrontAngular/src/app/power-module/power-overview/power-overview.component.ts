@@ -1,10 +1,11 @@
-import { AssetService } from '../../assets-module/asset.service';
 import { Component, OnInit } from '@angular/core';
 import { Kolony } from 'src/app/models/Kolony';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { CommonService } from 'src/app/services/common.service';
 import { ResourceName } from 'src/app/models/Resource';
-import { IAsset } from 'src/app/models/Entity';
+import { IAsset, ICountableEntity } from 'src/app/models/Entity';
+import { PowerService } from '../power.service';
+import { AssetService } from 'src/app/assets-module/asset.service';
 
 @Component({
   selector: 'app-power-overview',
@@ -12,57 +13,67 @@ import { IAsset } from 'src/app/models/Entity';
   styleUrls: ['./power-overview.component.scss']
 })
 export class PowerOverviewComponent implements OnInit {
-  assetsConsumingList: any[];
-  assetsProducingList: any[];
+  consumingItemsTableRows: any[] = [];
+  producingItemsTableRows: any[] = [];
 
   constructor(
     private kolonyService: KolonyService,
     private commonService: CommonService,
     private assetService: AssetService,
+    private powerService: PowerService,
   ) {
   }
 
   ngOnInit(): void {
-    this.assetsConsumingList = this.fillConsumingAssetList(this.assetService.getAssetsByConsumedAssetName(ResourceName.Energy));
-    this.assetsProducingList = this.fillProducingAssetList(this.assetService.getAssetsByProducedAssetName(ResourceName.Energy));
+    this.fillConsumingAssetList(this.powerService.powerConsumers);
+    this.fillProducingAssetList(this.powerService.powerSources);
   }
 
-  fillConsumingAssetList(resources: IAsset[]): any[] {
-    const res: any[] = [
-      ['name', 'per unit', 'qty', 'total']
+  fillConsumingAssetList(resources: ICountableEntity[]) {
+    const res: any[][] = [
+      ['name', 'type', 'per unit', 'qty', 'total']
     ];
 
     resources.forEach(r => {
       const perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.MaintenanceCost, ResourceName.Energy).Quantity;
       res.push([
         r.Name,
+        r.Type,
         perUnitUsage,
         r.Quantity,
         r.Quantity * perUnitUsage
       ]);
     });
-    res.push(['', '', 'Total', this.commonService.sumColumnOftable(res.slice(1), 3)]);
 
-    return res;
+    const colNo = res[0].indexOf('total');
+    res.push(['', '', '', 'Total', this.commonService.sumColumnOftable(res.slice(1), colNo)]);
+
+    this.consumingItemsTableRows = res;
   }
 
-  fillProducingAssetList(resources: IAsset[]): any[] {
-    const res: any[] = [
-      ['name', 'per unit', 'qty', 'total']
+  fillProducingAssetList(resources: ICountableEntity[]) {
+    const res: any[][] = [
+      ['name', 'type', 'per unit', 'qty', 'total']
     ];
 
     resources.forEach(r => {
       const perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.PassiveIncome, ResourceName.Energy).Quantity;
       res.push([
         r.Name,
+        r.Type,
         perUnitUsage,
         r.Quantity,
         r.Quantity * perUnitUsage
       ]);
     });
-    res.push(['', '', 'Total', this.commonService.sumColumnOftable(res.slice(1), 3)]);
 
-    return res;
+    const colNo = res[0].indexOf('total');
+    res.push(['', '', '', 'Total', this.commonService.sumColumnOftable(res.slice(1), colNo)]);
+
+    this.producingItemsTableRows = res;
   }
+
+
+
 
 }

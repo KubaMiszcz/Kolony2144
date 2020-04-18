@@ -19,17 +19,17 @@ export class PowerService {
     private assetService: AssetService,
     private kolonyService: KolonyService,
   ) {
-    // this.powerSources=assetService.
-
+    this.powerConsumers = this.assetService.getEntitiesByConsumedAssetName(ResourceName.Energy);
+    this.powerSources = this.assetService.getEntitiesByProducedAssetName(ResourceName.Energy);
   }
 
   getEnergyProduction(): number {
     // fixit it counts all except buildings - fixit somehow
-    return this.assetService.getAssetProductionQtyByName(ResourceName.Energy);
+    return this.assetService.getEntityProductionQtyByName(ResourceName.Energy);
   }
 
   getEnergyUsage(): number {
     // fixit it counts all except buildings - fixit somehow
-    return this.assetService.getAssetConsumptionQtyByName(ResourceName.Energy);
+    return this.assetService.getEntityConsumptionQtyByName(ResourceName.Energy);
   }
 }
