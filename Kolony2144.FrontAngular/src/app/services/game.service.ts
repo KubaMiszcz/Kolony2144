@@ -45,8 +45,8 @@ export class GameService {
   constructor(
     private router: Router,
     private commonService: CommonService,
-    private kolonyService: KolonyService,
     private sharedService: SharedService,
+    private kolonyService: KolonyService,
     private assetService: AssetService,
     private crewService: CrewService,
     private financeService: FinanceService,
