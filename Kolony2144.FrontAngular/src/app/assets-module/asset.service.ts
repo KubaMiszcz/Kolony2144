@@ -18,91 +18,35 @@ import { UoMsEnum } from '../models/enums/UoMs.enum';
   providedIn: 'root'
 })
 export class AssetService {
-
-  kolonyAssetList: IAsset[] = [];
+  allKolonyAssetList: IAsset[] = [];
 
   constructor(
     private commonService: CommonService,
     private sharedService: SharedService,
     private kolonyService: KolonyService,
   ) {
-    this.kolonyAssetList = this.kolonyService.getAllKolonyAssets();
-  }
-
-  getEntityByName(name: string): ICountableEntity {
-    return this.kolonyAssetList.find(i => i.Name === name);
+    this.allKolonyAssetList = this.kolonyService.getAllKolonyAssets();
   }
 
 
-
-
-
-  getVolatileEntities(): ICountableEntity[] {
-    return this.kolonyAssetList.filter(i => i.Tags.includes(ResourceTypesEnum.Volatile));
-  }
-
-  ClearVolatileEntities() {
-    this.getVolatileEntities().forEach(element => element.Quantity = 0);
+  getAssetByName(name: string): IAsset {
+    return this.allKolonyAssetList.find(i => i.Name === name);
   }
 
 
-  /**
-   * returns consumed qty of named entity by all kolony assets buildings etc
-   *@param entityName name of consumed entity
-   */
-  getEntityConsumptionQtyByName(entityName: string): number {
-    const cosnumedAsset = this.getEntityByName(entityName);
-    let consumedQty = 0;
-    this.kolonyAssetList.forEach(asset => {
-      const consumedItem = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name);
-      if (consumedItem) {
-        consumedQty += (asset.Quantity * consumedItem.Quantity);
-      }
-    });
 
-    return consumedQty;
+
+
+  getVolatileAssets(): IAsset[] {
+    return this.allKolonyAssetList.filter(i => i.Tags.includes(ResourceTypesEnum.Volatile));
   }
 
-  /**
- * returns produced qty of named entity by all kolony assets buildings etc
- *@param entityName name of produced entity
- */
-  getEntityProductionQtyByName(assetName: string): number {
-    const producedAsset = this.getEntityByName(assetName);
-    let producedQty = 0;
-    this.kolonyAssetList.forEach(asset => {
-      const producedItem = asset.PassiveIncome.find(item => item.Name === producedAsset.Name);
-      if (producedItem) {
-        producedQty += (asset.Quantity * producedItem.Quantity);
-      }
-    });
-
-    return producedQty;
+  ClearVolatileAssets() {
+    this.getVolatileAssets().forEach(element => element.Quantity = 0);
   }
 
 
-  getEntitiesByConsumedAssetName(consumedAssetName: ResourceName): ICountableEntity[] {
-    const res = [];
-    this.kolonyAssetList.forEach(asset => {
-      if (!!asset.MaintenanceCost.find(item => item.Name === consumedAssetName)) {
-        res.push(asset);
-      }
-    });
 
-    return res;
-  }
-
-
-  getEntitiesByProducedAssetName(producedAssetName: ResourceName): ICountableEntity[] {
-    const res = [];
-    this.kolonyAssetList.forEach(asset => {
-      if (!!asset.PassiveIncome.find(item => item.Name === producedAssetName)) {
-        res.push(asset);
-      }
-    });
-
-    return res;
-  }
 
 
 
@@ -113,7 +57,7 @@ export class AssetService {
       entity.MaintenanceCost.forEach(consumedItem => {
         // fix what if  asset isnt exist in inventory? yyy??? error? 0?? omit?
         this.sharedService
-          .findItemInListByName(this.kolonyAssetList, consumedItem.Name).Quantity -= (consumedItem.Quantity * entity.Quantity);
+          .findItemInListByName(this.allKolonyAssetList, consumedItem.Name).Quantity -= (consumedItem.Quantity * entity.Quantity);
       });
     });
   }
@@ -123,7 +67,7 @@ export class AssetService {
       entity.PassiveIncome.forEach(producedItem => {
         // fix what if  asset isnt exist in inventory? add new asset to list
         this.sharedService
-          .findItemInListByName(this.kolonyAssetList, producedItem.Name).Quantity += (producedItem.Quantity * entity.Quantity);
+          .findItemInListByName(this.allKolonyAssetList, producedItem.Name).Quantity += (producedItem.Quantity * entity.Quantity);
       });
     });
   }
@@ -159,7 +103,7 @@ export class AssetService {
     assetList.forEach(asset => {
       asset.MaintenanceCost.forEach(consumedItem => {
         // fix what if  asset isnt exist in inventory? yyy??? error?
-        this.kolonyAssetList.find(a => a.Name === consumedItem.Name).Quantity -= (consumedItem.Quantity * asset.Quantity);
+        this.allKolonyAssetList.find(a => a.Name === consumedItem.Name).Quantity -= (consumedItem.Quantity * asset.Quantity);
       });
     });
   }
@@ -168,7 +112,7 @@ export class AssetService {
     assetList.forEach(asset => {
       asset.PassiveIncome.forEach(producedItem => {
         // fix what if  asset isnt exist in inventory? add new asset to list
-        this.kolonyAssetList.find(a => a.Name === producedItem.Name).Quantity += (producedItem.Quantity * asset.Quantity);
+        this.allKolonyAssetList.find(a => a.Name === producedItem.Name).Quantity += (producedItem.Quantity * asset.Quantity);
       });
     });
   }
@@ -181,20 +125,14 @@ export class AssetService {
   /////////////////////////
   /////////////////////////
 
-  getAllAssets(): IAsset[] {
-    return this.kolonyAssetList;
-  }
-
   getAllResources(): IAsset[] {
-    return this.kolonyAssetList.filter(i => i.Type === AssetTypesEnum.Resource);
+    return this.allKolonyAssetList.filter(i => i.Type === AssetTypesEnum.Resource);
   }
 
-  getAssetByName(name: string): IAsset {
-    return this.kolonyAssetList.find(i => i.Name === name);
-  }
+
 
   getAssetsByType(type: AssetTypesEnum): IAsset[] {
-    return this.kolonyAssetList.filter(i => i.Type === type);
+    return this.allKolonyAssetList.filter(i => i.Type === type);
   }
 
 
@@ -202,7 +140,7 @@ export class AssetService {
     const asset = this.commonService.cloneObject(newAsset) as IAsset;
     asset.Quantity = 0;
     asset.Price = 0;
-    this.kolonyAssetList.push(asset);
+    this.allKolonyAssetList.push(asset);
 
     return asset;
   }
@@ -222,7 +160,7 @@ export class AssetService {
   }
 
   convertSimplifiedResourceToAssetByName(resourceName: string): IAsset {
-    return this.kolonyAssetList.find(a => a.Name === resourceName);
+    return this.allKolonyAssetList.find(a => a.Name === resourceName);
   }
 
 

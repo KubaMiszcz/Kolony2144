@@ -47,6 +47,7 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceName.Steel, Quantity: 5 }
     ],
     MaintenanceCost: [
+      { Name: ResourceName.Cash, Quantity: 100 },
       { Name: ResourceName.Energy, Quantity: 10 }
     ],
     PassiveIncome: [
@@ -66,6 +67,7 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceName.Steel, Quantity: 10 }
     ],
     MaintenanceCost: [
+      { Name: ResourceName.Cash, Quantity: 100 },
       { Name: ResourceName.Energy, Quantity: 10 }
     ],
     PassiveIncome: [
@@ -86,6 +88,7 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceName.Steel, Quantity: 20 }
     ],
     MaintenanceCost: [
+      { Name: ResourceName.Cash, Quantity: 100 }
     ],
     PassiveIncome: [
       { Name: ResourceName.Energy, Quantity: 500 }

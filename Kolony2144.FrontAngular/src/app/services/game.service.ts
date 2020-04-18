@@ -19,6 +19,7 @@ import { PowerService } from '../power-module/power.service';
 import { BuildingService } from '../buildings-module/building.service';
 import { CommonService } from './common.service';
 import { SharedService } from './shared.service';
+import { EntityService } from './entity.service';
 
 
 @Injectable({
@@ -47,6 +48,7 @@ export class GameService {
     private commonService: CommonService,
     private sharedService: SharedService,
     private kolonyService: KolonyService,
+    private entityService: EntityService,
     private assetService: AssetService,
     private crewService: CrewService,
     private financeService: FinanceService,
@@ -97,13 +99,13 @@ export class GameService {
 
       // ##########################################
       // #REGION NEW TURN BEGINS
-      this.assetService.ClearVolatileEntities();
+      this.assetService.ClearVolatileAssets();
       this.assetService.updateInventoryDueToMaintenanceCost(
-        [...this.buildingService.kolonyBuildingsList, ...this.assetService.kolonyAssetList]
+        [...this.buildingService.kolonyBuildingsList, ...this.assetService.allKolonyAssetList]
       );
       // todo MINING       // this.MiningService.mining
       this.assetService.updateInventoryDueToPassiveProducedItems(
-        [...this.buildingService.kolonyBuildingsList, ...this.assetService.kolonyAssetList]
+        [...this.buildingService.kolonyBuildingsList, ...this.assetService.allKolonyAssetList]
       );
 
       this.tradeService.prepareIncomingShip();
@@ -139,8 +141,8 @@ export class GameService {
 
 
     // news about cash
-    resource = this.assetService.getEntityByName(ResourceName.Cash);
-    consumption = this.assetService.getEntityConsumptionQtyByName(resource.Name);
+    resource = this.assetService.getAssetByName(ResourceName.Cash);
+    consumption = this.entityService.getEntityConsumptionQtyByName(resource.Name);
     if (resource.Quantity < 0) {
       this.overviewService.addNews('!!! CASH RUNS OUT, BAILIFF IS COMING TO KOLONY !!!');
     }
@@ -150,7 +152,7 @@ export class GameService {
 
     // news about food
     resource = this.assetService.getAssetByName(ResourceName.Food);
-    consumption = this.assetService.getEntityConsumptionQtyByName(resource.Name);
+    consumption = this.entityService.getEntityConsumptionQtyByName(resource.Name);
     if (resource.Quantity < 0) {
       this.overviewService.addNews('!!! HUNGER IN KOLONY !!!');
     }

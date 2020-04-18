@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Kolony, IKolony } from '../models/Kolony';
 import { AllResources, ResourceName as ResourceName } from '../models/Resource';
-import { IAsset, Asset } from '../models/Entity';
+import { IAsset, Asset, ICountableEntity } from '../models/Entity';
 import { AllCivilianCrew } from '../models/Crew';
 import { AllBuildings, IBuilding } from '../models/Building';
 import { AllMachines } from '../models/Machine';
@@ -14,6 +14,7 @@ import { TradeService } from '../trade-module/trade.service';
 import { WikiService } from '../wiki-module/wiki.service';
 import { AssetService } from '../assets-module/asset.service';
 import { GenericTypesEnum } from '../models/enums/Types.enum';
+import { SharedService } from './shared.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +26,16 @@ export class KolonyService {
 
   constructor(
     private commonService: CommonService,
+    private sharedService: SharedService,
   ) {
     this.InitNewKolony();
+  }
 
+  getAllKolonyEntities(): ICountableEntity[] {
+    return [
+      ...this.kolony.Assets,
+      ...this.kolony.Buildings
+    ];
   }
 
   getAllKolonyAssets(): IAsset[] { return this.kolony.Assets; }
@@ -73,6 +81,10 @@ export class KolonyService {
 
     return res;
   }
+
+
+
+  // this.cashConsumers = this.assetService.getEntitiesByConsumedAssetName(ResourceName.Cash);
 
 
   //#endregion

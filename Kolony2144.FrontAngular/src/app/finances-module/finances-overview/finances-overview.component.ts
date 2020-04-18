@@ -1,3 +1,4 @@
+import { FinanceService } from './../finance.service';
 import { AssetService } from '../../assets-module/asset.service';
 import { CommonService } from 'src/app/services/common.service';
 import { SharedModule } from './../../shared/shared.module';
@@ -20,11 +21,11 @@ export class FinancesOverviewComponent implements OnInit {
     private kolonyService: KolonyService,
     private commonService: CommonService,
     private sharedService: SharedService,
-    private assetService: AssetService,
+    private financeService: FinanceService,
   ) { }
 
   ngOnInit(): void {
-    this.fillAssetList(this.assetService.getEntitiesByConsumedAssetName(ResourceName.Cash));
+    this.fillAssetList(this.financeService.cashConsumers);
   }
 
   fillAssetList(resources: ICountableEntity[]) {
