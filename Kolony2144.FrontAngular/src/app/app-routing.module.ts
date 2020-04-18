@@ -9,11 +9,13 @@ import { AppSpinnerComponent } from './shared/spinner/spinner.component';
 import { BuildingsOverviewComponent } from './buildings-module/buildings-overview/buildings-overview.component';
 import { FinancesOverviewComponent } from './finances-module/finances-overview/finances-overview.component';
 import { DevTabComponent } from './core/dev-tab/dev-tab.component';
+import { WarehouseOverviewComponent } from './warehouse-module/warehouse-overview/warehouse-overview.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },
-  { path: 'start', component: BuildingsOverviewComponent },
+  { path: 'start', component: WarehouseOverviewComponent },
   { path: 'trade', component: TradeOverviewComponent },
+  { path: 'warehouse', component: WarehouseOverviewComponent },
   { path: 'overview', component: OverviewComponent },
   { path: 'finances', component: FinancesOverviewComponent },
   { path: 'crew', component: CrewOverviewComponent },

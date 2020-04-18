@@ -20,7 +20,8 @@ export const AllMachines: IFullEntity[] = [
       { Name: ResourceName.Steel, Quantity: 5 }
     ],
     MaintenanceCost: [
-      { Name: ResourceName.Cash, Quantity: 20 }
+      { Name: ResourceName.Cash, Quantity: 20 },
+      { Name: ResourceName.StorageSpace, Quantity: 20 }
     ],
     PassiveIncome: [
       { Name: ResourceName.Energy, Quantity: 100 }
@@ -39,7 +40,8 @@ export const AllMachines: IFullEntity[] = [
       { Name: ResourceName.Steel, Quantity: 50 }
     ],
     MaintenanceCost: [
-      { Name: ResourceName.Energy, Quantity: 10 }
+      { Name: ResourceName.Energy, Quantity: 10 },
+      { Name: ResourceName.StorageSpace, Quantity: 10 }
     ],
     PassiveIncome: [
     ],

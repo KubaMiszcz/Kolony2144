@@ -1,44 +1,43 @@
+import { GenericTypesEnum } from './../../models/enums/Types.enum';
 import { Component, OnInit } from '@angular/core';
-import { Kolony } from 'src/app/models/Kolony';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { CommonService } from 'src/app/services/common.service';
-import { ResourceName } from 'src/app/models/Resource';
-import { IAsset, ICountableEntity } from 'src/app/models/Entity';
-import { PowerService } from '../power.service';
-import { AssetService } from 'src/app/assets-module/asset.service';
 import { SharedService } from 'src/app/services/shared.service';
-import { GenericTypesEnum } from 'src/app/models/enums/Types.enum';
+import { FinanceService } from 'src/app/finances-module/finance.service';
+import { ICountableEntity } from 'src/app/models/Entity';
+import { ResourceName } from 'src/app/models/Resource';
+import { WarehouseService } from '../warehouse.service';
 
 @Component({
-  selector: 'app-power-overview',
-  templateUrl: './power-overview.component.html',
-  styleUrls: ['./power-overview.component.scss']
+  selector: 'app-warehouse-overview',
+  templateUrl: './warehouse-overview.component.html',
+  styleUrls: ['./warehouse-overview.component.scss']
 })
-export class PowerOverviewComponent implements OnInit {
-  consumingItemsTableRows: any[] = [];
-  producingItemsTableRows: any[] = [];
+export class WarehouseOverviewComponent implements OnInit {
+
+  storedItemsTableRows: any[] = [];
+  storageProvidersItemsTableRows: any[] = [];
 
   constructor(
-    private kolonyService: KolonyService,
     private commonService: CommonService,
     private sharedService: SharedService,
-    private assetService: AssetService,
-    private powerService: PowerService,
-  ) {
-  }
+    private kolonyService: KolonyService,
+    private warehouseService: WarehouseService,
+  ) { }
 
   ngOnInit(): void {
-    this.consumingItemsTableRows = this.fillSummaryTableRows(
-      this.powerService.powerConsumers,
-      ResourceName.Energy,
+    this.storedItemsTableRows = this.fillSummaryTableRows(
+      this.warehouseService.storedItems,
+      ResourceName.StorageSpace,
       GenericTypesEnum.Consuming
     );
 
-    this.producingItemsTableRows = this.fillSummaryTableRows(
-      this.powerService.powerSources,
-      ResourceName.Energy,
+    this.storageProvidersItemsTableRows = this.fillSummaryTableRows(
+      this.warehouseService.storageProviders,
+      ResourceName.StorageSpace,
       GenericTypesEnum.Producing
     );
+
   }
 
 
@@ -65,5 +64,5 @@ export class PowerOverviewComponent implements OnInit {
     return res;
   }
 
-
 }
+

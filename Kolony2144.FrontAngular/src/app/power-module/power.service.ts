@@ -27,10 +27,7 @@ export class PowerService {
     private kolonyService: KolonyService,
   ) {
     this.powerConsumers = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.Energy);
-
     this.powerSources = this.entityService.getEntitiesByProducedAssetNameFromList(ResourceName.Energy);
-
-
   }
 
   getEnergyProduction(): number {

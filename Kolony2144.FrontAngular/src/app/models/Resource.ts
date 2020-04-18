@@ -103,7 +103,9 @@ export const AllResources: IFullEntity[] = [
     Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
     Price: 10,
     CreationCost: [],
-    MaintenanceCost: [],
+    MaintenanceCost: [
+      { Name: ResourceName.StorageSpace, Quantity: 1 }
+    ],
     PassiveIncome: [],
     UoM: UoMsEnum.t,
     Quantity: 100
@@ -116,7 +118,9 @@ export const AllResources: IFullEntity[] = [
     Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
     Price: 20,
     CreationCost: [],
-    MaintenanceCost: [],
+    MaintenanceCost: [
+      { Name: ResourceName.StorageSpace, Quantity: 1 }
+    ],
     PassiveIncome: [],
     UoM: UoMsEnum.t,
     Quantity: 1000
@@ -129,7 +133,9 @@ export const AllResources: IFullEntity[] = [
     Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
     Price: 25,
     CreationCost: [],
-    MaintenanceCost: [],
+    MaintenanceCost: [
+      { Name: ResourceName.StorageSpace, Quantity: 1 }
+    ],
     PassiveIncome: [],
     UoM: UoMsEnum.t,
     Quantity: 1000
@@ -142,7 +148,9 @@ export const AllResources: IFullEntity[] = [
     Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
     Price: 1000,
     CreationCost: [],
-    MaintenanceCost: [],
+    MaintenanceCost: [
+      { Name: ResourceName.StorageSpace, Quantity: 1 }
+    ],
     PassiveIncome: [],
     UoM: UoMsEnum.pcs,
     Quantity: 0

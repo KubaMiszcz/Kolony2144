@@ -25,10 +25,11 @@ export class FinancesOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.fillAssetList(this.financeService.cashConsumers);
+    // todo switch to new method
+    this.fillAssetListDEPR(this.financeService.cashConsumers);
   }
 
-  fillAssetList(resources: ICountableEntity[]) {
+  fillAssetListDEPR(resources: ICountableEntity[]) {
     const res: any[] = [
       ['name', 'type', 'per unit', 'qty', 'total']
     ];

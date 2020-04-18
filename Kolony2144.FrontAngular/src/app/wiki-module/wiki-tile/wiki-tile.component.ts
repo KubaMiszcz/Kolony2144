@@ -1,3 +1,4 @@
+import { EntityService } from './../../services/entity.service';
 import { AssetService } from 'src/app/assets-module/asset.service';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { CommonService } from '../../services/common.service';
@@ -18,6 +19,7 @@ export class WikiTileComponent implements OnInit {
 
   constructor(
     private kolonyService: KolonyService,
+    private entityService: EntityService,
     private assetService: AssetService,
   ) { }
 
@@ -35,7 +37,7 @@ export class WikiTileComponent implements OnInit {
       result.push({
         Name: v.Name,
         Quantity: v.Quantity,
-        UoM: this.assetService.getUoMByName(v.Name)
+        UoM: this.entityService.getUoMByName(v.Name)
       })
     );
 
