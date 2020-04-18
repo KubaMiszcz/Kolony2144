@@ -48,7 +48,8 @@ export const AllBuildings: IFullEntity[] = [
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 100 },
-      { Name: ResourceName.Energy, Quantity: 10 }
+      { Name: ResourceName.Energy, Quantity: 10 },
+      { Name: ResourceName.PlanetSpace, Quantity: 10 }
     ],
     PassiveIncome: [
       { Name: ResourceName.LivingSpace, Quantity: 10 }
@@ -68,7 +69,8 @@ export const AllBuildings: IFullEntity[] = [
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 100 },
-      { Name: ResourceName.Energy, Quantity: 10 }
+      { Name: ResourceName.Energy, Quantity: 10 },
+      { Name: ResourceName.PlanetSpace, Quantity: 100 }
     ],
     PassiveIncome: [
       { Name: ResourceName.StorageSpace, Quantity: 500 }
@@ -88,7 +90,8 @@ export const AllBuildings: IFullEntity[] = [
       { Name: ResourceName.Steel, Quantity: 20 }
     ],
     MaintenanceCost: [
-      { Name: ResourceName.Cash, Quantity: 100 }
+      { Name: ResourceName.Cash, Quantity: 100 },
+      { Name: ResourceName.PlanetSpace, Quantity: 25 }
     ],
     PassiveIncome: [
       { Name: ResourceName.Energy, Quantity: 500 }
@@ -109,7 +112,8 @@ export const AllBuildings: IFullEntity[] = [
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 100 },
-      { Name: ResourceName.Energy, Quantity: 100 }
+      { Name: ResourceName.Energy, Quantity: 100 },
+      { Name: ResourceName.PlanetSpace, Quantity: 10 }
     ],
     PassiveIncome: [
       { Name: ResourceName.BasicWorkUnit, Quantity: 100 }
@@ -130,7 +134,8 @@ export const AllBuildings: IFullEntity[] = [
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 500 },
-      { Name: ResourceName.Energy, Quantity: 500 }
+      { Name: ResourceName.Energy, Quantity: 500 },
+      { Name: ResourceName.PlanetSpace, Quantity: 100 }
     ],
     PassiveIncome: [
       { Name: ResourceName.BasicWorkUnit, Quantity: 100 },
@@ -152,7 +157,8 @@ export const AllBuildings: IFullEntity[] = [
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 50 },
-      { Name: ResourceName.Energy, Quantity: 50 }
+      { Name: ResourceName.Energy, Quantity: 50 },
+      { Name: ResourceName.PlanetSpace, Quantity: 100 }
     ],
     PassiveIncome: [
     ],

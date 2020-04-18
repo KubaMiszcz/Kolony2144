@@ -4,11 +4,14 @@ import { AssetTypesEnum, ResourceTypesEnum, GenericTypesEnum } from './enums/Typ
 
 export enum ResourceName {
   Cash = 'Space Beads',
+  // volatile
   Energy = 'Energy',
   BasicWorkUnit = 'Basic Work Unit',
   AdvancedWorkUnit = 'Advanced Work Unit',
   StorageSpace = 'Storage space',
+  PlanetSpace = 'Planet space',
   LivingSpace = 'Living space',
+  // storable
   Food = 'Food',
   Stone = 'Stone',
   Steel = 'Steel',

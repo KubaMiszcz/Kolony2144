@@ -4,15 +4,15 @@
     <h4 class="card-header "> Buildings overview</h4>
     <div class="card-body p-1">
 
-      <div class="card m-2 ">
+      <!-- <div class="card m-2 ">
         <h4 class="card-header "> Current Production Queue</h4>
         <div class="card-body p-1">
           kolejka budowy
         </div>
-      </div>
+      </div> -->
 
 
-      <div class="card m-2 ">
+      <!-- <div class="card m-2 ">
         <h4 class="card-header "> building list</h4>
         <div class="card-body p-1">
           kafelki z budynkami i dodawanie dokolejki
@@ -20,16 +20,13 @@
             <app-asset-tile *ngFor="let item of allBuildingsList" [asset]="item"></app-asset-tile>
           </div>
         </div>
-      </div>
+      </div> -->
 
 
 
 
-      <app-tile-with-table [caption]="'Buildings List'" [header]="kolonyBuildingsList[0]" [rows]="kolonyBuildingsList.slice(1)">
+      <app-tile-with-table [caption]="'Buildings List'" [header]="kolonyBuildingsTableRows[0]" [rows]="kolonyBuildingsTableRows.slice(1)">
       </app-tile-with-table>
-
-
-
 
 
 
