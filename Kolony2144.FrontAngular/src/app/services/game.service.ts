@@ -4,7 +4,7 @@ import { KolonyService } from './kolony.service';
 import { ResourceName, AllResources } from '../models/Resource';
 import { OverviewService } from '../overview-module/overview.service';
 import { AssetService } from '../assets-module/asset.service';
-import { IAsset, Asset } from '../models/Entity';
+import { IAsset, Asset, ICountableEntity } from '../models/Entity';
 import { TradeService } from '../trade-module/trade.service';
 import { AllCivilianCrew } from '../models/Crew';
 import { AllBuildings, IBuilding, Building } from '../models/Building';
@@ -126,10 +126,11 @@ export class GameService {
   }
 
   updateNews() {
-    let resource: IAsset;
-    let consumption;
-    let production;
-    let msg;
+    let resource: ICountableEntity;
+    let consumption: number;
+    let production: number;
+    let msg: string;
+
     this.overviewService.addNews('Welcome in new month, current time is: ' + this.Age + ' of New Era');
     this.overviewService.addNews('');
 
@@ -138,7 +139,7 @@ export class GameService {
 
 
     // news about cash
-    resource = this.assetService.getAssetByName(ResourceName.Cash);
+    resource = this.assetService.getEntityByName(ResourceName.Cash);
     consumption = this.assetService.getEntityConsumptionQtyByName(resource.Name);
     if (resource.Quantity < 0) {
       this.overviewService.addNews('!!! CASH RUNS OUT, BAILIFF IS COMING TO KOLONY !!!');

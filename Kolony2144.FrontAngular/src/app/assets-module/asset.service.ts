@@ -47,8 +47,8 @@ export class AssetService {
 
 
 
-  getEntityConsumptionQtyByName(assetName: string): number {
-    const cosnumedAsset = this.getEntityByName(assetName);
+  getEntityConsumptionQtyByName(entityName: string): number {
+    const cosnumedAsset = this.getEntityByName(entityName);
     let consumedQty = 0;
     this.kolonyAssetList.forEach(asset => {
       const consumedItem = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name);
