@@ -28,20 +28,28 @@ export class AssetService {
   }
 
 
-
-
-
-
-  getVolatileAssets(): IAsset[] {
+  getVolatileEntities(): ICountableEntity[] {
     return this.kolonyAssetList.filter(i => i.Tags.includes(ResourceTypesEnum.Volatile));
   }
 
-  getNonVolatileAssets(): IAsset[] {
+  ClearVolatileEntities() {
+    this.getVolatileEntities().forEach(element => element.Quantity = 0);
+  }
+
+
+  // ==========================
+  // check if not deprecated
+
+  getVolatileAssetsDepr(): IAsset[] {
+    return this.kolonyAssetList.filter(i => i.Tags.includes(ResourceTypesEnum.Volatile));
+  }
+
+  getNonVolatileAssetsDepr(): IAsset[] {
     return this.kolonyAssetList.filter(i => !i.Tags.includes(ResourceTypesEnum.Volatile));
   }
 
-  ClearVolatileResources() {
-    this.getVolatileAssets().forEach(element => element.Quantity = 0);
+  ClearVolatileResourcesDepr() {
+    this.getVolatileAssetsDepr().forEach(element => element.Quantity = 0);
   }
 
 

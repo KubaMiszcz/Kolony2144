@@ -11,13 +11,16 @@ import { AssetService } from '../assets-module/asset.service';
   providedIn: 'root'
 })
 export class PowerService {
-  private powerAssets: ICountableEntity[] = [];
+  powerSources: ICountableEntity[] = [];
+  powerConsumers: ICountableEntity[] = [];
   // todo add brownou and blackout when overload
   constructor(
     private commonService: CommonService,
     private assetService: AssetService,
     private kolonyService: KolonyService,
   ) {
+    // this.powerSources=assetService.
+
   }
 
   getEnergyProduction(): number {

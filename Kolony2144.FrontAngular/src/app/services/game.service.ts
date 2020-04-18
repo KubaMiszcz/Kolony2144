@@ -94,7 +94,7 @@ export class GameService {
 
       // ##########################################
       // #REGION NEW TURN BEGINS
-      this.assetService.ClearVolatileResources();
+      this.assetService.ClearVolatileResourcesDepr();
       this.assetService.updateInventoryDueToMaintenance(this.assetService.kolonyAssetList);
       this.assetService.updateInventoryDueToMaintenance(this.buildingService.kolonyBuildingsList);
       // todo MINING       // this.MiningService.mining
