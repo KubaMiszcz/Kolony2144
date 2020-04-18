@@ -46,7 +46,10 @@ export class AssetService {
   }
 
 
-
+  /**
+   * returns consumed qty of named entity by all kolony assets buildings etc
+   *@param entityName name of consumed entity
+   */
   getEntityConsumptionQtyByName(entityName: string): number {
     const cosnumedAsset = this.getEntityByName(entityName);
     let consumedQty = 0;
@@ -60,6 +63,10 @@ export class AssetService {
     return consumedQty;
   }
 
+  /**
+ * returns produced qty of named entity by all kolony assets buildings etc
+ *@param entityName name of produced entity
+ */
   getEntityProductionQtyByName(assetName: string): number {
     const producedAsset = this.getEntityByName(assetName);
     let producedQty = 0;
