@@ -134,7 +134,7 @@ export class GameService {
 
     // news about cash
     resource = this.assetService.getAssetByName(ResourceName.Cash);
-    consumption = this.assetService.getAssetConsumptionQty(resource);
+    consumption = this.assetService.getAssetConsumptionQtyByName(resource.Name);
     if (resource.Quantity < 0) {
       this.overviewService.addNews('!!! CASH RUNS OUT, BAILIFF IS COMING TO KOLONY !!!');
     }
@@ -144,7 +144,7 @@ export class GameService {
 
     // news about food
     resource = this.assetService.getAssetByName(ResourceName.Food);
-    consumption = this.assetService.getAssetConsumptionQty(resource);
+    consumption = this.assetService.getAssetConsumptionQtyByName(resource.Name);
     if (resource.Quantity < 0) {
       this.overviewService.addNews('!!! HUNGER IN KOLONY !!!');
     }
