@@ -19,17 +19,15 @@ import { GenericTypesEnum } from '../models/enums/Types.enum';
   providedIn: 'root'
 })
 export class KolonyService {
+
   private kolony: Kolony;
   get Name(): string { return this.kolony.Name; }
 
   constructor(
     private commonService: CommonService,
   ) {
-    const kolony = new Kolony();
-    kolony.Name = 'KolonyUNO';
-    kolony.Assets = this.setInitialKolonyAssets();
-    kolony.Buildings = this.setInitialKolonyBuildings();
-    this.kolony = kolony;
+    this.InitNewKolony();
+
   }
 
   getAllKolonyAssets(): IAsset[] { return this.kolony.Assets; }
@@ -37,12 +35,29 @@ export class KolonyService {
   getAllKolonyBuildings(): IBuilding[] { return this.kolony.Buildings; }
 
 
+  getKolonyState(): IKolony {
+    return this.kolony;
+  }
+
+  setKolonyState(kolony: Kolony) {
+    // this.kolony = kolony as Kolony;
+  }
+
+  //#region init new kolony
+  InitNewKolony() {
+    this.kolony = new Kolony();
+    this.kolony.Name = 'KolonyUNO';
+    this.kolony.Assets = this.setInitialKolonyAssets();
+    this.kolony.Buildings = this.setInitialKolonyBuildings();
+  }
+
   setInitialKolonyAssets(): IAsset[] {
     const res: IAsset[] = [];
     [...AllResources, ...AllCivilianCrew, ...AllMachines]
       .filter(a => a.Quantity > 0 || a.Tags.includes(GenericTypesEnum.Property))
       .forEach(i => {
-        res.push(new Asset().Deserialize(i));
+        res.push(i as IAsset);
+        // res.push(new Asset().Deserialize(i));
       });
 
     return res;
@@ -53,19 +68,14 @@ export class KolonyService {
     [...AllBuildings]
       .filter(a => a.Quantity > 0)
       .forEach(i => {
-        res.push(new Asset().Deserialize(i));
+        res.push(i as IBuilding);
       });
 
     return res;
   }
 
-  getKolonyState(): IKolony {
-    return this.kolony;
-  }
 
-  setKolonyState(kolony: Kolony) {
-    // this.kolony = kolony as Kolony;
-  }
+  //#endregion
 
 
 }
