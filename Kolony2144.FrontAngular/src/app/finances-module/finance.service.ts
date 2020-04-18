@@ -26,4 +26,6 @@ export class FinanceService {
     this.Cash = this.assetService.getAssetByName(ResourceName.Cash);
   }
 
+
 }
+
