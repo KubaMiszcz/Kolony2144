@@ -100,13 +100,9 @@ export class GameService {
       // ##########################################
       // #REGION NEW TURN BEGINS
       this.assetService.ClearVolatileAssets();
-      this.assetService.updateInventoryDueToMaintenanceCost(
-        [...this.buildingService.kolonyBuildingsList, ...this.assetService.allKolonyAssetList]
-      );
+      this.entityService.updateInventoryDueToMaintenanceCost();
       // todo MINING       // this.MiningService.mining
-      this.assetService.updateInventoryDueToPassiveProducedItems(
-        [...this.buildingService.kolonyBuildingsList, ...this.assetService.allKolonyAssetList]
-      );
+      this.entityService.updateInventoryDueToPassiveProducedItems();
 
       this.tradeService.prepareIncomingShip();
       this.tradeService.setTradeAnnouncement();

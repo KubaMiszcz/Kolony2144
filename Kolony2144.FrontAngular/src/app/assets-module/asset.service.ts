@@ -52,33 +52,6 @@ export class AssetService {
 
 
 
-  updateInventoryDueToMaintenanceCost(entitiesList: ICountableEntity[]) {
-    entitiesList.forEach(entity => {
-      entity.MaintenanceCost.forEach(consumedItem => {
-        // fix what if  asset isnt exist in inventory? yyy??? error? 0?? omit?
-        this.sharedService
-          .findItemInListByName(this.allKolonyAssetList, consumedItem.Name).Quantity -= (consumedItem.Quantity * entity.Quantity);
-      });
-    });
-  }
-
-  updateInventoryDueToPassiveProducedItems(entitiesList: ICountableEntity[]) {
-    entitiesList.forEach(entity => {
-      entity.PassiveIncome.forEach(producedItem => {
-        // fix what if  asset isnt exist in inventory? add new asset to list
-        this.sharedService
-          .findItemInListByName(this.allKolonyAssetList, producedItem.Name).Quantity += (producedItem.Quantity * entity.Quantity);
-      });
-    });
-  }
-
-
-
-
-
-
-
-
 
 
 

@@ -107,6 +107,25 @@ export class EntityService {
   }
 
 
+  updateInventoryDueToMaintenanceCost() {
+    this.allKolonyEntitiesList.forEach(entity => {
+      entity.MaintenanceCost.forEach(consumedItem => {
+        // fix what if  asset isnt exist in inventory? yyy??? error? 0?? omit?
+        this.sharedService
+          .findItemInListByName(this.allKolonyEntitiesList, consumedItem.Name).Quantity -= (consumedItem.Quantity * entity.Quantity);
+      });
+    });
+  }
+
+  updateInventoryDueToPassiveProducedItems() {
+    this.allKolonyEntitiesList.forEach(entity => {
+      entity.PassiveIncome.forEach(producedItem => {
+        // fix what if  asset isnt exist in inventory? add new asset to list
+        this.sharedService
+          .findItemInListByName(this.allKolonyEntitiesList, producedItem.Name).Quantity += (producedItem.Quantity * entity.Quantity);
+      });
+    });
+  }
 
 
 
