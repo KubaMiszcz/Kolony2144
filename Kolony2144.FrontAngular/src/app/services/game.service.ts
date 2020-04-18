@@ -20,6 +20,7 @@ import { BuildingService } from '../buildings-module/building.service';
 import { CommonService } from './common.service';
 import { SharedService } from './shared.service';
 import { EntityService } from './entity.service';
+import { GameStaticDataContainerService } from './game-static-data-container.service';
 
 
 @Injectable({
@@ -27,7 +28,7 @@ import { EntityService } from './entity.service';
 })
 export class GameService {
 
-
+  // todo move age to kolony and kolony to gameservice
   private age = 100;
   get Age(): number { return Math.round(this.age * 10) / 10; }
   set Age(value: number) { this.age = value; this.AgeBS.next(value); }
@@ -38,8 +39,9 @@ export class GameService {
   set PlayerNotes(value: string) { this.playerNotes = value; this.PlayerNotesBS.next(value); }
   PlayerNotesBS = new BehaviorSubject<string>('');
 
-  ALL_ASSETS_LIST: IAsset[] = [];
-  ALL_BUILDINGS_LIST: IBuilding[] = [];
+  allGameAssets: IAsset[] = [];
+  allGameBuildings: IBuilding[] = [];
+  allGameEntities: ICountableEntity[] = [];
 
   // isTurnComputing = false;
 
@@ -47,6 +49,7 @@ export class GameService {
     private router: Router,
     private commonService: CommonService,
     private sharedService: SharedService,
+    private gameStaticDataContainerService: GameStaticDataContainerService,
     private kolonyService: KolonyService,
     private entityService: EntityService,
     private assetService: AssetService,
@@ -59,16 +62,18 @@ export class GameService {
     private buildingService: BuildingService,
   ) {
     this.playerNotes = sessionStorage.getItem('savedState');
+
+    this.allGameEntities = this.gameStaticDataContainerService.ALL_ENTITIES_LIST;
+    this.allGameBuildings = this.gameStaticDataContainerService.ALL_BUILDINGS_LIST;
+    this.allGameAssets = this.gameStaticDataContainerService.ALL_ASSETS_LIST;
+
     this.InitNewGame();
     this.nextTurn();
   }
 
 
 
-  getAssetByName(name: string): IAsset {
-    return this.sharedService.findItemInListByName(this.ALL_ASSETS_LIST, name);
-    // return this.ALL_ASSETS_LIST.find(i => i.Name === name);
-  }
+
 
 
   nextTurn() {
@@ -197,25 +202,11 @@ export class GameService {
 
   //#region init new game
   InitNewGame() {
-    this.fillAllInitialGameAssets();
-    this.fillAllInitialGameBuildings();
     this.tradeService.tradeableCargo = this.fillTradeableAssets();
   }
 
-  fillAllInitialGameAssets() {
-    [...AllResources, ...AllCivilianCrew, ...AllMachines].forEach(i => {
-      this.ALL_ASSETS_LIST.push(i as IAsset);
-    });
-  }
-
-  fillAllInitialGameBuildings() {
-    [...AllBuildings].forEach(i => {
-      this.ALL_BUILDINGS_LIST.push(i as IAsset);
-    });
-  }
-
   fillTradeableAssets(): IAsset[] { // todo change it to interface tradebale asset
-    const list = this.commonService.cloneObject<IAsset[]>(this.ALL_ASSETS_LIST);
+    const list = this.commonService.cloneObject<IAsset[]>(this.allGameAssets);
 
     return list.filter(a => a.Tags.includes(GenericTypesEnum.Tradeable));
   }

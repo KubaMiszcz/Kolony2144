@@ -5,6 +5,7 @@ import { SharedService } from './shared.service';
 import { KolonyService } from './kolony.service';
 import { ResourceName } from '../models/Resource';
 import { UoMsEnum } from '../models/enums/UoMs.enum';
+import { GameStaticDataContainerService } from './game-static-data-container.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class EntityService {
   constructor(
     private commonService: CommonService,
     private sharedService: SharedService,
+    private gameStaticDataContainerService: GameStaticDataContainerService,
     private kolonyService: KolonyService
   ) {
     this.allKolonyEntitiesList = this.kolonyService.getAllKolonyEntities();
@@ -111,9 +113,21 @@ export class EntityService {
   updateInventoryDueToMaintenanceCost() {
     this.allKolonyEntitiesList.forEach(entity => {
       entity.MaintenanceCost.forEach(consumedItem => {
-        // fix what if  asset isnt exist in inventory? yyy??? error? 0?? omit?
-        this.sharedService
-          .findItemInListByName(this.allKolonyEntitiesList, consumedItem.Name).Quantity -= (consumedItem.Quantity * entity.Quantity);
+        try {
+          const item = this.sharedService.findItemInListByName(this.allKolonyEntitiesList, consumedItem.Name);
+          // !! fix what if  asset isnt exist in inventory? yyy??? error? 0?? omit?
+          // if (!item) {
+          //   const newItem = this.gameStaticDataContainerService.getEntityByName(consumedItem.Name);
+          //   item = this.commonService.cloneObject(newItem);
+          //   this. addNewEntity.ad;
+          // } else {
+          // }
+          item.Quantity -= (consumedItem.Quantity * entity.Quantity);
+
+        } catch (error) {
+          console.log('consumed item not in inventory', error);
+        }
+
       });
     });
   }

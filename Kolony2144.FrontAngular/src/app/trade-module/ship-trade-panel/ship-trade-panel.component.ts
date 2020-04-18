@@ -1,3 +1,4 @@
+import { GameStaticDataContainerService } from './../../services/game-static-data-container.service';
 import { GameService } from './../../services/game.service';
 import { FinanceService } from '../../finances-module/finance.service';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
@@ -35,6 +36,7 @@ export class ShipTradePanelComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private tradeService: TradeService,
+    private gameStaticDataContainerService: GameStaticDataContainerService,
     private assetService: AssetService,
     private gameService: GameService,
   ) { }
@@ -79,8 +81,9 @@ export class ShipTradePanelComponent implements OnInit {
     let asset = this.assetService.getAssetByName(row.Name);
     if (!asset) {
       // todo create new isnatnce of all assets list in trade service
-      const newAsset = this.gameService.getAssetByName(row.Name); // get from all
-      asset = this.assetService.addNewAssetToInventoryDEPR(newAsset); // get newly added from kolony assets
+      const newAsset = this.gameStaticDataContainerService.getEntityByName(row.Name); // get from all
+      // !! fixit _____________________________________________________vvvvvvv
+      asset = this.assetService.addNewAssetToInventoryDEPR(newAsset as IAsset); // get newly added from kolony assets
     }
 
     let factor = 0;

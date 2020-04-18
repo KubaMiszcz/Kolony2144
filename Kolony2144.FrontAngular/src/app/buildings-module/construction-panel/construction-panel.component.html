@@ -1,0 +1,10 @@
+<div class="card m-2 ">
+  <h4 class="card-header "> Available Constructions</h4>
+  <div class="card-body p-1">
+    kafelki z budynkami i dodawanie dokolejki
+    <p>construction-panel works!</p>
+    <div class="d-flex flex-wrap">
+      <app-asset-tile *ngFor="let item of allBuildingsList" [asset]="item"></app-asset-tile>
+    </div>
+  </div>
+</div>

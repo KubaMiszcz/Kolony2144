@@ -9,8 +9,8 @@ export enum ResourceName {
   BasicWorkUnit = 'Basic Work Unit',
   AdvancedWorkUnit = 'Advanced Work Unit',
   StorageSpace = 'Storage space',
-  PlanetSpace = 'Planet space',
   LivingSpace = 'Living space',
+  PlanetSpace = 'Planet space',
   // storable
   Food = 'Food',
   Stone = 'Stone',
@@ -19,11 +19,9 @@ export enum ResourceName {
 }
 
 export const AllResources: IFullEntity[] = [
-  // cash
   {
     Name: ResourceName.Cash,
     Description: 'Space Beads, galactic currency', ImageUrl: '/assets/wiki-icons/resource-cash.png',
-
     Type: AssetTypesEnum.Resource,
     Tags: [GenericTypesEnum.Property],
     Price: 0,
@@ -36,7 +34,6 @@ export const AllResources: IFullEntity[] = [
   {
     Name: ResourceName.Energy,
     Description: 'Energy', ImageUrl: '/assets/wiki-icons/resource-energy.png',
-
     Type: AssetTypesEnum.Resource,
     Tags: [GenericTypesEnum.Property, ResourceTypesEnum.Volatile],
     Price: 0,
@@ -49,7 +46,6 @@ export const AllResources: IFullEntity[] = [
   {
     Name: ResourceName.BasicWorkUnit,
     Description: 'Basic Work Unit', ImageUrl: '/assets/wiki-icons/property.png',
-
     Type: AssetTypesEnum.Resource,
     Tags: [GenericTypesEnum.Property, ResourceTypesEnum.Volatile],
     Price: 0,
@@ -62,7 +58,6 @@ export const AllResources: IFullEntity[] = [
   {
     Name: ResourceName.AdvancedWorkUnit,
     Description: 'Advanced Work Unit', ImageUrl: '/assets/wiki-icons/property.png',
-
     Type: AssetTypesEnum.Resource,
     Tags: [GenericTypesEnum.Property, ResourceTypesEnum.Volatile],
     Price: 0,
@@ -75,7 +70,6 @@ export const AllResources: IFullEntity[] = [
   {
     Name: ResourceName.StorageSpace,
     Description: 'Storage Space', ImageUrl: '/assets/wiki-icons/property.png',
-
     Type: AssetTypesEnum.Resource,
     Tags: [GenericTypesEnum.Property, ResourceTypesEnum.Volatile],
     Price: 0,
@@ -88,7 +82,6 @@ export const AllResources: IFullEntity[] = [
   {
     Name: ResourceName.LivingSpace,
     Description: 'Living Space', ImageUrl: '/assets/wiki-icons/property.png',
-
     Type: AssetTypesEnum.Resource,
     Tags: [GenericTypesEnum.Property, ResourceTypesEnum.Volatile],
     Price: 0,
@@ -99,9 +92,40 @@ export const AllResources: IFullEntity[] = [
     Quantity: 0
   },
   {
+    Name: ResourceName.PlanetSpace,
+    Description: 'Planet Space', ImageUrl: '/assets/wiki-icons/property.png',
+    Type: AssetTypesEnum.Resource,
+    Tags: [GenericTypesEnum.Property, ResourceTypesEnum.Volatile],
+    Price: 0,
+    CreationCost: [],
+    MaintenanceCost: [],
+    PassiveIncome: [],
+    UoM: UoMsEnum.m2,
+    Quantity: 10000
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {
     Name: ResourceName.Food,
     Description: 'food for feeding your men and animals;]', ImageUrl: '/assets/wiki-icons/resource.png',
-
     Type: AssetTypesEnum.Resource,
     Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
     Price: 10,
@@ -116,7 +140,6 @@ export const AllResources: IFullEntity[] = [
   {
     Name: ResourceName.Stone,
     Description: 'A piece of stone', ImageUrl: '/assets/wiki-icons/resource.png',
-
     Type: AssetTypesEnum.Resource,
     Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
     Price: 20,
@@ -131,7 +154,6 @@ export const AllResources: IFullEntity[] = [
   {
     Name: ResourceName.Steel,
     Description: 'A piece of steel', ImageUrl: '/assets/wiki-icons/resource.png',
-
     Type: AssetTypesEnum.Resource,
     Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
     Price: 25,
@@ -146,7 +168,6 @@ export const AllResources: IFullEntity[] = [
   {
     Name: ResourceName.Diamonds,
     Description: 'A piece of Diamond', ImageUrl: '/assets/wiki-icons/resource.png',
-
     Type: AssetTypesEnum.Resource,
     Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
     Price: 1000,

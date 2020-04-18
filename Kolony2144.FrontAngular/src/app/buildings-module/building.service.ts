@@ -7,9 +7,8 @@ import { AssetService } from '../assets-module/asset.service';
   providedIn: 'root'
 })
 export class BuildingService {
-  updateInventoryDuewwwwToMaintenanceBuildings() {
-  }
   kolonyBuildingsList: IBuilding[] = [];
+  planetSize: number;
 
   constructor(
     private kolonyService: KolonyService,

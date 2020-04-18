@@ -17,12 +17,10 @@ import { GenericTypesEnum } from 'src/app/models/enums/Types.enum';
 })
 export class BuildingsOverviewComponent implements OnInit {
   kolonyBuildingsTableRows: any[] = [];
-  // allBuildingsList: ICountableEntity[] = [];
 
   constructor(
     private commonService: CommonService,
     private sharedService: SharedService,
-    private kolonyService: KolonyService,
     private buildingService: BuildingService,
   ) { }
 
@@ -32,9 +30,6 @@ export class BuildingsOverviewComponent implements OnInit {
       ResourceName.PlanetSpace,
       GenericTypesEnum.Consuming
     );
-
-
-    // this.allBuildingsList = this.gameService.ALL_BUILDINGS_LIST;
   }
 
   fillSummaryTableRows(entities: ICountableEntity[], resourceName: ResourceName, type: GenericTypesEnum) {
