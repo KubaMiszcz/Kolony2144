@@ -1,6 +1,6 @@
 import { AssetService } from './../../assets-module/asset.service';
 import { ICountableEntity } from 'src/app/models/Entity';
-import { SharedService } from './../../services/shared.service';
+import { CommonService } from '../../services/common.service';
 import { IAsset, ISimplifiedAsset } from '../../models/Entity';
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { KolonyService } from 'src/app/services/kolony.service';
@@ -23,8 +23,7 @@ export class AssetTileComponent implements OnInit {
   constructor(
     private kolonyService: KolonyService,
     private assetService: AssetService,
-    private sharedService: SharedService
-  ) { }
+    private commonService: CommonService) { }
 
   ngOnInit() {
     // this.productionService.productionQueueUpdatedEmitter.subscribe(e => {

@@ -1,4 +1,3 @@
-import { SharedService } from './../../services/shared.service';
 import { GameService } from './../../services/game.service';
 import { FinanceService } from '../../finances-module/finance.service';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
@@ -6,6 +5,7 @@ import { IAsset } from 'src/app/models/Entity';
 import { TradeService, TransactionTypeEnum } from '../trade.service';
 import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
 import { AssetService } from 'src/app/assets-module/asset.service';
+import { CommonService } from 'src/app/services/common.service';
 
 export interface ITradePanelData {
   Name: string;
@@ -33,7 +33,7 @@ export class ShipTradePanelComponent implements OnInit {
   // @ViewChild('tableQtyRef') tableQty: ElementRef;
 
   constructor(
-    private sharedService: SharedService,
+    private commonService: CommonService,
     private tradeService: TradeService,
     private assetService: AssetService,
     private gameService: GameService,

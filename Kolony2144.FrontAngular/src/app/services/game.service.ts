@@ -11,13 +11,13 @@ import { AllBuildings, IBuilding, Building } from '../models/Building';
 import { AllMachines } from '../models/Machine';
 import { CrewService } from '../crew-module/crew.service';
 import { FinanceService } from '../finances-module/finance.service';
-import { SharedService } from './shared.service';
 import { WikiService } from '../wiki-module/wiki.service';
 import { AssetTypesEnum, GenericTypesEnum } from '../models/enums/Types.enum';
 import { IKolony } from '../models/Kolony';
 import { BehaviorSubject } from 'rxjs';
 import { PowerService } from '../power-module/power.service';
 import { BuildingService } from '../buildings-module/building.service';
+import { CommonService } from './common.service';
 
 
 @Injectable({
@@ -42,7 +42,7 @@ export class GameService {
 
   constructor(
     private router: Router,
-    private sharedService: SharedService,
+    private commonService: CommonService,
     private kolonyService: KolonyService,
     private assetService: AssetService,
     private crewService: CrewService,
@@ -188,7 +188,7 @@ export class GameService {
 
 
   getTradeableAssets(): IAsset[] {
-    const list = this.sharedService.cloneObject<IAsset[]>(this.ALL_ASSETS_LIST);
+    const list = this.commonService.cloneObject<IAsset[]>(this.ALL_ASSETS_LIST);
 
     return list.filter(a => a.Tags.includes(GenericTypesEnum.Tradeable));
   }

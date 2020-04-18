@@ -1,5 +1,5 @@
 import { AssetService } from '../../assets-module/asset.service';
-import { SharedService } from 'src/app/services/shared.service';
+import { CommonService } from 'src/app/services/common.service';
 import { SharedModule } from './../../shared/shared.module';
 import { Component, OnInit } from '@angular/core';
 import { Kolony } from 'src/app/models/Kolony';
@@ -17,7 +17,7 @@ export class FinancesOverviewComponent implements OnInit {
 
   constructor(
     private kolonyService: KolonyService,
-    private sharedService: SharedService,
+    private commonService: CommonService,
     private assetService: AssetService,
   ) { }
 
@@ -39,7 +39,7 @@ export class FinancesOverviewComponent implements OnInit {
         r.Quantity * perUnitUsage
       ]);
     });
-    res.push(['', '', 'Total', this.sharedService.sumColumnOftable(res.slice(1), 3)]);
+    res.push(['', '', 'Total', this.commonService.sumColumnOftable(res.slice(1), 3)]);
 
     return res;
   }

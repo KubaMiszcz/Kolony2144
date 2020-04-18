@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { ResourceName } from '../models/Resource';
 import { IAsset } from '../models/Entity';
 import { AssetTypesEnum } from '../models/enums/Types.enum';
-import { SharedService } from '../services/shared.service';
+import { CommonService } from '../services/common.service';
 import { AssetService } from '../assets-module/asset.service';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class PowerService {
   private powerAssets: ICountableEntity[] = [];
   // todo add brownou and blackout when overload
   constructor(
-    private sharedService: SharedService,
+    private commonService: CommonService,
     private assetService: AssetService,
     private kolonyService: KolonyService,
   ) {

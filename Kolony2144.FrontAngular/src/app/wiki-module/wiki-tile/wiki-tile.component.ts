@@ -1,6 +1,6 @@
 import { AssetService } from 'src/app/assets-module/asset.service';
 import { KolonyService } from 'src/app/services/kolony.service';
-import { SharedService } from './../../services/shared.service';
+import { CommonService } from '../../services/common.service';
 import { IFullEntity, ISimplifiedAsset } from './../../models/Entity';
 import { Component, OnInit, Input } from '@angular/core';
 import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';

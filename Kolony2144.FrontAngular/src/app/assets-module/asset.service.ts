@@ -8,7 +8,7 @@ import { OverviewService } from '../overview-module/overview.service';
 import { CrewService } from '../crew-module/crew.service';
 import { FinanceService } from '../finances-module/finance.service';
 import { GameService } from '../services/game.service';
-import { SharedService } from '../services/shared.service';
+import { CommonService } from '../services/common.service';
 import { TradeService } from '../trade-module/trade.service';
 import { WikiService } from '../wiki-module/wiki.service';
 import { UoMsEnum } from '../models/enums/UoMs.enum';
@@ -21,7 +21,7 @@ export class AssetService {
   kolonyAssetList: IAsset[] = [];
 
   constructor(
-    private sharedService: SharedService,
+    private commonService: CommonService,
     private kolonyService: KolonyService,
   ) {
     this.kolonyAssetList = this.kolonyService.getAllKolonyAssets();
@@ -95,7 +95,7 @@ export class AssetService {
 
 
   addNewAssetToInventory(newAsset: IAsset): IAsset {
-    const asset = this.sharedService.cloneObject(newAsset) as IAsset;
+    const asset = this.commonService.cloneObject(newAsset) as IAsset;
     asset.Quantity = 0;
     asset.Price = 0;
     this.kolonyAssetList.push(asset);

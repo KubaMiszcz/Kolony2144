@@ -1,6 +1,6 @@
 import { AssetService } from '../../assets-module/asset.service';
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from 'src/app/services/shared.service';
+import { CommonService } from 'src/app/services/common.service';
 import { ResourceName } from 'src/app/models/Resource';
 import { AssetTypesEnum } from 'src/app/models/enums/Types.enum';
 
@@ -18,7 +18,7 @@ export class CrewOverviewComponent implements OnInit {
   totalFooter: any[] = [];
 
   constructor(
-    private sharedService: SharedService,
+    private commonService: CommonService,
     private assetService: AssetService
   ) {
   }
@@ -81,10 +81,10 @@ export class CrewOverviewComponent implements OnInit {
 
     this.totalFooter = [
       'Total:',
-      this.sharedService.sumColumnOftable(this.totalList, 1),
-      this.sharedService.sumColumnOftable(this.totalList, 2),
-      this.sharedService.sumColumnOftable(this.totalList, 3),
-      this.sharedService.sumColumnOftable(this.totalList, 4),
+      this.commonService.sumColumnOftable(this.totalList, 1),
+      this.commonService.sumColumnOftable(this.totalList, 2),
+      this.commonService.sumColumnOftable(this.totalList, 3),
+      this.commonService.sumColumnOftable(this.totalList, 4),
     ];
   }
 

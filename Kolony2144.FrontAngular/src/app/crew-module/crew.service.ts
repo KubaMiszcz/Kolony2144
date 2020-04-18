@@ -6,7 +6,7 @@ import { KolonyService } from '../services/kolony.service';
 import { OverviewService } from '../overview-module/overview.service';
 import { FinanceService } from '../finances-module/finance.service';
 import { GameService } from '../services/game.service';
-import { SharedService } from '../services/shared.service';
+import { CommonService } from '../services/common.service';
 import { TradeService } from '../trade-module/trade.service';
 import { WikiService } from '../wiki-module/wiki.service';
 
@@ -17,7 +17,7 @@ export class CrewService {
   private crewList: IAsset[];
 
   constructor(
-    private sharedService: SharedService,
+    private commonService: CommonService,
     private assetService: AssetService,
   ) {
     this.crewList = this.assetService.getAssetsByType(AssetTypesEnum.Crew);

@@ -1,11 +1,10 @@
-import { IBuilding } from './../../models/Building';
 import { Component, OnInit } from '@angular/core';
-import { BuildingService } from 'src/app/buildings-module/building.service';
+import { ICountableEntity } from 'src/app/models/Entity';
 import { KolonyService } from 'src/app/services/kolony.service';
-import { SharedService } from 'src/app/services/shared.service';
-import { ResourceName } from 'src/app/models/Resource';
-import { IAsset, ICountableEntity } from 'src/app/models/Entity';
+import { CommonService } from 'src/app/services/common.service';
+import { BuildingService } from '../building.service';
 import { GameService } from 'src/app/services/game.service';
+import { IBuilding } from 'src/app/models/Building';
 
 @Component({
   selector: 'app-buildings-overview',
@@ -18,7 +17,7 @@ export class BuildingsOverviewComponent implements OnInit {
 
   constructor(
     private kolonyService: KolonyService,
-    private sharedService: SharedService,
+    private commonService: CommonService,
     private buildingService: BuildingService,
     private gameService: GameService,
   ) { }

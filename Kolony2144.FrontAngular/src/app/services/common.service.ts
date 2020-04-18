@@ -4,7 +4,7 @@ import { IAsset } from '../models/Entity';
 @Injectable({
   providedIn: 'root'
 })
-export class SharedService {
+export class CommonService {
 
   constructor() {
   }

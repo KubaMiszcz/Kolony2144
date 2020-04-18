@@ -2,7 +2,7 @@ import { AssetService } from '../../assets-module/asset.service';
 import { Component, OnInit } from '@angular/core';
 import { Kolony } from 'src/app/models/Kolony';
 import { KolonyService } from 'src/app/services/kolony.service';
-import { SharedService } from 'src/app/services/shared.service';
+import { CommonService } from 'src/app/services/common.service';
 import { ResourceName } from 'src/app/models/Resource';
 import { IAsset } from 'src/app/models/Entity';
 
@@ -17,7 +17,7 @@ export class PowerOverviewComponent implements OnInit {
 
   constructor(
     private kolonyService: KolonyService,
-    private sharedService: SharedService,
+    private commonService: CommonService,
     private assetService: AssetService,
   ) {
   }
@@ -41,7 +41,7 @@ export class PowerOverviewComponent implements OnInit {
         r.Quantity * perUnitUsage
       ]);
     });
-    res.push(['', '', 'Total', this.sharedService.sumColumnOftable(res.slice(1), 3)]);
+    res.push(['', '', 'Total', this.commonService.sumColumnOftable(res.slice(1), 3)]);
 
     return res;
   }
@@ -60,7 +60,7 @@ export class PowerOverviewComponent implements OnInit {
         r.Quantity * perUnitUsage
       ]);
     });
-    res.push(['', '', 'Total', this.sharedService.sumColumnOftable(res.slice(1), 3)]);
+    res.push(['', '', 'Total', this.commonService.sumColumnOftable(res.slice(1), 3)]);
 
     return res;
   }

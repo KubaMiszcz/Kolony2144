@@ -5,7 +5,7 @@ import { IAsset, Asset } from '../models/Entity';
 import { AllCivilianCrew } from '../models/Crew';
 import { AllBuildings, IBuilding } from '../models/Building';
 import { AllMachines } from '../models/Machine';
-import { SharedService } from './shared.service';
+import { CommonService } from './common.service';
 import { CrewService } from '../crew-module/crew.service';
 import { FinanceService } from '../finances-module/finance.service';
 import { GameService } from './game.service';
@@ -23,7 +23,7 @@ export class KolonyService {
   get Name(): string { return this.kolony.Name; }
 
   constructor(
-    private sharedService: SharedService,
+    private commonService: CommonService,
   ) {
     const kolony = new Kolony();
     kolony.Name = 'KolonyUNO';

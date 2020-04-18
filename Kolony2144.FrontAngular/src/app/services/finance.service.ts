@@ -5,7 +5,7 @@ import { ResourceName } from '../models/Resource';
 import { CrewService } from '../crew-module/crew.service';
 import { GameService } from './game.service';
 import { KolonyService } from './kolony.service';
-import { SharedService } from './shared.service';
+import { CommonService } from './common.service';
 import { WikiService } from '../wiki-module/wiki.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -19,7 +19,7 @@ export class FinanceService {
   CashBS = new BehaviorSubject<IAsset>(null);
 
   constructor(
-    private sharedService: SharedService,
+    private commonService: CommonService,
     private assetService: AssetService,
   ) {
     this.Cash = this.assetService.getAssetByName(ResourceName.Cash);
