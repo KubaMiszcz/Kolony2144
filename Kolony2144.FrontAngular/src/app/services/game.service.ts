@@ -193,24 +193,24 @@ export class GameService {
 
   //#region init new game
   InitNewGame() {
-    this.getAllInitialGameAssets();
-    this.getAllInitialGameBuildings();
-    this.tradeService.tradeableCargo = this.getTradeableAssets();
+    this.fillAllInitialGameAssets();
+    this.fillAllInitialGameBuildings();
+    this.tradeService.tradeableCargo = this.fillTradeableAssets();
   }
 
-  getAllInitialGameAssets() {
+  fillAllInitialGameAssets() {
     [...AllResources, ...AllCivilianCrew, ...AllMachines].forEach(i => {
       this.ALL_ASSETS_LIST.push(i as IAsset);
     });
   }
 
-  getAllInitialGameBuildings() {
+  fillAllInitialGameBuildings() {
     [...AllBuildings].forEach(i => {
       this.ALL_BUILDINGS_LIST.push(i as IAsset);
     });
   }
 
-  getTradeableAssets(): IAsset[] { // todo change it to interface tradebale asset
+  fillTradeableAssets(): IAsset[] { // todo change it to interface tradebale asset
     const list = this.commonService.cloneObject<IAsset[]>(this.ALL_ASSETS_LIST);
 
     return list.filter(a => a.Tags.includes(GenericTypesEnum.Tradeable));

@@ -47,11 +47,11 @@ export class KolonyService {
   InitNewKolony() {
     this.kolony = new Kolony();
     this.kolony.Name = 'KolonyUNO';
-    this.kolony.Assets = this.setInitialKolonyAssets();
-    this.kolony.Buildings = this.setInitialKolonyBuildings();
+    this.kolony.Assets = this.fillInitialKolonyAssets();
+    this.kolony.Buildings = this.fillInitialKolonyBuildings();
   }
 
-  setInitialKolonyAssets(): IAsset[] {
+  fillInitialKolonyAssets(): IAsset[] {
     const res: IAsset[] = [];
     [...AllResources, ...AllCivilianCrew, ...AllMachines]
       .filter(a => a.Quantity > 0 || a.Tags.includes(GenericTypesEnum.Property))
@@ -63,7 +63,7 @@ export class KolonyService {
     return res;
   }
 
-  setInitialKolonyBuildings(): IBuilding[] {
+  fillInitialKolonyBuildings(): IBuilding[] {
     const res: IBuilding[] = [];
     [...AllBuildings]
       .filter(a => a.Quantity > 0)
