@@ -47,8 +47,11 @@ export class CommonService {
 
 
   sumColumnOftable(table: any[][], colNo: number) {
-    return table.map(c => c[colNo])
-      .reduce((total, i) => total + i);
+    if (!table || table.length < 1) {
+      return 0;
+    }
+
+    return table.map(c => c[colNo]).reduce((total, i) => total + i);
   }
 
   cloneObject<T>(object: T): T {
