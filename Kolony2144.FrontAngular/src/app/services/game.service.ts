@@ -25,6 +25,7 @@ import { CommonService } from './common.service';
 })
 export class GameService {
 
+
   private age = 100;
   get Age(): number { return Math.round(this.age * 10) / 10; }
   set Age(value: number) { this.age = value; this.AgeBS.next(value); }
@@ -54,29 +55,11 @@ export class GameService {
     private buildingService: BuildingService,
   ) {
     this.playerNotes = sessionStorage.getItem('savedState');
-    this.ALL_ASSETS_LIST = this.getAllInitialGameAssets();
-    this.ALL_BUILDINGS_LIST = this.getAllInitialGameBuildings();
-    this.tradeService.tradeableCargo = this.getTradeableAssets();
+    this.InitNewGame();
     this.nextTurn();
   }
 
-  getAllInitialGameAssets(): IAsset[] {
-    const res = [];
-    [...AllResources, ...AllCivilianCrew, ...AllMachines].forEach(i => {
-      res.push(new Asset().Deserialize(i));
-    });
 
-    return res;
-  }
-
-  getAllInitialGameBuildings(): IBuilding[] {
-    const res = [];
-    [...AllBuildings].forEach(i => {
-      res.push(new Building().Deserialize(i));
-    });
-
-    return res;
-  }
 
   getAssetByName(name: string): IAsset {
     return this.ALL_ASSETS_LIST.find(i => i.Name === name);
@@ -187,11 +170,7 @@ export class GameService {
 
 
 
-  getTradeableAssets(): IAsset[] {
-    const list = this.commonService.cloneObject<IAsset[]>(this.ALL_ASSETS_LIST);
 
-    return list.filter(a => a.Tags.includes(GenericTypesEnum.Tradeable));
-  }
 
   saveGame() {
     let gameState = new Object() as IGameState;
@@ -210,6 +189,34 @@ export class GameService {
     // this.kolonyService.setKolonyState(gameState.kolony);
   }
 
+
+
+  //#region init new game
+  InitNewGame() {
+    this.getAllInitialGameAssets();
+    this.getAllInitialGameBuildings();
+    this.tradeService.tradeableCargo = this.getTradeableAssets();
+  }
+
+  getAllInitialGameAssets() {
+    [...AllResources, ...AllCivilianCrew, ...AllMachines].forEach(i => {
+      this.ALL_ASSETS_LIST.push(i as IAsset);
+    });
+  }
+
+  getAllInitialGameBuildings() {
+    [...AllBuildings].forEach(i => {
+      this.ALL_BUILDINGS_LIST.push(i as IAsset);
+    });
+  }
+
+  getTradeableAssets(): IAsset[] { // todo change it to interface tradebale asset
+    const list = this.commonService.cloneObject<IAsset[]>(this.ALL_ASSETS_LIST);
+
+    return list.filter(a => a.Tags.includes(GenericTypesEnum.Tradeable));
+  }
+
+  //#endregion
 }
 
 interface IGameState {

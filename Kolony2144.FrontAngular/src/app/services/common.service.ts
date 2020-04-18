@@ -46,6 +46,7 @@ export class CommonService {
   }
 
 
+  // todo add sumColumnOftableByColumnHeader
   sumColumnOftable(table: any[][], colNo: number) {
     if (!table || table.length < 1) {
       return 0;

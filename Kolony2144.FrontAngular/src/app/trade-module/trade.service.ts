@@ -18,7 +18,7 @@ import { FinanceService } from '../finances-module/finance.service';
 })
 export class TradeService {
   tradeAnnouncement = '';
-  tradeableCargo: IAsset[] = [];
+  tradeableCargo: IAsset[] = []; // todo change to Itradebaleasset
   isShipLanded: boolean;
   landingProbability = 0.99;
   shipSizeVariation = 0.2;  // future  depend on shipsize?
