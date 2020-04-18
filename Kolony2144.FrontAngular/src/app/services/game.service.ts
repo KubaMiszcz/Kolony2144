@@ -18,6 +18,7 @@ import { BehaviorSubject } from 'rxjs';
 import { PowerService } from '../power-module/power.service';
 import { BuildingService } from '../buildings-module/building.service';
 import { CommonService } from './common.service';
+import { SharedService } from './shared.service';
 
 
 @Injectable({
@@ -45,6 +46,7 @@ export class GameService {
     private router: Router,
     private commonService: CommonService,
     private kolonyService: KolonyService,
+    private sharedService: SharedService,
     private assetService: AssetService,
     private crewService: CrewService,
     private financeService: FinanceService,
@@ -62,7 +64,8 @@ export class GameService {
 
 
   getAssetByName(name: string): IAsset {
-    return this.ALL_ASSETS_LIST.find(i => i.Name === name);
+    return this.sharedService.findItemInListByName(this.ALL_ASSETS_LIST, name);
+    // return this.ALL_ASSETS_LIST.find(i => i.Name === name);
   }
 
 
@@ -94,12 +97,14 @@ export class GameService {
 
       // ##########################################
       // #REGION NEW TURN BEGINS
-      this.assetService.ClearVolatileResourcesDepr();
-      this.assetService.updateInventoryDueToMaintenance(this.assetService.kolonyAssetList);
-      this.assetService.updateInventoryDueToMaintenance(this.buildingService.kolonyBuildingsList);
+      this.assetService.ClearVolatileEntities();
+      this.assetService.updateInventoryDueToMaintenanceCost(
+        [...this.buildingService.kolonyBuildingsList, ...this.assetService.kolonyAssetList]
+      );
       // todo MINING       // this.MiningService.mining
-      this.assetService.updateInventoryDueToPassiveProducedItemsByAssets(this.assetService.kolonyAssetList);
-      this.assetService.updateInventoryDueToPassiveProducedItemsByAssets(this.buildingService.kolonyBuildingsList);
+      this.assetService.updateInventoryDueToPassiveProducedItems(
+        [...this.buildingService.kolonyBuildingsList, ...this.assetService.kolonyAssetList]
+      );
 
       this.tradeService.prepareIncomingShip();
       this.tradeService.setTradeAnnouncement();

@@ -38,7 +38,7 @@
     ],
     "no-consecutive-blank-lines": [
       true,
-      8
+      20
     ],
     "comment-format": [
       true,

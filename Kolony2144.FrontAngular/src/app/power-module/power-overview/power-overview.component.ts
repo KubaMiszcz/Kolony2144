@@ -6,6 +6,7 @@ import { ResourceName } from 'src/app/models/Resource';
 import { IAsset, ICountableEntity } from 'src/app/models/Entity';
 import { PowerService } from '../power.service';
 import { AssetService } from 'src/app/assets-module/asset.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-power-overview',
@@ -19,6 +20,7 @@ export class PowerOverviewComponent implements OnInit {
   constructor(
     private kolonyService: KolonyService,
     private commonService: CommonService,
+    private sharedService: SharedService,
     private assetService: AssetService,
     private powerService: PowerService,
   ) {
@@ -35,7 +37,7 @@ export class PowerOverviewComponent implements OnInit {
     ];
 
     resources.forEach(r => {
-      const perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.MaintenanceCost, ResourceName.Energy).Quantity;
+      const perUnitUsage = this.sharedService.findItemInListByName(r.MaintenanceCost, ResourceName.Energy).Quantity;
       res.push([
         r.Name,
         r.Type,
@@ -57,7 +59,7 @@ export class PowerOverviewComponent implements OnInit {
     ];
 
     resources.forEach(r => {
-      const perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.PassiveIncome, ResourceName.Energy).Quantity;
+      const perUnitUsage = this.sharedService.findItemInListByName(r.PassiveIncome, ResourceName.Energy).Quantity;
       res.push([
         r.Name,
         r.Type,

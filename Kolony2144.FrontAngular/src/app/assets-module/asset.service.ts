@@ -1,3 +1,4 @@
+import { SharedService } from './../services/shared.service';
 import { Injectable } from '@angular/core';
 import { KolonyService } from '../services/kolony.service';
 import { IAsset, ISimplifiedAsset, ICountableEntity } from '../models/Entity';
@@ -22,6 +23,7 @@ export class AssetService {
 
   constructor(
     private commonService: CommonService,
+    private sharedService: SharedService,
     private kolonyService: KolonyService,
   ) {
     this.kolonyAssetList = this.kolonyService.getAllKolonyAssets();
@@ -99,32 +101,54 @@ export class AssetService {
 
 
 
+  updateInventoryDueToMaintenanceCost(entitiesList: ICountableEntity[]) {
+    entitiesList.forEach(entity => {
+      entity.MaintenanceCost.forEach(consumedItem => {
+        // fix what if  asset isnt exist in inventory? yyy??? error? 0?? omit?
+        this.sharedService
+          .findItemInListByName(this.kolonyAssetList, consumedItem.Name).Quantity -= (consumedItem.Quantity * entity.Quantity);
+      });
+    });
+  }
+
+  updateInventoryDueToPassiveProducedItems(entitiesList: ICountableEntity[]) {
+    entitiesList.forEach(entity => {
+      entity.PassiveIncome.forEach(producedItem => {
+        // fix what if  asset isnt exist in inventory? add new asset to list
+        this.sharedService
+          .findItemInListByName(this.kolonyAssetList, producedItem.Name).Quantity += (producedItem.Quantity * entity.Quantity);
+      });
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
   // ==========================
   // check if not deprecated
 
-  getVolatileAssetsDepr(): IAsset[] {
-    return this.kolonyAssetList.filter(i => i.Tags.includes(ResourceTypesEnum.Volatile));
-  }
-
-  getNonVolatileAssetsDepr(): IAsset[] {
-    return this.kolonyAssetList.filter(i => !i.Tags.includes(ResourceTypesEnum.Volatile));
-  }
-
-  ClearVolatileResourcesDepr() {
-    this.getVolatileAssetsDepr().forEach(element => element.Quantity = 0);
-  }
 
 
 
 
 
-
-
-
-  updateInventoryDueToMaintenance(assetList: ICountableEntity[]) {
+  updateInventoryDueToMaintenanceDEPR(assetList: ICountableEntity[]) {
     assetList.forEach(asset => {
       asset.MaintenanceCost.forEach(consumedItem => {
         // fix what if  asset isnt exist in inventory? yyy??? error?
@@ -133,7 +157,7 @@ export class AssetService {
     });
   }
 
-  updateInventoryDueToPassiveProducedItemsByAssets(assetList: ICountableEntity[]) {
+  updateInventoryDueToPassiveProducedItemsByAssetsDEPR(assetList: ICountableEntity[]) {
     assetList.forEach(asset => {
       asset.PassiveIncome.forEach(producedItem => {
         // fix what if  asset isnt exist in inventory? add new asset to list
@@ -179,33 +203,6 @@ export class AssetService {
 
 
 
-
-
-
-  getAssetsByProducedAssetNameDEPR(producedAssetName: ResourceName): IAsset[] {
-    const res = [];
-    this.kolonyAssetList.forEach(asset => {
-      if (!!asset.PassiveIncome.find(item => item.Name === producedAssetName)) {
-        res.push(asset);
-      }
-    });
-
-    return res;
-  }
-
-
-
-
-
-  findSimplifiedResourceInListByName(resourcesList: ISimplifiedAsset[], name: ResourceName): ISimplifiedAsset {
-    return resourcesList.find(r => r.Name === name);
-  }
-
-
-
-  // findAssetInListByName(resourcesList: IAsset[], name: string): IAsset {
-  //   return resourcesList.find(i => i.Name === name);
-  // }
 
   // getAssetQuantityFromListByName(assetsList: ISimplifiedResource[], name: string) {
   //   const asset = assetsList.find(s => s.Name === name);

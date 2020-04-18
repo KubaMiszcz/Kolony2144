@@ -6,6 +6,7 @@ import { Kolony } from 'src/app/models/Kolony';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { ResourceName } from 'src/app/models/Resource';
 import { IAsset, ICountableEntity } from 'src/app/models/Entity';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-finances-overview',
@@ -18,6 +19,7 @@ export class FinancesOverviewComponent implements OnInit {
   constructor(
     private kolonyService: KolonyService,
     private commonService: CommonService,
+    private sharedService: SharedService,
     private assetService: AssetService,
   ) { }
 
@@ -31,7 +33,7 @@ export class FinancesOverviewComponent implements OnInit {
     ];
 
     resources.forEach(r => {
-      const perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.MaintenanceCost, ResourceName.Cash).Quantity;
+      const perUnitUsage = this.sharedService.findItemInListByName(r.MaintenanceCost, ResourceName.Cash).Quantity;
       res.push([
         r.Name,
         r.Type,

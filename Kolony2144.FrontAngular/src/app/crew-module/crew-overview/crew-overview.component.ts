@@ -1,8 +1,9 @@
 import { AssetService } from '../../assets-module/asset.service';
 import { Component, OnInit } from '@angular/core';
-import { CommonService } from 'src/app/services/common.service';
 import { ResourceName } from 'src/app/models/Resource';
 import { AssetTypesEnum } from 'src/app/models/enums/Types.enum';
+import { SharedService } from 'src/app/services/shared.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-crew-overview',
@@ -19,6 +20,7 @@ export class CrewOverviewComponent implements OnInit {
 
   constructor(
     private commonService: CommonService,
+    private sharedService: SharedService,
     private assetService: AssetService
   ) {
   }
@@ -39,9 +41,9 @@ export class CrewOverviewComponent implements OnInit {
 
     this.assetService.getAssetsByType(AssetTypesEnum.Crew).forEach(c => {
       const name = c.Name;
-      const salary = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
-      const foodConsumption = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
-      const BasicWU = this.assetService.findSimplifiedResourceInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
+      const salary = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
+      const foodConsumption = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
+      const BasicWU = this.sharedService.findItemInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
       const qty = c.Quantity;
       this.perUnitList.push([
         name,
@@ -66,9 +68,9 @@ export class CrewOverviewComponent implements OnInit {
 
     this.assetService.getAssetsByType(AssetTypesEnum.Crew).forEach(c => {
       const name = c.Name;
-      const salary = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
-      const foodConsumption = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
-      const BasicWU = this.assetService.findSimplifiedResourceInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
+      const salary = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
+      const foodConsumption = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
+      const BasicWU = this.sharedService.findItemInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
       const qty = c.Quantity;
       this.totalList.push([
         name,
