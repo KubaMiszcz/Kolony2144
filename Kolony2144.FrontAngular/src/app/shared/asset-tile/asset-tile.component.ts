@@ -1,3 +1,4 @@
+import { EntityService } from './../../services/entity.service';
 import { AssetService } from './../../assets-module/asset.service';
 import { ICountableEntity } from 'src/app/models/Entity';
 import { CommonService } from '../../services/common.service';
@@ -22,6 +23,7 @@ export class AssetTileComponent implements OnInit {
 
   constructor(
     private kolonyService: KolonyService,
+    private entityService: EntityService,
     private assetService: AssetService,
     private commonService: CommonService) { }
 
@@ -32,7 +34,7 @@ export class AssetTileComponent implements OnInit {
     // });
 
     this.asset.CreationCost.forEach(m => {
-      const uom = this.assetService.getUoMByName(m.Name);
+      const uom = this.entityService.getUoMByName(m.Name);
       const kolonyAsset = this.assetService.getAssetByName(m.Name);
       this.productionCost.push({
         Name: m.Name,

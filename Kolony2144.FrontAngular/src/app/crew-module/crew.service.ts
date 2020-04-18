@@ -20,7 +20,7 @@ export class CrewService {
     private commonService: CommonService,
     private assetService: AssetService,
   ) {
-    this.crewList = this.assetService.getAssetsByType(AssetTypesEnum.Crew);
+    this.crewList = this.assetService.getAssetsByTypeDEPR(AssetTypesEnum.Crew);
   }
 
   getAllCrewQuantity() {

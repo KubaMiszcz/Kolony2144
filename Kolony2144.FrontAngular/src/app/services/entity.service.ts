@@ -4,6 +4,7 @@ import { CommonService } from './common.service';
 import { SharedService } from './shared.service';
 import { KolonyService } from './kolony.service';
 import { ResourceName } from '../models/Resource';
+import { UoMsEnum } from '../models/enums/UoMs.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -128,5 +129,10 @@ export class EntityService {
   }
 
 
+  getUoMByName(itemName: string): UoMsEnum {
+    // return this.allWikiEntites.find(m => m.Name === item.Name).UoM;
+    console.log('getUoMForSimpleAsset..........................................');
 
+    return 'fixit' as UoMsEnum;
+  }
 }

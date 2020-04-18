@@ -72,44 +72,24 @@ export class AssetService {
 
 
 
-  updateInventoryDueToMaintenanceDEPR(assetList: ICountableEntity[]) {
-    assetList.forEach(asset => {
-      asset.MaintenanceCost.forEach(consumedItem => {
-        // fix what if  asset isnt exist in inventory? yyy??? error?
-        this.allKolonyAssetList.find(a => a.Name === consumedItem.Name).Quantity -= (consumedItem.Quantity * asset.Quantity);
-      });
-    });
-  }
-
-  updateInventoryDueToPassiveProducedItemsByAssetsDEPR(assetList: ICountableEntity[]) {
-    assetList.forEach(asset => {
-      asset.PassiveIncome.forEach(producedItem => {
-        // fix what if  asset isnt exist in inventory? add new asset to list
-        this.allKolonyAssetList.find(a => a.Name === producedItem.Name).Quantity += (producedItem.Quantity * asset.Quantity);
-      });
-    });
-  }
-
-
-
   /////////////////////////
   /////////////////////////
   /////////////////////////
   /////////////////////////
   /////////////////////////
 
-  getAllResources(): IAsset[] {
+  getAllResourcesDEPR(): IAsset[] {
     return this.allKolonyAssetList.filter(i => i.Type === AssetTypesEnum.Resource);
   }
 
 
 
-  getAssetsByType(type: AssetTypesEnum): IAsset[] {
+  getAssetsByTypeDEPR(type: AssetTypesEnum): IAsset[] {
     return this.allKolonyAssetList.filter(i => i.Type === type);
   }
 
 
-  addNewAssetToInventory(newAsset: IAsset): IAsset {
+  addNewAssetToInventoryDEPR(newAsset: IAsset): IAsset {
     const asset = this.commonService.cloneObject(newAsset) as IAsset;
     asset.Quantity = 0;
     asset.Price = 0;
@@ -120,30 +100,5 @@ export class AssetService {
 
 
 
-
-
-  // getAssetQuantityFromListByName(assetsList: ISimplifiedResource[], name: string) {
-  //   const asset = assetsList.find(s => s.Name === name);
-  //   return !!asset ? asset.Quantity : 0;
-  // }
-
-
-  convertSimplifiedResourceToAsset(resource: ISimplifiedAsset): IAsset {
-    return this.convertSimplifiedResourceToAssetByName(resource.Name);
-  }
-
-  convertSimplifiedResourceToAssetByName(resourceName: string): IAsset {
-    return this.allKolonyAssetList.find(a => a.Name === resourceName);
-  }
-
-
-
-
-  getUoMByName(itemName: string): UoMsEnum {
-    // return this.allWikiEntites.find(m => m.Name === item.Name).UoM;
-    console.log('getUoMForSimpleAsset..........................................');
-
-    return 'fixit' as UoMsEnum;
-  }
 
 }

@@ -80,7 +80,7 @@ export class ShipTradePanelComponent implements OnInit {
     if (!asset) {
       // todo create new isnatnce of all assets list in trade service
       const newAsset = this.gameService.getAssetByName(row.Name); // get from all
-      asset = this.assetService.addNewAssetToInventory(newAsset); // get newly added from kolony assets
+      asset = this.assetService.addNewAssetToInventoryDEPR(newAsset); // get newly added from kolony assets
     }
 
     let factor = 0;

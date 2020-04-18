@@ -39,7 +39,7 @@ export class CrewOverviewComponent implements OnInit {
       'Total Qty',
     ];
 
-    this.assetService.getAssetsByType(AssetTypesEnum.Crew).forEach(c => {
+    this.assetService.getAssetsByTypeDEPR(AssetTypesEnum.Crew).forEach(c => {
       const name = c.Name;
       const salary = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
       const foodConsumption = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
@@ -66,7 +66,7 @@ export class CrewOverviewComponent implements OnInit {
       'Total ' + ResourceName.BasicWorkUnit + ' Production',
     ];
 
-    this.assetService.getAssetsByType(AssetTypesEnum.Crew).forEach(c => {
+    this.assetService.getAssetsByTypeDEPR(AssetTypesEnum.Crew).forEach(c => {
       const name = c.Name;
       const salary = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
       const foodConsumption = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
