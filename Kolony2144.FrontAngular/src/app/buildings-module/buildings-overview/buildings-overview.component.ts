@@ -23,11 +23,12 @@ export class BuildingsOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.kolonyBuildingsList = this.fillBuildingsList(this.buildingService.kolonyBuildingsList);
+    // todo swicth to new method
+    this.kolonyBuildingsList = this.fillBuildingsListDEPR(this.buildingService.kolonyBuildingsList);
     this.allBuildingsList = this.gameService.ALL_BUILDINGS_LIST;
   }
 
-  fillBuildingsList(resources: IBuilding[]): any[] {
+  fillBuildingsListDEPR(resources: IBuilding[]): any[] {
     const res: any[] = [['name', 'qty']];
 
     resources.forEach(r => {
