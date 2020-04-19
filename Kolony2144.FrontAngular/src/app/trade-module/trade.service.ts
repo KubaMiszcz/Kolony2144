@@ -35,6 +35,7 @@ export class TradeService {
     private assetService: AssetService,
     private financeService: FinanceService,
   ) {
+    this.tradeableCargo = dataProviderService.ALL_TRADEABLE_ASSETS_LIST;
   }
 
   updateResourcesPrices() {

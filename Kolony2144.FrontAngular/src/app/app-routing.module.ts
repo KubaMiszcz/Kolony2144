@@ -13,7 +13,7 @@ import { WarehouseOverviewComponent } from './warehouse-module/warehouse-overvie
 
 const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },
-  { path: 'start', component: WarehouseOverviewComponent },
+  { path: 'start', component: OverviewComponent },
   { path: 'trade', component: TradeOverviewComponent },
   { path: 'warehouse', component: WarehouseOverviewComponent },
   { path: 'overview', component: OverviewComponent },
