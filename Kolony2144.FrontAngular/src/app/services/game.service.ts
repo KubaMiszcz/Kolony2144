@@ -31,9 +31,7 @@ export class GameService {
     private overviewService: OverviewService,
     private powerService: PowerService,
     private tradeService: TradeService
-  ) {
-    // this.nextTurn();
-  }
+  ) { }
 
 
 
