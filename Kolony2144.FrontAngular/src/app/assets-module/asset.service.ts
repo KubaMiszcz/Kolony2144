@@ -2,7 +2,7 @@ import { SharedService } from './../services/shared.service';
 import { Injectable } from '@angular/core';
 import { KolonyService } from '../services/kolony.service';
 import { IAsset, ISimplifiedEntity, IEntity } from '../models/Entity';
-import { ResourceTypesEnum, AssetTypesEnum } from '../models/enums/Types.enum';
+import { ResourceTypesEnum, EntityTypesEnum } from '../models/enums/Types.enum';
 import { Kolony } from '../models/Kolony';
 import { ResourceName } from '../models/Resource';
 import { OverviewService } from '../overview-module/overview.service';
@@ -79,12 +79,12 @@ export class AssetService {
   /////////////////////////
 
   getAllResourcesDEPR(): IAsset[] {
-    return this.allKolonyAssetList.filter(i => i.Type === AssetTypesEnum.Resource);
+    return this.allKolonyAssetList.filter(i => i.Type === EntityTypesEnum.Resource);
   }
 
 
 
-  getAssetsByTypeDEPR(type: AssetTypesEnum): IAsset[] {
+  getAssetsByTypeDEPR(type: EntityTypesEnum): IAsset[] {
     return this.allKolonyAssetList.filter(i => i.Type === type);
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IAsset } from '../models/Entity';
 import { AssetService } from '../assets-module/asset.service';
-import { AssetTypesEnum } from '../models/enums/Types.enum';
+import { EntityTypesEnum } from '../models/enums/Types.enum';
 import { KolonyService } from '../services/kolony.service';
 import { OverviewService } from '../overview-module/overview.service';
 import { FinanceService } from '../finances-module/finance.service';

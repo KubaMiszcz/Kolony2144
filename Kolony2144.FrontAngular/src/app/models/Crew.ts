@@ -1,5 +1,5 @@
 import { IEntity, IWikiEntity, IAsset, ITradeableEntity } from './Entity';
-import { AssetTypesEnum, CrewTypesEnum, GenericTypesEnum } from './enums/Types.enum';
+import { EntityTypesEnum, CrewTypesEnum, GenericTypesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
 
@@ -19,8 +19,8 @@ export const AllCrew: ICrewFullModel[] = [
   {
     Name: CrewNames.Worker,
     Description: 'just peon worker, chop chop he\'s on it, eats many', ImageUrl: '/assets/wiki-icons/crew-worker.png',
-    Type: AssetTypesEnum.Crew,
-    Tags: [CrewTypesEnum.Production, GenericTypesEnum.Tradeable],
+    Type: EntityTypesEnum.Crew,
+    Tags: [CrewTypesEnum.Production],
     Price: 50,
     HistoricalPrices: [],
     CommonnessFactor: 1,
@@ -39,8 +39,8 @@ export const AllCrew: ICrewFullModel[] = [
     Name: CrewNames.Technician,
     Description: '', ImageUrl: '/assets/wiki-icons/crew-technician.png',
 
-    Type: AssetTypesEnum.Crew,
-    Tags: [CrewTypesEnum.Production, GenericTypesEnum.Tradeable],
+    Type: EntityTypesEnum.Crew,
+    Tags: [CrewTypesEnum.Production],
     Price: 100,
     HistoricalPrices: [],
     CommonnessFactor: 1,

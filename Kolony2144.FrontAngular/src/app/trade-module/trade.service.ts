@@ -1,7 +1,7 @@
 import { CommonService } from '../services/common.service';
 import { Injectable } from '@angular/core';
 import { AssetService } from '../assets-module/asset.service';
-import { AssetTypesEnum, ResourceTypesEnum, GenericTypesEnum } from '../models/enums/Types.enum';
+import { EntityTypesEnum, ResourceTypesEnum, GenericTypesEnum } from '../models/enums/Types.enum';
 import { IAsset } from '../models/Entity';
 import { GameService } from '../services/game.service';
 import { KolonyService } from '../services/kolony.service';
@@ -36,6 +36,7 @@ export class TradeService {
     private financeService: FinanceService,
   ) {
     this.tradeableCargo = dataProviderService.ALL_TRADEABLE_ASSETS_LIST;
+    this.updateResourcesPrices();
   }
 
   updateResourcesPrices() {

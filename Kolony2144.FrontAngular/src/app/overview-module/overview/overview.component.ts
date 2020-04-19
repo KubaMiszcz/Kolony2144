@@ -1,5 +1,5 @@
 import { OverviewService } from '../overview.service';
-import { AssetTypesEnum, GenericTypesEnum } from 'src/app/models/enums/Types.enum';
+import { EntityTypesEnum, GenericTypesEnum } from 'src/app/models/enums/Types.enum';
 import { IAsset, IEntity, ITradeableEntity } from './../../models/Entity';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { KolonyService } from 'src/app/services/kolony.service';

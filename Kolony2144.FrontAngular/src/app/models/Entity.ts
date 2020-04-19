@@ -1,5 +1,5 @@
 import { UoMsEnum } from './enums/UoMs.enum';
-import { AssetTypesEnum } from './enums/Types.enum';
+import { EntityTypesEnum } from './enums/Types.enum';
 import { IDeserializable } from '../core/interfaces/deserializable';
 import { IBuilding } from './Building';
 
@@ -8,7 +8,7 @@ import { IBuilding } from './Building';
 
 export interface IEntityModel {
   Name: string;
-  Type: AssetTypesEnum;
+  Type: EntityTypesEnum;
   Tags: string[];
   CreationCost: ISimplifiedEntity[];
   MaintenanceCost: ISimplifiedEntity[];
@@ -40,7 +40,7 @@ export interface ITradeableEntity extends IAsset {
 
 export class Asset implements IAsset, IDeserializable {
   Name: string;
-  Type: AssetTypesEnum;
+  Type: EntityTypesEnum;
   Tags: string[];
   Price: number;
   CreationCost: ISimplifiedEntity[];

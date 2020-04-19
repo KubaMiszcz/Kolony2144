@@ -1,5 +1,5 @@
 import { IEntity, IWikiEntity, IAsset, ITradeableEntity } from './Entity';
-import { AssetTypesEnum, GenericTypesEnum, ResourceTypesEnum } from './enums/Types.enum';
+import { EntityTypesEnum, GenericTypesEnum, ResourceTypesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 
 export enum ResourceName {
@@ -35,7 +35,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
   {
     Name: ResourceName.Energy,
     Description: 'Energy', ImageUrl: '/assets/wiki-icons/resource-energy.png',
-    Type: AssetTypesEnum.Resource,
+    Type: EntityTypesEnum.Resource,
     Tags: [], // fix change it to volatileresource
     CreationCost: [],
     MaintenanceCost: [],
@@ -46,7 +46,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
   {
     Name: ResourceName.BasicWorkUnit,
     Description: 'Basic Work Unit', ImageUrl: '/assets/wiki-icons/property.png',
-    Type: AssetTypesEnum.Resource,
+    Type: EntityTypesEnum.Resource,
     Tags: [],
     CreationCost: [],
     MaintenanceCost: [],
@@ -57,7 +57,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
   {
     Name: ResourceName.AdvancedWorkUnit,
     Description: 'Advanced Work Unit', ImageUrl: '/assets/wiki-icons/property.png',
-    Type: AssetTypesEnum.Resource,
+    Type: EntityTypesEnum.Resource,
     Tags: [],
     CreationCost: [],
     MaintenanceCost: [],
@@ -68,7 +68,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
   {
     Name: ResourceName.StorageSpace,
     Description: 'Storage Space', ImageUrl: '/assets/wiki-icons/property.png',
-    Type: AssetTypesEnum.Resource,
+    Type: EntityTypesEnum.Resource,
     Tags: [],
     CreationCost: [],
     MaintenanceCost: [],
@@ -79,7 +79,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
   {
     Name: ResourceName.LivingSpace,
     Description: 'Living Space', ImageUrl: '/assets/wiki-icons/property.png',
-    Type: AssetTypesEnum.Resource,
+    Type: EntityTypesEnum.Resource,
     Tags: [],
     CreationCost: [],
     MaintenanceCost: [],
@@ -90,7 +90,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
   {
     Name: ResourceName.PlanetSpace,
     Description: 'Planet Space', ImageUrl: '/assets/wiki-icons/property.png',
-    Type: AssetTypesEnum.Resource,
+    Type: EntityTypesEnum.Resource,
     Tags: [],
     CreationCost: [],
     MaintenanceCost: [],
@@ -107,7 +107,7 @@ export const AllResources: IResourceFullModel[] = [
   {
     Name: ResourceName.Cash,
     Description: 'Space Beads, galactic currency', ImageUrl: '/assets/wiki-icons/resource-cash.png',
-    Type: AssetTypesEnum.Resource,
+    Type: EntityTypesEnum.Resource,
     Tags: [],
     Price: 0,
     HistoricalPrices: [],
@@ -121,8 +121,8 @@ export const AllResources: IResourceFullModel[] = [
   {
     Name: ResourceName.Food,
     Description: 'food for feeding your men and animals;]', ImageUrl: '/assets/wiki-icons/resource.png',
-    Type: AssetTypesEnum.Resource,
-    Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
+    Type: EntityTypesEnum.Resource,
+    Tags: [ResourceTypesEnum.Production],
     Price: 10,
     HistoricalPrices: [],
     CommonnessFactor: 1,
@@ -137,8 +137,8 @@ export const AllResources: IResourceFullModel[] = [
   {
     Name: ResourceName.Stone,
     Description: 'A piece of stone', ImageUrl: '/assets/wiki-icons/resource.png',
-    Type: AssetTypesEnum.Resource,
-    Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
+    Type: EntityTypesEnum.Resource,
+    Tags: [ResourceTypesEnum.Production],
     Price: 10,
     HistoricalPrices: [],
     CommonnessFactor: 1,
@@ -153,8 +153,8 @@ export const AllResources: IResourceFullModel[] = [
   {
     Name: ResourceName.Steel,
     Description: 'A piece of steel', ImageUrl: '/assets/wiki-icons/resource.png',
-    Type: AssetTypesEnum.Resource,
-    Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
+    Type: EntityTypesEnum.Resource,
+    Tags: [ResourceTypesEnum.Production],
     Price: 25,
     HistoricalPrices: [],
     CommonnessFactor: 1,
@@ -169,8 +169,8 @@ export const AllResources: IResourceFullModel[] = [
   {
     Name: ResourceName.Coal,
     Description: 'A piece of coal', ImageUrl: '/assets/wiki-icons/resource.png',
-    Type: AssetTypesEnum.Resource,
-    Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
+    Type: EntityTypesEnum.Resource,
+    Tags: [ResourceTypesEnum.Production],
     Price: 15,
     HistoricalPrices: [],
     CommonnessFactor: 1,
@@ -185,8 +185,8 @@ export const AllResources: IResourceFullModel[] = [
   {
     Name: ResourceName.Diamonds,
     Description: 'A piece of Diamond', ImageUrl: '/assets/wiki-icons/resource.png',
-    Type: AssetTypesEnum.Resource,
-    Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
+    Type: EntityTypesEnum.Resource,
+    Tags: [ResourceTypesEnum.Production],
     Price: 1000,
     HistoricalPrices: [],
     CommonnessFactor: 0.1,

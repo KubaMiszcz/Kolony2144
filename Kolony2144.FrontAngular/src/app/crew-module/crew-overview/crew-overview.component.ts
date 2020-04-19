@@ -1,7 +1,7 @@
 import { AssetService } from '../../assets-module/asset.service';
 import { Component, OnInit } from '@angular/core';
 import { ResourceName } from 'src/app/models/Resource';
-import { AssetTypesEnum } from 'src/app/models/enums/Types.enum';
+import { EntityTypesEnum } from 'src/app/models/enums/Types.enum';
 import { SharedService } from 'src/app/services/shared.service';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -39,7 +39,7 @@ export class CrewOverviewComponent implements OnInit {
       'Total Qty',
     ];
 
-    this.assetService.getAssetsByTypeDEPR(AssetTypesEnum.Crew).forEach(c => {
+    this.assetService.getAssetsByTypeDEPR(EntityTypesEnum.Crew).forEach(c => {
       const name = c.Name;
       const salary = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
       const foodConsumption = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
@@ -66,7 +66,7 @@ export class CrewOverviewComponent implements OnInit {
       'Total ' + ResourceName.BasicWorkUnit + ' Production',
     ];
 
-    this.assetService.getAssetsByTypeDEPR(AssetTypesEnum.Crew).forEach(c => {
+    this.assetService.getAssetsByTypeDEPR(EntityTypesEnum.Crew).forEach(c => {
       const name = c.Name;
       const salary = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
       const foodConsumption = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;

@@ -1,5 +1,5 @@
 import { IEntity, IWikiEntity, IAsset, ITradeableEntity } from './Entity';
-import { AssetTypesEnum, GenericTypesEnum, MachineTypesEnum } from './enums/Types.enum';
+import { EntityTypesEnum, GenericTypesEnum, MachineTypesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
 
@@ -18,8 +18,8 @@ export const AllMachines: IMachineFullModel[] = [
   {
     Name: MachinesNames.PowerGenerator,
     Description: 'simple power coal powered generator', ImageUrl: '/assets/wiki-icons/machine.png',
-    Type: AssetTypesEnum.Machine,
-    Tags: [MachineTypesEnum.PowerSource, , GenericTypesEnum.Tradeable],
+    Type: EntityTypesEnum.Machine,
+    Tags: [MachineTypesEnum.PowerSource],
     Price: 5000,
     HistoricalPrices: [],
     CommonnessFactor: 1,
@@ -40,8 +40,8 @@ export const AllMachines: IMachineFullModel[] = [
     Name: MachinesNames.TeslaCoil,
     Description: 'sparks', ImageUrl: '/assets/wiki-icons/machine.png',
 
-    Type: AssetTypesEnum.Machine,
-    Tags: [GenericTypesEnum.Tradeable],
+    Type: EntityTypesEnum.Machine,
+    Tags: [],
     Price: 100,
     HistoricalPrices: [],
     CommonnessFactor: 1,

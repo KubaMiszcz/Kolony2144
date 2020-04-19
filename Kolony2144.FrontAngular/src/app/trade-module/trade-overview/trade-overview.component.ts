@@ -7,7 +7,7 @@ import { KolonyService } from 'src/app/services/kolony.service';
 import { OverviewService } from 'src/app/overview-module/overview.service';
 import { GameService } from 'src/app/services/game.service';
 import { AssetService } from 'src/app/assets-module/asset.service';
-import { AssetTypesEnum } from 'src/app/models/enums/Types.enum';
+import { EntityTypesEnum } from 'src/app/models/enums/Types.enum';
 import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
 import { ITradePanelData } from '../ship-trade-panel/ship-trade-panel.component';
 import { CommonService } from 'src/app/services/common.service';
@@ -66,11 +66,11 @@ export class TradeOverviewComponent implements OnInit, OnDestroy {
           row.AVGBuyPrice = kolonyAsset.Price;
         }
 
-        if (cargoItem.Type === AssetTypesEnum.Resource) {
+        if (cargoItem.Type === EntityTypesEnum.Resource) {
           this.resourcesTradePanelValues.push(row);
-        } else if (cargoItem.Type === AssetTypesEnum.Crew) {
+        } else if (cargoItem.Type === EntityTypesEnum.Crew) {
           this.crewTradePanelValues.push(row);
-        } else if (cargoItem.Type === AssetTypesEnum.Machine) {
+        } else if (cargoItem.Type === EntityTypesEnum.Machine) {
           this.machinesTradePanelValues.push(row);
         }
       });
