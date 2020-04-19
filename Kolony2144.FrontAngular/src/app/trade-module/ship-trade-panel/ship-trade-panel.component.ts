@@ -1,4 +1,4 @@
-import { GameStaticDataContainerService } from './../../services/game-static-data-container.service';
+import { GameDataProviderService } from '../../services/game-data-provider.service';
 import { GameService } from './../../services/game.service';
 import { FinanceService } from '../../finances-module/finance.service';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
@@ -36,7 +36,7 @@ export class ShipTradePanelComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private tradeService: TradeService,
-    private gameStaticDataContainerService: GameStaticDataContainerService,
+    private gameStaticDataContainerService: GameDataProviderService,
     private assetService: AssetService,
     private gameService: GameService,
   ) { }

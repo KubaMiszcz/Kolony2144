@@ -10,7 +10,7 @@ import { SharedService } from './shared.service';
 @Injectable({
   providedIn: 'root'
 })
-export class GameStaticDataContainerService {
+export class GameDataProviderService {
   ALL_ENTITIES_LIST: ICountableEntity[] = [];
   ALL_ASSETS_LIST: IAsset[] = [];
   ALL_BUILDINGS_LIST: IBuilding[] = [];

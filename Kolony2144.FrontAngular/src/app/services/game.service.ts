@@ -20,7 +20,7 @@ import { BuildingService } from '../buildings-module/building.service';
 import { CommonService } from './common.service';
 import { SharedService } from './shared.service';
 import { EntityService } from './entity.service';
-import { GameStaticDataContainerService } from './game-static-data-container.service';
+import { GameDataProviderService } from './game-data-provider.service';
 
 
 @Injectable({
@@ -49,7 +49,7 @@ export class GameService {
     private router: Router,
     private commonService: CommonService,
     private sharedService: SharedService,
-    private gameStaticDataContainerService: GameStaticDataContainerService,
+    private gameStaticDataContainerService: GameDataProviderService,
     private kolonyService: KolonyService,
     private entityService: EntityService,
     private assetService: AssetService,

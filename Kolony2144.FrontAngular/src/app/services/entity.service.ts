@@ -5,7 +5,7 @@ import { SharedService } from './shared.service';
 import { KolonyService } from './kolony.service';
 import { ResourceName } from '../models/Resource';
 import { UoMsEnum } from '../models/enums/UoMs.enum';
-import { GameStaticDataContainerService } from './game-static-data-container.service';
+import { GameDataProviderService } from './game-data-provider.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class EntityService {
   constructor(
     private commonService: CommonService,
     private sharedService: SharedService,
-    private gameStaticDataContainerService: GameStaticDataContainerService,
+    private gameStaticDataContainerService: GameDataProviderService,
     private kolonyService: KolonyService
   ) {
     this.allKolonyEntitiesList = this.kolonyService.getAllKolonyEntities();
