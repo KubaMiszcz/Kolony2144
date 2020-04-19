@@ -73,7 +73,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     CreationCost: [],
     MaintenanceCost: [],
     PassiveIncome: [],
-    UoM: UoMsEnum.m2,
+    UoM: UoMsEnum.m3,
     Quantity: 0
   },
   {
@@ -84,7 +84,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     CreationCost: [],
     MaintenanceCost: [],
     PassiveIncome: [],
-    UoM: UoMsEnum.m2,
+    UoM: UoMsEnum.m3,
     Quantity: 0
   },
   {
@@ -192,7 +192,7 @@ export const AllResources: IResourceFullModel[] = [
     RarityFactor: 0.95,
     CreationCost: [],
     MaintenanceCost: [
-      { Name: ResourceName.StorageSpace, Quantity: 1 }
+      { Name: ResourceName.StorageSpace, Quantity: 0.01 * 0.01 * 0.01 }
     ],
     PassiveIncome: [],
     UoM: UoMsEnum.pcs,

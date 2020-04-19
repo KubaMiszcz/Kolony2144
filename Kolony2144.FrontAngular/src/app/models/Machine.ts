@@ -6,6 +6,7 @@ import { ResourceName } from './Resource';
 export enum MachinesNames {
   PowerGenerator = 'Power Generator',
   TeslaCoil = 'Tesla Coil',
+  StorageContainer = 'Storage Container'
 }
 
 export interface IMachine extends IAsset {
@@ -28,7 +29,8 @@ export const AllMachines: IMachineFullModel[] = [
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 20 },
-      { Name: ResourceName.StorageSpace, Quantity: 20 }
+      { Name: ResourceName.StorageSpace, Quantity: 4 * 4 * 4 },
+      { Name: ResourceName.Coal, Quantity: 20 }
     ],
     PassiveIncome: [
       { Name: ResourceName.Energy, Quantity: 100 }
@@ -39,7 +41,6 @@ export const AllMachines: IMachineFullModel[] = [
   {
     Name: MachinesNames.TeslaCoil,
     Description: 'sparks', ImageUrl: '/assets/wiki-icons/machine.png',
-
     Type: EntityTypesEnum.Machine,
     Tags: [],
     Price: 100,
@@ -50,9 +51,31 @@ export const AllMachines: IMachineFullModel[] = [
     ],
     MaintenanceCost: [
       { Name: ResourceName.Energy, Quantity: 10 },
-      { Name: ResourceName.StorageSpace, Quantity: 10 }
+      { Name: ResourceName.StorageSpace, Quantity: 2 * 2 * 5 }
     ],
     PassiveIncome: [
+    ],
+    UoM: UoMsEnum.pcs,
+    Quantity: 5
+  },
+  {
+    Name: MachinesNames.StorageContainer,
+    Description: 'storage container', ImageUrl: '/assets/wiki-icons/machine.png',
+    Type: EntityTypesEnum.Machine,
+    Tags: [],
+    Price: 50,
+    HistoricalPrices: [],
+    RarityFactor: 0,
+    CreationCost: [
+      { Name: ResourceName.Steel, Quantity: 50 }
+    ],
+    MaintenanceCost: [
+      { Name: ResourceName.Energy, Quantity: 1 },
+      { Name: ResourceName.Cash, Quantity: 10 },
+      { Name: ResourceName.PlanetSpace, Quantity: 10 * 3 }
+    ],
+    PassiveIncome: [
+      { Name: ResourceName.StorageSpace, Quantity: 10 * 3 * 3 }
     ],
     UoM: UoMsEnum.pcs,
     Quantity: 5

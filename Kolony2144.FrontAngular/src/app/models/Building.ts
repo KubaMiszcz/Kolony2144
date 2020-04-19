@@ -10,7 +10,8 @@ export enum BuildingNames {
   SolarPanel = 'Solar panel',
   Workshop = 'Workshop',
   Factory = 'Factory',
-  CargoBay = 'Cargo bay'
+  CargoBay = 'Cargo bay',
+  CoalPowerPlant = 'Coal Powered Plant'
 }
 
 export interface IBuilding extends IEntity {
@@ -88,6 +89,25 @@ export const AllBuildings: IBuildingFullModel[] = [
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 100 },
       { Name: ResourceName.PlanetSpace, Quantity: 25 }
+    ],
+    PassiveIncome: [
+      { Name: ResourceName.Energy, Quantity: 500 }
+    ],
+    UoM: UoMsEnum.pcs,
+    Quantity: 20
+  },
+  {
+    Name: BuildingNames.CoalPowerPlant,
+    Description: '', ImageUrl: '/assets/wiki-icons/building.png',
+    Type: EntityTypesEnum.Building,
+    Tags: [BuildingTypesEnum.PowerSource], CreationCost: [
+      { Name: ResourceName.Stone, Quantity: 10 },
+      { Name: ResourceName.Steel, Quantity: 20 }
+    ],
+    MaintenanceCost: [
+      { Name: ResourceName.Cash, Quantity: 100 },
+      { Name: ResourceName.PlanetSpace, Quantity: 200 * 200 },
+      { Name: ResourceName.Coal, Quantity: 100 }
     ],
     PassiveIncome: [
       { Name: ResourceName.Energy, Quantity: 500 }
