@@ -14,7 +14,6 @@ import { DataProviderService } from './data-provider.service';
   providedIn: 'root'
 })
 export class KolonyService {
-
   Kolony: Kolony;
 
   constructor(
@@ -42,27 +41,6 @@ export class KolonyService {
     ];
   }
 
-
-  // fix it get rid of it
-  getAllKolonyEntities(): IEntity[] {
-    return [
-      ...this.Kolony.Buildings,
-      ...this.Kolony.Crew,
-      ...this.Kolony.Machines,
-      ...this.Kolony.Resources
-    ];
-  }
-
-
-  getKolonyState(): IKolony {
-    return this.Kolony;
-  }
-
-  setKolonyState(kolony: Kolony) {
-    // this.kolony = kolony as Kolony;
-  }
-
-  //#region init new kolony
   InitNewKolony() {
     this.Kolony = new Kolony();
     this.Kolony.Age = 100;
@@ -72,8 +50,6 @@ export class KolonyService {
     this.fillKolonyListWithInitialValues(this.dataProviderService.ALL_CREW_LIST, this.Kolony.Crew);
     this.fillKolonyListWithInitialValues(this.dataProviderService.ALL_MACHINES_LIST, this.Kolony.Machines);
     this.fillKolonyListWithInitialValues(this.dataProviderService.ALL_RESOURCES_LIST, this.Kolony.Resources);
-
-    // todo add method for auto fill tags like 'power source' etc
   }
 
   fillKolonyListWithInitialValues<T, T2>(srcList: T[], targetList: T2[]) {
@@ -86,6 +62,14 @@ export class KolonyService {
         // res.push(new Asset().Deserialize(i));
       });
     // return res;
+  }
+
+  getKolonyState(): IKolony {
+    return this.Kolony;
+  }
+
+  setKolonyState(kolony: Kolony) {
+    // this.kolony = kolony as Kolony;
   }
 
 }

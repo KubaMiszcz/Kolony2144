@@ -1,3 +1,4 @@
+import { IEntity } from './../../models/Entity';
 import { IAsset, Asset } from 'src/app/models/Entity';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { GameService } from 'src/app/services/game.service';
@@ -16,7 +17,7 @@ import { DataProviderService } from 'src/app/services/data-provider.service';
 export class StatusBarComponent implements OnInit {
   Age: number;
   Name: string;
-  Cash: IAsset = new Asset();
+  Cash: IEntity;
   energyProduction: number;
   energyUsage: number;
 

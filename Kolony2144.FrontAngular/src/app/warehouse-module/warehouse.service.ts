@@ -23,7 +23,7 @@ export class WarehouseService {
     private buildingService: BuildingService,
     private kolonyService: KolonyService
   ) {
-    this.storedItems = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.StorageSpace);
+    this.storedItems = this.entityService.GetEntitiesByConsumedAssetNameFromList(ResourceName.StorageSpace);
     this.storageProviders = this.entityService.getEntitiesByProducedAssetNameFromList(ResourceName.StorageSpace);
   }
 }

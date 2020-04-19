@@ -26,7 +26,7 @@ export class PowerService {
     private buildingService: BuildingService,
     private kolonyService: KolonyService,
   ) {
-    this.powerConsumers = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.Energy);
+    this.powerConsumers = this.entityService.GetEntitiesByConsumedAssetNameFromList(ResourceName.Energy);
     this.powerSources = this.entityService.getEntitiesByProducedAssetNameFromList(ResourceName.Energy);
   }
 

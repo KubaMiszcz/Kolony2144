@@ -9,28 +9,30 @@ import { GameService } from '../services/game.service';
 import { CommonService } from '../services/common.service';
 import { TradeService } from '../trade-module/trade.service';
 import { WikiService } from '../wiki-module/wiki.service';
+import { DataProviderService } from '../services/data-provider.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrewService {
-  private crewList: IAsset[];
+  CrewList: IAsset[];
 
   constructor(
     private commonService: CommonService,
     private assetService: AssetService,
+    private dataProviderService: DataProviderService
   ) {
-    this.crewList = this.assetService.getAssetsByTypeDEPR(AssetTypesEnum.Crew);
+    this.CrewList = this.dataProviderService.ALL_CREW_LIST;
   }
 
   getAllCrewQuantity() {
-    return this.getAllCrew()
+    return this.CrewList
       .map(crew => crew.Quantity)
       .reduce((acc, next) => acc + next);
   }
 
-  getAllCrew(): IAsset[] {
-    return this.crewList;
+  getAllCrewDEPR(): IAsset[] {
+    return this.CrewList;
   }
 
 }

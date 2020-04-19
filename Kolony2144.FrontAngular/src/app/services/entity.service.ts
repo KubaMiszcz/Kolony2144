@@ -19,7 +19,7 @@ export class EntityService {
     private dataProviderService: DataProviderService,
     private kolonyService: KolonyService
   ) {
-    this.allKolonyEntitiesList = this.kolonyService.getAllKolonyEntities();
+    this.allKolonyEntitiesList = this.kolonyService.AllKolonyEntities;
   }
 
   GetEntityByName(name: string): IEntity {
@@ -87,7 +87,7 @@ export class EntityService {
   }
 
 
-  getEntitiesByConsumedAssetNameFromList(consumedAssetName: ResourceName): IEntity[] {
+  GetEntitiesByConsumedAssetNameFromList(consumedAssetName: ResourceName): IEntity[] {
     const res = [];
     this.allKolonyEntitiesList.forEach(asset => {
       if (!!asset.MaintenanceCost.find(item => item.Name === consumedAssetName)) {

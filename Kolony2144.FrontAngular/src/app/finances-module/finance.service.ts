@@ -18,25 +18,18 @@ import { EntityService } from '../services/entity.service';
 })
 export class FinanceService {
   cashConsumers: IEntity[] = [];
-
-  private cash: IAsset;
-  get Cash() { return this.cash; }
-  set Cash(value: IAsset) { this.cash = value; this.CashBS.next(value); }
-  CashBS = new BehaviorSubject<IAsset>(null);
+  Cash: IEntity;
 
   constructor(
     private commonService: CommonService,
     private sharedService: SharedService,
     private entityService: EntityService,
     private assetService: AssetService,
-    private buildingService: BuildingService,
     private kolonyService: KolonyService,
   ) {
-    this.cashConsumers = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.Cash);
-
-    this.Cash = this.assetService.GetAssetByName(ResourceName.Cash);
+    this.cashConsumers = this.entityService.GetEntitiesByConsumedAssetNameFromList(ResourceName.Cash);
+    this.Cash = this.entityService.GetEntityByName(ResourceName.Cash);
   }
-
 
 }
 
