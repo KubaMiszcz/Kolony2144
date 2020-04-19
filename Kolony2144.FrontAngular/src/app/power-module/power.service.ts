@@ -30,13 +30,13 @@ export class PowerService {
     this.powerSources = this.entityService.getEntitiesByProducedAssetNameFromList(ResourceName.Energy);
   }
 
-  getEnergyProduction(): number {
+  GetEnergyProduction(): number {
     // fixit it counts all except buildings - fixit somehow
     return this.entityService.getEntityProductionQtyByName(ResourceName.Energy);
   }
 
-  getEnergyUsage(): number {
+  GetEnergyUsage(): number {
     // fixit it counts all except buildings - fixit somehow
-    return this.entityService.getEntityConsumptionQtyByName(ResourceName.Energy);
+    return this.entityService.GetEntityConsumptionQtyByName(ResourceName.Energy);
   }
 }

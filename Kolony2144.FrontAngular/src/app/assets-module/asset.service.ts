@@ -25,11 +25,11 @@ export class AssetService {
     private sharedService: SharedService,
     private kolonyService: KolonyService,
   ) {
-    this.allKolonyAssetList = this.kolonyService.getAllKolonyAssets();
+    this.allKolonyAssetList = this.kolonyService.Kolony.Assets;
   }
 
 
-  getAssetByName(name: string): IAsset {
+  GetAssetByName(name: string): IAsset {
     return this.allKolonyAssetList.find(i => i.Name === name);
   }
 

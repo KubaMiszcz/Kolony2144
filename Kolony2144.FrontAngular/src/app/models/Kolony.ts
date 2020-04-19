@@ -5,12 +5,14 @@ import { IDeserializable } from '../core/interfaces/deserializable';
 import { IBuilding } from './Building';
 
 export interface IKolony {
+  Age: number;
   Name: string;
   Assets: IAsset[];
   Buildings: IBuilding[];
 }
 
 export class Kolony implements IKolony, IDeserializable {
+  Age: number;
   Name: string;
   Assets: IAsset[] = [];
   Buildings: IBuilding[] = [];

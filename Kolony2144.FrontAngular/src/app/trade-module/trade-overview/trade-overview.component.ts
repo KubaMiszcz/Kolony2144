@@ -10,6 +10,9 @@ import { AssetService } from 'src/app/assets-module/asset.service';
 import { AssetTypesEnum } from 'src/app/models/enums/Types.enum';
 import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
 import { ITradePanelData } from '../ship-trade-panel/ship-trade-panel.component';
+import { CommonService } from 'src/app/services/common.service';
+import { SharedService } from 'src/app/services/shared.service';
+import { DataProviderService } from 'src/app/services/data-provider.service';
 
 
 @Component({
@@ -29,6 +32,9 @@ export class TradeOverviewComponent implements OnInit, OnDestroy {
   machinesTradePanelValues: ITradePanelData[] = [];
 
   constructor(
+    private commonService: CommonService,
+    private sharedService: SharedService,
+    private dataProviderService: DataProviderService,
     private kolonyService: KolonyService,
     private overviewService: OverviewService,
     private gameService: GameService,
@@ -37,7 +43,7 @@ export class TradeOverviewComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.gameService.PlayerNotesBS.subscribe(c => this.playerNotes = c);
+    this.playerNotes = this.dataProviderService.PlayerNotes;
 
     this.tradeAnnouncement = this.tradeService.tradeAnnouncement;
     this.isShipIncoming = this.tradeService.isShipLanded;
@@ -51,7 +57,7 @@ export class TradeOverviewComponent implements OnInit, OnDestroy {
         row.UoM = cargoItem.UoM;
         row.Type = cargoItem.Quantity > 0 ? TransactionTypeEnum.Buy : TransactionTypeEnum.Sell;
 
-        const kolonyAsset = this.assetService.getAssetByName(cargoItem.Name);
+        const kolonyAsset = this.assetService.GetAssetByName(cargoItem.Name);
         if (!kolonyAsset) {
           row.KolonyQty = 0;
           row.AVGBuyPrice = 0;
@@ -73,7 +79,7 @@ export class TradeOverviewComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    this.gameService.PlayerNotes = this.playerNotes;
+    this.dataProviderService.PlayerNotes = this.playerNotes;
   }
 }
 

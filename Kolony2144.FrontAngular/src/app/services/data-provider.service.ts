@@ -6,14 +6,22 @@ import { AllCivilianCrew } from '../models/Crew';
 import { AllMachines } from '../models/Machine';
 import { CommonService } from './common.service';
 import { SharedService } from './shared.service';
+import { GenericTypesEnum } from '../models/enums/Types.enum';
+import { IKolony } from '../models/Kolony';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GameDataProviderService {
+export class DataProviderService {
+  KOLONY: IKolony;
+
   ALL_ENTITIES_LIST: ICountableEntity[] = [];
   ALL_ASSETS_LIST: IAsset[] = [];
+  ALL_TRADEABLE_ASSETS_LIST: IAsset[] = [];
   ALL_BUILDINGS_LIST: IBuilding[] = [];
+
+  PlayerNotes = '';
+
 
   constructor(
     private commonService: CommonService,
@@ -22,10 +30,24 @@ export class GameDataProviderService {
     this.fillAllInitialGameBuildings();
     this.fillAllInitialGameAssets();
     this.fillAllInitialGameEntities();
+
+    this.fillAllTradeableAssets();
+
+    this.fillDataFromSavedState();
   }
 
   getEntityByName(name: string): ICountableEntity {
     return this.sharedService.findItemInListByName(this.ALL_ENTITIES_LIST, name);
+  }
+
+
+  fillAllTradeableAssets() { // todo change it to interface tradebale asset
+    this.ALL_TRADEABLE_ASSETS_LIST = this.commonService.cloneObject<IAsset[]>(this.ALL_ASSETS_LIST)
+      .filter(a => a.Tags.includes(GenericTypesEnum.Tradeable));
+  }
+
+  fillDataFromSavedState() {
+    this.PlayerNotes = sessionStorage.getItem('savedState');
   }
 
   // getAssetByName(name: string): IAsset {
@@ -58,4 +80,11 @@ export class GameDataProviderService {
       this.ALL_ENTITIES_LIST.push(i as ICountableEntity);
     });
   }
+}
+
+
+interface IGameState {
+  Age: number;
+  playerNotes: string;
+  kolony: IKolony;
 }

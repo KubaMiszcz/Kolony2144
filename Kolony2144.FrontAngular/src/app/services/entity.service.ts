@@ -5,7 +5,7 @@ import { SharedService } from './shared.service';
 import { KolonyService } from './kolony.service';
 import { ResourceName } from '../models/Resource';
 import { UoMsEnum } from '../models/enums/UoMs.enum';
-import { GameDataProviderService } from './game-data-provider.service';
+import { DataProviderService } from './data-provider.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +16,13 @@ export class EntityService {
   constructor(
     private commonService: CommonService,
     private sharedService: SharedService,
-    private gameStaticDataContainerService: GameDataProviderService,
+    private dataProviderService: DataProviderService,
     private kolonyService: KolonyService
   ) {
     this.allKolonyEntitiesList = this.kolonyService.getAllKolonyEntities();
   }
 
-  getEntityByName(name: string): ICountableEntity {
+  GetEntityByName(name: string): ICountableEntity {
     return this.allKolonyEntitiesList.find(i => i.Name === name);
   }
 
@@ -32,8 +32,8 @@ export class EntityService {
  * returns consumed qty of named entity by all kolony assets buildings etc
  *@param entityName name of consumed entity
  */
-  getEntityConsumptionQtyByName(entityName: string): number {
-    const cosnumedAsset = this.getEntityByName(entityName);
+  GetEntityConsumptionQtyByName(entityName: string): number {
+    const cosnumedAsset = this.GetEntityByName(entityName);
     let consumedQty = 0;
     this.allKolonyEntitiesList.forEach(asset => {
       const consumedItem = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name);
@@ -50,7 +50,7 @@ export class EntityService {
  *@param entityName name of produced entity
  */
   getEntityProductionQtyByName(assetName: string): number {
-    const producedAsset = this.getEntityByName(assetName);
+    const producedAsset = this.GetEntityByName(assetName);
     let producedQty = 0;
     this.allKolonyEntitiesList.forEach(asset => {
       const producedItem = asset.PassiveIncome.find(item => item.Name === producedAsset.Name);
@@ -110,7 +110,7 @@ export class EntityService {
   }
 
 
-  updateInventoryDueToMaintenanceCost() {
+  UpdateInventoryDueToMaintenanceCost() {
     this.allKolonyEntitiesList.forEach(entity => {
       entity.MaintenanceCost.forEach(consumedItem => {
         try {
@@ -132,7 +132,7 @@ export class EntityService {
     });
   }
 
-  updateInventoryDueToPassiveProducedItems() {
+  UpdateInventoryDueToPassiveProducedItems() {
     this.allKolonyEntitiesList.forEach(entity => {
       entity.PassiveIncome.forEach(producedItem => {
         // fix what if  asset isnt exist in inventory? add new asset to list

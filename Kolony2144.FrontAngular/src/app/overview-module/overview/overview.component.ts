@@ -6,6 +6,9 @@ import { KolonyService } from 'src/app/services/kolony.service';
 import { Kolony } from 'src/app/models/Kolony';
 import { GameService } from 'src/app/services/game.service';
 import { AssetService } from 'src/app/assets-module/asset.service';
+import { CommonService } from 'src/app/services/common.service';
+import { SharedService } from 'src/app/services/shared.service';
+import { DataProviderService } from 'src/app/services/data-provider.service';
 
 @Component({
   selector: 'app-overview',
@@ -15,9 +18,11 @@ import { AssetService } from 'src/app/assets-module/asset.service';
 export class OverviewComponent implements OnInit, OnDestroy {
   news: string[] = [];
   playerNotes = '';
-  resourcesList: any[];
 
   constructor(
+    private commonService: CommonService,
+    private sharedService: SharedService,
+    private dataProviderService: DataProviderService,
     private kolonyService: KolonyService,
     private overviewService: OverviewService,
     private gameService: GameService,
@@ -27,20 +32,11 @@ export class OverviewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.news = this.overviewService.News;
-    this.gameService.PlayerNotesBS.subscribe(c => this.playerNotes = c);
-    this.resourcesList = this.fillResourcesList(this.assetService.getAllResourcesDEPR());
+    this.playerNotes = this.dataProviderService.PlayerNotes;
   }
 
   ngOnDestroy(): void {
-    this.gameService.PlayerNotes = this.playerNotes;
-  }
-
-  fillResourcesList(resources: IAsset[]): any[] {
-    const res = [['name', 'qty'],
-    ...resources.map(r => [r.Name, r.Quantity])
-    ];
-
-    return res;
+    this.dataProviderService.PlayerNotes = this.playerNotes;
   }
 
 }

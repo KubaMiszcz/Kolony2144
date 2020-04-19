@@ -10,6 +10,8 @@ import { CargoShipNames } from '../models/enums/CargoShipNames.enum';
 import { CompanyNames } from '../models/enums/CompanyNames.enum';
 import { PlanetNames } from '../models/enums/PlanetNames.enum';
 import { FinanceService } from '../finances-module/finance.service';
+import { SharedService } from '../services/shared.service';
+import { DataProviderService } from '../services/data-provider.service';
 
 
 
@@ -28,9 +30,12 @@ export class TradeService {
 
   constructor(
     private commonService: CommonService,
+    private sharedService: SharedService,
+    private dataProviderService: DataProviderService,
     private assetService: AssetService,
     private financeService: FinanceService,
-  ) { }
+  ) {
+  }
 
   updateResourcesPrices() {
     // !! fixit check if prices too low and variations cant change it
@@ -62,7 +67,7 @@ export class TradeService {
   }
 
 
-  setTradeAnnouncement() {
+  SetTradeAnnouncement() {
     if (this.isShipLanded) {
       const ship = this.landedShip;
       // Cargo Ship 'VARG-1230' owned by companyName on route from originPlanetName to destinationPlanetName is landed.
@@ -76,7 +81,7 @@ export class TradeService {
   }
 
 
-  prepareIncomingShip() {
+  PrepareIncomingShip() {
     this.isShipLanded = this.commonService.getRandomBoolean();
     this.updateResourcesPrices();
 

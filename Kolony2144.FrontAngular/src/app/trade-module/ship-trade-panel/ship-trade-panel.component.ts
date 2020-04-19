@@ -1,4 +1,4 @@
-import { GameDataProviderService } from '../../services/game-data-provider.service';
+import { DataProviderService } from '../../services/data-provider.service';
 import { GameService } from './../../services/game.service';
 import { FinanceService } from '../../finances-module/finance.service';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
@@ -36,7 +36,7 @@ export class ShipTradePanelComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private tradeService: TradeService,
-    private gameStaticDataContainerService: GameDataProviderService,
+    private dataProviderService: DataProviderService,
     private assetService: AssetService,
     private gameService: GameService,
   ) { }
@@ -78,10 +78,10 @@ export class ShipTradePanelComponent implements OnInit {
     row.ShipQty -= row.QtyOnTable;
 
     // add if doesnt exist in kolony
-    let asset = this.assetService.getAssetByName(row.Name);
+    let asset = this.assetService.GetAssetByName(row.Name);
     if (!asset) {
       // todo create new isnatnce of all assets list in trade service
-      const newAsset = this.gameStaticDataContainerService.getEntityByName(row.Name); // get from all
+      const newAsset = this.dataProviderService.getEntityByName(row.Name); // get from all
       // !! fixit _____________________________________________________vvvvvvv
       asset = this.assetService.addNewAssetToInventoryDEPR(newAsset as IAsset); // get newly added from kolony assets
     }
@@ -95,7 +95,7 @@ export class ShipTradePanelComponent implements OnInit {
 
     row.KolonyQty += (factor * row.QtyOnTable);
     this.tradeService.proceedTransaction(row.Type, asset, (factor * row.QtyOnTable), row.ShipPrice);
-    row.AVGBuyPrice = this.assetService.getAssetByName(row.Name).Price;
+    row.AVGBuyPrice = this.assetService.GetAssetByName(row.Name).Price;
 
     this.updateMaxTableQty(row);
     // this.tableQty.nativeElement.value = 0;

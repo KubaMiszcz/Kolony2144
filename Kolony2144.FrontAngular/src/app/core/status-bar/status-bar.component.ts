@@ -4,6 +4,9 @@ import { GameService } from 'src/app/services/game.service';
 import { Component, OnInit } from '@angular/core';
 import { FinanceService } from 'src/app/finances-module/finance.service';
 import { PowerService } from 'src/app/power-module/power.service';
+import { CommonService } from 'src/app/services/common.service';
+import { SharedService } from 'src/app/services/shared.service';
+import { DataProviderService } from 'src/app/services/data-provider.service';
 
 @Component({
   selector: 'app-status-bar',
@@ -18,29 +21,40 @@ export class StatusBarComponent implements OnInit {
   energyUsage: number;
 
   constructor(
+    private commonService: CommonService,
+    private sharedService: SharedService,
+    private dataProviderService: DataProviderService,
     private kolonyService: KolonyService,
     private powerService: PowerService,
     private gameService: GameService,
     private financeService: FinanceService
-  ) {
-    this.gameService.AgeBS.subscribe(c => this.Age = c);
-    this.Name = this.kolonyService.Name;
-
-    this.financeService.CashBS.subscribe(c => this.Cash = c);
-
-    this.energyProduction = this.powerService.getEnergyProduction();
-    this.energyUsage = this.powerService.getEnergyUsage();
-  }
+  ) { }
 
   ngOnInit() {
+    this.updateStatusBarData();
+
+    this.gameService.IsTurnComputingEndedSubject.subscribe(s => {
+      if (s) {
+        this.updateStatusBarData();
+      }
+    });
+
+  }
+
+  updateStatusBarData() {
+    this.Age = this.kolonyService.Kolony.Age;
+    this.Name = this.kolonyService.Kolony.Name;
+    this.Cash = this.financeService.Cash;
+    this.energyProduction = this.powerService.GetEnergyProduction();
+    this.energyUsage = this.powerService.GetEnergyUsage();
   }
 
   nextTurn() {
     this.gameService.nextTurn();
-    // TODO make it subject and subscribe
-    this.Age = this.gameService.Age;
-    this.Name = this.kolonyService.Name;
-    this.energyProduction = this.powerService.getEnergyProduction();
-    this.energyUsage = this.powerService.getEnergyUsage();
+    // // TODO make it subject and subscribe
+    // this.Age = this.gameService.Age;
+    // this.Name = this.kolonyService.Name;
+    // this.energyProduction = this.powerService.GetEnergyProduction();
+    // this.energyUsage = this.powerService.GetEnergyUsage();
   }
 }

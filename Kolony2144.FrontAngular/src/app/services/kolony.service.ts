@@ -21,8 +21,13 @@ import { SharedService } from './shared.service';
 })
 export class KolonyService {
 
-  private kolony: Kolony;
-  get Name(): string { return this.kolony.Name; }
+  Kolony: Kolony;
+
+  // todo move age to kolony and kolony to gameservice
+  // private age = 100;
+  // get Age(): number { return Math.round(this.age * 10) / 10; }
+  // set Age(value: number) { this.age = value; this.AgeBS.next(value); }
+  // AgeBS = new BehaviorSubject<number>(100);
 
   constructor(
     private commonService: CommonService,
@@ -33,18 +38,14 @@ export class KolonyService {
 
   getAllKolonyEntities(): ICountableEntity[] {
     return [
-      ...this.kolony.Assets,
-      ...this.kolony.Buildings
+      ...this.Kolony.Assets,
+      ...this.Kolony.Buildings
     ];
   }
 
-  getAllKolonyAssets(): IAsset[] { return this.kolony.Assets; }
-
-  getAllKolonyBuildings(): IBuilding[] { return this.kolony.Buildings; }
-
 
   getKolonyState(): IKolony {
-    return this.kolony;
+    return this.Kolony;
   }
 
   setKolonyState(kolony: Kolony) {
@@ -53,10 +54,11 @@ export class KolonyService {
 
   //#region init new kolony
   InitNewKolony() {
-    this.kolony = new Kolony();
-    this.kolony.Name = 'KolonyUNO';
-    this.kolony.Assets = this.fillInitialKolonyAssets();
-    this.kolony.Buildings = this.fillInitialKolonyBuildings();
+    this.Kolony = new Kolony();
+    this.Kolony.Age = 100;
+    this.Kolony.Name = 'KolonyUNO';
+    this.Kolony.Assets = this.fillInitialKolonyAssets();
+    this.Kolony.Buildings = this.fillInitialKolonyBuildings();
   }
 
   fillInitialKolonyAssets(): IAsset[] {
@@ -81,13 +83,5 @@ export class KolonyService {
 
     return res;
   }
-
-
-
-  // this.cashConsumers = this.assetService.getEntitiesByConsumedAssetName(ResourceName.Cash);
-
-
-  //#endregion
-
 
 }

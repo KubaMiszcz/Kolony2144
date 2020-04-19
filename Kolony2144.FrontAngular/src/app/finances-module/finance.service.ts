@@ -34,7 +34,7 @@ export class FinanceService {
   ) {
     this.cashConsumers = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.Cash);
 
-    this.Cash = this.assetService.getAssetByName(ResourceName.Cash);
+    this.Cash = this.assetService.GetAssetByName(ResourceName.Cash);
   }
 
 
