@@ -35,7 +35,7 @@ export class AssetTileComponent implements OnInit {
 
     this.asset.CreationCost.forEach(m => {
       const uom = this.entityService.getUoMByName(m.Name);
-      const kolonyAsset = this.assetService.GetAssetByName(m.Name);
+      const kolonyAsset = this.assetService.getAssetByName(m.Name);
       this.productionCost.push({
         Name: m.Name,
         QtyPerUnit: m.Quantity,

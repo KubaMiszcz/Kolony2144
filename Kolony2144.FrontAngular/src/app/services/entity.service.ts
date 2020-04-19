@@ -22,7 +22,7 @@ export class EntityService {
     this.allKolonyEntitiesList = this.kolonyService.AllKolonyEntities;
   }
 
-  GetEntityByName(name: string): IEntity {
+  getEntityByName(name: string): IEntity {
     return this.allKolonyEntitiesList.find(i => i.Name === name);
   }
 
@@ -32,8 +32,8 @@ export class EntityService {
  * returns consumed qty of named entity by all kolony assets buildings etc
  *@param entityName name of consumed entity
  */
-  GetEntityConsumptionQtyByName(entityName: string): number {
-    const cosnumedAsset = this.GetEntityByName(entityName);
+  getEntityConsumptionQtyByName(entityName: string): number {
+    const cosnumedAsset = this.getEntityByName(entityName);
     let consumedQty = 0;
     this.allKolonyEntitiesList.forEach(asset => {
       const consumedItem = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name);
@@ -50,7 +50,7 @@ export class EntityService {
  *@param entityName name of produced entity
  */
   getEntityProductionQtyByName(assetName: string): number {
-    const producedAsset = this.GetEntityByName(assetName);
+    const producedAsset = this.getEntityByName(assetName);
     let producedQty = 0;
     this.allKolonyEntitiesList.forEach(asset => {
       const producedItem = asset.PassiveIncome.find(item => item.Name === producedAsset.Name);
@@ -87,7 +87,7 @@ export class EntityService {
   }
 
 
-  GetEntitiesByConsumedAssetNameFromList(consumedAssetName: ResourceName): IEntity[] {
+  getEntitiesByConsumedAssetNameFromList(consumedAssetName: ResourceName): IEntity[] {
     const res = [];
     this.allKolonyEntitiesList.forEach(asset => {
       if (!!asset.MaintenanceCost.find(item => item.Name === consumedAssetName)) {

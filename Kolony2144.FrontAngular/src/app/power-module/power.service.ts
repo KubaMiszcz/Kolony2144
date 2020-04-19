@@ -2,8 +2,6 @@ import { KolonyService } from './../services/kolony.service';
 import { IEntity } from 'src/app/models/Entity';
 import { Injectable } from '@angular/core';
 import { ResourceName } from '../models/Resource';
-import { IAsset } from '../models/Entity';
-import { AssetTypesEnum } from '../models/enums/Types.enum';
 import { CommonService } from '../services/common.service';
 import { AssetService } from '../assets-module/asset.service';
 import { SharedService } from '../services/shared.service';
@@ -26,17 +24,17 @@ export class PowerService {
     private buildingService: BuildingService,
     private kolonyService: KolonyService,
   ) {
-    this.powerConsumers = this.entityService.GetEntitiesByConsumedAssetNameFromList(ResourceName.Energy);
+    this.powerConsumers = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.Energy);
     this.powerSources = this.entityService.getEntitiesByProducedAssetNameFromList(ResourceName.Energy);
   }
 
-  GetEnergyProduction(): number {
+  getEnergyProduction(): number {
     // fixit it counts all except buildings - fixit somehow
     return this.entityService.getEntityProductionQtyByName(ResourceName.Energy);
   }
 
-  GetEnergyUsage(): number {
+  getEnergyUsage(): number {
     // fixit it counts all except buildings - fixit somehow
-    return this.entityService.GetEntityConsumptionQtyByName(ResourceName.Energy);
+    return this.entityService.getEntityConsumptionQtyByName(ResourceName.Energy);
   }
 }

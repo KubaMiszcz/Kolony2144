@@ -46,8 +46,8 @@ export class StatusBarComponent implements OnInit {
     this.Age = this.kolonyService.Kolony.Age;
     this.Name = this.kolonyService.Kolony.Name;
     this.Cash = this.financeService.Cash;
-    this.energyProduction = this.powerService.GetEnergyProduction();
-    this.energyUsage = this.powerService.GetEnergyUsage();
+    this.energyProduction = this.powerService.getEnergyProduction();
+    this.energyUsage = this.powerService.getEnergyUsage();
   }
 
   nextTurn() {
@@ -55,7 +55,7 @@ export class StatusBarComponent implements OnInit {
     // // TODO make it subject and subscribe
     // this.Age = this.gameService.Age;
     // this.Name = this.kolonyService.Name;
-    // this.energyProduction = this.powerService.GetEnergyProduction();
-    // this.energyUsage = this.powerService.GetEnergyUsage();
+    // this.energyProduction = this.powerService.getEnergyProduction();
+    // this.energyUsage = this.powerService.getEnergyUsage();
   }
 }

@@ -29,7 +29,7 @@ export class AssetService {
   }
 
 
-  GetAssetByName(name: string): IAsset {
+  getAssetByName(name: string): IAsset {
     return this.allKolonyAssetList.find(i => i.Name === name);
   }
 

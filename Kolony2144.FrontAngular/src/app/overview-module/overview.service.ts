@@ -49,8 +49,8 @@ export class OverviewService {
     this.AddNews(' ======================== Monthly report ========================');
 
     // news about cash
-    resource = this.entityService.GetEntityByName(ResourceName.Cash);
-    consumption = this.entityService.GetEntityConsumptionQtyByName(resource.Name);
+    resource = this.entityService.getEntityByName(ResourceName.Cash);
+    consumption = this.entityService.getEntityConsumptionQtyByName(resource.Name);
     if (resource.Quantity < 0) {
       this.AddNews('!!! CASH RUNS OUT, BAILIFF IS COMING TO KOLONY !!!');
     }
@@ -59,8 +59,8 @@ export class OverviewService {
     this.AddNews(msg);
 
     // news about food
-    resource = this.entityService.GetEntityByName(ResourceName.Food);
-    consumption = this.entityService.GetEntityConsumptionQtyByName(resource.Name);
+    resource = this.entityService.getEntityByName(ResourceName.Food);
+    consumption = this.entityService.getEntityConsumptionQtyByName(resource.Name);
     if (resource.Quantity < 0) {
       this.AddNews('!!! HUNGER IN KOLONY !!!');
     }
@@ -69,9 +69,9 @@ export class OverviewService {
     this.AddNews(msg);
 
     // news about power
-    resource = this.entityService.GetEntityByName(ResourceName.Energy);
-    consumption = this.powerService.GetEnergyUsage();
-    production = this.powerService.GetEnergyProduction();
+    resource = this.entityService.getEntityByName(ResourceName.Energy);
+    consumption = this.powerService.getEnergyUsage();
+    production = this.powerService.getEnergyProduction();
     if (consumption > production) {
       msg = '!!! ' + (((consumption / production) * 100) - 100).toFixed(1) + '%  OVERLOADED !!!';
       this.AddNews(msg);

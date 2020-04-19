@@ -78,7 +78,7 @@ export class ShipTradePanelComponent implements OnInit {
     row.ShipQty -= row.QtyOnTable;
 
     // add if doesnt exist in kolony
-    let asset = this.assetService.GetAssetByName(row.Name);
+    let asset = this.assetService.getAssetByName(row.Name);
     if (!asset) {
       // todo create new isnatnce of all assets list in trade service
       const newAsset = this.dataProviderService.getEntityByName(row.Name); // get from all
@@ -95,7 +95,7 @@ export class ShipTradePanelComponent implements OnInit {
 
     row.KolonyQty += (factor * row.QtyOnTable);
     this.tradeService.proceedTransaction(row.Type, asset, (factor * row.QtyOnTable), row.ShipPrice);
-    row.AVGBuyPrice = this.assetService.GetAssetByName(row.Name).Price;
+    row.AVGBuyPrice = this.assetService.getAssetByName(row.Name).Price;
 
     this.updateMaxTableQty(row);
     // this.tableQty.nativeElement.value = 0;

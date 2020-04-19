@@ -57,7 +57,7 @@ export class TradeOverviewComponent implements OnInit, OnDestroy {
         row.UoM = cargoItem.UoM;
         row.Type = cargoItem.Quantity > 0 ? TransactionTypeEnum.Buy : TransactionTypeEnum.Sell;
 
-        const kolonyAsset = this.assetService.GetAssetByName(cargoItem.Name);
+        const kolonyAsset = this.assetService.getAssetByName(cargoItem.Name);
         if (!kolonyAsset) {
           row.KolonyQty = 0;
           row.AVGBuyPrice = 0;
