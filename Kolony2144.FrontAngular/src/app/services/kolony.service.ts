@@ -61,6 +61,19 @@ export class KolonyService {
     this.Kolony.Buildings = this.fillInitialKolonyBuildings();
   }
 
+  fillKolonyListWithInitialValues<T, T2>(srcList: T[], targetList: T2[]) {
+    [...srcList].filter(a =>
+      (a as unknown as IEntity).Quantity > 0
+      || (a as unknown as IEntity).Tags.includes(GenericTypesEnum.Property)
+    )
+      .forEach(i => {
+        targetList.push(i as unknown as T2);
+        // res.push(new Asset().Deserialize(i));
+      });
+    // return res;
+  }
+
+
   fillInitialKolonyAssets(): IAsset[] {
     const res: IAsset[] = [];
     [...AllResources, ...AllCivilianCrew, ...AllMachines]

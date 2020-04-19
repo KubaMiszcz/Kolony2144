@@ -22,6 +22,7 @@ export interface IEntity extends IEntityModel, ISimplifiedEntity {
 }
 
 
+// fix get rid of it and move it to IENtity
 export interface IAsset extends IEntity {
   Price: number;
   // HistoricalPrices: number[];
