@@ -1,4 +1,4 @@
-import { IEntity, ITradeableEntity, IWikiEntity, IAsset } from './Entity';
+import { IEntity, IWikiEntity, IAsset } from './Entity';
 import { AssetTypesEnum, GenericTypesEnum, ResourceTypesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 
@@ -16,12 +16,13 @@ export enum ResourceName {
   Stone = 'Stone',
   Steel = 'Steel',
   Diamonds = 'Diamonds',
+  Coal = 'Coal'
 }
 
 export interface IResource extends IAsset {
 }
 
-export interface IResourceFullModel extends IResource, IWikiEntity, ITradeableEntity {
+export interface IResourceFullModel extends IResource, IWikiEntity {
 }
 
 export const AllVolatileResources: IResourceFullModel[] = [
@@ -134,7 +135,7 @@ export const AllResources: IResourceFullModel[] = [
     Description: 'A piece of stone', ImageUrl: '/assets/wiki-icons/resource.png',
     Type: AssetTypesEnum.Resource,
     Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
-    Price: 20,
+    Price: 10,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.StorageSpace, Quantity: 1 }
@@ -149,6 +150,20 @@ export const AllResources: IResourceFullModel[] = [
     Type: AssetTypesEnum.Resource,
     Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
     Price: 25,
+    CreationCost: [],
+    MaintenanceCost: [
+      { Name: ResourceName.StorageSpace, Quantity: 1 }
+    ],
+    PassiveIncome: [],
+    UoM: UoMsEnum.t,
+    Quantity: 1000
+  },
+  {
+    Name: ResourceName.Coal,
+    Description: 'A piece of coal', ImageUrl: '/assets/wiki-icons/resource.png',
+    Type: AssetTypesEnum.Resource,
+    Tags: [ResourceTypesEnum.Production, GenericTypesEnum.Tradeable],
+    Price: 15,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.StorageSpace, Quantity: 1 }

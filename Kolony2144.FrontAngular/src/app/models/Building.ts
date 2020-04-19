@@ -1,5 +1,5 @@
 import { IDeserializable } from '../core/interfaces/deserializable';
-import { IEntity, ISimplifiedEntity, ITradeableEntity, IWikiEntity } from './Entity';
+import { IEntity, ISimplifiedEntity, IWikiEntity } from './Entity';
 import { AssetTypesEnum, BuildingTypesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
@@ -16,7 +16,7 @@ export enum BuildingNames {
 export interface IBuilding extends IEntity {
 }
 
-export interface IBuildingFullModel extends IBuilding, IWikiEntity, ITradeableEntity {
+export interface IBuildingFullModel extends IBuilding, IWikiEntity {
 }
 
 export class Building implements IBuilding, IDeserializable {
@@ -43,7 +43,6 @@ export const AllBuildings: IBuildingFullModel[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: AssetTypesEnum.Building,
     Tags: [BuildingTypesEnum.Maintenance],
-    Price: 0,
     CreationCost: [
       { Name: ResourceName.Stone, Quantity: 20 },
       { Name: ResourceName.Steel, Quantity: 5 }
@@ -63,9 +62,7 @@ export const AllBuildings: IBuildingFullModel[] = [
     Name: BuildingNames.Warehouse,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: AssetTypesEnum.Building,
-    Tags: [],
-    Price: 0,
-    CreationCost: [
+    Tags: [], CreationCost: [
       { Name: ResourceName.Stone, Quantity: 10 },
       { Name: ResourceName.Steel, Quantity: 10 }
     ],
@@ -83,11 +80,8 @@ export const AllBuildings: IBuildingFullModel[] = [
   {
     Name: BuildingNames.SolarPanel,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
-
     Type: AssetTypesEnum.Building,
-    Tags: [BuildingTypesEnum.PowerSource],
-    Price: 0,
-    CreationCost: [
+    Tags: [BuildingTypesEnum.PowerSource], CreationCost: [
       { Name: ResourceName.Stone, Quantity: 10 },
       { Name: ResourceName.Steel, Quantity: 20 }
     ],
@@ -104,11 +98,8 @@ export const AllBuildings: IBuildingFullModel[] = [
   {
     Name: BuildingNames.Workshop,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
-
     Type: AssetTypesEnum.Building,
-    Tags: [BuildingTypesEnum.Production],
-    Price: 0,
-    CreationCost: [
+    Tags: [BuildingTypesEnum.Production], CreationCost: [
       { Name: ResourceName.Stone, Quantity: 20 },
       { Name: ResourceName.Steel, Quantity: 20 }
     ],
@@ -126,11 +117,8 @@ export const AllBuildings: IBuildingFullModel[] = [
   {
     Name: BuildingNames.Factory,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
-
     Type: AssetTypesEnum.Building,
-    Tags: [BuildingTypesEnum.Production],
-    Price: 0,
-    CreationCost: [
+    Tags: [BuildingTypesEnum.Production], CreationCost: [
       { Name: ResourceName.Stone, Quantity: 30 },
       { Name: ResourceName.Steel, Quantity: 100 }
     ],
@@ -149,11 +137,8 @@ export const AllBuildings: IBuildingFullModel[] = [
   {
     Name: BuildingNames.CargoBay,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
-
     Type: AssetTypesEnum.Building,
-    Tags: [],
-    Price: 0,
-    CreationCost: [
+    Tags: [], CreationCost: [
       { Name: ResourceName.Stone, Quantity: 30 },
       { Name: ResourceName.Steel, Quantity: 100 }
     ],

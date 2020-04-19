@@ -1,4 +1,4 @@
-import { IEntity, ITradeableEntity, IWikiEntity, IAsset } from './Entity';
+import { IEntity, IWikiEntity, IAsset } from './Entity';
 import { AssetTypesEnum, GenericTypesEnum, MachineTypesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
@@ -11,7 +11,7 @@ export enum MachinesNames {
 export interface IMachine extends IAsset {
 }
 
-export interface IMachineFullModel extends IMachine, IWikiEntity, ITradeableEntity {
+export interface IMachineFullModel extends IMachine, IWikiEntity {
 }
 
 export const AllMachines: IMachineFullModel[] = [
