@@ -13,7 +13,7 @@ import { PowerService } from '../power-module/power.service';
   providedIn: 'root'
 })
 export class OverviewService {
-  News: string[] = [];
+  News: string[] = ['Greetings Commandir, welcome in your new kolony'];
 
   constructor(
     private commonService: CommonService,

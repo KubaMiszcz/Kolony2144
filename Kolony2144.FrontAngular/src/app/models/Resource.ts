@@ -24,26 +24,12 @@ export interface IResource extends IEntity {
 export interface IResourceFullModel extends IResource, IWikiEntity, ITradeableEntity {
 }
 
-export const AllResources: IResourceFullModel[] = [
-  {
-    Name: ResourceName.Cash,
-    Description: 'Space Beads, galactic currency', ImageUrl: '/assets/wiki-icons/resource-cash.png',
-    Type: AssetTypesEnum.Resource,
-    Tags: [GenericTypesEnum.Property],
-    Price: 0,
-    CreationCost: [],
-    MaintenanceCost: [
-      { Name: ResourceName.StorageSpace, Quantity: 0.00000000000001 }
-    ],
-    PassiveIncome: [],
-    UoM: UoMsEnum.SB,
-    Quantity: 100000
-  },
+export const AllVolatileResources: IResourceFullModel[] = [
   {
     Name: ResourceName.Energy,
     Description: 'Energy', ImageUrl: '/assets/wiki-icons/resource-energy.png',
     Type: AssetTypesEnum.Resource,
-    Tags: [GenericTypesEnum.Property, ResourceTypesEnum.Volatile],
+    Tags: [GenericTypesEnum.Property, ResourceTypesEnum.Volatile], // fix change it to volatileresource
     Price: 0,
     CreationCost: [],
     MaintenanceCost: [],
@@ -110,27 +96,25 @@ export const AllResources: IResourceFullModel[] = [
     PassiveIncome: [],
     UoM: UoMsEnum.m2,
     Quantity: 10000
+  }
+];
+
+
+
+
+export const AllResources: IResourceFullModel[] = [
+  {
+    Name: ResourceName.Cash,
+    Description: 'Space Beads, galactic currency', ImageUrl: '/assets/wiki-icons/resource-cash.png',
+    Type: AssetTypesEnum.Resource,
+    Tags: [],
+    Price: 0,
+    CreationCost: [],
+    MaintenanceCost: [],
+    PassiveIncome: [],
+    UoM: UoMsEnum.SB,
+    Quantity: 100000
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   {
     Name: ResourceName.Food,
     Description: 'food for feeding your men and animals;]', ImageUrl: '/assets/wiki-icons/resource.png',

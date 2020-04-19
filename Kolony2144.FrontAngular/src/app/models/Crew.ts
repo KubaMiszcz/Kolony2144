@@ -15,7 +15,7 @@ export interface ICrewFullModel extends ICrew, IWikiEntity, ITradeableEntity {
 }
 
 
-export const AllCivilianCrew: ICrewFullModel[] = [
+export const AllCrew: ICrewFullModel[] = [
   {
     Name: CrewNames.Worker,
     Description: 'just peon worker, chop chop he\'s on it, eats many', ImageUrl: '/assets/wiki-icons/crew-worker.png',

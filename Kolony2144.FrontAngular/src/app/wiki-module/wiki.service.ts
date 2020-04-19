@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AllResources } from '../models/Resource';
-import { AllCivilianCrew } from '../models/Crew';
+import { AllCrew } from '../models/Crew';
 import { AllBuildings } from '../models/Building';
 import { AllMachines } from '../models/Machine';
 import { IWikiEntity } from '../models/Entity';
@@ -16,7 +16,7 @@ export class WikiService {
   }
 
   prepareWikiInitialData() {
-    [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines].forEach(i => {
+    [...AllResources, ...AllCrew, ...AllBuildings, ...AllMachines].forEach(i => {
       const a = new Object() as IWikiEntity;
       Object.assign(a, i);
       this.allWikiEntites.push(a);

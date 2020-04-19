@@ -8,7 +8,7 @@ import { IMachine } from './Machine';
 export interface IKolony {
   Age: number;
   Name: string;
-  Assets: IAsset[];
+  AssetsDEPR: IAsset[];
   Resources: IResource[];
   Buildings: IBuilding[];
   Crew: ICrew[];
@@ -18,7 +18,7 @@ export interface IKolony {
 export class Kolony implements IKolony, IDeserializable {
   Age: number;
   Name: string;
-  Assets: IAsset[] = [];
+  AssetsDEPR: IAsset[] = [];
   Resources: IResource[] = [];
   Buildings: IBuilding[] = [];
   Crew: ICrew[] = [];

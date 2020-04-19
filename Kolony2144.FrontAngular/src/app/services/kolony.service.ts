@@ -1,19 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Kolony, IKolony } from '../models/Kolony';
-import { AllResources, ResourceName as ResourceName } from '../models/Resource';
-import { IAsset, Asset, IEntity } from '../models/Entity';
-import { AllCivilianCrew } from '../models/Crew';
 import { AllBuildings, IBuilding } from '../models/Building';
+import { AllCrew as AllCrew } from '../models/Crew';
+import { IAsset, IEntity } from '../models/Entity';
+import { GenericTypesEnum, ResourceTypesEnum } from '../models/enums/Types.enum';
+import { IKolony, Kolony } from '../models/Kolony';
 import { AllMachines } from '../models/Machine';
+import { AllResources, AllVolatileResources } from '../models/Resource';
 import { CommonService } from './common.service';
-import { CrewService } from '../crew-module/crew.service';
-import { FinanceService } from '../finances-module/finance.service';
-import { GameService } from './game.service';
-import { OverviewService } from '../overview-module/overview.service';
-import { TradeService } from '../trade-module/trade.service';
-import { WikiService } from '../wiki-module/wiki.service';
-import { AssetService } from '../assets-module/asset.service';
-import { GenericTypesEnum } from '../models/enums/Types.enum';
 import { SharedService } from './shared.service';
 
 @Injectable({
@@ -22,12 +15,6 @@ import { SharedService } from './shared.service';
 export class KolonyService {
 
   Kolony: Kolony;
-
-  // todo move age to kolony and kolony to gameservice
-  // private age = 100;
-  // get Age(): number { return Math.round(this.age * 10) / 10; }
-  // set Age(value: number) { this.age = value; this.AgeBS.next(value); }
-  // AgeBS = new BehaviorSubject<number>(100);
 
   constructor(
     private commonService: CommonService,
@@ -38,8 +25,10 @@ export class KolonyService {
 
   getAllKolonyEntities(): IEntity[] {
     return [
-      ...this.Kolony.Assets,
-      ...this.Kolony.Buildings
+      ...this.Kolony.Buildings,
+      ...this.Kolony.Crew,
+      ...this.Kolony.Machines,
+      ...this.Kolony.Resources
     ];
   }
 
@@ -57,14 +46,20 @@ export class KolonyService {
     this.Kolony = new Kolony();
     this.Kolony.Age = 100;
     this.Kolony.Name = 'KolonyUNO';
-    this.Kolony.Assets = this.fillInitialKolonyAssets();
-    this.Kolony.Buildings = this.fillInitialKolonyBuildings();
+    // this.Kolony.Buildings = this.fillInitialKolonyBuildings();
+    this.fillKolonyListWithInitialValues(AllBuildings, this.Kolony.Buildings);
+    this.fillKolonyListWithInitialValues(AllCrew, this.Kolony.Crew);
+    this.fillKolonyListWithInitialValues(AllMachines, this.Kolony.Machines);
+    this.fillKolonyListWithInitialValues(AllResources, this.Kolony.Resources);
+    this.fillKolonyListWithInitialValues(AllVolatileResources, this.Kolony.Resources);
+    this.Kolony.AssetsDEPR = this.fillInitialKolonyAssets();
   }
 
   fillKolonyListWithInitialValues<T, T2>(srcList: T[], targetList: T2[]) {
     [...srcList].filter(a =>
       (a as unknown as IEntity).Quantity > 0
       || (a as unknown as IEntity).Tags.includes(GenericTypesEnum.Property)
+      || (a as unknown as IEntity).Tags.includes(ResourceTypesEnum.Volatile)
     )
       .forEach(i => {
         targetList.push(i as unknown as T2);
@@ -76,7 +71,7 @@ export class KolonyService {
 
   fillInitialKolonyAssets(): IAsset[] {
     const res: IAsset[] = [];
-    [...AllResources, ...AllCivilianCrew, ...AllMachines]
+    [...AllResources, ...AllCrew, ...AllMachines]
       .filter(a => a.Quantity > 0 || a.Tags.includes(GenericTypesEnum.Property))
       .forEach(i => {
         res.push(i as IAsset);

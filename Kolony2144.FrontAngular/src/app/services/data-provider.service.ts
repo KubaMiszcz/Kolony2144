@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IEntity, IAsset } from '../models/Entity';
 import { IBuilding, AllBuildings } from '../models/Building';
 import { AllResources } from '../models/Resource';
-import { AllCivilianCrew } from '../models/Crew';
+import { AllCrew } from '../models/Crew';
 import { AllMachines } from '../models/Machine';
 import { CommonService } from './common.service';
 import { SharedService } from './shared.service';
@@ -64,7 +64,7 @@ export class DataProviderService {
 
 
   fillAllInitialGameAssets() {
-    [...AllResources, ...AllCivilianCrew, ...AllMachines].forEach(i => {
+    [...AllResources, ...AllCrew, ...AllMachines].forEach(i => {
       this.ALL_ASSETS_LIST.push(i as IAsset);
     });
   }

@@ -25,7 +25,7 @@ export class AssetService {
     private sharedService: SharedService,
     private kolonyService: KolonyService,
   ) {
-    this.allKolonyAssetList = this.kolonyService.Kolony.Assets;
+    this.allKolonyAssetList = this.kolonyService.Kolony.AssetsDEPR;
   }
 
 
