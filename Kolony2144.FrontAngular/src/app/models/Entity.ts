@@ -3,8 +3,8 @@ import { AssetTypesEnum } from './enums/Types.enum';
 import { IDeserializable } from '../core/interfaces/deserializable';
 import { IBuilding } from './Building';
 
-export interface IFullEntity extends IEntityModel, IAsset, IBuilding, IWikiEntity {
-}
+// export interface IWikiEntity extends IEntityModel, IAsset, IBuilding, IWikiEntity {
+// }
 
 export interface IEntityModel {
   Name: string;

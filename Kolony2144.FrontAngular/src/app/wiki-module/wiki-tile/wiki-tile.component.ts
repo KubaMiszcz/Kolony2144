@@ -2,7 +2,7 @@ import { EntityService } from './../../services/entity.service';
 import { AssetService } from 'src/app/assets-module/asset.service';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { CommonService } from '../../services/common.service';
-import { IFullEntity, ISimplifiedEntity } from './../../models/Entity';
+import { IWikiEntity, ISimplifiedEntity } from './../../models/Entity';
 import { Component, OnInit, Input } from '@angular/core';
 import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
 
@@ -12,7 +12,7 @@ import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
   styleUrls: ['./wiki-tile.component.scss']
 })
 export class WikiTileComponent implements OnInit {
-  @Input() item: IFullEntity;
+  @Input() item: IWikiEntity;
   productionCost: IWikiListItem[] = [];
   producedItems: IWikiListItem[] = [];
   consumedItems: IWikiListItem[] = [];

@@ -1,8 +1,8 @@
-import { IFullEntity, IEntityModel, ISimplifiedEntity, IWikiEntity, IEntity } from './Entity';
+import { IDeserializable } from '../core/interfaces/deserializable';
+import { IEntity, ISimplifiedEntity, ITradeableEntity, IWikiEntity } from './Entity';
+import { AssetTypesEnum, BuildingTypesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
-import { AssetTypesEnum, BuildingTypesEnum } from './enums/Types.enum';
-import { IDeserializable } from '../core/interfaces/deserializable';
 
 export enum BuildingNames {
   Habitat = 'Habitat',
@@ -13,8 +13,10 @@ export enum BuildingNames {
   CargoBay = 'Cargo bay'
 }
 
-export interface IBuilding extends IEntityModel, IEntity, ISimplifiedEntity {
-  Quantity: number;
+export interface IBuilding extends IEntity {
+}
+
+export interface IBuildingFullModel extends IBuilding, IWikiEntity, ITradeableEntity {
 }
 
 export class Building implements IBuilding, IDeserializable {
@@ -35,7 +37,7 @@ export class Building implements IBuilding, IDeserializable {
   }
 }
 
-export const AllBuildings: IFullEntity[] = [
+export const AllBuildings: IBuildingFullModel[] = [
   {
     Name: BuildingNames.Habitat,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',

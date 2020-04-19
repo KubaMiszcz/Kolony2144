@@ -1,8 +1,6 @@
-import { IAsset } from './Entity';
-import { ResourceName } from './Resource';
-import { ResourceTypesEnum, AssetTypesEnum } from './enums/Types.enum';
 import { IDeserializable } from '../core/interfaces/deserializable';
 import { IBuilding } from './Building';
+import { IAsset } from './Entity';
 
 export interface IKolony {
   Age: number;

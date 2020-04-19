@@ -1,4 +1,4 @@
-import { IFullEntity } from './../../models/Entity';
+import { IWikiEntity } from './../../models/Entity';
 import { Component, OnInit } from '@angular/core';
 import { AssetTypesEnum } from './../../models/enums/Types.enum';
 import { WikiService } from '../wiki.service';
@@ -10,11 +10,11 @@ import { WikiService } from '../wiki.service';
 })
 export class WikiComponent implements OnInit {
 
-  inventoryItemsList: IFullEntity[] = [];
+  inventoryItemsList: IWikiEntity[] = [];
 
-  crewList: IFullEntity[] = [];
-  buildingsList: IFullEntity[] = [];
-  machinesList: IFullEntity[] = [];
+  crewList: IWikiEntity[] = [];
+  buildingsList: IWikiEntity[] = [];
+  machinesList: IWikiEntity[] = [];
 
   constructor(
     private wikiService: WikiService

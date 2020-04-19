@@ -1,19 +1,21 @@
-import { IFullEntity, IAsset } from './Entity';
+import { IEntity, ITradeableEntity, IWikiEntity } from './Entity';
+import { AssetTypesEnum, CrewTypesEnum, GenericTypesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
-import { AssetTypesEnum, CrewTypesEnum, BuildingTypesEnum, GenericTypesEnum } from './enums/Types.enum';
 
 export enum CrewNames {
   Worker = 'Worker',
   Technician = 'Technician'
 }
 
-export interface ICrewFullEntity extends IFullEntity {
-  // SubType: CrewTypesEnum;
+export interface ICrew extends IEntity {
+}
+
+export interface ICrewFullModel extends ICrew, IWikiEntity, ITradeableEntity {
 }
 
 
-export const AllCivilianCrew: IFullEntity[] = [
+export const AllCivilianCrew: ICrewFullModel[] = [
   {
     Name: CrewNames.Worker,
     Description: 'just peon worker, chop chop he\'s on it, eats many', ImageUrl: '/assets/wiki-icons/crew-worker.png',

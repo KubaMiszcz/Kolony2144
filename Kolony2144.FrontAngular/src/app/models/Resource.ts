@@ -1,6 +1,6 @@
-import { IFullEntity } from './Entity';
+import { IEntity, ITradeableEntity, IWikiEntity } from './Entity';
+import { AssetTypesEnum, GenericTypesEnum, ResourceTypesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
-import { AssetTypesEnum, ResourceTypesEnum, GenericTypesEnum } from './enums/Types.enum';
 
 export enum ResourceName {
   Cash = 'Space Beads',
@@ -18,7 +18,13 @@ export enum ResourceName {
   Diamonds = 'Diamonds',
 }
 
-export const AllResources: IFullEntity[] = [
+export interface IResource extends IEntity {
+}
+
+export interface IResourceFullModel extends IResource, IWikiEntity, ITradeableEntity {
+}
+
+export const AllResources: IResourceFullModel[] = [
   {
     Name: ResourceName.Cash,
     Description: 'Space Beads, galactic currency', ImageUrl: '/assets/wiki-icons/resource-cash.png',

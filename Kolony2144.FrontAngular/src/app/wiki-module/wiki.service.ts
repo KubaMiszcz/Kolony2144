@@ -3,13 +3,13 @@ import { AllResources } from '../models/Resource';
 import { AllCivilianCrew } from '../models/Crew';
 import { AllBuildings } from '../models/Building';
 import { AllMachines } from '../models/Machine';
-import { IFullEntity } from '../models/Entity';
+import { IWikiEntity } from '../models/Entity';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WikiService {
-  allWikiEntites: IFullEntity[] = [];
+  allWikiEntites: IWikiEntity[] = [];
 
   constructor() {
     this.prepareWikiInitialData();
@@ -17,7 +17,7 @@ export class WikiService {
 
   prepareWikiInitialData() {
     [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines].forEach(i => {
-      const a = new Object() as IFullEntity;
+      const a = new Object() as IWikiEntity;
       Object.assign(a, i);
       this.allWikiEntites.push(a);
       // this.allWikiEntites.push({

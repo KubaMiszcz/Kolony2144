@@ -1,7 +1,7 @@
-import { IFullEntity, IEntity, IWikiEntity, ITradeableEntity } from './Entity';
-import { AssetTypesEnum, MachineTypesEnum, GenericTypesEnum } from './enums/Types.enum';
-import { ResourceName } from './Resource';
+import { IEntity, ITradeableEntity, IWikiEntity } from './Entity';
+import { AssetTypesEnum, GenericTypesEnum, MachineTypesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
+import { ResourceName } from './Resource';
 
 export enum MachinesNames {
   PowerGenerator = 'Power Generator',
