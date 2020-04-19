@@ -8,6 +8,7 @@ import { AllMachines } from '../models/Machine';
 import { AllResources, AllVolatileResources } from '../models/Resource';
 import { CommonService } from './common.service';
 import { SharedService } from './shared.service';
+import { DataProviderService } from './data-provider.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,15 @@ import { SharedService } from './shared.service';
 export class KolonyService {
 
   Kolony: Kolony;
+
+  constructor(
+    private commonService: CommonService,
+    private sharedService: SharedService,
+    private dataProviderService: DataProviderService
+  ) {
+    this.InitNewKolony();
+  }
+
   get AllAssets(): IAsset[] {
     return [
       ...this.Kolony.Crew,
@@ -32,13 +42,8 @@ export class KolonyService {
     ];
   }
 
-  constructor(
-    private commonService: CommonService,
-    private sharedService: SharedService,
-  ) {
-    this.InitNewKolony();
-  }
 
+  // fix it get rid of it
   getAllKolonyEntities(): IEntity[] {
     return [
       ...this.Kolony.Buildings,
@@ -63,11 +68,12 @@ export class KolonyService {
     this.Kolony.Age = 100;
     this.Kolony.Name = 'KolonyUNO';
     // this.Kolony.Buildings = this.fillInitialKolonyBuildings();
-    this.fillKolonyListWithInitialValues(AllBuildings, this.Kolony.Buildings);
-    this.fillKolonyListWithInitialValues(AllCrew, this.Kolony.Crew);
-    this.fillKolonyListWithInitialValues(AllMachines, this.Kolony.Machines);
-    this.fillKolonyListWithInitialValues(AllResources, this.Kolony.Resources);
-    this.fillKolonyListWithInitialValues(AllVolatileResources, this.Kolony.Resources);
+    this.fillKolonyListWithInitialValues(this.dataProviderService.ALL_BUILDINGS_LIST, this.Kolony.Buildings);
+    this.fillKolonyListWithInitialValues(this.dataProviderService.ALL_CREW_LIST, this.Kolony.Crew);
+    this.fillKolonyListWithInitialValues(this.dataProviderService.ALL_MACHINES_LIST, this.Kolony.Machines);
+    this.fillKolonyListWithInitialValues(this.dataProviderService.ALL_RESOURCES_LIST, this.Kolony.Resources);
+
+    // todo add method for auto fill tags like 'power source' etc
   }
 
   fillKolonyListWithInitialValues<T, T2>(srcList: T[], targetList: T2[]) {
