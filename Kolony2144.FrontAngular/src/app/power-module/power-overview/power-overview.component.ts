@@ -3,7 +3,7 @@ import { Kolony } from 'src/app/models/Kolony';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { CommonService } from 'src/app/services/common.service';
 import { ResourceName } from 'src/app/models/Resource';
-import { IAsset, ICountableEntity } from 'src/app/models/Entity';
+import { IAsset, IEntity } from 'src/app/models/Entity';
 import { PowerService } from '../power.service';
 import { AssetService } from 'src/app/assets-module/asset.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -42,7 +42,7 @@ export class PowerOverviewComponent implements OnInit {
   }
 
 
-  fillSummaryTableRows(entities: ICountableEntity[], resourceName: ResourceName, type: GenericTypesEnum) {
+  fillSummaryTableRows(entities: IEntity[], resourceName: ResourceName, type: GenericTypesEnum) {
     const res: any[][] = [
       ['name', 'type', 'per unit', 'qty', 'total']
     ];

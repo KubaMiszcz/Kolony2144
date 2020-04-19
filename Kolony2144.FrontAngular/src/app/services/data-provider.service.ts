@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ICountableEntity, IAsset } from '../models/Entity';
+import { IEntity, IAsset } from '../models/Entity';
 import { IBuilding, AllBuildings } from '../models/Building';
 import { AllResources } from '../models/Resource';
 import { AllCivilianCrew } from '../models/Crew';
@@ -15,7 +15,7 @@ import { IKolony } from '../models/Kolony';
 export class DataProviderService {
   KOLONY: IKolony;
 
-  ALL_ENTITIES_LIST: ICountableEntity[] = [];
+  ALL_ENTITIES_LIST: IEntity[] = [];
   ALL_ASSETS_LIST: IAsset[] = [];
   ALL_TRADEABLE_ASSETS_LIST: IAsset[] = [];
   ALL_BUILDINGS_LIST: IBuilding[] = [];
@@ -36,7 +36,7 @@ export class DataProviderService {
     this.fillDataFromSavedState();
   }
 
-  getEntityByName(name: string): ICountableEntity {
+  getEntityByName(name: string): IEntity {
     return this.sharedService.findItemInListByName(this.ALL_ENTITIES_LIST, name);
   }
 
@@ -77,7 +77,7 @@ export class DataProviderService {
 
   fillAllInitialGameEntities() {
     [...this.ALL_BUILDINGS_LIST, ...this.ALL_ASSETS_LIST].forEach(i => {
-      this.ALL_ENTITIES_LIST.push(i as ICountableEntity);
+      this.ALL_ENTITIES_LIST.push(i as IEntity);
     });
   }
 }

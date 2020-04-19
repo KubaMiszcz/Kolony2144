@@ -1,3 +1,7 @@
+// todo add autofill tags
+// fix dont add tags when ti can be deducted form mainetnance like power sources and fill autotags in dataprovider
+// fix or volatile
+// todo add attacehd entites, and max atatchentities
 export enum AssetTypesEnum {
   // Property = 'Property',
   Crew = 'Crew',

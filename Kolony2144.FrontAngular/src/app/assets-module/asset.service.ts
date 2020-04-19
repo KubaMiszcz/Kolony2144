@@ -1,7 +1,7 @@
 import { SharedService } from './../services/shared.service';
 import { Injectable } from '@angular/core';
 import { KolonyService } from '../services/kolony.service';
-import { IAsset, ISimplifiedAsset, ICountableEntity } from '../models/Entity';
+import { IAsset, ISimplifiedEntity, IEntity } from '../models/Entity';
 import { ResourceTypesEnum, AssetTypesEnum } from '../models/enums/Types.enum';
 import { Kolony } from '../models/Kolony';
 import { ResourceName } from '../models/Resource';

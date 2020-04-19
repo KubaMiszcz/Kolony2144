@@ -26,7 +26,9 @@ export const AllResources: IFullEntity[] = [
     Tags: [GenericTypesEnum.Property],
     Price: 0,
     CreationCost: [],
-    MaintenanceCost: [],
+    MaintenanceCost: [
+      { Name: ResourceName.StorageSpace, Quantity: 0.00000000000001 }
+    ],
     PassiveIncome: [],
     UoM: UoMsEnum.SB,
     Quantity: 100000

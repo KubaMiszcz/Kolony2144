@@ -1,4 +1,4 @@
-import { IFullEntity, IEntity, ISimplifiedAsset, IWikiEntity, ICountableEntity } from './Entity';
+import { IFullEntity, IEntityModel, ISimplifiedEntity, IWikiEntity, IEntity } from './Entity';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
 import { AssetTypesEnum, BuildingTypesEnum } from './enums/Types.enum';
@@ -13,7 +13,7 @@ export enum BuildingNames {
   CargoBay = 'Cargo bay'
 }
 
-export interface IBuilding extends IEntity, ICountableEntity, ISimplifiedAsset {
+export interface IBuilding extends IEntityModel, IEntity, ISimplifiedEntity {
   Quantity: number;
 }
 
@@ -23,9 +23,9 @@ export class Building implements IBuilding, IDeserializable {
   Name: string;
   Type: AssetTypesEnum;
   SubType: string;
-  CreationCost: ISimplifiedAsset[];
-  MaintenanceCost: ISimplifiedAsset[];
-  PassiveIncome: ISimplifiedAsset[];
+  CreationCost: ISimplifiedEntity[];
+  MaintenanceCost: ISimplifiedEntity[];
+  PassiveIncome: ISimplifiedEntity[];
   UoM: UoMsEnum;
 
   Deserialize(input: any): this {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ICountableEntity, IAsset } from '../models/Entity';
+import { IEntity, IAsset } from '../models/Entity';
 import { CommonService } from '../services/common.service';
 import { SharedService } from '../services/shared.service';
 import { EntityService } from '../services/entity.service';
@@ -12,8 +12,8 @@ import { ResourceName } from '../models/Resource';
   providedIn: 'root'
 })
 export class WarehouseService {
-  storedItems: ICountableEntity[];
-  storageProviders: ICountableEntity[];
+  storedItems: IEntity[];
+  storageProviders: IEntity[];
 
   constructor(
     private commonService: CommonService,

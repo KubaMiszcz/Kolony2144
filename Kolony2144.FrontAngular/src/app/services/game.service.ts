@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AssetService } from '../assets-module/asset.service';
-import { ICountableEntity } from '../models/Entity';
+import { IEntity } from '../models/Entity';
 import { ResourceName } from '../models/Resource';
 import { OverviewService } from '../overview-module/overview.service';
 import { PowerService } from '../power-module/power.service';

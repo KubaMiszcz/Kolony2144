@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ICountableEntity } from '../models/Entity';
+import { IEntity } from '../models/Entity';
 import { CommonService } from './common.service';
 import { SharedService } from './shared.service';
 import { KolonyService } from './kolony.service';
@@ -11,7 +11,7 @@ import { DataProviderService } from './data-provider.service';
   providedIn: 'root'
 })
 export class EntityService {
-  allKolonyEntitiesList: ICountableEntity[] = [];
+  allKolonyEntitiesList: IEntity[] = [];
 
   constructor(
     private commonService: CommonService,
@@ -22,7 +22,7 @@ export class EntityService {
     this.allKolonyEntitiesList = this.kolonyService.getAllKolonyEntities();
   }
 
-  GetEntityByName(name: string): ICountableEntity {
+  GetEntityByName(name: string): IEntity {
     return this.allKolonyEntitiesList.find(i => i.Name === name);
   }
 
@@ -63,7 +63,7 @@ export class EntityService {
   }
 
 
-  getEntitiesByConsumedAssetName(consumedAssetName: ResourceName): ICountableEntity[] {
+  getEntitiesByConsumedAssetName(consumedAssetName: ResourceName): IEntity[] {
     const res = [];
     this.allKolonyEntitiesList.forEach(asset => {
       if (!!asset.MaintenanceCost.find(item => item.Name === consumedAssetName)) {
@@ -75,7 +75,7 @@ export class EntityService {
   }
 
 
-  getEntitiesByProducedAssetName(producedAssetName: ResourceName): ICountableEntity[] {
+  getEntitiesByProducedAssetName(producedAssetName: ResourceName): IEntity[] {
     const res = [];
     this.allKolonyEntitiesList.forEach(asset => {
       if (!!asset.PassiveIncome.find(item => item.Name === producedAssetName)) {
@@ -87,7 +87,7 @@ export class EntityService {
   }
 
 
-  getEntitiesByConsumedAssetNameFromList(consumedAssetName: ResourceName): ICountableEntity[] {
+  getEntitiesByConsumedAssetNameFromList(consumedAssetName: ResourceName): IEntity[] {
     const res = [];
     this.allKolonyEntitiesList.forEach(asset => {
       if (!!asset.MaintenanceCost.find(item => item.Name === consumedAssetName)) {
@@ -98,7 +98,7 @@ export class EntityService {
     return res;
   }
 
-  getEntitiesByProducedAssetNameFromList(producedAssetName: ResourceName): ICountableEntity[] {
+  getEntitiesByProducedAssetNameFromList(producedAssetName: ResourceName): IEntity[] {
     const res = [];
     this.allKolonyEntitiesList.forEach(asset => {
       if (!!asset.PassiveIncome.find(item => item.Name === producedAssetName)) {

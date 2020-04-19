@@ -1,5 +1,5 @@
 import { KolonyService } from './../services/kolony.service';
-import { ICountableEntity } from 'src/app/models/Entity';
+import { IEntity } from 'src/app/models/Entity';
 import { Injectable } from '@angular/core';
 import { ResourceName } from '../models/Resource';
 import { IAsset } from '../models/Entity';
@@ -14,8 +14,8 @@ import { EntityService } from '../services/entity.service';
   providedIn: 'root'
 })
 export class PowerService {
-  powerSources: ICountableEntity[] = [];
-  powerConsumers: ICountableEntity[] = [];
+  powerSources: IEntity[] = [];
+  powerConsumers: IEntity[] = [];
 
   // todo add brownou and blackout when overload
   constructor(

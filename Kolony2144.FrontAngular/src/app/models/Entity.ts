@@ -3,26 +3,26 @@ import { AssetTypesEnum } from './enums/Types.enum';
 import { IDeserializable } from '../core/interfaces/deserializable';
 import { IBuilding } from './Building';
 
-export interface IFullEntity extends IEntity, IAsset, IBuilding, IWikiEntity {
+export interface IFullEntity extends IEntityModel, IAsset, IBuilding, IWikiEntity {
 }
 
-export interface IEntity {
+export interface IEntityModel {
   Name: string;
   Type: AssetTypesEnum;
   Tags: string[];
-  CreationCost: ISimplifiedAsset[];
-  MaintenanceCost: ISimplifiedAsset[];
-  PassiveIncome: ISimplifiedAsset[];
+  CreationCost: ISimplifiedEntity[];
+  MaintenanceCost: ISimplifiedEntity[];
+  PassiveIncome: ISimplifiedEntity[];
   UoM: UoMsEnum;
 }
 
-export interface ICountableEntity extends IEntity, ISimplifiedAsset {
+export interface IEntity extends IEntityModel, ISimplifiedEntity {
   Quantity: number;
   // HistoricalPrices: number[];
 }
 
 
-export interface IAsset extends IEntity, ICountableEntity {
+export interface IAsset extends IEntity {
   Price: number;
   // HistoricalPrices: number[];
 }
@@ -39,12 +39,11 @@ export class Asset implements IAsset, IDeserializable {
   Type: AssetTypesEnum;
   Tags: string[];
   Price: number;
-  CreationCost: ISimplifiedAsset[];
-  MaintenanceCost: ISimplifiedAsset[];
-  PassiveIncome: ISimplifiedAsset[];
+  CreationCost: ISimplifiedEntity[];
+  MaintenanceCost: ISimplifiedEntity[];
+  PassiveIncome: ISimplifiedEntity[];
   UoM: UoMsEnum;
   Quantity: number;
-  // HistoricalPrices: number[];
 
   Deserialize(input: any): this {
     Object.assign(this, input);
@@ -54,13 +53,13 @@ export class Asset implements IAsset, IDeserializable {
 }
 
 
-export interface IWikiEntity {
+export interface IWikiEntity extends IEntityModel {
   Description: string;
   ImageUrl: string;
 }
 
 
-export interface ISimplifiedAsset {
+export interface ISimplifiedEntity {
   Name: string;
   Quantity: number;
 }

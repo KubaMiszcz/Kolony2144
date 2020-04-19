@@ -1,8 +1,8 @@
 import { EntityService } from './../../services/entity.service';
 import { AssetService } from './../../assets-module/asset.service';
-import { ICountableEntity } from 'src/app/models/Entity';
+import { IEntity } from 'src/app/models/Entity';
 import { CommonService } from '../../services/common.service';
-import { IAsset, ISimplifiedAsset } from '../../models/Entity';
+import { IAsset, ISimplifiedEntity } from '../../models/Entity';
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { IKolony } from 'src/app/models/Kolony';
@@ -14,11 +14,11 @@ import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
   styleUrls: ['./asset-tile.component.scss']
 })
 export class AssetTileComponent implements OnInit {
-  @Input() asset: ICountableEntity;
+  @Input() asset: IEntity;
   productionQty = 1;
   maxProductionQty = 1;
   productionCost: IproductionCost[] = [];
-  inventory: ISimplifiedAsset[] = [];
+  inventory: ISimplifiedEntity[] = [];
   disableAddToQueue: boolean;
 
   constructor(

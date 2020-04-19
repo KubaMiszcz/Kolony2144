@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Kolony } from 'src/app/models/Kolony';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { ResourceName } from 'src/app/models/Resource';
-import { IAsset, ICountableEntity } from 'src/app/models/Entity';
+import { IAsset, IEntity } from 'src/app/models/Entity';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class FinancesOverviewComponent implements OnInit {
     this.fillAssetListDEPR(this.financeService.cashConsumers);
   }
 
-  fillAssetListDEPR(resources: ICountableEntity[]) {
+  fillAssetListDEPR(resources: IEntity[]) {
     const res: any[] = [
       ['name', 'type', 'per unit', 'qty', 'total']
     ];

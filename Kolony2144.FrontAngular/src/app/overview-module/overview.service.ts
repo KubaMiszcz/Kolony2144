@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ICountableEntity } from '../models/Entity';
+import { IEntity } from '../models/Entity';
 import { ResourceName } from '../models/Resource';
 import { CommonService } from '../services/common.service';
 import { SharedService } from '../services/shared.service';
@@ -35,7 +35,7 @@ export class OverviewService {
   }
 
   UpdateNews() {
-    let resource: ICountableEntity;
+    let resource: IEntity;
     let consumption: number;
     let production: number;
     let msg: string;

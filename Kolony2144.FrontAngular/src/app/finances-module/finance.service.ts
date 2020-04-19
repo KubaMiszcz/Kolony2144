@@ -1,6 +1,6 @@
 import { BuildingService } from './../buildings-module/building.service';
 import { Injectable } from '@angular/core';
-import { IAsset, ICountableEntity } from '../models/Entity';
+import { IAsset, IEntity } from '../models/Entity';
 import { AssetService } from '../assets-module/asset.service';
 import { ResourceName } from '../models/Resource';
 import { GameService } from '../services/game.service';
@@ -17,7 +17,7 @@ import { EntityService } from '../services/entity.service';
   providedIn: 'root'
 })
 export class FinanceService {
-  cashConsumers: ICountableEntity[] = [];
+  cashConsumers: IEntity[] = [];
 
   private cash: IAsset;
   get Cash() { return this.cash; }

@@ -2,7 +2,7 @@ import { EntityService } from './../../services/entity.service';
 import { AssetService } from 'src/app/assets-module/asset.service';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { CommonService } from '../../services/common.service';
-import { IFullEntity, ISimplifiedAsset } from './../../models/Entity';
+import { IFullEntity, ISimplifiedEntity } from './../../models/Entity';
 import { Component, OnInit, Input } from '@angular/core';
 import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
 
@@ -31,7 +31,7 @@ export class WikiTileComponent implements OnInit {
 
   }
 
-  fillList(list: ISimplifiedAsset[]) {
+  fillList(list: ISimplifiedEntity[]) {
     const result = [];
     list.map(v =>
       result.push({

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ICountableEntity } from 'src/app/models/Entity';
+import { IEntity } from 'src/app/models/Entity';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { CommonService } from 'src/app/services/common.service';
 import { BuildingService } from '../building.service';
@@ -32,7 +32,7 @@ export class BuildingsOverviewComponent implements OnInit {
     );
   }
 
-  fillSummaryTableRows(entities: ICountableEntity[], resourceName: ResourceName, type: GenericTypesEnum) {
+  fillSummaryTableRows(entities: IEntity[], resourceName: ResourceName, type: GenericTypesEnum) {
     const res: any[][] = [
       ['name', 'type', 'per unit', 'qty', 'total']
     ];

@@ -4,7 +4,7 @@ import { KolonyService } from 'src/app/services/kolony.service';
 import { CommonService } from 'src/app/services/common.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { FinanceService } from 'src/app/finances-module/finance.service';
-import { ICountableEntity } from 'src/app/models/Entity';
+import { IEntity } from 'src/app/models/Entity';
 import { ResourceName } from 'src/app/models/Resource';
 import { WarehouseService } from '../warehouse.service';
 
@@ -41,7 +41,7 @@ export class WarehouseOverviewComponent implements OnInit {
   }
 
 
-  fillSummaryTableRows(entities: ICountableEntity[], resourceName: ResourceName, type: GenericTypesEnum) {
+  fillSummaryTableRows(entities: IEntity[], resourceName: ResourceName, type: GenericTypesEnum) {
     const res: any[][] = [
       ['name', 'type', 'per unit', 'qty', 'total']
     ];

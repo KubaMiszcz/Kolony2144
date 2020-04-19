@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Kolony, IKolony } from '../models/Kolony';
 import { AllResources, ResourceName as ResourceName } from '../models/Resource';
-import { IAsset, Asset, ICountableEntity } from '../models/Entity';
+import { IAsset, Asset, IEntity } from '../models/Entity';
 import { AllCivilianCrew } from '../models/Crew';
 import { AllBuildings, IBuilding } from '../models/Building';
 import { AllMachines } from '../models/Machine';
@@ -36,7 +36,7 @@ export class KolonyService {
     this.InitNewKolony();
   }
 
-  getAllKolonyEntities(): ICountableEntity[] {
+  getAllKolonyEntities(): IEntity[] {
     return [
       ...this.Kolony.Assets,
       ...this.Kolony.Buildings
