@@ -32,6 +32,7 @@ export interface IAsset extends IEntityModel, ISimplifiedEntity {
 
 export interface ITradeableEntity extends IAsset {
   // HistoricalPrices: number[];
+  // CommonnessFactor:number
 }
 
 
