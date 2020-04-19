@@ -111,7 +111,7 @@ export const AllResources: IResourceFullModel[] = [
     Tags: [],
     Price: 0,
     HistoricalPrices: [],
-    CommonnessFactor: 1,
+    RarityFactor: 0,
     CreationCost: [],
     MaintenanceCost: [],
     PassiveIncome: [],
@@ -125,7 +125,7 @@ export const AllResources: IResourceFullModel[] = [
     Tags: [ResourceTypesEnum.Production],
     Price: 10,
     HistoricalPrices: [],
-    CommonnessFactor: 1,
+    RarityFactor: 0,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.StorageSpace, Quantity: 1 }
@@ -141,7 +141,7 @@ export const AllResources: IResourceFullModel[] = [
     Tags: [ResourceTypesEnum.Production],
     Price: 10,
     HistoricalPrices: [],
-    CommonnessFactor: 1,
+    RarityFactor: 0,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.StorageSpace, Quantity: 1 }
@@ -157,7 +157,7 @@ export const AllResources: IResourceFullModel[] = [
     Tags: [ResourceTypesEnum.Production],
     Price: 25,
     HistoricalPrices: [],
-    CommonnessFactor: 1,
+    RarityFactor: 0,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.StorageSpace, Quantity: 1 }
@@ -173,7 +173,7 @@ export const AllResources: IResourceFullModel[] = [
     Tags: [ResourceTypesEnum.Production],
     Price: 15,
     HistoricalPrices: [],
-    CommonnessFactor: 1,
+    RarityFactor: 0,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.StorageSpace, Quantity: 1 }
@@ -189,7 +189,7 @@ export const AllResources: IResourceFullModel[] = [
     Tags: [ResourceTypesEnum.Production],
     Price: 1000,
     HistoricalPrices: [],
-    CommonnessFactor: 0.1,
+    RarityFactor: 0.95,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.StorageSpace, Quantity: 1 }

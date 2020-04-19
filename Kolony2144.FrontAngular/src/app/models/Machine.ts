@@ -22,7 +22,7 @@ export const AllMachines: IMachineFullModel[] = [
     Tags: [MachineTypesEnum.PowerSource],
     Price: 5000,
     HistoricalPrices: [],
-    CommonnessFactor: 1,
+    RarityFactor: 0,
     CreationCost: [
       { Name: ResourceName.Steel, Quantity: 5 }
     ],
@@ -44,7 +44,7 @@ export const AllMachines: IMachineFullModel[] = [
     Tags: [],
     Price: 100,
     HistoricalPrices: [],
-    CommonnessFactor: 1,
+    RarityFactor: 0,
     CreationCost: [
       { Name: ResourceName.Steel, Quantity: 50 }
     ],

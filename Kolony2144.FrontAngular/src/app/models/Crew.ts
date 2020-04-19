@@ -23,7 +23,7 @@ export const AllCrew: ICrewFullModel[] = [
     Tags: [CrewTypesEnum.Production],
     Price: 50,
     HistoricalPrices: [],
-    CommonnessFactor: 1,
+    RarityFactor: 0,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.Food, Quantity: 0.2 },
@@ -43,7 +43,7 @@ export const AllCrew: ICrewFullModel[] = [
     Tags: [CrewTypesEnum.Production],
     Price: 100,
     HistoricalPrices: [],
-    CommonnessFactor: 1,
+    RarityFactor: 0,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.Food, Quantity: 0.1 },

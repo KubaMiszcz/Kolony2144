@@ -1,3 +1,4 @@
+import { ITradeableEntity } from './../models/Entity';
 import { CommonService } from '../services/common.service';
 import { Injectable } from '@angular/core';
 import { AssetService } from '../assets-module/asset.service';
@@ -20,7 +21,7 @@ import { DataProviderService } from '../services/data-provider.service';
 })
 export class TradeService {
   tradeAnnouncement = '';
-  tradeableCargo: IAsset[] = []; // todo change to Itradebaleasset
+  tradeableCargo: ITradeableEntity[] = []; // todo change to Itradebaleasset
   isShipLanded: boolean;
   landingProbability = 0.99;
   shipSizeVariation = 0.2;  // future  depend on shipsize?
@@ -94,18 +95,18 @@ export class TradeService {
       ship.CompanyName = this.commonService.getRandomValueFromEnum(Object.values(CompanyNames));
       ship.OriginPlanetName = this.commonService.getRandomValueFromEnum(Object.values(PlanetNames));
       ship.DestinationPlanetName = this.commonService.getRandomValueFromEnum(Object.values(PlanetNames));
-      ship.Cargo = this.getShipCargo(ship.Size);
+      ship.Cargo = this.generateShipCargo(ship.Size);
       this.landedShip = ship;
     }
   }
 
-  getShipCargo(shipSize: number): IAsset[] {
+  private generateShipCargo(shipSize: number): IAsset[] {
     this.tradeableCargo.forEach(r => {
       const tradeType = this.commonService.getRandomIntFromRange(-1, 1);
       if (tradeType === 0) {
         r.Quantity = 0;
       } else {
-        r.Quantity = tradeType * this.commonService.getRandomIntAroundValue(shipSize, shipSize * this.shipSizeVariation);
+        r.Quantity = tradeType * this.commonService.getRandomIntAroundValue(shipSize, shipSize * this.shipSizeVariation) * (1 - r.RarityFactor);
       }
     });
 
