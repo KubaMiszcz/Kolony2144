@@ -1,4 +1,4 @@
-import { IEntity, IWikiEntity, IAsset } from './Entity';
+import { IEntity, IWikiEntity, IAsset, ITradeableEntity } from './Entity';
 import { AssetTypesEnum, CrewTypesEnum, GenericTypesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
@@ -11,7 +11,7 @@ export enum CrewNames {
 export interface ICrew extends IAsset {
 }
 
-export interface ICrewFullModel extends ICrew, IWikiEntity {
+export interface ICrewFullModel extends ICrew, IWikiEntity, ITradeableEntity {
 }
 
 
@@ -22,6 +22,8 @@ export const AllCrew: ICrewFullModel[] = [
     Type: AssetTypesEnum.Crew,
     Tags: [CrewTypesEnum.Production, GenericTypesEnum.Tradeable],
     Price: 50,
+    HistoricalPrices: [],
+    CommonnessFactor: 1,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.Food, Quantity: 0.2 },
@@ -40,6 +42,8 @@ export const AllCrew: ICrewFullModel[] = [
     Type: AssetTypesEnum.Crew,
     Tags: [CrewTypesEnum.Production, GenericTypesEnum.Tradeable],
     Price: 100,
+    HistoricalPrices: [],
+    CommonnessFactor: 1,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.Food, Quantity: 0.1 },

@@ -52,17 +52,7 @@ export class KolonyService {
     this.fillKolonyListWithInitialValues(this.dataProviderService.ALL_RESOURCES_LIST, this.Kolony.Resources);
   }
 
-  fillKolonyListWithInitialValues<T, T2>(srcList: T[], targetList: T2[]) {
-    [...srcList].filter(a =>
-      (a as unknown as IEntity).Quantity > 0
-      || (a as unknown as IAsset).Price === undefined
-    )
-      .forEach(i => {
-        targetList.push(i as unknown as T2);
-        // res.push(new Asset().Deserialize(i));
-      });
-    // return res;
-  }
+
 
   getKolonyState(): IKolony {
     return this.Kolony;
@@ -70,6 +60,24 @@ export class KolonyService {
 
   setKolonyState(kolony: Kolony) {
     // this.kolony = kolony as Kolony;
+  }
+
+
+
+
+
+
+  private fillKolonyListWithInitialValues<T, T2>(srcList: T[], targetList: T2[]) {
+    [...srcList].filter(a =>
+      (a as unknown as IEntity).Quantity > 0
+      || (a as unknown as IAsset).Price === undefined
+    )
+      .forEach(item => {
+        const clonedItem = this.commonService.cloneObject(item) as unknown as T2;
+        targetList.push(clonedItem);
+        // res.push(new Asset().Deserialize(i));
+      });
+    // return res;
   }
 
 }

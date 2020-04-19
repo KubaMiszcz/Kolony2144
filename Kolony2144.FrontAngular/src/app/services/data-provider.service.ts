@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IEntity, IAsset } from '../models/Entity';
+import { IEntity, IAsset, ITradeableEntity } from '../models/Entity';
 import { IBuilding, AllBuildings } from '../models/Building';
 import { AllResources, IResource, AllVolatileResources } from '../models/Resource';
 import { AllCrew, ICrew } from '../models/Crew';
@@ -20,8 +20,6 @@ export class DataProviderService {
   ALL_MACHINES_LIST: IMachine[] = [];
   ALL_RESOURCES_LIST: IResource[] = [];
 
-  ALL_TRADEABLE_ASSETS_LIST: IAsset[] = [];
-
   PlayerNotes = '';
 
 
@@ -35,10 +33,7 @@ export class DataProviderService {
     this.fillListWithInitialValues(AllResources, this.ALL_RESOURCES_LIST);
     this.fillListWithInitialValues(AllVolatileResources, this.ALL_RESOURCES_LIST);
 
-    this.fillAllTradeableAssets();
-
     this.fillDataFromSavedState();
-
 
     // todo add method for auto fill tags like 'power source' etc and get kolony assets from this service not files
   }
@@ -60,23 +55,13 @@ export class DataProviderService {
     ];
   }
 
-  fillListWithInitialValues<T, T2>(srcList: T[], targetList: T2[]) {
-    [...srcList].forEach(i => {
-      targetList.push(i as unknown as T2);
-      // res.push(new Asset().Deserialize(i));
-    });
+  get ALL_TRADEABLE_ASSETS_LIST(): ITradeableEntity[] {
+    return this.ALL_ASSETS_LIST
+      .filter(a => a.Price >= 0) as ITradeableEntity[];
   }
 
   getEntityByName(name: string): IEntity {
     return this.sharedService.findItemInListByName(this.ALL_ENTITIES_LIST, name);
-  }
-
-
-
-  // fix it check it
-  fillAllTradeableAssets() { // todo change it to interface tradebale asset
-    this.ALL_TRADEABLE_ASSETS_LIST = this.commonService.cloneObject<IAsset[]>(this.ALL_ASSETS_LIST)
-      .filter(a => a.Tags.includes(GenericTypesEnum.Tradeable));
   }
 
 
@@ -86,6 +71,27 @@ export class DataProviderService {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  private fillListWithInitialValues<T, T2>(srcList: T[], targetList: T2[]) {
+    [...srcList].forEach(item => {
+      const clonedItem = this.commonService.cloneObject(item) as unknown as T2;
+      targetList.push(clonedItem);
+      // res.push(new Asset().Deserialize(i));
+    });
+  }
 
 }
 
