@@ -55,7 +55,7 @@ export class KolonyService {
   fillKolonyListWithInitialValues<T, T2>(srcList: T[], targetList: T2[]) {
     [...srcList].filter(a =>
       (a as unknown as IEntity).Quantity > 0
-      || (a as unknown as IEntity).Tags.includes(ResourceTypesEnum.Volatile)
+      || (a as unknown as IAsset).Price === undefined
     )
       .forEach(i => {
         targetList.push(i as unknown as T2);

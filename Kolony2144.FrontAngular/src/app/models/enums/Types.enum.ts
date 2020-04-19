@@ -20,7 +20,6 @@ export enum GenericTypesEnum {
 
 
 export enum ResourceTypesEnum {
-  Volatile = 'Volatile',
   Production = 'Production',
 }
 

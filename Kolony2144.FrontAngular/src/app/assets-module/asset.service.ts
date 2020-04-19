@@ -38,7 +38,7 @@ export class AssetService {
 
 
   getVolatileAssets(): IAsset[] {
-    return this.allKolonyAssetList.filter(i => i.Tags.includes(ResourceTypesEnum.Volatile));
+    return this.allKolonyAssetList.filter(i => i.Price === undefined);
   }
 
   ClearVolatileAssets() {

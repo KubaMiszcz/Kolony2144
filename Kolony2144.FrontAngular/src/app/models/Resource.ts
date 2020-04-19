@@ -1,4 +1,4 @@
-import { IEntity, IWikiEntity, IAsset } from './Entity';
+import { IEntity, IWikiEntity, IAsset, ITradeableEntity } from './Entity';
 import { AssetTypesEnum, GenericTypesEnum, ResourceTypesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 
@@ -19,19 +19,24 @@ export enum ResourceName {
   Coal = 'Coal'
 }
 
+export interface IVolatileResource extends IEntity {
+}
+
+export interface IVolatileResourceFullModel extends IVolatileResource, IWikiEntity {
+}
+
 export interface IResource extends IAsset {
 }
 
-export interface IResourceFullModel extends IResource, IWikiEntity {
+export interface IResourceFullModel extends IResource, IWikiEntity, ITradeableEntity {
 }
 
-export const AllVolatileResources: IResourceFullModel[] = [
+export const AllVolatileResources: IVolatileResourceFullModel[] = [
   {
     Name: ResourceName.Energy,
     Description: 'Energy', ImageUrl: '/assets/wiki-icons/resource-energy.png',
     Type: AssetTypesEnum.Resource,
-    Tags: [ResourceTypesEnum.Volatile], // fix change it to volatileresource
-    Price: 0,
+    Tags: [], // fix change it to volatileresource
     CreationCost: [],
     MaintenanceCost: [],
     PassiveIncome: [],
@@ -42,8 +47,7 @@ export const AllVolatileResources: IResourceFullModel[] = [
     Name: ResourceName.BasicWorkUnit,
     Description: 'Basic Work Unit', ImageUrl: '/assets/wiki-icons/property.png',
     Type: AssetTypesEnum.Resource,
-    Tags: [ResourceTypesEnum.Volatile],
-    Price: 0,
+    Tags: [],
     CreationCost: [],
     MaintenanceCost: [],
     PassiveIncome: [],
@@ -54,8 +58,7 @@ export const AllVolatileResources: IResourceFullModel[] = [
     Name: ResourceName.AdvancedWorkUnit,
     Description: 'Advanced Work Unit', ImageUrl: '/assets/wiki-icons/property.png',
     Type: AssetTypesEnum.Resource,
-    Tags: [ResourceTypesEnum.Volatile],
-    Price: 0,
+    Tags: [],
     CreationCost: [],
     MaintenanceCost: [],
     PassiveIncome: [],
@@ -66,8 +69,7 @@ export const AllVolatileResources: IResourceFullModel[] = [
     Name: ResourceName.StorageSpace,
     Description: 'Storage Space', ImageUrl: '/assets/wiki-icons/property.png',
     Type: AssetTypesEnum.Resource,
-    Tags: [ResourceTypesEnum.Volatile],
-    Price: 0,
+    Tags: [],
     CreationCost: [],
     MaintenanceCost: [],
     PassiveIncome: [],
@@ -78,8 +80,7 @@ export const AllVolatileResources: IResourceFullModel[] = [
     Name: ResourceName.LivingSpace,
     Description: 'Living Space', ImageUrl: '/assets/wiki-icons/property.png',
     Type: AssetTypesEnum.Resource,
-    Tags: [ResourceTypesEnum.Volatile],
-    Price: 0,
+    Tags: [],
     CreationCost: [],
     MaintenanceCost: [],
     PassiveIncome: [],
@@ -90,8 +91,7 @@ export const AllVolatileResources: IResourceFullModel[] = [
     Name: ResourceName.PlanetSpace,
     Description: 'Planet Space', ImageUrl: '/assets/wiki-icons/property.png',
     Type: AssetTypesEnum.Resource,
-    Tags: [ResourceTypesEnum.Volatile],
-    Price: 0,
+    Tags: [],
     CreationCost: [],
     MaintenanceCost: [],
     PassiveIncome: [],
