@@ -1,4 +1,4 @@
-import { IEntity, ITradeableEntity, IWikiEntity } from './Entity';
+import { IEntity, ITradeableEntity, IWikiEntity, IAsset } from './Entity';
 import { AssetTypesEnum, CrewTypesEnum, GenericTypesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
@@ -8,7 +8,7 @@ export enum CrewNames {
   Technician = 'Technician'
 }
 
-export interface ICrew extends IEntity {
+export interface ICrew extends IAsset {
 }
 
 export interface ICrewFullModel extends ICrew, IWikiEntity, ITradeableEntity {
@@ -19,7 +19,6 @@ export const AllCrew: ICrewFullModel[] = [
   {
     Name: CrewNames.Worker,
     Description: 'just peon worker, chop chop he\'s on it, eats many', ImageUrl: '/assets/wiki-icons/crew-worker.png',
-
     Type: AssetTypesEnum.Crew,
     Tags: [CrewTypesEnum.Production, GenericTypesEnum.Tradeable],
     Price: 50,

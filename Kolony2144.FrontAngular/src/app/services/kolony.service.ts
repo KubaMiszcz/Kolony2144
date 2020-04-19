@@ -15,6 +15,22 @@ import { SharedService } from './shared.service';
 export class KolonyService {
 
   Kolony: Kolony;
+  get AllAssets(): IAsset[] {
+    return [
+      ...this.Kolony.Crew,
+      ...this.Kolony.Machines,
+      ...this.Kolony.Resources
+    ];
+  }
+
+  get AllKolonyEntities(): IEntity[] {
+    return [
+      ...this.Kolony.Buildings,
+      ...this.Kolony.Crew,
+      ...this.Kolony.Machines,
+      ...this.Kolony.Resources
+    ];
+  }
 
   constructor(
     private commonService: CommonService,
@@ -52,13 +68,11 @@ export class KolonyService {
     this.fillKolonyListWithInitialValues(AllMachines, this.Kolony.Machines);
     this.fillKolonyListWithInitialValues(AllResources, this.Kolony.Resources);
     this.fillKolonyListWithInitialValues(AllVolatileResources, this.Kolony.Resources);
-    this.Kolony.AssetsDEPR = this.fillInitialKolonyAssets();
   }
 
   fillKolonyListWithInitialValues<T, T2>(srcList: T[], targetList: T2[]) {
     [...srcList].filter(a =>
       (a as unknown as IEntity).Quantity > 0
-      || (a as unknown as IEntity).Tags.includes(GenericTypesEnum.Property)
       || (a as unknown as IEntity).Tags.includes(ResourceTypesEnum.Volatile)
     )
       .forEach(i => {
@@ -66,30 +80,6 @@ export class KolonyService {
         // res.push(new Asset().Deserialize(i));
       });
     // return res;
-  }
-
-
-  fillInitialKolonyAssets(): IAsset[] {
-    const res: IAsset[] = [];
-    [...AllResources, ...AllCrew, ...AllMachines]
-      .filter(a => a.Quantity > 0 || a.Tags.includes(GenericTypesEnum.Property))
-      .forEach(i => {
-        res.push(i as IAsset);
-        // res.push(new Asset().Deserialize(i));
-      });
-
-    return res;
-  }
-
-  fillInitialKolonyBuildings(): IBuilding[] {
-    const res: IBuilding[] = [];
-    [...AllBuildings]
-      .filter(a => a.Quantity > 0)
-      .forEach(i => {
-        res.push(i as IBuilding);
-      });
-
-    return res;
   }
 
 }

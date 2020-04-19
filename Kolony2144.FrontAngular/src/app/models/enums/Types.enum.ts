@@ -14,7 +14,6 @@ export enum AssetTypesEnum {
 
 export enum GenericTypesEnum {
   Tradeable = 'Tradeable',
-  Property = 'Property',
   Consuming = 'Consuming',
   Producing = 'Producing',
 }

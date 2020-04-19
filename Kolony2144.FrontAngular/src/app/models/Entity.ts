@@ -18,14 +18,12 @@ export interface IEntityModel {
 
 export interface IEntity extends IEntityModel, ISimplifiedEntity {
   Quantity: number;
-  // HistoricalPrices: number[];
 }
 
 
 // fix get rid of it and move it to IENtity
 export interface IAsset extends IEntity {
   Price: number;
-  // HistoricalPrices: number[];
 }
 
 export interface ITradeableEntity extends IAsset {

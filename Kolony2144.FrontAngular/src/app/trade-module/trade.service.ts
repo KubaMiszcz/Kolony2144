@@ -94,8 +94,6 @@ export class TradeService {
       ship.DestinationPlanetName = this.commonService.getRandomValueFromEnum(Object.values(PlanetNames));
       ship.Cargo = this.getShipCargo(ship.Size);
       this.landedShip = ship;
-      console.log(ship);
-
     }
   }
 
