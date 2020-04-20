@@ -36,7 +36,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     Name: ResourceName.Energy,
     Description: 'Energy', ImageUrl: '/assets/wiki-icons/resource-energy.png',
     Type: EntityTypesEnum.Resource,
-    Tags: [], // fix change it to volatileresource
+    Tags: [],
     CreationCost: [],
     MaintenanceCost: [],
     PassiveIncome: [],
@@ -111,7 +111,7 @@ export const AllResources: IResourceFullModel[] = [
     Tags: [],
     Price: 0,
     HistoricalPrices: [],
-    RarityFactor: 0,
+    RarityFactor: 1,
     CreationCost: [],
     MaintenanceCost: [],
     PassiveIncome: [],

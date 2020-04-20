@@ -29,12 +29,10 @@ export class PowerService {
   }
 
   getEnergyProduction(): number {
-    // fixit it counts all except buildings - fixit somehow
     return this.entityService.getEntityProductionQtyByName(ResourceName.Energy);
   }
 
   getEnergyUsage(): number {
-    // fixit it counts all except buildings - fixit somehow
     return this.entityService.getEntityConsumptionQtyByName(ResourceName.Energy);
   }
 }

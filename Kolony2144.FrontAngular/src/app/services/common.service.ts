@@ -46,6 +46,15 @@ export class CommonService {
   }
 
 
+  sumColumnOftableByHeader(table: any[][], header: string) {
+    if (!table || table.length < 2) {
+      return 0;
+    }
+    const colNo = table[0].indexOf(header);
+
+    return colNo > 0 ? this.sumColumnOftable(table.slice(1), colNo) : 0;
+  }
+
   // todo add sumColumnOftableByColumnHeader
   sumColumnOftable(table: any[][], colNo: number) {
     if (!table || table.length < 1) {

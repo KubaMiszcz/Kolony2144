@@ -3,34 +3,30 @@ import { EntityTypesEnum } from './enums/Types.enum';
 import { IDeserializable } from '../core/interfaces/deserializable';
 import { IBuilding } from './Building';
 
-// export interface IWikiEntity extends IEntityModel, IAsset, IBuilding, IWikiEntity {
-// }
-
 export interface IEntityModel {
   Name: string;
   Type: EntityTypesEnum;
   Tags: string[];
+  // todo TechLevel:number;
   CreationCost: ISimplifiedEntity[];
   MaintenanceCost: ISimplifiedEntity[];
+  // todo IdleMaintenanceCost: ISimplifiedEntity[];
   PassiveIncome: ISimplifiedEntity[];
   UoM: UoMsEnum;
 }
 
-// todo
-// make maintain cost different when idle
-// attach entiotes to factories etc, they are not produce naything whhen empty
 
 export interface IEntity extends IEntityModel, ISimplifiedEntity {
   Quantity: number;
 }
 
 
-// fix get rid of it and move it to IENtity
 export interface IAsset extends IEntityModel, ISimplifiedEntity {
   Price: number; // dont move it to Ienity, Ibuilding doesnt need price but inherits from enity
 }
 
 export interface ITradeableEntity extends IAsset {
+  // todo PriceVariationFactor: unmber'
   HistoricalPrices: number[];
   RarityFactor: number;
 }

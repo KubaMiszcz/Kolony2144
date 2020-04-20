@@ -34,7 +34,7 @@ export class BuildingsOverviewComponent implements OnInit {
 
   fillSummaryTableRows(entities: IEntity[], resourceName: ResourceName, type: GenericTypesEnum) {
     const res: any[][] = [
-      ['name', 'type', 'per unit', 'qty', 'total']
+      ['name', 'type', 'per unit', 'qty', resourceName + ' total']
     ];
 
     entities.forEach(r => {

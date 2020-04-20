@@ -39,13 +39,10 @@ export class OverviewComponent implements OnInit, OnDestroy {
     this.allAssetsTableRows = this.fillSummaryTableRows(this.dataProviderService.ALL_TRADEABLE_ASSETS_LIST);
   }
 
-  ngOnDestroy(): void {
-    this.dataProviderService.PlayerNotes = this.playerNotes;
-  }
 
   fillSummaryTableRows(entities: IAsset[]) {
     const res: any[][] = [
-      ['name', 'type', 'qty', 'price']
+      ['name', 'type', 'qty', 'price', 'RarityFactor']
     ];
 
     entities.forEach(rr => {
@@ -55,11 +52,16 @@ export class OverviewComponent implements OnInit, OnDestroy {
         r.Type,
         r.Quantity,
         r.Price,
-        // r.CommonnessFactor
+        r.RarityFactor
       ]);
     });
 
     return res;
+  }
+
+
+  ngOnDestroy(): void {
+    this.dataProviderService.PlayerNotes = this.playerNotes;
   }
 
 }

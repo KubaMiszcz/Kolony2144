@@ -21,7 +21,7 @@ import { DataProviderService } from '../services/data-provider.service';
 })
 export class TradeService {
   tradeAnnouncement = '';
-  tradeableCargo: ITradeableEntity[] = []; // todo change to Itradebaleasset
+  tradeableCargo: ITradeableEntity[] = [];
   isShipLanded: boolean;
   landingProbability = 0.99;
   shipSizeVariation = 0.2;  // future  depend on shipsize?
@@ -106,7 +106,8 @@ export class TradeService {
       if (tradeType === 0) {
         r.Quantity = 0;
       } else {
-        r.Quantity = tradeType * this.commonService.getRandomIntAroundValue(shipSize, shipSize * this.shipSizeVariation) * (1 - r.RarityFactor);
+        const qty = this.commonService.getRandomIntAroundValue(shipSize, shipSize * this.shipSizeVariation) * (1 - r.RarityFactor);
+        r.Quantity = tradeType * Math.round(qty);
       }
     });
 

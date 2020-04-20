@@ -40,7 +40,7 @@ export class OverviewService {
     let production: number;
     let msg: string;
 
-    this.AddNews('Welcome in new month. Current time is ' + this.kolonyService.Kolony.Age + ' of New Era');
+    this.AddNews('Welcome in new month. Current time is ' + this.kolonyService.Kolony.Age.toFixed(1) + ' of New Era');
 
     // news about ship
     this.AddNews(this.tradeService.tradeAnnouncement);
