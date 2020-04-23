@@ -14,7 +14,7 @@ import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
   styleUrls: ['./asset-tile.component.scss']
 })
 export class AssetTileComponent implements OnInit {
-  @Input() asset: IEntity;
+  @Input() entity: IEntity;
   productionQty = 1;
   maxProductionQty = 1;
   productionCost: IproductionCost[] = [];
@@ -33,19 +33,19 @@ export class AssetTileComponent implements OnInit {
     //   this.updatemaxProductionQty();
     // });
 
-    this.asset.CreationCost.forEach(m => {
+    this.entity.CreationCost.forEach(m => {
       const uom = this.entityService.getUoMByName(m.Name);
-      const kolonyAsset = this.assetService.getAssetByName(m.Name);
+      const kolonyEntity = this.entityService.getEntityByName(m.Name);
       this.productionCost.push({
         Name: m.Name,
         QtyPerUnit: m.Quantity,
         TotalQty: m.Quantity * this.productionQty,
-        StockQty: kolonyAsset.Quantity,
+        StockQty: kolonyEntity.Quantity,
         UoM: uom
       });
     });
 
-    // this.maxProductionQty = this.productionService.getMaxProduceedQty(this.asset);
+    this.maxProductionQty = this.entityService.getMaxProducedQty(this.entity);
 
     // this.updateCosts();
   }

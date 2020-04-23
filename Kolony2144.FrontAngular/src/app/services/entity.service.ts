@@ -11,6 +11,7 @@ import { DataProviderService } from './data-provider.service';
   providedIn: 'root'
 })
 export class EntityService {
+
   allKolonyEntitiesList: IEntity[] = [];
 
   constructor(
@@ -141,6 +142,32 @@ export class EntityService {
       });
     });
   }
+
+
+
+
+  getMaxProducedQty(entity: IEntity): number {
+    const costs = [];
+    entity.CreationCost.forEach(m => {
+      costs.push(Math.floor(this.getEntityByName(m.Name).Quantity / m.Quantity));
+    });
+
+    return Math.min(...costs);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   getUoMByName(itemName: string): UoMsEnum {
