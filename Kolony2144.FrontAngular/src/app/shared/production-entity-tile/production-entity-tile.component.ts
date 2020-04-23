@@ -1,5 +1,5 @@
-import { EntityService } from './../../services/entity.service';
-import { AssetService } from './../../assets-module/asset.service';
+import { EntityService } from '../../services/entity.service';
+import { AssetService } from '../../assets-module/asset.service';
 import { IEntity } from 'src/app/models/Entity';
 import { CommonService } from '../../services/common.service';
 import { IAsset, ISimplifiedEntity } from '../../models/Entity';
@@ -9,11 +9,11 @@ import { IKolony } from 'src/app/models/Kolony';
 import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
 
 @Component({
-  selector: 'app-asset-tile',
-  templateUrl: './asset-tile.component.html',
-  styleUrls: ['./asset-tile.component.scss']
+  selector: 'app-production-asset-tile',
+  templateUrl: './production-entity-tile.component.html',
+  styleUrls: ['./production-entity-tile.component.scss']
 })
-export class AssetTileComponent implements OnInit {
+export class ProductionEntityTileComponent implements OnInit {
   @Input() entity: IEntity;
   productionQty = 1;
   maxProductionQty = 1;

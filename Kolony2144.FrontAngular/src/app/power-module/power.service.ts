@@ -1,5 +1,4 @@
 import { KolonyService } from './../services/kolony.service';
-import { IEntity } from 'src/app/models/Entity';
 import { Injectable } from '@angular/core';
 import { ResourceName } from '../models/Resource';
 import { CommonService } from '../services/common.service';
@@ -7,6 +6,7 @@ import { AssetService } from '../assets-module/asset.service';
 import { SharedService } from '../services/shared.service';
 import { BuildingService } from '../buildings-module/building.service';
 import { EntityService } from '../services/entity.service';
+import { IEntity } from '../models/Entity';
 
 @Injectable({
   providedIn: 'root'

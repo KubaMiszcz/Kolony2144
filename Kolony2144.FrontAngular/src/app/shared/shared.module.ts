@@ -4,15 +4,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
 import { TileWithTableComponent } from './tile-with-table/tile-with-table.component';
 import { AppSpinnerComponent } from './spinner/spinner.component';
-import { AssetTileComponent } from './asset-tile/asset-tile.component';
-import { QueueAssetTileComponent } from './queue-asset-tile/queue-asset-tile.component';
+import { ProductionEntityTileComponent } from './production-entity-tile/production-entity-tile.component';
+import { QueueEntityTileComponent } from './queue-entity-tile/queue-entity-tile.component';
 
 @NgModule({
   declarations: [
     AppSpinnerComponent,
     TileWithTableComponent,
-    AssetTileComponent,
-    QueueAssetTileComponent
+    ProductionEntityTileComponent,
+    QueueEntityTileComponent
   ],
   imports: [
     CommonModule,
@@ -26,8 +26,8 @@ import { QueueAssetTileComponent } from './queue-asset-tile/queue-asset-tile.com
     AppRoutingModule,
     AppSpinnerComponent,
     TileWithTableComponent,
-    AssetTileComponent,
-    QueueAssetTileComponent
+    ProductionEntityTileComponent,
+    QueueEntityTileComponent
   ]
 })
 export class SharedModule { }

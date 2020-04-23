@@ -1,4 +1,3 @@
-import { Kolony } from 'src/app/models/Kolony';
 import { Injectable } from '@angular/core';
 import { KolonyService } from '../services/kolony.service';
 import { IBuilding } from '../models/Building';

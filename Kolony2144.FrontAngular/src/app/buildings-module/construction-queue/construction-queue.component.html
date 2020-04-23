@@ -2,8 +2,8 @@
   <h4 class="card-header "> Construction Queue</h4>
   <div class="card-body p-1">
     <div *ngIf="productionQueue.length" class="d-flex flex-wrap production-queue">
-      <app-queue-asset-tile *ngFor="let item of productionQueue" [entity]="item" (click)="removeItemFromProductionQueue(item)">
-      </app-queue-asset-tile>
+      <app-queue-entity-tile *ngFor="let item of productionQueue" [entity]="item" (click)="removeItemFromProductionQueue(item)">
+      </app-queue-entity-tile>
     </div>
   </div>
 </div>

@@ -3,11 +3,11 @@ import { IAsset, IEntity } from '../../models/Entity';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-queue-asset-tile',
-  templateUrl: './queue-asset-tile.component.html',
-  styleUrls: ['./queue-asset-tile.component.scss']
+  selector: 'app-queue-entity-tile',
+  templateUrl: './queue-entity-tile.component.html',
+  styleUrls: ['./queue-entity-tile.component.scss']
 })
-export class QueueAssetTileComponent implements OnInit {
+export class QueueEntityTileComponent implements OnInit {
   @Input() entity: IEntity;
 
   constructor(
