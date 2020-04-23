@@ -34,7 +34,7 @@ export class ProductionEntityTileComponent implements OnInit {
     this.fillStockQtyRows();
     this.updateMaxProductionQty();
 
-    this.entityService.ProductionQueueEmitter.subscribe(() => {
+    this.entityService.ProductionQueueIsUpdatedEmitter.subscribe(() => {
       this.updateStockRows();
       this.updateMaxProductionQty();
     });

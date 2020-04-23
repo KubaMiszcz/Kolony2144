@@ -14,7 +14,7 @@ import { BehaviorSubject } from 'rxjs';
 export class EntityService {
   allKolonyEntitiesList: IEntity[] = [];
   productionQueue: IEntity[] = [];
-  ProductionQueueEmitter = new EventEmitter<boolean>();
+  ProductionQueueIsUpdatedEmitter = new EventEmitter<boolean>();
 
   constructor(
     private commonService: CommonService,
@@ -160,13 +160,20 @@ export class EntityService {
 
   addItemToProductionQueue(entity: IEntity) {
     this.productionQueue.push(entity);
-    this.UpdateInventoryDueToProducedItem(entity);
-    this.ProductionQueueEmitter.emit(true);
+    this.UpdateInventoryDueToProducedItem(entity, entity.Quantity);
+    this.ProductionQueueIsUpdatedEmitter.emit(true);
   }
 
-  UpdateInventoryDueToProducedItem(addedEntity: IEntity) {
+  removeItemFromProductionQueue(entity: IEntity) {
+    const idx = this.productionQueue.indexOf(entity);
+    this.productionQueue.splice(idx, 1);
+    this.UpdateInventoryDueToProducedItem(entity, -1 * entity.Quantity);
+    this.ProductionQueueIsUpdatedEmitter.emit(true);
+  }
+
+  UpdateInventoryDueToProducedItem(addedEntity: IEntity, qty: number) {
     addedEntity.CreationCost.forEach(r => {
-      this.getEntityByName(r.Name).Quantity -= r.Quantity * addedEntity.Quantity;
+      this.getEntityByName(r.Name).Quantity -= (r.Quantity * qty);
     });
   }
 

@@ -21,12 +21,12 @@ export class ConstructionQueueComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.entityService.ProductionQueueEmitter.subscribe(() =>
+    this.entityService.ProductionQueueIsUpdatedEmitter.subscribe(() =>
       this.productionQueue = this.entityService.productionQueue);
   }
 
-  removeItemFromProductionQueue() {
-
+  removeItemFromProductionQueue(item: IEntity) {
+    this.entityService.removeItemFromProductionQueue(item);
   }
 
 }
