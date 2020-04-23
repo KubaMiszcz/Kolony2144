@@ -84,7 +84,7 @@ export const AllBuildings: IBuildingFullModel[] = [
     Name: BuildingNames.SolarPanel,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: EntityTypesEnum.Building,
-    Tags: [BuildingTypesEnum.PowerSource], CreationCost: [
+    Tags: [], CreationCost: [
       { Name: ResourceName.Stone, Quantity: 5 },
       { Name: ResourceName.Steel, Quantity: 50 }
     ],
@@ -102,7 +102,7 @@ export const AllBuildings: IBuildingFullModel[] = [
     Name: BuildingNames.CoalPowerPlant,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: EntityTypesEnum.Building,
-    Tags: [BuildingTypesEnum.PowerSource], CreationCost: [
+    Tags: [], CreationCost: [
       { Name: ResourceName.Stone, Quantity: 1000 },
       { Name: ResourceName.Steel, Quantity: 2000 }
     ],

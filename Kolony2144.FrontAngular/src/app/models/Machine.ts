@@ -34,7 +34,7 @@ export const AllMachines: IMachineFullModel[] = [
     Name: MachinesNames.PowerGenerator,
     Description: 'simple power coal powered generator', ImageUrl: '/assets/wiki-icons/machine.png',
     Type: EntityTypesEnum.Machine,
-    Tags: [MachineTypesEnum.PowerSource],
+    Tags: [],
     Price: 5000,
     HistoricalPrices: [],
     RarityFactor: 0,

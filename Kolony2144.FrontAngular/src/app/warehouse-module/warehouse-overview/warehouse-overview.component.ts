@@ -43,7 +43,7 @@ export class WarehouseOverviewComponent implements OnInit {
 
   fillSummaryTableRows(entities: IEntity[], resourceName: ResourceName, type: GenericTypesEnum) {
     const res: any[][] = [
-      ['name', 'type', 'per unit', 'qty', resourceName+ ' total', '%']
+      ['name', 'type', 'per unit', 'qty', resourceName + ' total', '%']
     ];
 
     entities.forEach(r => {
@@ -59,8 +59,9 @@ export class WarehouseOverviewComponent implements OnInit {
       ]);
     });
 
-    const colNo = res[0].indexOf('total');
-    res.push(['', '', '', 'Total', this.commonService.sumColumnOftable(res.slice(1), colNo), '']);
+    res.push(['', '', '', 'Total',
+      this.commonService.sumColumnOftableByHeader(res, resourceName + ' total')]);
+
 
     return res;
   }

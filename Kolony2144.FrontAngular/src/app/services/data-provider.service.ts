@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { IEntity, IAsset, ITradeableEntity } from '../models/Entity';
 import { IBuilding, AllBuildings } from '../models/Building';
-import { AllResources, IResource, AllVolatileResources } from '../models/Resource';
+import { AllResources, IResource, AllVolatileResources, ResourceName } from '../models/Resource';
 import { AllCrew, ICrew } from '../models/Crew';
 import { AllMachines, IMachine } from '../models/Machine';
 import { CommonService } from './common.service';
 import { SharedService } from './shared.service';
-import { GenericTypesEnum } from '../models/enums/Types.enum';
+import { GenericTypesEnum, ResourceTypesEnum, BuildingTypesEnum, CommonTypesEnum as CommonTagsEnum } from '../models/enums/Types.enum';
 import { IKolony } from '../models/Kolony';
 
 @Injectable({
@@ -32,6 +32,9 @@ export class DataProviderService {
     this.fillListWithInitialValues(AllMachines, this.ALL_MACHINES_LIST);
     this.fillListWithInitialValues(AllResources, this.ALL_RESOURCES_LIST);
     this.fillListWithInitialValues(AllVolatileResources, this.ALL_RESOURCES_LIST);
+
+    this.assignTagToEntities(this.ALL_ENTITIES_LIST, GenericTypesEnum.Producing, ResourceName.Energy, CommonTagsEnum.PowerSource);
+
 
     this.fillDataFromSavedState();
 
@@ -93,6 +96,16 @@ export class DataProviderService {
     });
   }
 
+
+  assignTagToEntities(entitieslist: IEntity[], type: GenericTypesEnum, resourceName: ResourceName, tag: CommonTagsEnum) {
+    entitieslist.forEach(e => {
+      const list = type === GenericTypesEnum.Consuming ? e.MaintenanceCost : e.PassiveIncome;
+      const item = list.find(i => i.Name === resourceName);
+      if (!!item && item.Quantity > 0) {
+        e.Tags.push(tag);
+      }
+    });
+  }
 }
 
 

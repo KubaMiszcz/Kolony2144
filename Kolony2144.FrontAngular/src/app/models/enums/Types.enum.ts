@@ -16,6 +16,10 @@ export enum GenericTypesEnum {
 }
 
 
+export enum CommonTypesEnum {
+  PowerSource = 'Power source',
+}
+
 export enum ResourceTypesEnum {
   Production = 'Production',
 }
@@ -26,12 +30,10 @@ export enum CrewTypesEnum {
 
 export enum BuildingTypesEnum {
   Production = 'Production',
-  PowerSource = 'Power source',
   Maintenance = 'Maintenance',
 }
 
 export enum MachineTypesEnum {
   Production = 'Production',
-  PowerSource = 'Power source',
   Maintenance = 'Maintenance',
 }

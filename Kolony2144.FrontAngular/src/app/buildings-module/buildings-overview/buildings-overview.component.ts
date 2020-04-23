@@ -49,8 +49,8 @@ export class BuildingsOverviewComponent implements OnInit {
       ]);
     });
 
-    const colNo = res[0].indexOf('total');
-    res.push(['', '', '', 'Total', this.commonService.sumColumnOftable(res.slice(1), colNo)]);
+    res.push(['', '', '', 'Total',
+      this.commonService.sumColumnOftableByHeader(res, resourceName + ' total')]);
 
     return res;
   }
