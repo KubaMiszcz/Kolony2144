@@ -15,7 +15,7 @@
             <span class="input-group-text py-0 px-1">Qty:</span>
           </div>
           <input #productionQtyInput [ngModel]="productionQty" [min]=1 type="number" class="form-control form-control-sm shadow-green"
-            id="formGroupExampleInput2" placeholder="Qty" (ngModelChange)="onChange($event)" required>
+            id="formGroupExampleInput2" placeholder="Qty" (ngModelChange)="onQtyChange($event)" required>
           <div class="input-group-append">
             <button class="btn btn-outline-primary input-group-text px-2 shadow-green" type="button" id="button-addon2"
               (click)='addItemToProductionQueue()'>To<br>Queue</button>
@@ -26,12 +26,12 @@
 
 
         <div class="btn-group mccx-1 m-2 d-flex justify-content-end " role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-sm btn-outline-primary shadow-green " (click)="quickAdd('clear')">Clear</button>
+          <button type="button" class="btn btn-sm btn-outline-primary shadow-green " (click)="quickAdd(-productionQty)">Clear</button>
           <button type="button" class="btn btn-sm btn-outline-primary shadow-green btn-digit" (click)="quickAdd(-10)">-10</button>
           <button type="button" class="btn btn-sm btn-outline-primary shadow-green btn-digit" (click)="quickAdd(-1)">-1</button>
           <button type="button" class="btn btn-sm btn-outline-primary shadow-green btn-digit" (click)="quickAdd(1)">+1</button>
           <button type="button" class="btn btn-sm btn-outline-primary shadow-green btn-digit" (click)="quickAdd(10)">+10</button>
-          <button type="button" class="btn btn-sm btn-outline-primary shadow-green " (click)="quickAdd('max')">+Max</button>
+          <button type="button" class="btn btn-sm btn-outline-primary shadow-green " (click)="quickAdd(maxProductionQty)">+Max</button>
         </div>
 
 

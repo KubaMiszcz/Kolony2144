@@ -50,15 +50,56 @@ export class AssetTileComponent implements OnInit {
     // this.updateCosts();
   }
 
+
+
   updateCosts() {
-    // this.productionCost.forEach(i => {
-    //   i.TotalQty = i.QtyPerUnit * this.productionQty;
-    // });
+    this.productionCost.forEach(i => {
+      i.TotalQty = i.QtyPerUnit * this.productionQty;
+    });
   }
+
+  onQtyChange(event: number) {
+    console.log('onChange', event, this.productionQty);
+    if (event > this.maxProductionQty) {
+      this.productionQty = this.maxProductionQty;
+    } else if (event <= 1) {
+      this.productionQty = 1;
+    } else {
+      this.productionQty = event;
+    }
+    this.updateCosts();
+  }
+
+  quickAdd(val: any) {
+    this.productionQty += val;
+    if (this.productionQty < 1) {
+      this.productionQty = 1;
+    } else if (this.productionQty > this.maxProductionQty) {
+      this.productionQty = this.maxProductionQty;
+    }
+    this.updateCosts();
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   updateStock() {
     // this.productionCost.forEach(i => {
-    //   i.StockQty = this.kolonyService.findInventoryItemFromAllByName(i.Name).Quantity;
+    //   i.StockQty = this.entityService.getEntityByName(i.Name).Quantity;
     // });
   }
 
@@ -78,28 +119,6 @@ export class AssetTileComponent implements OnInit {
     // }
   }
 
-  quickAdd(val: any) {
-    // console.log(this.productionQty + val);
-    // if (!isNaN(val)) {
-    //   if (this.productionQty + val < 1) this.productionQty = 1;
-    //   // if (this.productionQty + val > this.maxProductionQty) this.productionQty = this.maxProductionQty;
-    //   else this.productionQty += val;
-    // }
-    // else if (val === 'clear') this.productionQty = 1;
-    // else if (val === 'max') this.productionQty = this.maxProductionQty;
-
-    // console.log(val, this.productionQty);
-    // this.updateCosts();
-  }
-
-  onChange(event) {
-    // console.log('onChange', event, this.productionQty);
-    // this.productionQty = event;
-    // this.updateCosts();
-    // // if (event > this.maxProductionQty) event = this.maxProductionQty;
-    // // else if (event <= 1) event = 1;
-    // // this.productionQty = event;
-  }
 
 }
 
