@@ -52,7 +52,7 @@ export class AssetTileComponent implements OnInit {
     });
   }
 
-  qtyChange(event: number) {
+  onQtyChange(event: number) {
     console.log('onChange', event, this.productionQty);
     if (event > this.maxProductionQty) {
       this.productionQty = this.maxProductionQty;

@@ -1,0 +1,14 @@
+<div class="card m-2 ">
+  <h4 class="card-header "> {{entity.Name}}</h4>
+  <div class="card-body p-1 m-auto">
+    <div class="d-flex">
+      <div class="asset-icon" [ngStyle]="{'background-image': 'url('+ 'entity.ImageUrl' +')'}">
+        <p class="asset-icon-content">{{entity.Quantity}}</p>
+        <!-- todo little progerss bar with finished percentage -->
+      </div>
+
+    </div>
+
+  </div>
+  <!-- <progressbar [value]="60" [max]="100" [type]="'success'" class="progress" style="height: 1em;" [striped]="true" [animate]="true"> </progressbar> -->
+</div>

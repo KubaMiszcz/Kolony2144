@@ -1,7 +1,9 @@
 <div class="card m-2 ">
   <h4 class="card-header "> Construction Queue</h4>
   <div class="card-body p-1">
-    <p>construction-queue works!</p>
-    <p *ngFor="let item of productionQueue">{{item.Name}}:{{item.Quantity}}</p>
+    <div *ngIf="productionQueue.length" class="d-flex flex-wrap production-queue">
+      <app-queue-asset-tile *ngFor="let item of productionQueue" [entity]="item" (click)="removeItemFromProductionQueue(item)">
+      </app-queue-asset-tile>
+    </div>
   </div>
 </div>

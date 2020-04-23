@@ -25,4 +25,8 @@ export class ConstructionQueueComponent implements OnInit {
       this.productionQueue = this.entityService.productionQueue);
   }
 
+  removeItemFromProductionQueue() {
+
+  }
+
 }
