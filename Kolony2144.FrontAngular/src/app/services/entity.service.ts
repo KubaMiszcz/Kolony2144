@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { IEntity } from '../models/Entity';
 import { CommonService } from './common.service';
 import { SharedService } from './shared.service';
@@ -6,13 +6,15 @@ import { KolonyService } from './kolony.service';
 import { ResourceName } from '../models/Resource';
 import { UoMsEnum } from '../models/enums/UoMs.enum';
 import { DataProviderService } from './data-provider.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntityService {
-
   allKolonyEntitiesList: IEntity[] = [];
+  productionQueue: IEntity[] = [];
+  ProductionQueueEmitter = new EventEmitter<boolean>();
 
   constructor(
     private commonService: CommonService,
@@ -30,9 +32,9 @@ export class EntityService {
 
 
   /**
- * returns consumed qty of named entity by all kolony assets buildings etc
- *@param entityName name of consumed entity
- */
+  * returns consumed qty of named entity by all kolony assets buildings etc
+  *@param entityName name of consumed entity
+  */
   getEntityConsumptionQtyByName(entityName: string): number {
     const cosnumedAsset = this.getEntityByName(entityName);
     let consumedQty = 0;
@@ -47,9 +49,9 @@ export class EntityService {
   }
 
   /**
- * returns produced qty of named entity by all kolony assets buildings etc
- *@param entityName name of produced entity
- */
+  * returns produced qty of named entity by all kolony assets buildings etc
+  *@param entityName name of produced entity
+  */
   getEntityProductionQtyByName(assetName: string): number {
     const producedAsset = this.getEntityByName(assetName);
     let producedQty = 0;
@@ -156,8 +158,17 @@ export class EntityService {
   }
 
 
+  addItemToProductionQueue(entity: IEntity) {
+    this.productionQueue.push(entity);
+    this.UpdateInventoryDueToProducedItem(entity);
+    this.ProductionQueueEmitter.emit(true);
+  }
 
-
+  UpdateInventoryDueToProducedItem(addedEntity: IEntity) {
+    addedEntity.CreationCost.forEach(r => {
+      this.getEntityByName(r.Name).Quantity -= r.Quantity * addedEntity.Quantity;
+    });
+  }
 
 
 

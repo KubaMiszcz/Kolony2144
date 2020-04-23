@@ -2,5 +2,6 @@
   <h4 class="card-header "> Construction Queue</h4>
   <div class="card-body p-1">
     <p>construction-queue works!</p>
+    <p *ngFor="let item of productionQueue">{{item.Name}}:{{item.Quantity}}</p>
   </div>
 </div>

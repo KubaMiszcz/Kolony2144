@@ -15,11 +15,10 @@
             <span class="input-group-text py-0 px-1">Qty:</span>
           </div>
           <input #productionQtyInput [ngModel]="productionQty" [min]=1 type="number" class="form-control form-control-sm shadow-green"
-            id="formGroupExampleInput2" placeholder="Qty" (ngModelChange)="onQtyChange($event)" required>
+            id="idproductionQty" placeholder="Qty" (ngModelChange)="qtyChange($event)" required>
           <div class="input-group-append">
             <button class="btn btn-outline-primary input-group-text px-2 shadow-green" type="button" id="button-addon2"
-              (click)='addItemToProductionQueue()'>To<br>Queue</button>
-            <!-- [disabled]="productionQty > maxProductionQty"  -->
+              (click)='addItemToProductionQueue()' [disabled]="maxProductionQty<1">To<br>Queue</button>
           </div>
         </div>
 

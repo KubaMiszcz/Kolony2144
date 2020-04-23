@@ -18,37 +18,31 @@ export class AssetTileComponent implements OnInit {
   productionQty = 1;
   maxProductionQty = 1;
   productionCost: IproductionCost[] = [];
-  inventory: ISimplifiedEntity[] = [];
+  // inventory: ISimplifiedEntity[] = [];
   disableAddToQueue: boolean;
 
   constructor(
     private kolonyService: KolonyService,
     private entityService: EntityService,
     private assetService: AssetService,
-    private commonService: CommonService) { }
+    private commonService: CommonService
+  ) { }
 
   ngOnInit() {
-    // this.productionService.productionQueueUpdatedEmitter.subscribe(e => {
-    //   this.updateStock();
-    //   this.updatemaxProductionQty();
-    // });
-
-    this.entity.CreationCost.forEach(m => {
-      const uom = this.entityService.getUoMByName(m.Name);
-      const kolonyEntity = this.entityService.getEntityByName(m.Name);
-      this.productionCost.push({
-        Name: m.Name,
-        QtyPerUnit: m.Quantity,
-        TotalQty: m.Quantity * this.productionQty,
-        StockQty: kolonyEntity.Quantity,
-        UoM: uom
-      });
+    this.entityService.ProductionQueueEmitter.subscribe(() => {
+      this.updateStockRows();
+      this.updateMaxProductionQty();
     });
 
-    this.maxProductionQty = this.entityService.getMaxProducedQty(this.entity);
-
+    this.fillStockQtyRows();
+    this.updateMaxProductionQty();
     // this.updateCosts();
   }
+
+  updateMaxProductionQty() {
+    this.maxProductionQty = this.entityService.getMaxProducedQty(this.entity);
+  }
+
 
 
 
@@ -58,7 +52,7 @@ export class AssetTileComponent implements OnInit {
     });
   }
 
-  onQtyChange(event: number) {
+  qtyChange(event: number) {
     console.log('onChange', event, this.productionQty);
     if (event > this.maxProductionQty) {
       this.productionQty = this.maxProductionQty;
@@ -70,7 +64,7 @@ export class AssetTileComponent implements OnInit {
     this.updateCosts();
   }
 
-  quickAdd(val: any) {
+  quickAdd(val: number) {
     this.productionQty += val;
     if (this.productionQty < 1) {
       this.productionQty = 1;
@@ -80,46 +74,37 @@ export class AssetTileComponent implements OnInit {
     this.updateCosts();
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  updateStock() {
-    // this.productionCost.forEach(i => {
-    //   i.StockQty = this.entityService.getEntityByName(i.Name).Quantity;
-    // });
-  }
-
-  updatemaxProductionQty() {
-    // this.maxProductionQty = this.productionService.getMaxProduceedQty(this.asset);
+  updateStockRows() {
+    this.productionCost.forEach(i => {
+      i.StockQty = this.entityService.getEntityByName(i.Name).Quantity;
+    });
   }
 
   addItemToProductionQueue() {
-    // if (this.productionQty >= 1) {
-    //   let assetToAdd = { ...this.asset };
-    //   assetToAdd.Quantity = this.productionQty;
-    //   this.productionService.addItemToProductionQueue(assetToAdd);
-    //   this.productionQty = 1;
-    //   this.updateCosts();
-    //   this.updateStock();
-    //   this.updatemaxProductionQty();
-    // }
+    if (this.productionQty >= 1) {
+      const entityToAdd = { ...this.entity };
+      entityToAdd.Quantity = this.productionQty;
+      this.entityService.addItemToProductionQueue(entityToAdd);
+      this.productionQty = 1;
+      this.updateCosts();
+      this.updateStockRows();
+      this.maxProductionQty = this.entityService.getMaxProducedQty(this.entity);
+    }
   }
 
-
+  fillStockQtyRows() {
+    this.entity.CreationCost.forEach(m => {
+      const uom = this.entityService.getUoMByName(m.Name);
+      const kolonyEntity = this.entityService.getEntityByName(m.Name);
+      this.productionCost.push({
+        Name: m.Name,
+        QtyPerUnit: m.Quantity,
+        TotalQty: m.Quantity * this.productionQty,
+        StockQty: kolonyEntity.Quantity,
+        UoM: uom
+      });
+    });
+  }
 }
 
 
