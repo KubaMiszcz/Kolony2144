@@ -1,3 +1,4 @@
+import { WikiService } from './../../wiki-module/wiki.service';
 import { EntityService } from '../../services/entity.service';
 import { AssetService } from '../../assets-module/asset.service';
 import { IEntity } from 'src/app/models/Entity';
@@ -17,25 +18,27 @@ export class ProductionEntityTileComponent implements OnInit {
   @Input() entity: IEntity;
   productionQty = 1;
   maxProductionQty = 1;
-  productionCost: IproductionCost[] = [];
-  // inventory: ISimplifiedEntity[] = [];
-  disableAddToQueue: boolean;
+  productionCostRows: IproductionCostRow[] = [];
+  imgUrl: string;
 
   constructor(
+    private commonService: CommonService,
     private kolonyService: KolonyService,
     private entityService: EntityService,
     private assetService: AssetService,
-    private commonService: CommonService
+    private wikiService: WikiService
   ) { }
 
   ngOnInit() {
+    this.imgUrl = this.wikiService.getImgUrlByName(this.entity.Name);
+    this.fillStockQtyRows();
+    this.updateMaxProductionQty();
+
     this.entityService.ProductionQueueEmitter.subscribe(() => {
       this.updateStockRows();
       this.updateMaxProductionQty();
     });
 
-    this.fillStockQtyRows();
-    this.updateMaxProductionQty();
     // this.updateCosts();
   }
 
@@ -47,7 +50,7 @@ export class ProductionEntityTileComponent implements OnInit {
 
 
   updateCosts() {
-    this.productionCost.forEach(i => {
+    this.productionCostRows.forEach(i => {
       i.TotalQty = i.QtyPerUnit * this.productionQty;
     });
   }
@@ -75,7 +78,7 @@ export class ProductionEntityTileComponent implements OnInit {
   }
 
   updateStockRows() {
-    this.productionCost.forEach(i => {
+    this.productionCostRows.forEach(i => {
       i.StockQty = this.entityService.getEntityByName(i.Name).Quantity;
     });
   }
@@ -96,7 +99,7 @@ export class ProductionEntityTileComponent implements OnInit {
     this.entity.CreationCost.forEach(m => {
       const uom = this.entityService.getUoMByName(m.Name);
       const kolonyEntity = this.entityService.getEntityByName(m.Name);
-      this.productionCost.push({
+      this.productionCostRows.push({
         Name: m.Name,
         QtyPerUnit: m.Quantity,
         TotalQty: m.Quantity * this.productionQty,
@@ -109,7 +112,7 @@ export class ProductionEntityTileComponent implements OnInit {
 
 
 
-interface IproductionCost {
+interface IproductionCostRow {
   Name: string;
   QtyPerUnit: number;
   TotalQty: number;

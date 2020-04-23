@@ -15,6 +15,10 @@ export class WikiService {
     this.prepareWikiInitialData();
   }
 
+  getImgUrlByName(name: string) {
+    return this.allWikiEntites.find(e => e.Name === name).ImageUrl;
+  }
+
   prepareWikiInitialData() {
     [...AllResources, ...AllCrew, ...AllBuildings, ...AllMachines].forEach(i => {
       const a = new Object() as IWikiEntity;

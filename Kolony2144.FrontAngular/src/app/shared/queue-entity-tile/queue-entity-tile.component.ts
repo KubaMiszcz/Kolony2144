@@ -1,3 +1,4 @@
+import { WikiService } from './../../wiki-module/wiki.service';
 import { SharedService } from '../../services/shared.service';
 import { IAsset, IEntity } from '../../models/Entity';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -9,11 +10,14 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class QueueEntityTileComponent implements OnInit {
   @Input() entity: IEntity;
+  imgUrl = '';
 
   constructor(
+    private wikiService: WikiService
   ) { }
 
   ngOnInit() {
+    this.imgUrl = this.wikiService.getImgUrlByName(this.entity.Name);
   }
 
 }

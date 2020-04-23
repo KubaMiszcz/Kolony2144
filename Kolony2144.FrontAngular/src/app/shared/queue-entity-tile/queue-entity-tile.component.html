@@ -2,7 +2,7 @@
   <h4 class="card-header "> {{entity.Name}}</h4>
   <div class="card-body p-1 m-auto">
     <div class="d-flex">
-      <div class="asset-icon" [ngStyle]="{'background-image': 'url('+ 'entity.ImageUrl' +')'}">
+      <div class="asset-icon" [ngStyle]="{'background-image': 'url('+ imgUrl +')'}">
         <p class="asset-icon-content">{{entity.Quantity}}</p>
         <!-- todo little progerss bar with finished percentage -->
       </div>
