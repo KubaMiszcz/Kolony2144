@@ -47,16 +47,16 @@ export const AllBuildings: IBuildingFullModel[] = [
     Type: EntityTypesEnum.Building,
     Tags: [BuildingTypesEnum.Maintenance],
     CreationCost: [
-      { Name: ResourceName.Stone, Quantity: 20 },
-      { Name: ResourceName.Steel, Quantity: 5 }
+      { Name: ResourceName.Stone, Quantity: 200 },
+      { Name: ResourceName.Steel, Quantity: 50 }
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 100 },
       { Name: ResourceName.Energy, Quantity: 10 },
-      { Name: ResourceName.PlanetSpace, Quantity: 10 }
+      { Name: ResourceName.PlanetSpace, Quantity: 20 * 40 }
     ],
     PassiveIncome: [
-      { Name: ResourceName.LivingSpace, Quantity: 10 }
+      { Name: ResourceName.LivingSpace, Quantity: 20 }
     ],
     UoM: UoMsEnum.pcs,
     Quantity: 10
@@ -66,13 +66,13 @@ export const AllBuildings: IBuildingFullModel[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: EntityTypesEnum.Building,
     Tags: [], CreationCost: [
-      { Name: ResourceName.Stone, Quantity: 10 },
-      { Name: ResourceName.Steel, Quantity: 10 }
+      { Name: ResourceName.Stone, Quantity: 50 },
+      { Name: ResourceName.Steel, Quantity: 100 }
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 100 },
       { Name: ResourceName.Energy, Quantity: 10 },
-      { Name: ResourceName.PlanetSpace, Quantity: 100 }
+      { Name: ResourceName.PlanetSpace, Quantity: 100 * 100 }
     ],
     PassiveIncome: [
       { Name: ResourceName.StorageSpace, Quantity: 500 }
@@ -85,15 +85,15 @@ export const AllBuildings: IBuildingFullModel[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: EntityTypesEnum.Building,
     Tags: [BuildingTypesEnum.PowerSource], CreationCost: [
-      { Name: ResourceName.Stone, Quantity: 10 },
-      { Name: ResourceName.Steel, Quantity: 20 }
+      { Name: ResourceName.Stone, Quantity: 5 },
+      { Name: ResourceName.Steel, Quantity: 50 }
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 100 },
-      { Name: ResourceName.PlanetSpace, Quantity: 25 }
+      { Name: ResourceName.PlanetSpace, Quantity: 5 * 5 }
     ],
     PassiveIncome: [
-      { Name: ResourceName.Energy, Quantity: 500 }
+      { Name: ResourceName.Energy, Quantity: 100 }
     ],
     UoM: UoMsEnum.pcs,
     Quantity: 20
@@ -103,51 +103,51 @@ export const AllBuildings: IBuildingFullModel[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: EntityTypesEnum.Building,
     Tags: [BuildingTypesEnum.PowerSource], CreationCost: [
-      { Name: ResourceName.Stone, Quantity: 10 },
-      { Name: ResourceName.Steel, Quantity: 20 }
+      { Name: ResourceName.Stone, Quantity: 1000 },
+      { Name: ResourceName.Steel, Quantity: 2000 }
     ],
     MaintenanceCost: [
-      { Name: ResourceName.Cash, Quantity: 100 },
+      { Name: ResourceName.Cash, Quantity: 1000 },
       { Name: ResourceName.PlanetSpace, Quantity: 200 * 200 },
       { Name: ResourceName.Coal, Quantity: 100 }
     ],
     PassiveIncome: [
-      { Name: ResourceName.Energy, Quantity: 500 }
+      { Name: ResourceName.Energy, Quantity: 1000 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 20
+    Quantity: 1
   },
   {
     Name: BuildingNames.Workshop,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: EntityTypesEnum.Building,
     Tags: [BuildingTypesEnum.Production], CreationCost: [
-      { Name: ResourceName.Stone, Quantity: 20 },
-      { Name: ResourceName.Steel, Quantity: 20 }
+      { Name: ResourceName.Stone, Quantity: 50 },
+      { Name: ResourceName.Steel, Quantity: 100 }
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 100 },
       { Name: ResourceName.Energy, Quantity: 100 },
-      { Name: ResourceName.PlanetSpace, Quantity: 10 }
+      { Name: ResourceName.PlanetSpace, Quantity: 20 * 20 }
     ],
     PassiveIncome: [
       { Name: ResourceName.BasicWorkUnit, Quantity: 100 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 3
+    Quantity: 1
   },
   {
     Name: BuildingNames.Factory,
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: EntityTypesEnum.Building,
     Tags: [BuildingTypesEnum.Production], CreationCost: [
-      { Name: ResourceName.Stone, Quantity: 30 },
-      { Name: ResourceName.Steel, Quantity: 100 }
+      { Name: ResourceName.Stone, Quantity: 1000 },
+      { Name: ResourceName.Steel, Quantity: 3000 }
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 500 },
       { Name: ResourceName.Energy, Quantity: 500 },
-      { Name: ResourceName.PlanetSpace, Quantity: 100 }
+      { Name: ResourceName.PlanetSpace, Quantity: 100 * 100 }
     ],
     PassiveIncome: [
       { Name: ResourceName.BasicWorkUnit, Quantity: 100 },
@@ -161,13 +161,13 @@ export const AllBuildings: IBuildingFullModel[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: EntityTypesEnum.Building,
     Tags: [], CreationCost: [
-      { Name: ResourceName.Stone, Quantity: 30 },
+      { Name: ResourceName.Stone, Quantity: 50 },
       { Name: ResourceName.Steel, Quantity: 100 }
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 50 },
       { Name: ResourceName.Energy, Quantity: 50 },
-      { Name: ResourceName.PlanetSpace, Quantity: 100 }
+      { Name: ResourceName.PlanetSpace, Quantity: 50 * 50 }
     ],
     PassiveIncome: [
     ],

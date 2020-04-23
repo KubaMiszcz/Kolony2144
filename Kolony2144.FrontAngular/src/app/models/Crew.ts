@@ -21,7 +21,7 @@ export const AllCrew: ICrewFullModel[] = [
     Description: 'just peon worker, chop chop he\'s on it, eats many', ImageUrl: '/assets/wiki-icons/crew-worker.png',
     Type: EntityTypesEnum.Crew,
     Tags: [CrewTypesEnum.Production],
-    Price: 50,
+    Price: 2,
     HistoricalPrices: [],
     RarityFactor: 0,
     CreationCost: [],
@@ -41,7 +41,7 @@ export const AllCrew: ICrewFullModel[] = [
 
     Type: EntityTypesEnum.Crew,
     Tags: [CrewTypesEnum.Production],
-    Price: 100,
+    Price: 5,
     HistoricalPrices: [],
     RarityFactor: 0,
     CreationCost: [],

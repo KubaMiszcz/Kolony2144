@@ -16,7 +16,8 @@ export enum ResourceName {
   Stone = 'Stone',
   Steel = 'Steel',
   Diamonds = 'Diamonds',
-  Coal = 'Coal'
+  Coal = 'Coal',
+  Diesel = 'Diesel'
 }
 
 export interface IVolatileResource extends IEntity {
@@ -180,6 +181,22 @@ export const AllResources: IResourceFullModel[] = [
     ],
     PassiveIncome: [],
     UoM: UoMsEnum.t,
+    Quantity: 1000
+  },
+  {
+    Name: ResourceName.Diesel,
+    Description: 'A piece of diesel', ImageUrl: '/assets/wiki-icons/resource.png',
+    Type: EntityTypesEnum.Resource,
+    Tags: [ResourceTypesEnum.Production],
+    Price: 15,
+    HistoricalPrices: [],
+    RarityFactor: 0,
+    CreationCost: [],
+    MaintenanceCost: [
+      { Name: ResourceName.StorageSpace, Quantity: 1 }
+    ],
+    PassiveIncome: [],
+    UoM: UoMsEnum.m3,
     Quantity: 1000
   },
   {
