@@ -1,18 +1,14 @@
-import { GenericTypesEnum } from './../../models/enums/Types.enum';
-import { BuildingNames } from './../../models/Building';
-import { TradeService, TransactionTypeEnum, ICargoShip } from '../trade.service';
-import { IAsset } from 'src/app/models/Entity';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { KolonyService } from 'src/app/services/kolony.service';
-import { OverviewService } from 'src/app/overview-module/overview.service';
-import { GameService } from 'src/app/services/game.service';
+import { Component, OnInit } from '@angular/core';
 import { AssetService } from 'src/app/assets-module/asset.service';
 import { EntityTypesEnum } from 'src/app/models/enums/Types.enum';
-import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
-import { ITradePanelData } from '../ship-trade-panel/ship-trade-panel.component';
+import { OverviewService } from 'src/app/overview-module/overview.service';
 import { CommonService } from 'src/app/services/common.service';
-import { SharedService } from 'src/app/services/shared.service';
 import { DataProviderService } from 'src/app/services/data-provider.service';
+import { GameService } from 'src/app/services/game.service';
+import { KolonyService } from 'src/app/services/kolony.service';
+import { SharedService } from 'src/app/services/shared.service';
+import { ITradePanelData } from '../ship-trade-panel/ship-trade-panel.component';
+import { ICargoShip, TradeService, TransactionTypeEnum } from '../trade.service';
 
 
 @Component({
@@ -20,8 +16,7 @@ import { DataProviderService } from 'src/app/services/data-provider.service';
   templateUrl: './trade-overview.component.html',
   styleUrls: ['./trade-overview.component.scss']
 })
-export class TradeOverviewComponent implements OnInit, OnDestroy {
-  playerNotes = '';
+export class TradeOverviewComponent implements OnInit {
   isShipIncoming: boolean;
   tradeAnnouncement = '';
   cargoShip: ICargoShip;
@@ -43,7 +38,6 @@ export class TradeOverviewComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.playerNotes = this.dataProviderService.PlayerNotes;
 
     this.tradeAnnouncement = this.tradeService.tradeAnnouncement;
     this.isShipIncoming = this.tradeService.isShipLanded;
@@ -78,9 +72,6 @@ export class TradeOverviewComponent implements OnInit, OnDestroy {
   }
 
 
-  ngOnDestroy(): void {
-    this.dataProviderService.PlayerNotes = this.playerNotes;
-  }
 }
 
 

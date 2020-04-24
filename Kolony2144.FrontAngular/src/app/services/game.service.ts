@@ -113,7 +113,18 @@ export class GameService {
     // this.kolonyService.setKolonyState(gameState.kolony);
   }
 
+  savePlayerNotes(value: string) {
+    this.dataProviderService.PlayerNotes = value;
+    localStorage.setItem('playerNotes', JSON.stringify(value));
+  }
 
+
+  loadPlayerNotes(): string {
+    const value: string = JSON.parse(localStorage.getItem('playerNotes'));
+    this.dataProviderService.PlayerNotes = value;
+
+    return value;
+  }
 
 }
 

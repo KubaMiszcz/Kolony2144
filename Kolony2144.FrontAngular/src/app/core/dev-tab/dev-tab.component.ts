@@ -9,8 +9,7 @@ import { DataProviderService } from 'src/app/services/data-provider.service';
   templateUrl: './dev-tab.component.html',
   styleUrls: ['./dev-tab.component.scss']
 })
-export class DevTabComponent implements OnInit, OnDestroy {
-  playerNotes = '';
+export class DevTabComponent implements OnInit {
 
   constructor(
     private gameService: GameService,
@@ -21,15 +20,9 @@ export class DevTabComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.playerNotes = this.dataProviderService.PlayerNotes;
-  }
-
-  ngOnDestroy(): void {
-    this.dataProviderService.PlayerNotes = this.playerNotes;
   }
 
   saveGame() {
-    // this.gameService.PlayerNotesDEPR = this.playerNotes;
     // this.gameService.saveGame();
   }
 

@@ -6,13 +6,15 @@ import { TileWithTableComponent } from './tile-with-table/tile-with-table.compon
 import { AppSpinnerComponent } from './spinner/spinner.component';
 import { ProductionEntityTileComponent } from './production-entity-tile/production-entity-tile.component';
 import { QueueEntityTileComponent } from './queue-entity-tile/queue-entity-tile.component';
+import { PlayerNotesComponent } from './player-notes/player-notes.component';
 
 @NgModule({
   declarations: [
     AppSpinnerComponent,
     TileWithTableComponent,
     ProductionEntityTileComponent,
-    QueueEntityTileComponent
+    QueueEntityTileComponent,
+    PlayerNotesComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { QueueEntityTileComponent } from './queue-entity-tile/queue-entity-tile.
     AppSpinnerComponent,
     TileWithTableComponent,
     ProductionEntityTileComponent,
-    QueueEntityTileComponent
+    QueueEntityTileComponent,
+    PlayerNotesComponent
   ]
 })
 export class SharedModule { }

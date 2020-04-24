@@ -8,11 +8,6 @@
 
       <div #announcements class="card-body p-1 collapse show" id="idannouncements">
         <span *ngFor="let item of news" [ngClass]="{'warning-news': item.startsWith('!!!')}"> {{item}}<br></span>
-        <!-- <br>
-        przy okazji:<br>
-        wyladowal statek<br>
-        stalo sie jakies wydarzenie<br>
-        cos znaleziono<br> -->
       </div>
     </div>
 
@@ -21,14 +16,7 @@
       </app-tile-with-table>
     </div>
 
-
-    <div class="card m-2">
-      <h4 class="card-header "> Player Notes: </h4>
-      <div class="card-body p-1 m-1">
-        <textarea class="form-control m-2 player-notes" id="playerNotesTextArea" rows="5" [(ngModel)]="playerNotes"
-          placeholder="your notes"></textarea>
-      </div>
-    </div>
+    <app-player-notes></app-player-notes>
 
     <span>todo</span>
     <span>zwijane newsy</span>

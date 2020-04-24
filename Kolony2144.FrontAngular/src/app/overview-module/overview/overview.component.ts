@@ -16,9 +16,8 @@ import { ResourceName } from 'src/app/models/Resource';
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss']
 })
-export class OverviewComponent implements OnInit, OnDestroy {
+export class OverviewComponent implements OnInit {
   news: string[] = [];
-  playerNotes = '';
   allAssetsTableRows: any[];
 
   constructor(
@@ -34,8 +33,6 @@ export class OverviewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.news = this.overviewService.News;
-    this.playerNotes = this.dataProviderService.PlayerNotes;
-
     this.allAssetsTableRows = this.fillSummaryTableRows(this.dataProviderService.ALL_TRADEABLE_ASSETS_LIST);
   }
 
@@ -57,11 +54,6 @@ export class OverviewComponent implements OnInit, OnDestroy {
     });
 
     return res;
-  }
-
-
-  ngOnDestroy(): void {
-    this.dataProviderService.PlayerNotes = this.playerNotes;
   }
 
 }
