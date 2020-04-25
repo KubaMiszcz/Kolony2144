@@ -85,7 +85,7 @@ export class TradeService {
 
 
   PrepareIncomingShip() {
-    this.isShipLanded = this.commonService.getRandomBoolean();
+    this.isShipLanded = this.commonService.getRandomBoolean(this.landingProbability);
     this.updateResourcesPrices();
 
     if (this.isShipLanded) {
