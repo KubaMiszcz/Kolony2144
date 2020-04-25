@@ -14,6 +14,4 @@ export class SharedService {
     return list.find(r => ((r as unknown) as IEntityModel).Name === name);
   }
 
-
-
 }

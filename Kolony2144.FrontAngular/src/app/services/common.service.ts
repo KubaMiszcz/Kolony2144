@@ -9,14 +9,11 @@ export class CommonService {
   constructor() {
   }
 
-  getRandomFloatFromRange(min: number, max: number) {
-    // inputs: floats, output: float
-    return min + Math.random() * (max - min);
+  getRandomBoolean(factor: number = 0.5) {
+    return Math.random() < factor ? true : false;
   }
 
-  getRandomFloatAroundValue(baseValue: number, aroundValue: number): number {
-    return this.getRandomFloatFromRange(baseValue - aroundValue, baseValue + aroundValue);
-  }
+
 
   getRandomIntFromRange(min: number, max: number) {
     // inputs: integers, output: integer
@@ -27,9 +24,17 @@ export class CommonService {
     return this.getRandomIntFromRange(baseValue - aroundValue, baseValue + aroundValue);
   }
 
-  getRandomBoolean(factor: number = 0.5) {
-    return Math.random() < factor ? true : false;
+
+
+  getRandomFloatFromRange(min: number, max: number) {
+    // inputs: floats, output: float
+    return min + Math.random() * (max - min);
   }
+
+  getRandomFloatAroundValue(baseValue: number, aroundValue: number): number {
+    return this.getRandomFloatFromRange(baseValue - aroundValue, baseValue + aroundValue);
+  }
+
 
 
   getRandomValueFromEnum(list: string[]): string {
@@ -39,11 +44,14 @@ export class CommonService {
     return list[n];
   }
 
+
+
   Round(val: number, precision: number): number {
     const base = Math.pow(10, precision);
 
     return Math.round((val * base)) / base;
   }
+
 
 
   sumColumnOftableByHeader(table: any[][], header: string) {
@@ -55,7 +63,6 @@ export class CommonService {
     return colNo > 0 ? this.sumColumnOftable(table.slice(1), colNo) : 0;
   }
 
-  // todo add sumColumnOftableByColumnHeader
   sumColumnOftable(table: any[][], colNo: number) {
     if (!table || table.length < 1) {
       return 0;
@@ -64,7 +71,9 @@ export class CommonService {
     return table.map(c => c[colNo]).reduce((total, i) => total + i);
   }
 
+
   cloneObject<T>(object: T): T {
     return JSON.parse(JSON.stringify(object)) as T;
   }
+
 }
