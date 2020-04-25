@@ -9,7 +9,7 @@ import { WikiService } from '../wiki.service';
   styleUrls: ['./wiki.component.scss']
 })
 export class WikiComponent implements OnInit {
-
+  // todo szukajka dynamiczna filtrowanie entities
   inventoryItemsList: IWikiEntity[] = [];
 
   crewList: IWikiEntity[] = [];

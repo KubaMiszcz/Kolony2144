@@ -4,6 +4,7 @@ import { ResourceName } from 'src/app/models/Resource';
 import { EntityTypesEnum } from 'src/app/models/enums/Types.enum';
 import { SharedService } from 'src/app/services/shared.service';
 import { CommonService } from 'src/app/services/common.service';
+import { EntityService } from 'src/app/services/entity.service';
 
 @Component({
   selector: 'app-crew-overview',
@@ -21,6 +22,7 @@ export class CrewOverviewComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private sharedService: SharedService,
+    private entityService: EntityService,
     private assetService: AssetService
   ) {
   }
@@ -64,6 +66,7 @@ export class CrewOverviewComponent implements OnInit {
       'Total Salary',
       'Total ' + ResourceName.Food + ' Consumption',
       'Total ' + ResourceName.BasicWorkUnit + ' Production',
+      'Total ' + ResourceName.AdvancedWorkUnit + ' Production',
     ];
 
     this.assetService.getAssetsByTypeDEPR(EntityTypesEnum.Crew).forEach(c => {
@@ -71,6 +74,9 @@ export class CrewOverviewComponent implements OnInit {
       const salary = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
       const foodConsumption = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
       const BasicWU = this.sharedService.findItemInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
+      const AdvancedWU = this.sharedService.findItemInListByName(c.PassiveIncome, ResourceName.AdvancedWorkUnit)?.Quantity;
+
+
       const qty = c.Quantity;
       this.totalList.push([
         name,
@@ -78,6 +84,7 @@ export class CrewOverviewComponent implements OnInit {
         salary * qty,
         foodConsumption * qty,
         BasicWU * qty,
+        (AdvancedWU ?? 0) * qty,
       ]);
     });
 
@@ -87,6 +94,7 @@ export class CrewOverviewComponent implements OnInit {
       this.commonService.sumColumnOftable(this.totalList, 2),
       this.commonService.sumColumnOftable(this.totalList, 3),
       this.commonService.sumColumnOftable(this.totalList, 4),
+      this.commonService.sumColumnOftable(this.totalList, 5),
     ];
   }
 

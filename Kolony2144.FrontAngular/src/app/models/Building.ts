@@ -47,11 +47,13 @@ export const AllBuildings: IBuildingFullModel[] = [
     Type: EntityTypesEnum.Building,
     Tags: [BuildingTypesEnum.Maintenance],
     CreationCost: [
+      { Name: ResourceName.BasicWorkUnit, Quantity: 100 },
       { Name: ResourceName.Stone, Quantity: 200 },
       { Name: ResourceName.Steel, Quantity: 50 }
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 100 },
+      { Name: ResourceName.BasicWorkUnit, Quantity: 10 },
       { Name: ResourceName.Energy, Quantity: 10 },
       { Name: ResourceName.PlanetSpace, Quantity: 20 * 40 }
     ],
@@ -66,11 +68,13 @@ export const AllBuildings: IBuildingFullModel[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: EntityTypesEnum.Building,
     Tags: [], CreationCost: [
+      { Name: ResourceName.BasicWorkUnit, Quantity: 100 },
       { Name: ResourceName.Stone, Quantity: 50 },
       { Name: ResourceName.Steel, Quantity: 100 }
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 100 },
+      { Name: ResourceName.BasicWorkUnit, Quantity: 10 },
       { Name: ResourceName.Energy, Quantity: 10 },
       { Name: ResourceName.PlanetSpace, Quantity: 100 * 100 }
     ],
@@ -85,11 +89,14 @@ export const AllBuildings: IBuildingFullModel[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: EntityTypesEnum.Building,
     Tags: [], CreationCost: [
+      { Name: ResourceName.BasicWorkUnit, Quantity: 100 },
+      { Name: ResourceName.AdvancedWorkUnit, Quantity: 20 },
       { Name: ResourceName.Stone, Quantity: 5 },
       { Name: ResourceName.Steel, Quantity: 50 }
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 100 },
+      { Name: ResourceName.BasicWorkUnit, Quantity: 1 },
       { Name: ResourceName.PlanetSpace, Quantity: 5 * 5 }
     ],
     PassiveIncome: [
@@ -103,11 +110,13 @@ export const AllBuildings: IBuildingFullModel[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: EntityTypesEnum.Building,
     Tags: [], CreationCost: [
+      { Name: ResourceName.BasicWorkUnit, Quantity: 1000 },
       { Name: ResourceName.Stone, Quantity: 1000 },
       { Name: ResourceName.Steel, Quantity: 2000 }
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 1000 },
+      { Name: ResourceName.BasicWorkUnit, Quantity: 100 },
       { Name: ResourceName.PlanetSpace, Quantity: 200 * 200 },
       { Name: ResourceName.Coal, Quantity: 100 }
     ],
@@ -122,11 +131,13 @@ export const AllBuildings: IBuildingFullModel[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: EntityTypesEnum.Building,
     Tags: [BuildingTypesEnum.Production], CreationCost: [
+      { Name: ResourceName.BasicWorkUnit, Quantity: 200 },
       { Name: ResourceName.Stone, Quantity: 50 },
       { Name: ResourceName.Steel, Quantity: 100 }
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 100 },
+      { Name: ResourceName.BasicWorkUnit, Quantity: 10 },
       { Name: ResourceName.Energy, Quantity: 100 },
       { Name: ResourceName.PlanetSpace, Quantity: 20 * 20 }
     ],
@@ -141,11 +152,13 @@ export const AllBuildings: IBuildingFullModel[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: EntityTypesEnum.Building,
     Tags: [BuildingTypesEnum.Production], CreationCost: [
+      { Name: ResourceName.BasicWorkUnit, Quantity: 1000 },
       { Name: ResourceName.Stone, Quantity: 1000 },
       { Name: ResourceName.Steel, Quantity: 3000 }
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 500 },
+      { Name: ResourceName.BasicWorkUnit, Quantity: 100 },
       { Name: ResourceName.Energy, Quantity: 500 },
       { Name: ResourceName.PlanetSpace, Quantity: 100 * 100 }
     ],
@@ -161,11 +174,13 @@ export const AllBuildings: IBuildingFullModel[] = [
     Description: '', ImageUrl: '/assets/wiki-icons/building.png',
     Type: EntityTypesEnum.Building,
     Tags: [], CreationCost: [
+      { Name: ResourceName.BasicWorkUnit, Quantity: 200 },
       { Name: ResourceName.Stone, Quantity: 50 },
       { Name: ResourceName.Steel, Quantity: 100 }
     ],
     MaintenanceCost: [
       { Name: ResourceName.Cash, Quantity: 50 },
+      { Name: ResourceName.BasicWorkUnit, Quantity: 10 },
       { Name: ResourceName.Energy, Quantity: 50 },
       { Name: ResourceName.PlanetSpace, Quantity: 50 * 50 }
     ],
