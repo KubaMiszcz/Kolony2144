@@ -100,8 +100,7 @@ export class DataProviderService {
   assignTagToEntities(entitieslist: IEntity[], type: GenericTypesEnum, resourceName: ResourceName, tag: CommonTagsEnum) {
     entitieslist.forEach(e => {
       const list = type === GenericTypesEnum.Consuming ? e.MaintenanceCost : e.PassiveIncome;
-      const item = list.find(i => i.Name === resourceName);
-      if (!!item && item.Quantity > 0) {
+      if (list.find(i => i.Name === resourceName)?.Quantity > 0) {
         e.Tags.push(tag);
       }
     });
