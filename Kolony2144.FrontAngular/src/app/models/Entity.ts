@@ -1,45 +1,49 @@
 import { UoMsEnum } from './enums/UoMs.enum';
-import { AssetTypesEnum } from './enums/Types.enum';
+import { EntityTypesEnum } from './enums/Types.enum';
 import { IDeserializable } from '../core/interfaces/deserializable';
 import { IBuilding } from './Building';
 
-export interface IFullEntity extends IEntity, IAsset, IBuilding {
-  Description: string;
-  ImageUrl: string;
-  Price: number;
-}
-
-export interface IEntity {
+export interface IEntityModel {
   Name: string;
-  Size: number;
-  Type: AssetTypesEnum;
+  Type: EntityTypesEnum;
   Tags: string[];
-  CreationCost: ISimplifiedResource[];
-  MaintenanceCost: ISimplifiedResource[];
-  PassiveIncome: ISimplifiedResource[];
+  // todo TechLevel:number;
+  CreationCost: ISimplifiedEntity[];
+  MaintenanceCost: ISimplifiedEntity[];
+  // todo IdleMaintenanceCost: ISimplifiedEntity[];
+  PassiveIncome: ISimplifiedEntity[];
   UoM: UoMsEnum;
 }
 
 
-
-export interface IAsset extends IEntity {
-  Price: number;
+export interface IEntity extends IEntityModel, ISimplifiedEntity {
   Quantity: number;
-  // HistoricalPrices: number[];
 }
+
+
+export interface IAsset extends IEntityModel, ISimplifiedEntity {
+  Price: number; // dont move it to Ienity, Ibuilding doesnt need price but inherits from enity
+}
+
+export interface ITradeableEntity extends IAsset {
+  // todo PriceVariationFactor: unmber'
+  HistoricalPrices: number[];
+  RarityFactor: number;
+}
+
+
+
 
 export class Asset implements IAsset, IDeserializable {
   Name: string;
-  Size: number;
-  Type: AssetTypesEnum;
+  Type: EntityTypesEnum;
   Tags: string[];
   Price: number;
-  CreationCost: ISimplifiedResource[];
-  MaintenanceCost: ISimplifiedResource[];
-  PassiveIncome: ISimplifiedResource[];
+  CreationCost: ISimplifiedEntity[];
+  MaintenanceCost: ISimplifiedEntity[];
+  PassiveIncome: ISimplifiedEntity[];
   UoM: UoMsEnum;
   Quantity: number;
-  // HistoricalPrices: number[];
 
   Deserialize(input: any): this {
     Object.assign(this, input);
@@ -49,10 +53,13 @@ export class Asset implements IAsset, IDeserializable {
 }
 
 
+export interface IWikiEntity extends IEntityModel {
+  Description: string;
+  ImageUrl: string;
+}
 
 
-
-export interface ISimplifiedResource {
+export interface ISimplifiedEntity {
   Name: string;
   Quantity: number;
 }

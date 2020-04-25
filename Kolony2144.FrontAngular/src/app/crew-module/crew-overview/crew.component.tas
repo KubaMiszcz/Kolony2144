@@ -20,7 +20,7 @@
 
 //   constructor(
 //     private kolonyService: KolonyService,
-//     private sharedService: SharedService
+//     private commonService: CommonService
 //   ) {
 //     this.kolonyService.KolonyBS.subscribe(k => this.kolony = k);
 //   }
@@ -45,11 +45,11 @@
 
 //     this.kolony.Crew.forEach(c => {
 //       let name = c.Name;
-//       let salary = this.sharedService.getQuantityByNameOrDefault(c.ConsumedItems, InventoryItemsNames.Cash);
-//       let foodConsumption = this.sharedService.getQuantityByNameOrDefault(c.ConsumedItems, InventoryItemsNames.Food);
-//       let BasicWU = this.sharedService.getQuantityByNameOrDefault(c.ProducedItems, InventoryItemsNames.BasicWorkUnit);
-//       let AdvWU = this.sharedService.getQuantityByNameOrDefault(c.ProducedItems, InventoryItemsNames.AdvancedWorkUnit);
-//       let ScienceWU = this.sharedService.getQuantityByNameOrDefault(c.ProducedItems, InventoryItemsNames.SciencePack);
+//       let salary = this.commonService.getQuantityByNameOrDefault(c.ConsumedItems, InventoryItemsNames.Cash);
+//       let foodConsumption = this.commonService.getQuantityByNameOrDefault(c.ConsumedItems, InventoryItemsNames.Food);
+//       let BasicWU = this.commonService.getQuantityByNameOrDefault(c.ProducedItems, InventoryItemsNames.BasicWorkUnit);
+//       let AdvWU = this.commonService.getQuantityByNameOrDefault(c.ProducedItems, InventoryItemsNames.AdvancedWorkUnit);
+//       let ScienceWU = this.commonService.getQuantityByNameOrDefault(c.ProducedItems, InventoryItemsNames.SciencePack);
 //       let qty = c.Quantity;
 //       this.crewList.push([
 //         name,
@@ -67,7 +67,7 @@
 //       ]);
 //     });
 
-//     totals = this.sharedService.getTotalsForTable(this.crewList.slice(1));
+//     totals = this.commonService.getTotalsForTable(this.crewList.slice(1));
 //     this.crewList.push([...(new Array(5)), 'Total:', ...totals.slice(6)]);
 //   }
 

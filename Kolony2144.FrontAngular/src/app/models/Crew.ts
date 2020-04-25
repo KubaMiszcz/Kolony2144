@@ -1,26 +1,29 @@
-import { IFullEntity, IAsset } from './Entity';
+import { IEntity, IWikiEntity, IAsset, ITradeableEntity } from './Entity';
+import { EntityTypesEnum, CrewTypesEnum, GenericTypesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
-import { AssetTypesEnum, CrewTypesEnum, BuildingTypesEnum, GenericTypesEnum } from './enums/Types.enum';
 
 export enum CrewNames {
   Worker = 'Worker',
   Technician = 'Technician'
 }
 
-export interface ICrewFullEntity extends IFullEntity {
-  // SubType: CrewTypesEnum;
+export interface ICrew extends IAsset {
+}
+
+export interface ICrewFullModel extends ICrew, IWikiEntity, ITradeableEntity {
 }
 
 
-export const AllCivilianCrew: IFullEntity[] = [
+export const AllCrew: ICrewFullModel[] = [
   {
     Name: CrewNames.Worker,
     Description: 'just peon worker, chop chop he\'s on it, eats many', ImageUrl: '/assets/wiki-icons/crew-worker.png',
-    Size: 1,
-    Type: AssetTypesEnum.Crew,
-    Tags: [CrewTypesEnum.Production, GenericTypesEnum.Tradeable],
-    Price: 50,
+    Type: EntityTypesEnum.Crew,
+    Tags: [CrewTypesEnum.Production],
+    Price: 2,
+    HistoricalPrices: [],
+    RarityFactor: 0,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.Food, Quantity: 0.2 },
@@ -35,10 +38,12 @@ export const AllCivilianCrew: IFullEntity[] = [
   {
     Name: CrewNames.Technician,
     Description: '', ImageUrl: '/assets/wiki-icons/crew-technician.png',
-    Size: 1,
-    Type: AssetTypesEnum.Crew,
-    Tags: [CrewTypesEnum.Production, GenericTypesEnum.Tradeable],
-    Price: 100,
+
+    Type: EntityTypesEnum.Crew,
+    Tags: [CrewTypesEnum.Production],
+    Price: 5,
+    HistoricalPrices: [],
+    RarityFactor: 0,
     CreationCost: [],
     MaintenanceCost: [
       { Name: ResourceName.Food, Quantity: 0.1 },

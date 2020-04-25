@@ -1,7 +1,8 @@
-import { AssetService } from 'src/app/services/asset.service';
+import { EntityService } from './../../services/entity.service';
+import { AssetService } from 'src/app/assets-module/asset.service';
 import { KolonyService } from 'src/app/services/kolony.service';
-import { SharedService } from './../../services/shared.service';
-import { IFullEntity, ISimplifiedResource } from './../../models/Entity';
+import { CommonService } from '../../services/common.service';
+import { IWikiEntity, ISimplifiedEntity } from './../../models/Entity';
 import { Component, OnInit, Input } from '@angular/core';
 import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
 
@@ -11,13 +12,14 @@ import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
   styleUrls: ['./wiki-tile.component.scss']
 })
 export class WikiTileComponent implements OnInit {
-  @Input() item: IFullEntity;
+  @Input() item: IWikiEntity;
   productionCost: IWikiListItem[] = [];
   producedItems: IWikiListItem[] = [];
   consumedItems: IWikiListItem[] = [];
 
   constructor(
     private kolonyService: KolonyService,
+    private entityService: EntityService,
     private assetService: AssetService,
   ) { }
 
@@ -29,13 +31,13 @@ export class WikiTileComponent implements OnInit {
 
   }
 
-  fillList(list: ISimplifiedResource[]) {
+  fillList(list: ISimplifiedEntity[]) {
     const result = [];
     list.map(v =>
       result.push({
         Name: v.Name,
         Quantity: v.Quantity,
-        UoM: this.assetService.getUoMByName(v.Name)
+        UoM: this.entityService.getUoMByName(v.Name)
       })
     );
 

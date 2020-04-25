@@ -1,0 +1,19 @@
+<div class="card my-2">
+
+  <div class="card m-2">
+    <h4 class="card-header "> Warehouse Overview</h4>
+    <div class="card-body p-1">
+      <app-tile-with-table [caption]="'co mi zzera miejsce w magazynach'" [header]="storedItemsTableRows[0]" [rows]="storedItemsTableRows.slice(1)">
+      </app-tile-with-table>
+
+      <app-tile-with-table [caption]="'co mi produkuje miejsce w magazynach'" [header]="storageProvidersItemsTableRows[0]"
+        [rows]="storageProvidersItemsTableRows.slice(1)">
+      </app-tile-with-table>
+
+    </div>
+  </div>
+
+
+
+  <app-player-notes></app-player-notes>
+</div>

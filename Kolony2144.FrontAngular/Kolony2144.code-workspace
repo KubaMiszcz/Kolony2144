@@ -17,6 +17,7 @@
     }
   ],
   "settings": {
-    "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace"
+    "editor.fontFamily": "'Fira Code Light', 'Courier Prime Code', Hack, Consolas, 'Courier New', monospace",
+    "editor.fontSize": 12
   }
 }

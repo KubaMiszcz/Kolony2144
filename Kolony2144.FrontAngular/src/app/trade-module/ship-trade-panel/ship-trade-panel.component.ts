@@ -1,11 +1,12 @@
-import { SharedService } from './../../services/shared.service';
+import { DataProviderService } from '../../services/data-provider.service';
 import { GameService } from './../../services/game.service';
-import { FinanceService } from './../../services/finance.service';
+import { FinanceService } from '../../finances-module/finance.service';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { IAsset } from 'src/app/models/Entity';
-import { TradeService, TransactionTypeEnum } from './../../services/trade.service';
+import { TradeService, TransactionTypeEnum } from '../trade.service';
 import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
-import { AssetService } from 'src/app/services/asset.service';
+import { AssetService } from 'src/app/assets-module/asset.service';
+import { CommonService } from 'src/app/services/common.service';
 
 export interface ITradePanelData {
   Name: string;
@@ -33,8 +34,9 @@ export class ShipTradePanelComponent implements OnInit {
   // @ViewChild('tableQtyRef') tableQty: ElementRef;
 
   constructor(
-    private sharedService: SharedService,
+    private commonService: CommonService,
     private tradeService: TradeService,
+    private dataProviderService: DataProviderService,
     private assetService: AssetService,
     private gameService: GameService,
   ) { }
@@ -51,7 +53,7 @@ export class ShipTradePanelComponent implements OnInit {
     }
   }
 
-  updateOnTableQty(row: ITradePanelData, val) {
+  updateOnTableQty(row: ITradePanelData, val: number) {
     if (val === 0) {
       row.QtyOnTable = 0;
     } else {
@@ -79,8 +81,9 @@ export class ShipTradePanelComponent implements OnInit {
     let asset = this.assetService.getAssetByName(row.Name);
     if (!asset) {
       // todo create new isnatnce of all assets list in trade service
-      const newAsset = this.gameService.getAssetByName(row.Name); // get from all
-      asset = this.assetService.addNewAssetToInventory(newAsset); // get newly added from kolony assets
+      const newAsset = this.dataProviderService.getEntityByName(row.Name); // get from all
+      // !! fixit _____________________________________________________vvvvvvv
+      asset = this.assetService.addNewAssetToInventoryDEPR(newAsset as IAsset); // get newly added from kolony assets
     }
 
     let factor = 0;

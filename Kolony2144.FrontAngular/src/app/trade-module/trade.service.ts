@@ -1,18 +1,18 @@
-import { SharedService } from './shared.service';
+import { ITradeableEntity } from './../models/Entity';
+import { CommonService } from '../services/common.service';
 import { Injectable } from '@angular/core';
-import { AssetService } from './asset.service';
-import { AssetTypesEnum, ResourceTypesEnum, GenericTypesEnum } from '../models/enums/Types.enum';
+import { AssetService } from '../assets-module/asset.service';
+import { EntityTypesEnum, ResourceTypesEnum, GenericTypesEnum } from '../models/enums/Types.enum';
 import { IAsset } from '../models/Entity';
-import { CrewService } from './crew.service';
-import { FinanceService } from './finance.service';
-import { GameService } from './game.service';
-import { KolonyService } from './kolony.service';
-import { OverviewService } from './overview.service';
-import { PowerService } from './power.service';
-import { WikiService } from './wiki.service';
+import { GameService } from '../services/game.service';
+import { KolonyService } from '../services/kolony.service';
+import { OverviewService } from '../overview-module/overview.service';
 import { CargoShipNames } from '../models/enums/CargoShipNames.enum';
 import { CompanyNames } from '../models/enums/CompanyNames.enum';
 import { PlanetNames } from '../models/enums/PlanetNames.enum';
+import { FinanceService } from '../finances-module/finance.service';
+import { SharedService } from '../services/shared.service';
+import { DataProviderService } from '../services/data-provider.service';
 
 
 
@@ -21,7 +21,7 @@ import { PlanetNames } from '../models/enums/PlanetNames.enum';
 })
 export class TradeService {
   tradeAnnouncement = '';
-  tradeableCargo: IAsset[] = [];
+  tradeableCargo: ITradeableEntity[] = [];
   isShipLanded: boolean;
   landingProbability = 0.99;
   shipSizeVariation = 0.2;  // future  depend on shipsize?
@@ -30,15 +30,20 @@ export class TradeService {
 
 
   constructor(
+    private commonService: CommonService,
     private sharedService: SharedService,
+    private dataProviderService: DataProviderService,
     private assetService: AssetService,
     private financeService: FinanceService,
-  ) { }
+  ) {
+    this.tradeableCargo = dataProviderService.ALL_TRADEABLE_ASSETS_LIST;
+    this.updateResourcesPrices();
+  }
 
   updateResourcesPrices() {
     // !! fixit check if prices too low and variations cant change it
     this.tradeableCargo.forEach(r => {
-      r.Price = this.sharedService.getRandomIntAroundValue(r.Price, r.Price * this.priceVariation);
+      r.Price = this.commonService.getRandomIntAroundValue(r.Price, r.Price * this.priceVariation);
     });
   }
 
@@ -61,11 +66,11 @@ export class TradeService {
     const newQty = curentQty + addedQty;
     const newAVGPrice = newQty === 0 ? 0 : newValue / newQty;
 
-    return this.sharedService.Round(newAVGPrice, 1);
+    return this.commonService.Round(newAVGPrice, 1);
   }
 
 
-  setTradeAnnouncement() {
+  SetTradeAnnouncement() {
     if (this.isShipLanded) {
       const ship = this.landedShip;
       // Cargo Ship 'VARG-1230' owned by companyName on route from originPlanetName to destinationPlanetName is landed.
@@ -79,31 +84,30 @@ export class TradeService {
   }
 
 
-  prepareIncomingShip() {
-    this.isShipLanded = this.sharedService.getRandomBoolean(this.landingProbability);
+  PrepareIncomingShip() {
+    this.isShipLanded = this.commonService.getRandomBoolean(this.landingProbability);
     this.updateResourcesPrices();
 
     if (this.isShipLanded) {
       const ship = new Object() as ICargoShip;
       ship.Size = this.getSizeLandedShip(1000); // todo 1000 is cargobays number
-      ship.Name = this.sharedService.getRandomValueFromEnum(Object.values(CargoShipNames));
-      ship.CompanyName = this.sharedService.getRandomValueFromEnum(Object.values(CompanyNames));
-      ship.OriginPlanetName = this.sharedService.getRandomValueFromEnum(Object.values(PlanetNames));
-      ship.DestinationPlanetName = this.sharedService.getRandomValueFromEnum(Object.values(PlanetNames));
-      ship.Cargo = this.getShipCargo(ship.Size);
+      ship.Name = this.commonService.getRandomValueFromEnum(Object.values(CargoShipNames));
+      ship.CompanyName = this.commonService.getRandomValueFromEnum(Object.values(CompanyNames));
+      ship.OriginPlanetName = this.commonService.getRandomValueFromEnum(Object.values(PlanetNames));
+      ship.DestinationPlanetName = this.commonService.getRandomValueFromEnum(Object.values(PlanetNames));
+      ship.Cargo = this.generateShipCargo(ship.Size);
       this.landedShip = ship;
-      console.log(ship);
-
     }
   }
 
-  getShipCargo(shipSize: number): IAsset[] {
+  private generateShipCargo(shipSize: number): IAsset[] {
     this.tradeableCargo.forEach(r => {
-      const tradeType = this.sharedService.getRandomIntFromRange(-1, 1);
+      const tradeType = this.commonService.getRandomIntFromRange(-1, 1);
       if (tradeType === 0) {
         r.Quantity = 0;
       } else {
-        r.Quantity = tradeType * this.sharedService.getRandomIntAroundValue(shipSize, shipSize * this.shipSizeVariation);
+        const qty = this.commonService.getRandomIntAroundValue(shipSize, shipSize * this.shipSizeVariation) * (1 - r.RarityFactor);
+        r.Quantity = tradeType * Math.round(qty);
       }
     });
 
@@ -111,7 +115,7 @@ export class TradeService {
   }
 
   getSizeLandedShip(cargoBaysQty: number): number {
-    return this.sharedService.getRandomIntAroundValue(cargoBaysQty, cargoBaysQty * this.shipSizeVariation);
+    return this.commonService.getRandomIntAroundValue(cargoBaysQty, cargoBaysQty * this.shipSizeVariation);
   }
 
 

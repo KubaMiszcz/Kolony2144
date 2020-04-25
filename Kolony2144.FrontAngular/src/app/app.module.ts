@@ -1,3 +1,4 @@
+import { WarehouseModule } from './warehouse-module/warehouse.module';
 import { PowerModule } from './power-module/power.module';
 import { CrewModule } from './crew-module/crew.module';
 import { BuildingsModule } from './buildings-module/buildings.module';
@@ -30,6 +31,7 @@ import { TradeModule } from './trade-module/trade.module';
 
     OverviewModule,
     TradeModule,
+    WarehouseModule,
     FinancesModule,
     PowerModule,
     CrewModule,

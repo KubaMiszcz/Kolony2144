@@ -1,59 +1,83 @@
 import { Injectable } from '@angular/core';
-import { Kolony, IKolony } from '../models/Kolony';
-import { AllResources, ResourceName as ResourceName } from '../models/Resource';
-import { IAsset, Asset } from '../models/Entity';
-import { AllCivilianCrew } from '../models/Crew';
-import { AllBuildings } from '../models/Building';
+import { AllBuildings, IBuilding } from '../models/Building';
+import { AllCrew as AllCrew } from '../models/Crew';
+import { IAsset, IEntity } from '../models/Entity';
+import { GenericTypesEnum, ResourceTypesEnum } from '../models/enums/Types.enum';
+import { IKolony, Kolony } from '../models/Kolony';
 import { AllMachines } from '../models/Machine';
+import { AllResources, AllVolatileResources } from '../models/Resource';
+import { CommonService } from './common.service';
 import { SharedService } from './shared.service';
-import { CrewService } from './crew.service';
-import { FinanceService } from './finance.service';
-import { GameService } from './game.service';
-import { OverviewService } from './overview.service';
-import { PowerService } from './power.service';
-import { TradeService } from './trade.service';
-import { WikiService } from './wiki.service';
-import { AssetService } from './asset.service';
-import { GenericTypesEnum } from '../models/enums/Types.enum';
+import { DataProviderService } from './data-provider.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class KolonyService {
-
-  private kolony: Kolony;
-  get Name(): string { return this.kolony.Name; }
+  Kolony: Kolony;
 
   constructor(
+    private commonService: CommonService,
     private sharedService: SharedService,
+    private dataProviderService: DataProviderService
   ) {
-    const kolony = new Kolony();
-    kolony.Name = 'KolonyUNO';
-    kolony.Assets = this.setInitialKolonyAssets();
-    this.kolony = kolony;
+    this.InitNewKolony();
   }
 
-  getAllKolonyAssets(): IAsset[] { return this.kolony.Assets; }
-
-
-  setInitialKolonyAssets(): IAsset[] {
-    const res: IAsset[] = [];
-    [...AllResources, ...AllCivilianCrew, ...AllBuildings, ...AllMachines]
-      .filter(a => a.Quantity > 0 || a.Tags.includes(GenericTypesEnum.Property))
-      .forEach(i => {
-        res.push(new Asset().Deserialize(i));
-      });
-
-    return res;
+  get AllAssets(): IAsset[] {
+    return [
+      ...this.Kolony.Crew,
+      ...this.Kolony.Machines,
+      ...this.Kolony.Resources
+    ];
   }
+
+  get AllKolonyEntities(): IEntity[] {
+    return [
+      ...this.Kolony.Buildings,
+      ...this.Kolony.Crew,
+      ...this.Kolony.Machines,
+      ...this.Kolony.Resources
+    ];
+  }
+
+  InitNewKolony() {
+    this.Kolony = new Kolony();
+    this.Kolony.Age = 100;
+    this.Kolony.Name = 'KolonyUNO';
+    // this.Kolony.Buildings = this.fillInitialKolonyBuildings();
+    this.fillKolonyListWithInitialValues(this.dataProviderService.ALL_BUILDINGS_LIST, this.Kolony.Buildings);
+    this.fillKolonyListWithInitialValues(this.dataProviderService.ALL_CREW_LIST, this.Kolony.Crew);
+    this.fillKolonyListWithInitialValues(this.dataProviderService.ALL_MACHINES_LIST, this.Kolony.Machines);
+    this.fillKolonyListWithInitialValues(this.dataProviderService.ALL_RESOURCES_LIST, this.Kolony.Resources);
+  }
+
+
 
   getKolonyState(): IKolony {
-    return this.kolony;
+    return this.Kolony;
   }
 
   setKolonyState(kolony: Kolony) {
     // this.kolony = kolony as Kolony;
   }
 
+
+
+
+
+
+  private fillKolonyListWithInitialValues<T, T2>(srcList: T[], targetList: T2[]) {
+    [...srcList].filter(a =>
+      (a as unknown as IEntity).Quantity > 0
+      || (a as unknown as IAsset).Price === undefined
+    )
+      .forEach(item => {
+        const clonedItem = this.commonService.cloneObject(item) as unknown as T2;
+        targetList.push(clonedItem);
+        // res.push(new Asset().Deserialize(i));
+      });
+    // return res;
+  }
 
 }

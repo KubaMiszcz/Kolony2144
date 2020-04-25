@@ -1,11 +1,13 @@
-import { AssetService } from './../../services/asset.service';
-import { SharedService } from 'src/app/services/shared.service';
+import { FinanceService } from './../finance.service';
+import { AssetService } from '../../assets-module/asset.service';
+import { CommonService } from 'src/app/services/common.service';
 import { SharedModule } from './../../shared/shared.module';
 import { Component, OnInit } from '@angular/core';
 import { Kolony } from 'src/app/models/Kolony';
 import { KolonyService } from 'src/app/services/kolony.service';
 import { ResourceName } from 'src/app/models/Resource';
-import { IAsset } from 'src/app/models/Entity';
+import { IAsset, IEntity } from 'src/app/models/Entity';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-finances-overview',
@@ -13,35 +15,40 @@ import { IAsset } from 'src/app/models/Entity';
   styleUrls: ['./finances-overview.component.scss']
 })
 export class FinancesOverviewComponent implements OnInit {
-  assetList: any[];
+  financeItemsTableRows: any[] = [];
 
   constructor(
     private kolonyService: KolonyService,
+    private commonService: CommonService,
     private sharedService: SharedService,
-    private assetService: AssetService,
+    private financeService: FinanceService,
   ) { }
 
   ngOnInit(): void {
-    this.assetList = this.fillAssetList(this.assetService.getAssetsByConsumedAssetName(ResourceName.Cash));
+    // todo switch to new method
+    this.fillAssetListDEPR(this.financeService.cashConsumers);
   }
 
-  fillAssetList(resources: IAsset[]): any[] {
+  fillAssetListDEPR(resources: IEntity[]) {
     const res: any[] = [
-      ['name', 'per unit', 'qty', 'total']
+      ['name', 'type', 'per unit', 'qty', 'total']
     ];
 
     resources.forEach(r => {
-      const perUnitUsage = this.assetService.findSimplifiedResourceInListByName(r.MaintenanceCost, ResourceName.Cash).Quantity;
+      const perUnitUsage = this.sharedService.findItemInListByName(r.MaintenanceCost, ResourceName.Cash).Quantity;
       res.push([
         r.Name,
+        r.Type,
         perUnitUsage,
         r.Quantity,
         r.Quantity * perUnitUsage
       ]);
     });
-    res.push(['', '', 'Total', this.sharedService.sumColumnOftable(res.slice(1), 3)]);
 
-    return res;
+    const colNo = res[0].indexOf('total');
+    res.push(['', '', '', 'Total', this.commonService.sumColumnOftable(res.slice(1), colNo)]);
+
+    this.financeItemsTableRows = res;
   }
 
 }

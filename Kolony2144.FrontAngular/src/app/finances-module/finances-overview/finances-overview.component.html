@@ -3,7 +3,8 @@
   <div class="card m-2">
     <h4 class="card-header "> Finances Overview</h4>
     <div class="card-body p-1">
-      <app-tile-with-table [caption]="'co mi zzera kase'" [header]="assetList[0]" [rows]="assetList.slice(1)"></app-tile-with-table>
+      <app-tile-with-table [caption]="'co mi zzera kase'" [header]="financeItemsTableRows[0]" [rows]="financeItemsTableRows.slice(1)">
+      </app-tile-with-table>
 
       <!-- <app-tile-with-table [caption]="" [header]="resourcesList[0]" [rows]="resourcesList.slice(1)"></app-tile-with-table>> -->
 
@@ -11,5 +12,5 @@
     </div>
   </div>
 
-
+  <app-player-notes></app-player-notes>
 </div>

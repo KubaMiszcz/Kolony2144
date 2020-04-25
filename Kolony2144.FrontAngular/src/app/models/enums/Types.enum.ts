@@ -1,5 +1,7 @@
-export enum AssetTypesEnum {
-  // Property = 'Property',
+// todo add autofill tags
+// fix dont add tags when ti can be deducted form mainetnance like power sources and fill autotags in dataprovider
+export enum EntityTypesEnum {
+  // todo add volatile type fo resources????
   Crew = 'Crew',
   Resource = 'Resource',
   Building = 'Building',
@@ -9,13 +11,16 @@ export enum AssetTypesEnum {
 
 
 export enum GenericTypesEnum {
-  Tradeable = 'Tradeable',
-  Property = 'Property',
+  Consuming = 'Consuming',
+  Producing = 'Producing',
 }
 
 
+export enum CommonTypesEnum {
+  PowerSource = 'Power source',
+}
+
 export enum ResourceTypesEnum {
-  Volatile = 'Volatile',
   Production = 'Production',
 }
 
@@ -25,12 +30,10 @@ export enum CrewTypesEnum {
 
 export enum BuildingTypesEnum {
   Production = 'Production',
-  PowerSource = 'Power source',
   Maintenance = 'Maintenance',
 }
 
 export enum MachineTypesEnum {
   Production = 'Production',
-  PowerSource = 'Power source',
   Maintenance = 'Maintenance',
 }

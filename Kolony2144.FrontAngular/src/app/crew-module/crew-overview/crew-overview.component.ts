@@ -1,8 +1,10 @@
-import { AssetService } from './../../services/asset.service';
+import { AssetService } from '../../assets-module/asset.service';
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from 'src/app/services/shared.service';
 import { ResourceName } from 'src/app/models/Resource';
-import { AssetTypesEnum } from 'src/app/models/enums/Types.enum';
+import { EntityTypesEnum } from 'src/app/models/enums/Types.enum';
+import { SharedService } from 'src/app/services/shared.service';
+import { CommonService } from 'src/app/services/common.service';
+import { EntityService } from 'src/app/services/entity.service';
 
 @Component({
   selector: 'app-crew-overview',
@@ -18,7 +20,9 @@ export class CrewOverviewComponent implements OnInit {
   totalFooter: any[] = [];
 
   constructor(
+    private commonService: CommonService,
     private sharedService: SharedService,
+    private entityService: EntityService,
     private assetService: AssetService
   ) {
   }
@@ -37,11 +41,11 @@ export class CrewOverviewComponent implements OnInit {
       'Total Qty',
     ];
 
-    this.assetService.getAssetsByType(AssetTypesEnum.Crew).forEach(c => {
+    this.assetService.getAssetsByTypeDEPR(EntityTypesEnum.Crew).forEach(c => {
       const name = c.Name;
-      const salary = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
-      const foodConsumption = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
-      const BasicWU = this.assetService.findSimplifiedResourceInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
+      const salary = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
+      const foodConsumption = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
+      const BasicWU = this.sharedService.findItemInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
       const qty = c.Quantity;
       this.perUnitList.push([
         name,
@@ -62,13 +66,17 @@ export class CrewOverviewComponent implements OnInit {
       'Total Salary',
       'Total ' + ResourceName.Food + ' Consumption',
       'Total ' + ResourceName.BasicWorkUnit + ' Production',
+      'Total ' + ResourceName.AdvancedWorkUnit + ' Production',
     ];
 
-    this.assetService.getAssetsByType(AssetTypesEnum.Crew).forEach(c => {
+    this.assetService.getAssetsByTypeDEPR(EntityTypesEnum.Crew).forEach(c => {
       const name = c.Name;
-      const salary = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
-      const foodConsumption = this.assetService.findSimplifiedResourceInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
-      const BasicWU = this.assetService.findSimplifiedResourceInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
+      const salary = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Cash).Quantity;
+      const foodConsumption = this.sharedService.findItemInListByName(c.MaintenanceCost, ResourceName.Food).Quantity;
+      const BasicWU = this.sharedService.findItemInListByName(c.PassiveIncome, ResourceName.BasicWorkUnit).Quantity;
+      const AdvancedWU = this.sharedService.findItemInListByName(c.PassiveIncome, ResourceName.AdvancedWorkUnit)?.Quantity;
+
+
       const qty = c.Quantity;
       this.totalList.push([
         name,
@@ -76,15 +84,17 @@ export class CrewOverviewComponent implements OnInit {
         salary * qty,
         foodConsumption * qty,
         BasicWU * qty,
+        (AdvancedWU ?? 0) * qty,
       ]);
     });
 
     this.totalFooter = [
       'Total:',
-      this.sharedService.sumColumnOftable(this.totalList, 1),
-      this.sharedService.sumColumnOftable(this.totalList, 2),
-      this.sharedService.sumColumnOftable(this.totalList, 3),
-      this.sharedService.sumColumnOftable(this.totalList, 4),
+      this.commonService.sumColumnOftable(this.totalList, 1),
+      this.commonService.sumColumnOftable(this.totalList, 2),
+      this.commonService.sumColumnOftable(this.totalList, 3),
+      this.commonService.sumColumnOftable(this.totalList, 4),
+      this.commonService.sumColumnOftable(this.totalList, 5),
     ];
   }
 
