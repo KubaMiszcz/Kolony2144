@@ -1,19 +1,14 @@
-import { ITradeableEntity } from './../models/Entity';
-import { CommonService } from '../services/common.service';
 import { Injectable } from '@angular/core';
 import { AssetService } from '../assets-module/asset.service';
-import { EntityTypesEnum, ResourceTypesEnum, GenericTypesEnum } from '../models/enums/Types.enum';
+import { FinanceService } from '../finances-module/finance.service';
 import { IAsset } from '../models/Entity';
-import { GameService } from '../services/game.service';
-import { KolonyService } from '../services/kolony.service';
-import { OverviewService } from '../overview-module/overview.service';
 import { CargoShipNames } from '../models/enums/CargoShipNames.enum';
 import { CompanyNames } from '../models/enums/CompanyNames.enum';
 import { PlanetNames } from '../models/enums/PlanetNames.enum';
-import { FinanceService } from '../finances-module/finance.service';
-import { SharedService } from '../services/shared.service';
+import { CommonService } from '../services/common.service';
 import { DataProviderService } from '../services/data-provider.service';
-
+import { SharedService } from '../services/shared.service';
+import { ITradeableEntity } from './../models/Entity';
 
 
 @Injectable({
@@ -24,8 +19,8 @@ export class TradeService {
   tradeableCargo: ITradeableEntity[] = [];
   isShipLanded: boolean;
   landingProbability = 0.99;
-  shipSizeVariation = 0.2;  // future  depend on shipsize?
-  priceVariation = 0.2; // future  depend on asset
+  shipSizeVariation = 0.2;
+  priceVariation = 0.2; // futuredepend on asset
   landedShip: ICargoShip;
 
 
