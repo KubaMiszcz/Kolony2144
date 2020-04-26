@@ -7,9 +7,9 @@ pipeline {
         echo 'Hello World'
       }
     }
-    stage('Checkout branch: "${BRANCH_NAME}"') {
+    stage('Checkout branch: ${BRANCH_NAME}') {
       steps {
-        git branch: '"${BRANCH_NAME}"', url: 'https://github.com/KubaMiszcz/Kolony2144.git'
+        git branch: '${BRANCH_NAME}', url: 'https://github.com/KubaMiszcz/Kolony2144.git'
       }
     }
     stage('install node_modules') {
