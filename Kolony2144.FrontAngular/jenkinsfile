@@ -3,8 +3,8 @@ pipeline {
 
   stages {
     stage('Hello') {
-    ws('"${env.WORKSPACE}"/Kolony2144.FrontAngular'){
       steps {
+      ws('"${env.WORKSPACE}"/Kolony2144.FrontAngular'){
         echo 'Hello World'
         echo "pwd"
       }
