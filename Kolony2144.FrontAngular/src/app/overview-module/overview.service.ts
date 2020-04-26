@@ -40,11 +40,10 @@ export class OverviewService {
     let production: number;
     let msg: string;
 
-    // todo inne newsy
-    // przy okazji:<br>
-    // wyladowal statek<br>
-    // stalo sie jakies wydarzenie<br>
-    // cos znaleziono<br> -->
+    // future inne newsy
+    // przy okazji
+    // stalo sie jakies wydarzenie - piraci trzesieni ziemi itp
+    // cos znaleziono zloza diamnety itp skarb
 
 
     this.AddNews('Welcome in new month. Current time is ' + this.kolonyService.Kolony.Age.toFixed(1) + ' of New Era');

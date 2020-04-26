@@ -15,8 +15,8 @@ export enum BuildingNames {
 }
 
 export interface IBuilding extends IEntity {
-  // todo attach entiotes to factories etc, they are not produce naything whhen empty
-  // todo add attacehd entites, and max atatchentities
+  // todo add attach entities to factories etc, let them not produce anything whhen empty
+  // add attacehd entites, and max atatchentities
 }
 
 export interface IBuildingFullModel extends IBuilding, IWikiEntity {

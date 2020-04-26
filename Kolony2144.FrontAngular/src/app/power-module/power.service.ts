@@ -15,7 +15,7 @@ export class PowerService {
   powerSources: IEntity[] = [];
   powerConsumers: IEntity[] = [];
 
-  // todo add brownou and blackout when overload
+  // todo add brownou 100-120% and blackout >120% when overload
   constructor(
     private commonService: CommonService,
     private sharedService: SharedService,

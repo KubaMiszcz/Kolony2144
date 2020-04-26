@@ -25,7 +25,7 @@ export class FinancesOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // todo switch to new method
+    // fix switch to new version of this method
     this.fillAssetListDEPR(this.financeService.cashConsumers);
   }
 

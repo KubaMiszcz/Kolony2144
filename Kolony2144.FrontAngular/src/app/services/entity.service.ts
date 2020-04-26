@@ -126,11 +126,11 @@ export class EntityService {
           // } else {
           // }
           item.Quantity -= (consumedItem.Quantity * entity.Quantity);
-
         } catch (error) {
-          console.log('consumed item not in inventory', error);
+          console.error('==========================================================');
+          console.error('consumed item in entity not in global initial lists', error);
+          console.error('==========================================================');
         }
-
       });
     });
   }

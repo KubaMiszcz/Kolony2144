@@ -35,10 +35,7 @@ export class DataProviderService {
 
     this.assignTagToEntities(this.ALL_ENTITIES_LIST, GenericTypesEnum.Producing, ResourceName.Energy, CommonTagsEnum.PowerSource);
 
-
     this.fillDataFromSavedState();
-
-    // todo add method for auto fill tags like 'power source' etc and get kolony assets from this service not files
   }
 
   get ALL_ENTITIES_LIST(): IEntity[] {

@@ -26,13 +26,6 @@ export class Kolony implements IKolony, IDeserializable {
 
   constructor() { }
 
-  // todo throw ex eption if metareial form list in not in strater set and for building also
-  // get RawResources(): IInventoryItem[] { return this.AllInventoryItemsArray.filter(m => m.MainType === InventoryItemsMainTypes.RawResource); }
-  // get RawDeposits(): IAsset[] { return this.AllAssetsArray.filter(m => m.MainType === AssetMainTypes.RawDeposit); }
-
-  // get Robots(): IAsset[] { return this.AllMachines.filter(m => m.DetailedType === DetailedMachineTypes.Robot); }
-
-
   Deserialize(input: any): this {
     Object.assign(this, input);
 

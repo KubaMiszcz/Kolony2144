@@ -4,17 +4,20 @@ import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
 
 // fix w trade pojawiaja sie pieniadze wywal to
-// burzenie budynkow
-// co mi zzera wegiel i
+
+// todo co mi zzera wegiel i
 // czyli podsumwoanie resources i ile zywa i ile sie produkcuje
-// rozrzut cen w tradeentity
+// w trade buttony nie +-10 tylko +- polowa i =- 1.4 towara
 // takei podusmwoanei jak w transport tycoon czyli co na plu co na minus i roznica
-// w trade nie +-10 tylko +- polowa i =- 1.4 towara
 // po sprzedazy do 0 pamietaj ostatnia cene, albo zrob  te historucal prices
-// przy tabelce resourceces ze zeraniej jakies rozwijanie wierszy ze szeczoglami co zzera i ile
+// przy tabelce resourceces ze zzeraniem jakies rozwijanie wierszy ze szeczoglami co zzera i ile
 // i co produkuje tez tabela z rozwijaniem wierszy
 // moze diwe koluny np zo mi zzera kase i iile dodaje a potem total
+
+// future burzenie budynkow
 // wlaczanie wlaczanie maszyn i budynkow bo teraz duzo generaotr zera w pizdziet wegla
+
+
 
 export enum MachinesNames {
   PowerGenerator = 'Power Generator',

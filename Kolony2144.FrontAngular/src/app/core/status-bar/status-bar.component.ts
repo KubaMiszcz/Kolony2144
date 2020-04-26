@@ -52,10 +52,5 @@ export class StatusBarComponent implements OnInit {
 
   nextTurn() {
     this.gameService.nextTurn();
-    // // TODO make it subject and subscribe
-    // this.Age = this.gameService.Age;
-    // this.Name = this.kolonyService.Name;
-    // this.energyProduction = this.powerService.getEnergyProduction();
-    // this.energyUsage = this.powerService.getEnergyUsage();
   }
 }

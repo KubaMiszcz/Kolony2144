@@ -7,10 +7,10 @@ export interface IEntityModel {
   Name: string;
   Type: EntityTypesEnum;
   Tags: string[];
-  // todo TechLevel:number;
+  // future TechLevel:number;
   CreationCost: ISimplifiedEntity[];
   MaintenanceCost: ISimplifiedEntity[];
-  // todo IdleMaintenanceCost: ISimplifiedEntity[];
+  // future IdleMaintenanceCost: ISimplifiedEntity[];
   PassiveIncome: ISimplifiedEntity[];
   UoM: UoMsEnum;
 }
@@ -22,11 +22,11 @@ export interface IEntity extends IEntityModel, ISimplifiedEntity {
 
 
 export interface IAsset extends IEntityModel, ISimplifiedEntity {
-  Price: number; // dont move it to Ienity, Ibuilding doesnt need price but inherits from enity
+  Price: number; // info dont move it to Ienity, Ibuilding doesnt need price but inherits from enity
 }
 
 export interface ITradeableEntity extends IAsset {
-  // todo PriceVariationFactor: unmber'
+  // future PriceVariationFactor: unmber'
   HistoricalPrices: number[];
   RarityFactor: number;
 }

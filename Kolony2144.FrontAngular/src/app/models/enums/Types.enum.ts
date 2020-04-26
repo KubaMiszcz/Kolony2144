@@ -1,7 +1,7 @@
 // todo add autofill tags
 // fix dont add tags when ti can be deducted form mainetnance like power sources and fill autotags in dataprovider
 export enum EntityTypesEnum {
-  // todo add volatile type fo resources????
+  // todo add volatile type do resources????
   Crew = 'Crew',
   Resource = 'Resource',
   Building = 'Building',
