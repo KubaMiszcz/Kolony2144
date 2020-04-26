@@ -14,17 +14,17 @@ pipeline {
     }
     stage('install node_modules') {
       steps {
-        ws('${WORKSPACE}/Kolony2144.FrontAngular'){
-          // sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular/ && npm install'
-          sh 'npm install'
-        }
+        // ws('${WORKSPACE}/Kolony2144.FrontAngular'){
+          sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular/ && npm install'
+          // sh 'npm install'
+        // }
       }
     }
     stage('Build') {
       steps {
-        ws('${WORKSPACE}/Kolony2144.FrontAngular'){
-          sh 'ng build --prod'
-        }
+        // ws('${WORKSPACE}/Kolony2144.FrontAngular'){
+          sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular/ && ng build --prod'
+        // }
       }
     }
   }
