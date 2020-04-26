@@ -1,0 +1,24 @@
+node {
+  stage('Hello') {
+    steps {
+      echo 'Hello World'
+    }
+  }
+  stage('Checkout branch: devel') {
+    steps {
+      git branch: 'jenkins', url: 'https://github.com/KubaMiszcz/Kolony2144.git'
+    }
+  }
+  stage('install node_modules') {
+    steps {
+      sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular/'
+      sh 'npm install'
+    }
+  }
+// 		stage('Build') {
+// 			steps {
+				// sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular'
+			 //   sh 'ng build --prod'
+// 			}
+// 		}
+}
