@@ -14,8 +14,7 @@ pipeline {
       }
       stage('install node_modules') {
         steps {
-          sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular/'
-          sh 'npm install'
+          sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular/ && npm install'
         }
       }
     // 		stage('Build') {
