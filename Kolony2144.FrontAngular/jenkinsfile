@@ -4,9 +4,7 @@ pipeline {
   stages {
     stage('Hello') {
       steps {
-      ws('"${env.WORKSPACE}"/Kolony2144.FrontAngular'){
         echo 'Hello World'
-        echo "pwd"
       }
     }
     }
@@ -17,16 +15,18 @@ pipeline {
     }
     stage('install node_modules') {
       steps {
-        // sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular/ && npm install'
-        sh 'npm install'
+        ws('"${env.WORKSPACE}"/Kolony2144.FrontAngular'){
+          // sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular/ && npm install'
+          sh 'npm install'
+        }
       }
     }
-      // 		stage('Build') {
-      // 			steps {
-              // sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular'
-            //   sh 'ng build --prod'
-      // 			}
-  // 		}
+    stage('Build') {
+      steps {
+        ws('"${env.WORKSPACE}"/Kolony2144.FrontAngular'){
+          sh 'ng build --prod'
+        }
+      }
+    }
   }
 }
-
