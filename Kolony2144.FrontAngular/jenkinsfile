@@ -10,7 +10,7 @@ pipeline {
       steps {
         echo 'npm install'
         dir('Kolony2144.FrontAngular') {
-          sh 'npm install'
+          // sh 'npm install'
         }
       }
     }
@@ -19,7 +19,7 @@ pipeline {
         echo 'Building..'
         dir('Kolony2144.FrontAngular') {
           // sh 'npm run ng -- build --prod --baseHref=/webapp/ -optimization=true'
-          sh 'npm run ng --build'
+          sh 'npm run ng build'
         }
       }
     }
