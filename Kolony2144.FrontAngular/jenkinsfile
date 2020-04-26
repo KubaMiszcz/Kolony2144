@@ -23,7 +23,7 @@ pipeline {
     stage('Build') {
       steps {
         // ws('${WORKSPACE}/Kolony2144.FrontAngular'){
-          sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular/ && ng build --prod'
+          sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular/ && npm run-script build'
         // }
       }
     }
