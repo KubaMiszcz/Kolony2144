@@ -1,27 +1,31 @@
 pipeline {
 	agent any
 
-    stages {
-      stage('Hello') {
-        steps {
-          echo 'Hello World'
+  ws('"${env.WORKSPACE}"/Kolony2144.FrontAngular'){
+      stages {
+        stage('Hello') {
+          steps {
+            echo 'Hello World'
+            echo "pwd"
+          }
         }
-      }
-      stage('Checkout branch: devel') {
-        steps {
-          git branch: 'jenkins', url: 'https://github.com/KubaMiszcz/Kolony2144.git'
+        stage('Checkout branch: devel') {
+          steps {
+            git branch: 'jenkins', url: 'https://github.com/KubaMiszcz/Kolony2144.git'
+          }
         }
-      }
-      stage('install node_modules') {
-        steps {
-          sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular/ && npm install'
+        stage('install node_modules') {
+          steps {
+            // sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular/ && npm install'
+            sh 'npm install'
+          }
         }
-      }
-    // 		stage('Build') {
-    // 			steps {
-            // sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular'
-          //   sh 'ng build --prod'
-    // 			}
-// 		}
+      // 		stage('Build') {
+      // 			steps {
+              // sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular'
+            //   sh 'ng build --prod'
+      // 			}
+  // 		}
+    }
   }
 }
