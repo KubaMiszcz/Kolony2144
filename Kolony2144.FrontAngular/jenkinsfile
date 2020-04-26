@@ -14,7 +14,7 @@ pipeline {
     }
     stage('install node_modules') {
       steps {
-        ws('"${WORKSPACE}"/Kolony2144.FrontAngular'){
+        ws('${WORKSPACE}/Kolony2144.FrontAngular'){
           // sh 'cd "${WORKSPACE}"/Kolony2144.FrontAngular/ && npm install'
           sh 'npm install'
         }
@@ -22,7 +22,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        ws('"${WORKSPACE}"/Kolony2144.FrontAngular'){
+        ws('${WORKSPACE}/Kolony2144.FrontAngular'){
           sh 'ng build --prod'
         }
       }
