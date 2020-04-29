@@ -33,7 +33,7 @@ export class FinanceService {
   }
 
   get totalCashConsumption() {
-    return this.entityService.getEntityConsumptionQtyByName(ResourceName.Cash);
+    return this.entityService.getTotalEntityConsumptionQtyByName(ResourceName.Cash);
   }
 
 }

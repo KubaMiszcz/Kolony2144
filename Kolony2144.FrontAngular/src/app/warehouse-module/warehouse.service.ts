@@ -28,10 +28,10 @@ export class WarehouseService {
   }
 
   get totalStorageCapacity(): number {
-    return this.entityService.getEntityProductionQtyByName(ResourceName.StorageSpace);
+    return this.entityService.getTotalEntityProductionQtyByName(ResourceName.StorageSpace);
   }
 
   get totalStorageUsage(): number {
-    return this.entityService.getEntityConsumptionQtyByName(ResourceName.StorageSpace);
+    return this.entityService.getTotalEntityConsumptionQtyByName(ResourceName.StorageSpace);
   }
 }

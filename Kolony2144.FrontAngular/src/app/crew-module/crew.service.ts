@@ -1,3 +1,4 @@
+import { EntityService } from 'src/app/services/entity.service';
 import { Injectable } from '@angular/core';
 import { IAsset } from '../models/Entity';
 import { AssetService } from '../assets-module/asset.service';
@@ -10,29 +11,33 @@ import { CommonService } from '../services/common.service';
 import { TradeService } from '../trade-module/trade.service';
 import { WikiService } from '../wiki-module/wiki.service';
 import { DataProviderService } from '../services/data-provider.service';
+import { ResourceName } from '../models/Resource';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrewService {
-  CrewList: IAsset[];
+  crewList: IAsset[];
 
   constructor(
     private commonService: CommonService,
     private assetService: AssetService,
-    private dataProviderService: DataProviderService
+    private dataProviderService: DataProviderService,
+    private entityService: EntityService,
+    private kolonyService: KolonyService
   ) {
-    this.CrewList = this.dataProviderService.ALL_CREW_LIST;
+    this.crewList = this.kolonyService.Kolony.Crew;
+
+
   }
 
-  getAllCrewQuantity() {
-    return this.CrewList
+  getTotoalCrewQuantity() {
+    return this.crewList
       .map(crew => crew.Quantity)
       .reduce((acc, next) => acc + next);
   }
 
-  getAllCrewDEPR(): IAsset[] {
-    return this.CrewList;
-  }
+
+
 
 }

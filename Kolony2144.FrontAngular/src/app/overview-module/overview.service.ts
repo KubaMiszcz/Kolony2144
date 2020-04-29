@@ -56,7 +56,7 @@ export class OverviewService {
 
     // news about cash
     resource = this.entityService.getEntityByName(ResourceName.Cash);
-    consumption = this.entityService.getEntityConsumptionQtyByName(resource.Name);
+    consumption = this.entityService.getTotalEntityConsumptionQtyByName(resource.Name);
     if (resource.Quantity < 0) {
       this.AddNews('!!! CASH RUNS OUT, BAILIFF IS COMING TO KOLONY !!!');
     }
@@ -66,7 +66,7 @@ export class OverviewService {
 
     // news about food
     resource = this.entityService.getEntityByName(ResourceName.Food);
-    consumption = this.entityService.getEntityConsumptionQtyByName(resource.Name);
+    consumption = this.entityService.getTotalEntityConsumptionQtyByName(resource.Name);
     if (resource.Quantity < 0) {
       this.AddNews('!!! HUNGER IN KOLONY !!!');
     }
