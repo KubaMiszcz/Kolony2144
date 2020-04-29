@@ -25,8 +25,7 @@ export class CrewOverviewComponent implements OnInit {
     private entityService: EntityService,
     private assetService: AssetService,
     private crewService: CrewService
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.cashConsumptionList = this.fillSummaryTableRows(

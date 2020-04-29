@@ -41,7 +41,7 @@ export class FinancesOverviewComponent implements OnInit {
 
     entities.forEach(r => {
       const list = type === GenericTypesEnum.Consuming ? r.MaintenanceCost : r.PassiveIncome;
-      const perUnitUsage = this.sharedService.findItemInListByName(list, resourceName).Quantity;
+      const perUnitUsage = this.sharedService.findItemInListByName(list, resourceName)?.Quantity ?? 0;
       const usage = (r.Quantity * perUnitUsage) / referenceQty;
       res.push([
         r.Name,
