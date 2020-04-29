@@ -76,8 +76,8 @@ export class OverviewService {
 
     // news about power
     resource = this.entityService.getEntityByName(ResourceName.Energy);
-    consumption = this.powerService.getEnergyUsage();
-    production = this.powerService.getEnergyProduction();
+    consumption = this.powerService.totalEnergyUsage;
+    production = this.powerService.totalEnergyProduction;
     if (consumption > production) {
       msg = '!!! ' + (((consumption / production) * 100) - 100).toFixed(1) + '%  OVERLOADED !!!';
       this.AddNews(msg);

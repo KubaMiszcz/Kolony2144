@@ -28,11 +28,11 @@ export class PowerService {
     this.powerSources = this.entityService.getEntitiesByProducedAssetNameFromList(ResourceName.Energy);
   }
 
-  getEnergyProduction(): number {
+  get totalEnergyProduction(): number {
     return this.entityService.getEntityProductionQtyByName(ResourceName.Energy);
   }
 
-  getEnergyUsage(): number {
+  get totalEnergyUsage(): number {
     return this.entityService.getEntityConsumptionQtyByName(ResourceName.Energy);
   }
 }
