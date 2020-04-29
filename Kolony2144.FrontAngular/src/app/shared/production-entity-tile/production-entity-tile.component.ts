@@ -56,7 +56,6 @@ export class ProductionEntityTileComponent implements OnInit {
   }
 
   onQtyChange(event: number) {
-    console.log('onChange', event, this.productionQty);
     if (event > this.maxProductionQty) {
       this.productionQty = this.maxProductionQty;
     } else if (event <= 1) {

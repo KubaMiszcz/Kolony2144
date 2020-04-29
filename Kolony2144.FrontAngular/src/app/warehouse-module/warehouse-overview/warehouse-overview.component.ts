@@ -1,3 +1,4 @@
+import { EntityService } from 'src/app/services/entity.service';
 import { GenericTypesEnum } from './../../models/enums/Types.enum';
 import { Component, OnInit } from '@angular/core';
 import { KolonyService } from 'src/app/services/kolony.service';
@@ -14,7 +15,6 @@ import { WarehouseService } from '../warehouse.service';
   styleUrls: ['./warehouse-overview.component.scss']
 })
 export class WarehouseOverviewComponent implements OnInit {
-
   storedItemsTableRows: any[] = [];
   storageProvidersItemsTableRows: any[] = [];
 
@@ -29,19 +29,21 @@ export class WarehouseOverviewComponent implements OnInit {
     this.storedItemsTableRows = this.fillSummaryTableRows(
       this.warehouseService.storedItems,
       ResourceName.StorageSpace,
-      GenericTypesEnum.Consuming
+      GenericTypesEnum.Consuming,
+      this.warehouseService.totalStorageCapacity
     );
 
     this.storageProvidersItemsTableRows = this.fillSummaryTableRows(
       this.warehouseService.storageProviders,
       ResourceName.StorageSpace,
-      GenericTypesEnum.Producing
+      GenericTypesEnum.Producing,
+      this.warehouseService.totalStorageCapacity
     );
 
   }
 
 
-  fillSummaryTableRows(entities: IEntity[], resourceName: ResourceName, type: GenericTypesEnum) {
+  fillSummaryTableRows(entities: IEntity[], resourceName: ResourceName, type: GenericTypesEnum, referenceQty: number) {
     const res: any[][] = [
       ['name', 'type', 'per unit', 'qty', resourceName + ' total', '%']
     ];
@@ -49,13 +51,14 @@ export class WarehouseOverviewComponent implements OnInit {
     entities.forEach(r => {
       const list = type === GenericTypesEnum.Consuming ? r.MaintenanceCost : r.PassiveIncome;
       const perUnitUsage = this.sharedService.findItemInListByName(list, resourceName).Quantity;
+      const usage = (r.Quantity * perUnitUsage) / referenceQty;
       res.push([
         r.Name,
         r.Type,
         perUnitUsage,
         r.Quantity,
         r.Quantity * perUnitUsage,
-        'fix'
+        this.commonService.ConvertToPercents(usage, 1) + '%'
       ]);
     });
 

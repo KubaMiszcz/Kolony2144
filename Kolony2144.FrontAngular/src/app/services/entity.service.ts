@@ -160,14 +160,14 @@ export class EntityService {
 
   addItemToProductionQueue(entity: IEntity) {
     this.productionQueue.push(entity);
-    this.UpdateInventoryDueToProducedItem(entity, entity.Quantity);
+    // this.UpdateInventoryDueToProducedItem(entity, entity.Quantity);
     this.ProductionQueueIsUpdatedEmitter.emit(true);
   }
 
   removeItemFromProductionQueue(entity: IEntity) {
     const idx = this.productionQueue.indexOf(entity);
     this.productionQueue.splice(idx, 1);
-    this.UpdateInventoryDueToProducedItem(entity, -1 * entity.Quantity);
+    // this.UpdateInventoryDueToProducedItem(entity, -1 * entity.Quantity);
     this.ProductionQueueIsUpdatedEmitter.emit(true);
   }
 
@@ -176,7 +176,6 @@ export class EntityService {
       this.getEntityByName(r.Name).Quantity -= (r.Quantity * qty);
     });
   }
-
 
 
 

@@ -1,3 +1,4 @@
+import { ISimplifiedEntity } from './../../models/Entity';
 import { Component, OnInit } from '@angular/core';
 import { IEntity } from 'src/app/models/Entity';
 import { KolonyService } from 'src/app/services/kolony.service';
@@ -30,3 +31,4 @@ export class ConstructionQueueComponent implements OnInit {
   }
 
 }
+

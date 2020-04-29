@@ -1,3 +1,4 @@
+import { ResourceTypesEnum } from './../models/enums/Types.enum';
 import { BuildingService } from './../buildings-module/building.service';
 import { Injectable } from '@angular/core';
 import { IAsset, IEntity } from '../models/Entity';
@@ -29,6 +30,10 @@ export class FinanceService {
   ) {
     this.cashConsumers = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.Cash);
     this.Cash = this.entityService.getEntityByName(ResourceName.Cash);
+  }
+
+  get totalCashConsumption() {
+    return this.entityService.getEntityConsumptionQtyByName(ResourceName.Cash);
   }
 
 }

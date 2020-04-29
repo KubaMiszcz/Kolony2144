@@ -26,4 +26,12 @@ export class WarehouseService {
     this.storedItems = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.StorageSpace);
     this.storageProviders = this.entityService.getEntitiesByProducedAssetNameFromList(ResourceName.StorageSpace);
   }
+
+  get totalStorageCapacity(): number {
+    return this.entityService.getEntityProductionQtyByName(ResourceName.StorageSpace);
+  }
+
+  get totalStorageUsage(): number {
+    return this.entityService.getEntityConsumptionQtyByName(ResourceName.StorageSpace);
+  }
 }

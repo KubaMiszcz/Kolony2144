@@ -72,6 +72,14 @@ export class CommonService {
   }
 
 
+
+  ConvertToPercents(number: number, precision: number = 0) {
+    return this.Round(number * 100, precision);
+  }
+
+
+
+
   cloneObject<T>(object: T): T {
     return JSON.parse(JSON.stringify(object)) as T;
   }
