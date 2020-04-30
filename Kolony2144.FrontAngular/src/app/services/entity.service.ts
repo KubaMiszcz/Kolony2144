@@ -22,7 +22,7 @@ export class EntityService {
     private dataProviderService: DataProviderService,
     private kolonyService: KolonyService
   ) {
-    this.allKolonyEntitiesList = this.kolonyService.AllKolonyEntities;
+    this.kolonyService.AllKolonyEntitiesBS.subscribe(data => this.allKolonyEntitiesList = data);
   }
 
   getEntityByName(name: string): IEntity {

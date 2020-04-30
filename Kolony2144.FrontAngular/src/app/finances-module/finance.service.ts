@@ -28,7 +28,10 @@ export class FinanceService {
     private assetService: AssetService,
     private kolonyService: KolonyService,
   ) {
-    this.cashConsumers = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.Cash);
+    this.kolonyService.AllKolonyEntitiesBS.subscribe(data =>
+      this.cashConsumers = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.Cash)
+    );
+
     this.Cash = this.entityService.getEntityByName(ResourceName.Cash);
   }
 

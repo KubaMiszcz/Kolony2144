@@ -1,3 +1,4 @@
+import { KolonyService } from 'src/app/services/kolony.service';
 import { Injectable } from '@angular/core';
 import { AssetService } from '../assets-module/asset.service';
 import { FinanceService } from '../finances-module/finance.service';
@@ -27,6 +28,7 @@ export class TradeService {
   constructor(
     private commonService: CommonService,
     private sharedService: SharedService,
+    private kolonyService: KolonyService,
     private dataProviderService: DataProviderService,
     private assetService: AssetService,
     private financeService: FinanceService,
@@ -44,14 +46,25 @@ export class TradeService {
 
 
 
-  proceedTransaction(type: TransactionTypeEnum, asset: IAsset, qtyOnTable: number, price: number) {
+  proceedTransaction(type: TransactionTypeEnum, assetName: string, qtyOnTable: number, price: number) {
+    let asset = this.assetService.getAssetByName(assetName);
+    if (!asset) {
+      const newAsset = this.dataProviderService.getAssetByName(assetName);
+      asset = this.kolonyService.createNewAssetInKolony(newAsset);
+    }
+
     if (type === TransactionTypeEnum.Buy) {
       this.financeService.Cash.Quantity -= (qtyOnTable * price);
-      asset.Quantity += qtyOnTable;
       asset.Price = this.getUpdatedAVGPrice(asset.Quantity, asset.Price, qtyOnTable, price);
+      asset.Quantity += qtyOnTable;
     } else {
       this.financeService.Cash.Quantity += (qtyOnTable * price);
       asset.Quantity -= qtyOnTable;
+      if (asset.Quantity === 0) {
+        this.kolonyService.deleteAssetFromKolony(asset);
+      } else if (asset.Quantity < 0) {
+        throw new Error('asset.Quantity<0');
+      }
     }
   }
 
