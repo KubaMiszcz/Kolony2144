@@ -39,10 +39,8 @@ export class EntityService {
     const cosnumedAsset = this.getEntityByName(entityName);
     let consumedQty = 0;
     this.allKolonyEntitiesList.forEach(asset => {
-      const consumedItem = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name);
-      if (consumedItem) {
-        consumedQty += (asset.Quantity * consumedItem.Quantity);
-      }
+      const consumedItemQuantity = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name)?.Quantity ?? 0;
+      consumedQty += (asset.Quantity * consumedItemQuantity);
     });
 
     return consumedQty;
@@ -56,10 +54,9 @@ export class EntityService {
     const producedAsset = this.getEntityByName(assetName);
     let producedQty = 0;
     this.allKolonyEntitiesList.forEach(asset => {
-      const producedItem = asset.PassiveIncome.find(item => item.Name === producedAsset.Name);
-      if (producedItem) {
-        producedQty += (asset.Quantity * producedItem.Quantity);
-      }
+      const producedItemQuantity = asset.PassiveIncome.find(item => item.Name === producedAsset.Name)?.Quantity ?? 0;
+      producedQty += (asset.Quantity * producedItemQuantity);
+
     });
 
     return producedQty;
