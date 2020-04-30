@@ -80,8 +80,19 @@ export class CommonService {
 
 
 
+
+  removeItemFromList(list: any[], index: number) {
+    if (index > -1) {
+      list.splice(index, 1);
+    }
+  }
+
   cloneObject<T>(object: T): T {
     return JSON.parse(JSON.stringify(object)) as T;
   }
+
+
+
+
 
 }
