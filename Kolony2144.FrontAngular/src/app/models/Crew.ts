@@ -5,7 +5,8 @@ import { ResourceName } from './Resource';
 
 export enum CrewNames {
   Worker = 'Worker',
-  Technician = 'Technician'
+  Technician = 'Technician',
+  Engineer = 'Engineer'
 }
 
 export interface ICrew extends IAsset {
@@ -38,7 +39,6 @@ export const AllCrew: ICrewFullModel[] = [
   {
     Name: CrewNames.Technician,
     Description: '', ImageUrl: '/assets/wiki-icons/crew-technician.png',
-
     Type: EntityTypesEnum.Crew,
     Tags: [CrewTypesEnum.Production],
     Price: 5,
@@ -55,6 +55,26 @@ export const AllCrew: ICrewFullModel[] = [
     ],
     UoM: UoMsEnum.pcs,
     Quantity: 5
+  },
+  {
+    Name: CrewNames.Engineer,
+    Description: '', ImageUrl: '/assets/wiki-icons/crew-technician.png',
+    Type: EntityTypesEnum.Crew,
+    Tags: [CrewTypesEnum.Production],
+    Price: 15,
+    HistoricalPrices: [],
+    RarityFactor: 0,
+    CreationCost: [],
+    MaintenanceCost: [
+      { Name: ResourceName.Food, Quantity: 0.1 },
+      { Name: ResourceName.Cash, Quantity: 5 },
+    ],
+    PassiveIncome: [
+      { Name: ResourceName.BasicWorkUnit, Quantity: 1 },
+      { Name: ResourceName.AdvancedWorkUnit, Quantity: 3 },
+    ],
+    UoM: UoMsEnum.pcs,
+    Quantity: 0
   }
 ];
 
