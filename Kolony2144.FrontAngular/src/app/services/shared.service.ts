@@ -14,5 +14,12 @@ export class SharedService {
     return list.find(r => ((r as unknown) as IEntityModel).Name === name);
   }
 
+  removeItemFromListByName(list: IEntity[], name: string) {
+    const index = list.findIndex(item => item.Name === name);
+    if (index > -1) {
+      list.splice(index, 1);
+    }
+
+  }
 
 }
