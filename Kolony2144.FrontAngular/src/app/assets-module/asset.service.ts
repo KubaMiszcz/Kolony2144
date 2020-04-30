@@ -46,7 +46,15 @@ export class AssetService {
   }
 
 
+  // todo use here method form entites services method
+  addNewAssetToInventory(newAsset: IAsset, qty: number, price: number): IAsset {
+    const asset = this.commonService.cloneObject(newAsset) as IAsset;
+    asset.Quantity = qty;
+    asset.Price = price;
+    this.allKolonyAssetList.push(asset);
 
+    return asset;
+  }
 
 
 
@@ -89,14 +97,6 @@ export class AssetService {
   }
 
 
-  addNewAssetToInventoryDEPR(newAsset: IAsset): IAsset {
-    const asset = this.commonService.cloneObject(newAsset) as IAsset;
-    asset.Quantity = 0;
-    asset.Price = 0;
-    this.allKolonyAssetList.push(asset);
-
-    return asset;
-  }
 
 
 
