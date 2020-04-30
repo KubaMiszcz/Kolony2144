@@ -45,13 +45,13 @@ export class TradeService {
 
 
   proceedTransaction(type: TransactionTypeEnum, asset: IAsset, qtyOnTable: number, price: number) {
-    this.financeService.Cash.Quantity -= (qtyOnTable * price);
     if (type === TransactionTypeEnum.Buy) {
+      this.financeService.Cash.Quantity -= (qtyOnTable * price);
+      asset.Quantity += qtyOnTable;
       asset.Price = this.getUpdatedAVGPrice(asset.Quantity, asset.Price, qtyOnTable, price);
-    }
-    asset.Quantity += qtyOnTable;
-    if (asset.Quantity === 0) {
-      asset.Price = 0;
+    } else {
+      this.financeService.Cash.Quantity += (qtyOnTable * price);
+      asset.Quantity -= qtyOnTable;
     }
   }
 

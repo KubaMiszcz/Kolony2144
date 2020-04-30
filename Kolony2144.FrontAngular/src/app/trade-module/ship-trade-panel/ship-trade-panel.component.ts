@@ -83,18 +83,16 @@ export class ShipTradePanelComponent implements OnInit {
       // todo create new isnatnce of all assets list in trade service
       const newAsset = this.dataProviderService.getEntityByName(row.Name); // get from all
       // fixit _____________________________________________________vvvvvvv
-      asset = this.assetService.addNewAssetToInventoryDEPR(newAsset as IAsset); // get newly added from kolony assets
+      asset = this.assetService.addNewAssetToInventory(newAsset as IAsset, row.QtyOnTable, row.AVGBuyPrice); // get newly added from kolony assets
     }
 
-    let factor = 0;
     if (row.Type === TransactionTypeEnum.Buy) {
-      factor = 1;
+      row.KolonyQty += row.QtyOnTable;
     } else {
-      factor = -1;
+      row.KolonyQty -= row.QtyOnTable;
     }
 
-    row.KolonyQty += (factor * row.QtyOnTable);
-    this.tradeService.proceedTransaction(row.Type, asset, (factor * row.QtyOnTable), row.ShipPrice);
+    this.tradeService.proceedTransaction(row.Type, asset, row.QtyOnTable, row.ShipPrice);
     row.AVGBuyPrice = this.assetService.getAssetByName(row.Name).Price;
 
     this.updateMaxTableQty(row);

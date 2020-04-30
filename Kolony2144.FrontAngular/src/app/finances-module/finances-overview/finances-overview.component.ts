@@ -17,6 +17,7 @@ import { GenericTypesEnum } from 'src/app/models/enums/Types.enum';
 })
 export class FinancesOverviewComponent implements OnInit {
   financeItemsTableRows: any[] = [];
+  cashConsumers: IEntity[] = [];
 
   constructor(
     private kolonyService: KolonyService,
@@ -26,8 +27,9 @@ export class FinancesOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.cashConsumers = this.financeService.cashConsumers;
     this.financeItemsTableRows = this.fillSummaryTableRows(
-      this.financeService.cashConsumers,
+      this.cashConsumers,
       ResourceName.Cash,
       GenericTypesEnum.Consuming,
       this.financeService.totalCashConsumption
