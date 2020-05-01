@@ -40,24 +40,42 @@ export class EntityService {
   *@param entityName name of consumed entity
   */
   getTotalEntityConsumptionQtyByName(entityName: string): number {
-    const cosnumedAsset = this.getEntityByName(entityName);
+    return this.getTotalEntityConsumptionQtyByNameFromList(entityName, this.allKolonyEntitiesList);
+  }
+
+  /**
+  * returns total consumed qty of named entity by kolony assets IN LIST buildings etc
+  *@param entityName name of consumed entity
+  */
+  getTotalEntityConsumptionQtyByNameFromList(entityName: string, list: IEntity[]): number {
+    const consumedEntity = this.getEntityByName(entityName);
     let consumedQty = 0;
-    this.allKolonyEntitiesList.forEach(asset => {
-      const consumedItemQuantity = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name)?.Quantity ?? 0;
-      consumedQty += (asset.Quantity * consumedItemQuantity);
+    list.forEach(entity => {
+      const consumedItemQuantity = entity.MaintenanceCost.find(item => item.Name === consumedEntity.Name)?.Quantity ?? 0;
+      consumedQty += (entity.Quantity * consumedItemQuantity);
     });
 
     return consumedQty;
   }
 
+
+  /**
+  * returns total produced qty of named entity by kolony assets IN LIST buildings etc
+  *@param entityName name of produced entity
+  */
+  getTotalEntityProductionQtyByName(entityName: string): number {
+    return this.getTotalEntityProductionQtyByNameFromList(entityName, this.allKolonyEntitiesList);
+  }
+
+
   /**
   * returns total produced qty of named entity by ALL kolony assets buildings etc
   *@param entityName name of produced entity
   */
-  getTotalEntityProductionQtyByName(assetName: string): number {
-    const producedAsset = this.getEntityByName(assetName);
+  getTotalEntityProductionQtyByNameFromList(entityName: string, list: IEntity[]): number {
+    const producedAsset = this.getEntityByName(entityName);
     let producedQty = 0;
-    this.allKolonyEntitiesList.forEach(asset => {
+    list.forEach(asset => {
       const producedItemQuantity = asset.PassiveIncome.find(item => item.Name === producedAsset.Name)?.Quantity ?? 0;
       producedQty += (asset.Quantity * producedItemQuantity);
 
@@ -65,6 +83,10 @@ export class EntityService {
 
     return producedQty;
   }
+
+
+
+
 
 
   getEntitiesByConsumedAssetName(consumedAssetName: ResourceName): IEntity[] {

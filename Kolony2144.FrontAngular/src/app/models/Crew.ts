@@ -34,7 +34,7 @@ export const AllCrew: ICrewFullModel[] = [
       { Name: ResourceName.BasicWorkUnit, Quantity: 2 },
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 20
+    Quantity: 200
   },
   {
     Name: CrewNames.Technician,

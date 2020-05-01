@@ -31,22 +31,26 @@ export class CrewOverviewComponent implements OnInit {
     this.cashConsumptionList = this.fillSummaryTableRows(
       this.crewService.crewList,
       ResourceName.Cash,
-      GenericTypesEnum.Consuming
+      GenericTypesEnum.Consuming,
+      this.entityService.getTotalEntityConsumptionQtyByNameFromList(ResourceName.Cash, this.crewService.crewList)
     );
     this.foodConsumptionList = this.fillSummaryTableRows(
       this.crewService.crewList,
       ResourceName.Food,
-      GenericTypesEnum.Consuming
+      GenericTypesEnum.Consuming,
+      this.entityService.getTotalEntityConsumptionQtyByNameFromList(ResourceName.Food, this.crewService.crewList)
     );
     this.basicWorkUnitProductionList = this.fillSummaryTableRows(
       this.crewService.crewList,
       ResourceName.BasicWorkUnit,
-      GenericTypesEnum.Producing
+      GenericTypesEnum.Producing,
+      this.entityService.getTotalEntityProductionQtyByNameFromList(ResourceName.BasicWorkUnit, this.crewService.crewList)
     );
     this.advancedWorkUnitProductionList = this.fillSummaryTableRows(
       this.crewService.crewList,
       ResourceName.AdvancedWorkUnit,
-      GenericTypesEnum.Producing
+      GenericTypesEnum.Producing,
+      this.entityService.getTotalEntityProductionQtyByNameFromList(ResourceName.AdvancedWorkUnit, this.crewService.crewList)
     );
 
 
@@ -57,16 +61,16 @@ export class CrewOverviewComponent implements OnInit {
     // this.fillTotalSummary();
   }
 
-  fillSummaryTableRows(entities: IEntity[], resourceName: ResourceName, type: GenericTypesEnum) {
+  fillSummaryTableRows(entities: IEntity[], resourceName: ResourceName, type: GenericTypesEnum, referenceQty?: number) {
     const res: any[][] = [
       ['name', 'type', 'per unit', 'qty', resourceName + ' total', '%']
     ];
 
-
-    const referenceQty = type === GenericTypesEnum.Consuming ?
-      this.entityService.getTotalEntityConsumptionQtyByName(resourceName)
-      : this.entityService.getTotalEntityProductionQtyByName(resourceName);
-
+    if (!referenceQty) {
+      referenceQty = type === GenericTypesEnum.Consuming ?
+        this.entityService.getTotalEntityConsumptionQtyByName(resourceName)
+        : this.entityService.getTotalEntityProductionQtyByName(resourceName);
+    }
 
     entities.forEach(r => {
       const list = type === GenericTypesEnum.Consuming ? r.MaintenanceCost : r.PassiveIncome;

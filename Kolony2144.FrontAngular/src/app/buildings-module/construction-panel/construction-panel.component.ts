@@ -1,3 +1,4 @@
+import { IBuilding } from 'src/app/models/Building';
 import { BuildingService } from './../building.service';
 import { GameService } from './../../services/game.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,7 @@ import { KolonyService } from 'src/app/services/kolony.service';
   styleUrls: ['./construction-panel.component.scss']
 })
 export class ConstructionPanelComponent implements OnInit {
-  allBuildingsList: IEntity[] = [];
+  allBuildingsList: IBuilding[] = [];
 
   constructor(
     private commonService: CommonService,
@@ -24,7 +25,7 @@ export class ConstructionPanelComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.allBuildingsList = this.buildingService.kolonyBuildingsList;
+    this.allBuildingsList = this.dataProviderService.ALL_BUILDINGS_LIST;
   }
 
 }

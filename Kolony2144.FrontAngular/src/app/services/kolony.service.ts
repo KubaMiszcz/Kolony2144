@@ -100,7 +100,7 @@ export class KolonyService {
   private fillKolonyListWithInitialValues<T, T2>(srcList: T[], targetList: T2[]) {
     [...srcList].filter(a =>
       (a as unknown as IEntity).Quantity > 0
-      || (a as unknown as IAsset).Price === undefined
+      // || ((a as unknown as IEntity).Type === EntityTypesEnum.Resource && !(a as unknown as IAsset).Price)
     )
       .forEach(item => {
         const clonedItem = this.commonService.cloneObject(item) as unknown as T2;
