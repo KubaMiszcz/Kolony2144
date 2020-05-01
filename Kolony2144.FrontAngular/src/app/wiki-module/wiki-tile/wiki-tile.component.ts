@@ -24,9 +24,9 @@ export class WikiTileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.item.CreationCost) { this.productionCost = this.fillList(this.item.CreationCost); }
-    if (this.item.PassiveIncome) { this.producedItems = this.fillList(this.item.PassiveIncome); }
-    if (this.item.MaintenanceCost) { this.consumedItems = this.fillList(this.item.MaintenanceCost); }
+    if (!!this.item.CreationCost) { this.productionCost = this.fillList(this.item.CreationCost); }
+    if (!!this.item.PassiveIncome) { this.producedItems = this.fillList(this.item.PassiveIncome); }
+    if (!!this.item.MaintenanceCost) { this.consumedItems = this.fillList(this.item.MaintenanceCost); }
     console.log(this.productionCost);
 
   }

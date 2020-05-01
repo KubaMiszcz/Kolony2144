@@ -1,14 +1,11 @@
-import { FinanceService } from './../finance.service';
-import { AssetService } from '../../assets-module/asset.service';
-import { CommonService } from 'src/app/services/common.service';
-import { SharedModule } from './../../shared/shared.module';
 import { Component, OnInit } from '@angular/core';
-import { Kolony } from 'src/app/models/Kolony';
-import { KolonyService } from 'src/app/services/kolony.service';
-import { ResourceName } from 'src/app/models/Resource';
-import { IAsset, IEntity } from 'src/app/models/Entity';
-import { SharedService } from 'src/app/services/shared.service';
+import { IEntity } from 'src/app/models/Entity';
 import { GenericTypesEnum } from 'src/app/models/enums/Types.enum';
+import { ResourceName } from 'src/app/models/Resource';
+import { CommonService } from 'src/app/services/common.service';
+import { KolonyService } from 'src/app/services/kolony.service';
+import { SharedService } from 'src/app/services/shared.service';
+import { FinanceService } from './../finance.service';
 
 @Component({
   selector: 'app-finances-overview',
@@ -28,6 +25,7 @@ export class FinancesOverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.cashConsumers = this.financeService.cashConsumers;
+
     this.financeItemsTableRows = this.fillSummaryTableRows(
       this.cashConsumers,
       ResourceName.Cash,

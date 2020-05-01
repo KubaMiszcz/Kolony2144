@@ -32,7 +32,7 @@ export class EntityService {
 
 
   /**
-  * returns consumed qty of named entity by all kolony assets buildings etc
+  * returns total consumed qty of named entity by ALL kolony assets buildings etc
   *@param entityName name of consumed entity
   */
   getTotalEntityConsumptionQtyByName(entityName: string): number {
@@ -47,7 +47,7 @@ export class EntityService {
   }
 
   /**
-  * returns produced qty of named entity by all kolony assets buildings etc
+  * returns total produced qty of named entity by ALL kolony assets buildings etc
   *@param entityName name of produced entity
   */
   getTotalEntityProductionQtyByName(assetName: string): number {

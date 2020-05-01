@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { AllBuildings, IBuilding } from '../models/Building';
 import { AllCrew as AllCrew } from '../models/Crew';
 import { IAsset, IEntity } from '../models/Entity';
@@ -9,7 +9,7 @@ import { AllResources, AllVolatileResources } from '../models/Resource';
 import { CommonService } from './common.service';
 import { SharedService } from './shared.service';
 import { DataProviderService } from './data-provider.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,7 @@ export class KolonyService {
   Kolony: Kolony;
   AllAssetsBS = new BehaviorSubject<IAsset[]>([]);
   AllKolonyEntitiesBS = new BehaviorSubject<IEntity[]>([]);
+  KolonyStateUpdatedSubject = new Subject<boolean>();
 
   constructor(
     private commonService: CommonService,
@@ -41,6 +42,7 @@ export class KolonyService {
   private updateGenericLists() {
     this.AllAssetsBS.next([...this.Kolony.Crew, ...this.Kolony.Machines, ...this.Kolony.Resources]);
     this.AllKolonyEntitiesBS.next([...this.Kolony.Buildings, ...this.Kolony.Crew, ...this.Kolony.Machines, ...this.Kolony.Resources]);
+    this.KolonyStateUpdatedSubject.next(true);
   }
 
   createNewAssetInKolony(newAsset: IAsset): IAsset {
@@ -69,9 +71,8 @@ export class KolonyService {
     } else if (asset.Type === EntityTypesEnum.Machine) {
       assetList = this.Kolony.Machines;
     }
-    this.updateGenericLists();
-
     this.sharedService.removeItemFromListByName(assetList, asset.Name);
+    this.updateGenericLists();
   }
 
 

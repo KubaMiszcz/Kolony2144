@@ -41,7 +41,7 @@ export class GameService {
   nextTurn() {
     console.log('nexturn');
     this.router.navigate(['/loading-screen']);
-    this.IsTurnComputingEndedSubject.next(false);
+    // this.IsTurnComputingEndedSubject.next(false);
     setTimeout(() => {
 
       // ##########################################

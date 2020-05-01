@@ -26,8 +26,9 @@ export class CrewService {
     private entityService: EntityService,
     private kolonyService: KolonyService
   ) {
-    this.crewList = this.kolonyService.Kolony.Crew;
-
+    this.kolonyService.AllKolonyEntitiesBS.subscribe(data => {
+      this.crewList = this.kolonyService.Kolony.Crew;
+    });
 
   }
 

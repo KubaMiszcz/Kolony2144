@@ -23,8 +23,10 @@ export class WarehouseService {
     private buildingService: BuildingService,
     private kolonyService: KolonyService
   ) {
-    this.storedItems = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.StorageSpace);
-    this.storageProviders = this.entityService.getEntitiesByProducedAssetNameFromList(ResourceName.StorageSpace);
+    this.kolonyService.AllKolonyEntitiesBS.subscribe(data => {
+      this.storedItems = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.StorageSpace);
+      this.storageProviders = this.entityService.getEntitiesByProducedAssetNameFromList(ResourceName.StorageSpace);
+    });
   }
 
   get totalStorageCapacity(): number {

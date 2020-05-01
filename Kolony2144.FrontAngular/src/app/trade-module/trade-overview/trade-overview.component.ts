@@ -38,7 +38,6 @@ export class TradeOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.tradeAnnouncement = this.tradeService.tradeAnnouncement;
     this.isShipIncoming = this.tradeService.isShipLanded;
     if (this.isShipIncoming) {

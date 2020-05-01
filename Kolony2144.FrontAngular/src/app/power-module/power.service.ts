@@ -24,13 +24,17 @@ export class PowerService {
     private buildingService: BuildingService,
     private kolonyService: KolonyService,
   ) {
-    this.powerConsumers = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.Energy);
-    this.powerSources = this.entityService.getEntitiesByProducedAssetNameFromList(ResourceName.Energy);
+    this.kolonyService.AllKolonyEntitiesBS.subscribe(data => {
+      this.powerConsumers = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.Energy);
+      this.powerSources = this.entityService.getEntitiesByProducedAssetNameFromList(ResourceName.Energy);
+    }
+    );
   }
 
   get totalEnergyProduction(): number {
     return this.entityService.getTotalEntityProductionQtyByName(ResourceName.Energy);
   }
+
 
   get totalEnergyUsage(): number {
     return this.entityService.getTotalEntityConsumptionQtyByName(ResourceName.Energy);

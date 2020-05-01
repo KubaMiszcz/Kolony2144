@@ -35,9 +35,9 @@ export class StatusBarComponent implements OnInit {
     this.updateStatusBarData();
 
     this.gameService.IsTurnComputingEndedSubject.subscribe(s => {
-      if (s) {
-        this.updateStatusBarData();
-      }
+      // if (s) {
+      this.updateStatusBarData();
+      // }
     });
 
   }
