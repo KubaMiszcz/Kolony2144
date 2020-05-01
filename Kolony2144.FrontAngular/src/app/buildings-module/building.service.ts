@@ -16,9 +16,10 @@ export class BuildingService {
     private kolonyService: KolonyService,
     private entityService: EntityService,
   ) {
-    this.kolonyService.AllKolonyEntitiesBS.subscribe(data => {
-      this.kolonyBuildingsList = this.kolonyService.Kolony.Buildings;
-    });
+    this.kolonyBuildingsList = this.kolonyService.Kolony.Buildings;
+    this.kolonyService.KolonyStateUpdatedSubject.subscribe(data =>
+      this.kolonyBuildingsList = this.kolonyService.Kolony.Buildings
+    );
   }
 
 }

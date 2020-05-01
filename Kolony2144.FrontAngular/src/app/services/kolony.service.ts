@@ -16,8 +16,10 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class KolonyService {
   Kolony: Kolony;
-  AllAssetsBS = new BehaviorSubject<IAsset[]>([]);
-  AllKolonyEntitiesBS = new BehaviorSubject<IEntity[]>([]);
+  AllAssets: IAsset[] = [];
+  AllKolonyEntities: IEntity[] = [];
+  // AllAssetsBS = new BehaviorSubject<IAsset[]>([]);
+  // AllKolonyEntitiesBS = new BehaviorSubject<IEntity[]>([]);
   KolonyStateUpdatedSubject = new Subject<boolean>();
 
   constructor(
@@ -40,8 +42,8 @@ export class KolonyService {
   }
 
   private updateGenericLists() {
-    this.AllAssetsBS.next([...this.Kolony.Crew, ...this.Kolony.Machines, ...this.Kolony.Resources]);
-    this.AllKolonyEntitiesBS.next([...this.Kolony.Buildings, ...this.Kolony.Crew, ...this.Kolony.Machines, ...this.Kolony.Resources]);
+    this.AllAssets = [...this.Kolony.Crew, ...this.Kolony.Machines, ...this.Kolony.Resources];
+    this.AllKolonyEntities = [...this.Kolony.Buildings, ...this.Kolony.Crew, ...this.Kolony.Machines, ...this.Kolony.Resources];
     this.KolonyStateUpdatedSubject.next(true);
   }
 

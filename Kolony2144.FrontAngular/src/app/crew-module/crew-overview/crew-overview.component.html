@@ -16,20 +16,37 @@
     </div>
 
 
+    <div class="card-body p-1 row">
+      <div class="col">
+        <app-tile-with-table [caption]="'cashConsumptionList'" [header]="cashConsumptionList[0]" [rows]="cashConsumptionList.slice(1)">
+        </app-tile-with-table>
+      </div>
+      <div class="col">
+        <app-tile-with-table [caption]="'food consumption summary'" [header]="foodConsumptionList[0]" [rows]="foodConsumptionList.slice(1)">
+        </app-tile-with-table>
+      </div>
+    </div>
 
 
     <div class="card-body p-1 row">
-      <app-tile-with-table [caption]="'cashConsumptionList'" [header]="cashConsumptionList[0]" [rows]="cashConsumptionList.slice(1)">
-      </app-tile-with-table>
-      <app-tile-with-table [caption]="'food consumption summary'" [header]="foodConsumptionList[0]" [rows]="foodConsumptionList.slice(1)">
-      </app-tile-with-table>
-      <app-tile-with-table [caption]="'basicWorkUnitProductionList'" [header]="basicWorkUnitProductionList[0]"
-        [rows]="basicWorkUnitProductionList.slice(1)">
-      </app-tile-with-table>
-      <app-tile-with-table [caption]="'advancedWorkUnitProductionList'" [header]="advancedWorkUnitProductionList[0]"
-        [rows]="advancedWorkUnitProductionList.slice(1)">
-      </app-tile-with-table>
+      <div class="col">
+        <app-tile-with-table [caption]="'basicWorkUnitProductionList'" [header]="basicWorkUnitProductionList[0]"
+          [rows]="basicWorkUnitProductionList.slice(1)">
+        </app-tile-with-table>
+      </div>
+      <div class="col">
+        <app-tile-with-table [caption]="'advancedWorkUnitProductionList'" [header]="advancedWorkUnitProductionList[0]"
+          [rows]="advancedWorkUnitProductionList.slice(1)">
+        </app-tile-with-table>
+      </div>
     </div>
+
+
+
+
+
+
+
 
 
     <!-- <hr> -->

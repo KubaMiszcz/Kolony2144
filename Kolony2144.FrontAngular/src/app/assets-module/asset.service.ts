@@ -16,7 +16,10 @@ export class AssetService {
     private sharedService: SharedService,
     private kolonyService: KolonyService,
   ) {
-    this.kolonyService.AllAssetsBS.subscribe(data => this.allKolonyAssetList = data);
+    this.allKolonyAssetList = kolonyService.AllAssets;
+    this.kolonyService.KolonyStateUpdatedSubject.subscribe(data =>
+      this.allKolonyAssetList = kolonyService.AllAssets
+    );
   }
 
 
