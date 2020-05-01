@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AssetService } from '../assets-module/asset.service';
-import { IEntity } from '../models/Entity';
-import { ResourceName } from '../models/Resource';
 import { OverviewService } from '../overview-module/overview.service';
 import { PowerService } from '../power-module/power.service';
 import { TradeService } from '../trade-module/trade.service';
@@ -18,7 +16,7 @@ import { SharedService } from './shared.service';
   providedIn: 'root'
 })
 export class GameService {
-  IsTurnComputingEndedSubject = new Subject<boolean>();
+  // IsTurnComputingEndedSubject = new Subject<boolean>();
 
   constructor(
     private router: Router,
@@ -87,7 +85,7 @@ export class GameService {
       // this.isTurnComputing.next(false);
 
       this.overviewService.UpdateNews();
-      this.IsTurnComputingEndedSubject.next(true);
+      // this.IsTurnComputingEndedSubject.next(true);
       this.router.navigate(['/start']);
     }, 200);
   }

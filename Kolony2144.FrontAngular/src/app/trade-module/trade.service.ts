@@ -66,6 +66,7 @@ export class TradeService {
         throw new Error('asset.Quantity<0');
       }
     }
+    this.kolonyService.KolonyStateUpdatedSubject.next();
   }
 
   getUpdatedAVGPrice(curentQty: number, currentPrice: number, addedQty: number, addedPrice: number) {

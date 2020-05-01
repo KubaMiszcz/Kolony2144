@@ -34,11 +34,9 @@ export class StatusBarComponent implements OnInit {
   ngOnInit() {
     this.updateStatusBarData();
 
-    this.gameService.IsTurnComputingEndedSubject.subscribe(s => {
-      // if (s) {
-      this.updateStatusBarData();
-      // }
-    });
+    this.kolonyService.KolonyStateUpdatedSubject.subscribe(() =>
+      this.updateStatusBarData()
+    );
 
   }
 
