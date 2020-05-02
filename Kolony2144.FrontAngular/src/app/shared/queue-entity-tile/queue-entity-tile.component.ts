@@ -1,3 +1,4 @@
+import { CommonService } from './../../services/common.service';
 import { WikiService } from './../../wiki-module/wiki.service';
 import { SharedService } from '../../services/shared.service';
 import { IAsset, IEntity } from '../../models/Entity';
@@ -15,13 +16,15 @@ export class QueueEntityTileComponent implements OnInit {
   remainPcs: number;
 
   constructor(
+    private commonService: CommonService,
     private wikiService: WikiService
   ) { }
 
   ngOnInit() {
     this.imgUrl = this.wikiService.getImgUrlByName(this.entity.Name);
     this.remainPcs = Math.ceil(this.entity.Quantity);
-    this.percentProgress = this.entity.Quantity / this.remainPcs;
+    const currentProgress = this.remainPcs - this.entity.Quantity;
+    this.percentProgress = this.commonService.ConvertToPercents(currentProgress / this.remainPcs, 2);
   }
 
 }
