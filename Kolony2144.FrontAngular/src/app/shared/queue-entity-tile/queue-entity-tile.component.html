@@ -3,7 +3,8 @@
   <div class="card-body p-1 m-auto">
     <div class="d-flex">
       <div class="asset-icon" [ngStyle]="{'background-image': 'url('+ imgUrl +')'}">
-        <p class="asset-icon-content">{{entity.Quantity | number:'1.0-2' }}</p>
+        <p class="asset-icon-content">{{remainPcs | number:'1.0-0' }}</p>
+        <p class="asset-icon-content">{{percentProgress | number:'1.1-1' }}</p>
         <!-- todo little progerss bar with finished percentage -->
       </div>
 

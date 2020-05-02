@@ -11,6 +11,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class QueueEntityTileComponent implements OnInit {
   @Input() entity: IEntity;
   imgUrl = '';
+  percentProgress: number;
+  remainPcs: number;
 
   constructor(
     private wikiService: WikiService
@@ -18,6 +20,8 @@ export class QueueEntityTileComponent implements OnInit {
 
   ngOnInit() {
     this.imgUrl = this.wikiService.getImgUrlByName(this.entity.Name);
+    this.remainPcs = Math.ceil(this.entity.Quantity);
+    this.percentProgress = this.entity.Quantity / this.remainPcs;
   }
 
 }

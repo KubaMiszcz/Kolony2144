@@ -82,6 +82,9 @@ export class CrewOverviewComponent implements OnInit {
         perUnitUsage,
         r.Quantity,
         r.Quantity * perUnitUsage,
+        // this.commonService.Round(perUnitUsage, 1),
+        // this.commonService.Round(r.Quantity, 1),
+        // this.commonService.Round(r.Quantity * perUnitUsage, 1),
         this.commonService.ConvertToPercents(usage, 1) + '%'
       ]);
     });

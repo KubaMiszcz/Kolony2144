@@ -46,10 +46,10 @@ export class CommonService {
 
 
 
-  Round(val: number, precision: number): number {
+  Round(value: number, precision: number = 0): number {
     const base = Math.pow(10, precision);
 
-    return Math.round((val * base)) / base;
+    return Math.round((value * base)) / base;
   }
 
 
@@ -73,8 +73,8 @@ export class CommonService {
 
 
 
-  ConvertToPercents(number: number, precision: number = 0) {
-    return this.Round(number * 100, precision);
+  ConvertToPercents(value: number, precision: number = 0) {
+    return this.Round(value * 100, precision);
   }
 
 
