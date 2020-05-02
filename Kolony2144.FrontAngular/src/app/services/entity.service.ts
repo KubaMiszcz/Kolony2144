@@ -197,48 +197,14 @@ export class EntityService {
 
 
 
-  UpdateInventoryDueToProducedItemDEPR(addedEntity: IEntity, qty: number) {
-    addedEntity.CreationCost.forEach(r => {
-      this.getEntityByName(r.Name).Quantity -= (r.Quantity * qty);
+
+
+
+
+  updateInventoryDueToProduceEntity(addedEntity: IEntity, qty: number) {
+    addedEntity.CreationCost.forEach(e => {
+      this.getEntityByName(e.Name).Quantity -= (e.Quantity * qty);
     });
-  }
-
-
-  proceedConstructionQueue() {
-    for (const constructedItem of this.constructionQueue) {
-      const maxCount = this.getPossibleConstructionQty(constructedItem);
-
-      const countToAdd = Math.min(maxCount, constructedItem.Quantity);
-      this.updateInventory(constructedItem, countToAdd);
-      this.kolonyService.updateGenericLists();
-
-      const nextQty = constructedItem.Quantity - countToAdd;
-      const itemToAdd = Math.floor(Math.ceil(constructedItem.Quantity) - nextQty);
-      constructedItem.Quantity = nextQty;
-
-      if (itemToAdd > 0) {
-        let itemInKolony = this.getEntityByName(constructedItem.Name);
-        if (!itemInKolony) {
-          itemInKolony = this.kolonyService.createNewEntityInKolony(constructedItem);
-        }
-        itemInKolony.Quantity += itemToAdd;
-      }
-
-      if (constructedItem.Quantity <= 0) {
-        this.commonService.removeItemFromList(this.constructionQueue, this.constructionQueue.indexOf(constructedItem));
-      } else {
-        break; // partially constructed, stop processing for this turn
-      }
-    }
-  }
-
-
-
-
-  updateInventory(item: IEntity, count: number) {
-    item.CreationCost.forEach(e =>
-      this.getEntityByName(e.Name).Quantity -= e.Quantity * count
-    );
   }
 
 

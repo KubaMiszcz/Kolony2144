@@ -48,7 +48,7 @@ export class GameService {
       // this.productionService.produceAssetsInQueue(production);
 
       // update construction queue, and assets array
-      this.entityService.proceedConstructionQueue();
+      this.proceedConstructionQueue();
 
       // ##########################################
       console.log('newMonthBegins');
@@ -69,6 +69,56 @@ export class GameService {
       this.router.navigate(['/start']);
     }, 200);
   }
+
+
+
+  proceedConstructionQueue() {
+    for (const constructedItem of this.entityService.constructionQueue) {
+      const maxCount = this.entityService.getPossibleConstructionQty(constructedItem);
+
+      const countToAdd = Math.min(maxCount, constructedItem.Quantity);
+      if (countToAdd === 0) {
+        // no resources - info
+      }
+      this.entityService.updateInventoryDueToProduceEntity(constructedItem, countToAdd);
+      this.kolonyService.updateGenericLists();
+
+      const nextQty = constructedItem.Quantity - countToAdd;
+      const itemToAdd = Math.floor(Math.ceil(constructedItem.Quantity) - nextQty);
+      constructedItem.Quantity = nextQty;
+
+      if (itemToAdd > 0) {
+        let itemInKolony = this.entityService.getEntityByName(constructedItem.Name);
+        if (!itemInKolony) {
+          itemInKolony = this.kolonyService.createNewEntityInKolony(constructedItem);
+        }
+        itemInKolony.Quantity += itemToAdd;
+        // ove
+      }
+
+      if (constructedItem.Quantity <= 0) {
+        this.commonService.removeItemFromList(this.entityService.constructionQueue, this.entityService.constructionQueue.indexOf(constructedItem));
+      } else {
+        break; // partially constructed, stop processing for this turn
+      }
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
