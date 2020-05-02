@@ -34,12 +34,18 @@ export class OverviewService {
     this.News.push(val);
   }
 
+  AddNewsList(val: string[]) {
+    this.News.push(...val);
+  }
+
+
   UpdateNews() {
     let resource: IEntity;
     let consumption: number;
     let production: number;
     let msg: string;
 
+    // fix move it to proper services like in construction
     // future inne newsy
     // przy okazji
     // stalo sie jakies wydarzenie - piraci trzesieni ziemi itp
@@ -87,7 +93,6 @@ export class OverviewService {
       + ' (' + ((consumption / production) * 100).toFixed(1) + '%) of total ' + production + resource.UoM;
     this.AddNews(msg);
 
-    this.AddNews(' ==============================================================');
   }
 
 }

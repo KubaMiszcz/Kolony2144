@@ -24,7 +24,7 @@ export class QueueEntityTileComponent implements OnInit {
     this.imgUrl = this.wikiService.getImgUrlByName(this.entity.Name);
     this.remainPcs = Math.ceil(this.entity.Quantity);
     const currentProgress = this.remainPcs - this.entity.Quantity;
-    this.percentProgress = this.commonService.ConvertToPercents(currentProgress / this.remainPcs, 2);
+    this.percentProgress = this.commonService.ConvertToPercents(currentProgress / this.remainPcs, 1);
   }
 
 }
