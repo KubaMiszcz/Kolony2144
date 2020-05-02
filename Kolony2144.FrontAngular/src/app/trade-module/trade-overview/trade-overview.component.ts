@@ -29,12 +29,8 @@ export class TradeOverviewComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private sharedService: SharedService,
-    private dataProviderService: DataProviderService,
-    private kolonyService: KolonyService,
-    private overviewService: OverviewService,
-    private gameService: GameService,
-    private assetService: AssetService,
     private tradeService: TradeService,
+    private assetService: AssetService,
   ) { }
 
   ngOnInit() {

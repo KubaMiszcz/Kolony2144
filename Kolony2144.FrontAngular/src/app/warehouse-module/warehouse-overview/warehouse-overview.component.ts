@@ -1,13 +1,11 @@
-import { EntityService } from 'src/app/services/entity.service';
-import { GenericTypesEnum } from './../../models/enums/Types.enum';
 import { Component, OnInit } from '@angular/core';
-import { KolonyService } from 'src/app/services/kolony.service';
-import { CommonService } from 'src/app/services/common.service';
-import { SharedService } from 'src/app/services/shared.service';
-import { FinanceService } from 'src/app/finances-module/finance.service';
 import { IEntity } from 'src/app/models/Entity';
 import { ResourceName } from 'src/app/models/Resource';
+import { CommonService } from 'src/app/services/common.service';
+import { KolonyService } from 'src/app/services/kolony.service';
+import { SharedService } from 'src/app/services/shared.service';
 import { WarehouseService } from '../warehouse.service';
+import { GenericTypesEnum } from './../../models/enums/Types.enum';
 
 @Component({
   selector: 'app-warehouse-overview',
@@ -21,7 +19,6 @@ export class WarehouseOverviewComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private sharedService: SharedService,
-    private kolonyService: KolonyService,
     private warehouseService: WarehouseService,
   ) { }
 
