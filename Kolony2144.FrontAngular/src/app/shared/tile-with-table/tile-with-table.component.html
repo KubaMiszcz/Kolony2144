@@ -21,14 +21,14 @@
       <tbody *ngIf="rows">
         <tr *ngFor="let row of rows">
           <td scope="row" class="col-nonumbers-align-left"> {{row[0]}} </td>
-          <td *ngFor="let item of row | slice:1" scope="row" [ngClass]="{'negative-red': item<0}"> {{item}} </td>
+          <td *ngFor="let item of row | slice:1" scope="row" [ngClass]="{'negative-red': item<0}"> {{item | number:'1.0-1'}} </td>
         </tr>
       </tbody>
 
       <thead class="thead-dark">
         <!-- TODO: make nhClass -->
         <tr *ngIf="footer">
-          <td *ngFor="let item of footer" scope="row"><b> {{item}} </b></td>
+          <td *ngFor="let item of footer" scope="row"><b>xxx {{item | number:'1.0-1'}} xxx</b></td>
         </tr>
       </thead>
 

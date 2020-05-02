@@ -20,8 +20,8 @@
     <tbody *ngIf="tradePanelData">
       <tr *ngFor="let row of tradePanelData">
         <td scope="row" class="col-nonumbers-align-left td-name"> {{row.Name}} </td>
-        <td scope="row" class=""> {{row.KolonyQty}}{{row.UoM}} </td>
-        <td scope="row" class=""> {{row.AVGBuyPrice}} </td>
+        <td scope="row" class=""> {{row.KolonyQty | number:'1.0-1'}}{{row.UoM}} </td>
+        <td scope="row" class=""> {{row.AVGBuyPrice | number:'1.0-1'}} </td>
 
 
         <td scope="row " class="td-table p-1">
@@ -96,7 +96,7 @@
           <i *ngIf="row.Type===typeBuy" class="fas fa-chevron-circle-left    "></i>
           <i *ngIf="row.Type===typeSell" class="fas fa-chevron-circle-right    "></i>
           {{row.ShipQty}}{{row.UoM}} </td>
-        <td scope="row" class=""> {{row.ShipPrice}} </td>
+        <td scope="row" class=""> {{row.ShipPrice | number:'1.0-1'}} </td>
         <td scope="row" class=" ">
           <span>1M +12 (2.5%) </span><br>
           <span>6M +12 (2.5%) </span><br>
@@ -104,7 +104,7 @@
         </td>
         <!-- <td scope="row" class=" ">+32 (32.5%) </td>
         <td scope="row" class=" ">+52 (22.5%) </td> -->
-        <!-- <td *ngFor="let item of row | slice:1" scope="row" [ngClass]="{'negative-red': item<0}"> {{item}} </td> -->
+        <!-- <td *ngFor="let item of row | slice:1" scope="row" [ngClass]="{'negative-red': item<0}"> {{item | number:'1.0-1'}} </td> -->
       </tr>
     </tbody>
 
