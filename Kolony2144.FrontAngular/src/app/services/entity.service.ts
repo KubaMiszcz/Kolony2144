@@ -205,35 +205,31 @@ export class EntityService {
 
 
   proceedConstructionQueue() {
-    // fix switch to for loop and break;
-    let proceed = true;
-    this.constructionQueue.forEach(constructedItem => {
-      if (proceed) {
-        const maxCount = this.getPossibleConstructionQty(constructedItem);
+    for (const constructedItem of this.constructionQueue) {
+      const maxCount = this.getPossibleConstructionQty(constructedItem);
 
-        const countToAdd = Math.min(maxCount, constructedItem.Quantity);
-        this.updateInventory(constructedItem, countToAdd);
-        this.kolonyService.updateGenericLists();
+      const countToAdd = Math.min(maxCount, constructedItem.Quantity);
+      this.updateInventory(constructedItem, countToAdd);
+      this.kolonyService.updateGenericLists();
 
-        const nextQty = constructedItem.Quantity - countToAdd;
-        const itemToAdd = Math.floor(Math.ceil(constructedItem.Quantity) - nextQty);
-        constructedItem.Quantity = nextQty;
+      const nextQty = constructedItem.Quantity - countToAdd;
+      const itemToAdd = Math.floor(Math.ceil(constructedItem.Quantity) - nextQty);
+      constructedItem.Quantity = nextQty;
 
-        if (itemToAdd > 0) {
-          let itemInKolony = this.getEntityByName(constructedItem.Name);
-          if (!itemInKolony) {
-            itemInKolony = this.kolonyService.createNewEntityInKolony(constructedItem);
-          }
-          itemInKolony.Quantity += itemToAdd;
+      if (itemToAdd > 0) {
+        let itemInKolony = this.getEntityByName(constructedItem.Name);
+        if (!itemInKolony) {
+          itemInKolony = this.kolonyService.createNewEntityInKolony(constructedItem);
         }
-
-        if (constructedItem.Quantity <= 0) {
-          this.commonService.removeItemFromList(this.constructionQueue, this.constructionQueue.indexOf(constructedItem));
-        } else {
-          proceed = false; // partially constructed, stop processing for this turn
-        }
+        itemInKolony.Quantity += itemToAdd;
       }
-    });
+
+      if (constructedItem.Quantity <= 0) {
+        this.commonService.removeItemFromList(this.constructionQueue, this.constructionQueue.indexOf(constructedItem));
+      } else {
+        break; // partially constructed, stop processing for this turn
+      }
+    }
   }
 
 
