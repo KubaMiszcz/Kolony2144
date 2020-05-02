@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
 import { AssetService } from '../assets-module/asset.service';
 import { OverviewService } from '../overview-module/overview.service';
 import { PowerService } from '../power-module/power.service';
@@ -16,7 +15,6 @@ import { SharedService } from './shared.service';
   providedIn: 'root'
 })
 export class GameService {
-  // IsTurnComputingEndedSubject = new Subject<boolean>();
 
   constructor(
     private router: Router,
@@ -29,7 +27,9 @@ export class GameService {
     private overviewService: OverviewService,
     private powerService: PowerService,
     private tradeService: TradeService
-  ) { }
+  ) {
+    this.nextTurn();
+  }
 
 
 
@@ -39,31 +39,23 @@ export class GameService {
   nextTurn() {
     console.log('nexturn');
     this.router.navigate(['/loading-screen']);
-    // this.IsTurnComputingEndedSubject.next(false);
     setTimeout(() => {
 
-      // ##########################################
-      // #region TURN ENDS
+      // #REGION TURN ENDS
       // update inventory after production
 
       // update production queue, and assets array
       // this.productionService.produceAssetsInQueue(production);
 
       // update construction queue, and assets array
-      // this.productionService.produceAssetsInQueue();
-
-      // #ENDREGION
-      // ##########################################
-
-
-      {
-        console.log('newMonthBegins');
-        this.kolonyService.Kolony.Age += 0.1;
-        this.overviewService.clearNews();
-      }
-
+      this.entityService.proceedConstructionQueue();
 
       // ##########################################
+      console.log('newMonthBegins');
+      this.kolonyService.Kolony.Age += 0.1;
+      this.overviewService.clearNews();
+      // ##########################################
+
       // #REGION NEW TURN BEGINS
       this.assetService.ClearVolatileAssets();
       this.entityService.UpdateInventoryDueToMaintenanceCost();
@@ -73,19 +65,7 @@ export class GameService {
       this.tradeService.PrepareIncomingShip();
       this.tradeService.SetTradeAnnouncement();
 
-
-      //   //UPDATE powerstatus with newly produced assets
-      //   this.powerService.updatePowerStatus();
-
-      // ##########################################
-
-
-      // this.tradeService.setTradeAnnouncement(); console.log('setTradeAnnouncement');
-      // this.kolonyService.setTradeAnnouncement();
-      // this.isTurnComputing.next(false);
-
       this.overviewService.UpdateNews();
-      // this.IsTurnComputingEndedSubject.next(true);
       this.router.navigate(['/start']);
     }, 200);
   }

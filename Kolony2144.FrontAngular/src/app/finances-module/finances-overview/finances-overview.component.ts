@@ -3,9 +3,8 @@ import { IEntity } from 'src/app/models/Entity';
 import { GenericTypesEnum } from 'src/app/models/enums/Types.enum';
 import { ResourceName } from 'src/app/models/Resource';
 import { CommonService } from 'src/app/services/common.service';
-import { KolonyService } from 'src/app/services/kolony.service';
 import { SharedService } from 'src/app/services/shared.service';
-import { FinanceService } from './../finance.service';
+import { FinanceService } from '../finance.service';
 
 @Component({
   selector: 'app-finances-overview',
@@ -17,7 +16,6 @@ export class FinancesOverviewComponent implements OnInit {
   cashConsumers: IEntity[] = [];
 
   constructor(
-    private kolonyService: KolonyService,
     private commonService: CommonService,
     private sharedService: SharedService,
     private financeService: FinanceService,

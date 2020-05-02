@@ -49,8 +49,8 @@ export class TradeService {
   proceedTransaction(type: TransactionTypeEnum, assetName: string, qtyOnTable: number, price: number) {
     let asset = this.assetService.getAssetByName(assetName);
     if (!asset) {
-      const newAsset = this.dataProviderService.getAssetByName(assetName);
-      asset = this.kolonyService.createNewAssetInKolony(newAsset);
+      const newEntity = this.dataProviderService.getEntityByName(assetName);
+      asset = this.kolonyService.createNewEntityInKolony(newEntity) as IAsset;
     }
 
     if (type === TransactionTypeEnum.Buy) {

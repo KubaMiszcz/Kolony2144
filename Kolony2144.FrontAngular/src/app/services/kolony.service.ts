@@ -41,28 +41,44 @@ export class KolonyService {
     this.updateGenericLists();
   }
 
-  private updateGenericLists() {
+  updateGenericLists() {
     this.AllAssets = [...this.Kolony.Crew, ...this.Kolony.Machines, ...this.Kolony.Resources];
     this.AllKolonyEntities = [...this.Kolony.Buildings, ...this.Kolony.Crew, ...this.Kolony.Machines, ...this.Kolony.Resources];
     this.KolonyStateUpdatedSubject.next(true);
   }
 
-  createNewAssetInKolony(newAsset: IAsset): IAsset {
-    const asset = this.commonService.cloneObject(newAsset) as IAsset;
-    asset.Quantity = 0;
-    asset.Price = 0;
-    if (asset.Type === EntityTypesEnum.Resource) {
-      this.Kolony.Resources.push(asset);
-    } else if (asset.Type === EntityTypesEnum.Crew) {
-      this.Kolony.Crew.push(asset);
-    } else if (asset.Type === EntityTypesEnum.Machine) {
-      this.Kolony.Machines.push(asset);
+
+  createNewEntityInKolony(newEntity: IEntity): IEntity {
+    const entity = this.commonService.cloneObject(newEntity) as IEntity;
+    entity.Quantity = 0;
+    if (entity.Type === EntityTypesEnum.Building) {
+      this.Kolony.Buildings.push(entity);
+    } else if (entity.Type === EntityTypesEnum.Resource) {
+      this.Kolony.Resources.push(entity as IAsset);
+    } else if (entity.Type === EntityTypesEnum.Crew) {
+      this.Kolony.Crew.push(entity as IAsset);
+    } else if (entity.Type === EntityTypesEnum.Machine) {
+      this.Kolony.Machines.push(entity as IAsset);
     }
     this.updateGenericLists();
 
-    return asset;
+    return entity;
   }
 
+  deleteEntityFromKolony(entity: IEntity) {
+    let entityList;
+    if (entity.Type === EntityTypesEnum.Building) {
+      entityList = this.Kolony.Buildings;
+    } else if (entity.Type === EntityTypesEnum.Resource) {
+      entityList = this.Kolony.Resources;
+    } else if (entity.Type === EntityTypesEnum.Crew) {
+      entityList = this.Kolony.Crew;
+    } else if (entity.Type === EntityTypesEnum.Machine) {
+      entityList = this.Kolony.Machines;
+    }
+    this.sharedService.removeItemFromListByName(entityList, entity.Name);
+    this.updateGenericLists();
+  }
 
   deleteAssetFromKolony(asset: IAsset) {
     let assetList = [];

@@ -17,7 +17,7 @@ import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
 export class ProductionEntityTileComponent implements OnInit {
   @Input() entity: IEntity;
   productionQty = 1;
-  maxProductionQty = 100;
+  maxProductionQty = 1000;
   productionCostRows: IproductionCostRow[] = [];
   imgUrl: string;
 
@@ -34,7 +34,7 @@ export class ProductionEntityTileComponent implements OnInit {
     this.fillStockQtyRows();
     // this.updateMaxProductionQty();
 
-    this.entityService.ProductionQueueIsUpdatedEmitter.subscribe(() => {
+    this.entityService.constructionQueueIsUpdatedEmitter.subscribe(() => {
       // this.updateStockRows();
       // this.updateMaxProductionQty();
     });

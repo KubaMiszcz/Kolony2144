@@ -7,14 +7,15 @@ import { ResourceName } from '../models/Resource';
 import { UoMsEnum } from '../models/enums/UoMs.enum';
 import { DataProviderService } from './data-provider.service';
 import { BehaviorSubject } from 'rxjs';
+import { isNgTemplate } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntityService {
   allKolonyEntitiesList: IEntity[] = [];
-  productionQueue: IEntity[] = [];
-  ProductionQueueIsUpdatedEmitter = new EventEmitter<boolean>();
+  constructionQueue: IEntity[] = [];
+  constructionQueueIsUpdatedEmitter = new EventEmitter<boolean>();
 
   constructor(
     private commonService: CommonService,
@@ -182,24 +183,77 @@ export class EntityService {
 
 
   addItemToProductionQueue(entity: IEntity) {
-    this.productionQueue.push(entity);
+    this.constructionQueue.push(entity);
     // this.UpdateInventoryDueToProducedItem(entity, entity.Quantity);
-    this.ProductionQueueIsUpdatedEmitter.emit(true);
+    this.constructionQueueIsUpdatedEmitter.emit(true);
   }
 
   removeItemFromProductionQueue(entity: IEntity) {
-    const idx = this.productionQueue.indexOf(entity);
-    this.productionQueue.splice(idx, 1);
+    const idx = this.constructionQueue.indexOf(entity);
+    this.constructionQueue.splice(idx, 1);
     // this.UpdateInventoryDueToProducedItem(entity, -1 * entity.Quantity);
-    this.ProductionQueueIsUpdatedEmitter.emit(true);
+    this.constructionQueueIsUpdatedEmitter.emit(true);
   }
 
-  UpdateInventoryDueToProducedItem(addedEntity: IEntity, qty: number) {
+
+
+  UpdateInventoryDueToProducedItemDEPR(addedEntity: IEntity, qty: number) {
     addedEntity.CreationCost.forEach(r => {
       this.getEntityByName(r.Name).Quantity -= (r.Quantity * qty);
     });
   }
 
+
+  proceedConstructionQueue() {
+    // fix switch to for loop and break;
+    let proceed = true;
+    this.constructionQueue.forEach(constructedItem => {
+      if (proceed) {
+        const maxCount = this.getPossibleConstructionQty(constructedItem);
+
+        const countToAdd = Math.min(maxCount, constructedItem.Quantity);
+        this.updateInventory(constructedItem, countToAdd);
+        this.kolonyService.updateGenericLists();
+
+        const nextQty = constructedItem.Quantity - countToAdd;
+        const itemToAdd = Math.floor(Math.ceil(constructedItem.Quantity) - nextQty);
+        constructedItem.Quantity = nextQty;
+
+        if (itemToAdd > 0) {
+          let itemInKolony = this.getEntityByName(constructedItem.Name);
+          if (!itemInKolony) {
+            itemInKolony = this.kolonyService.createNewEntityInKolony(constructedItem);
+          }
+          itemInKolony.Quantity += itemToAdd;
+        }
+
+        if (constructedItem.Quantity <= 0) {
+          this.commonService.removeItemFromList(this.constructionQueue, this.constructionQueue.indexOf(constructedItem));
+        } else {
+          proceed = false; // partially constructed, stop processing for this turn
+        }
+      }
+    });
+  }
+
+
+
+
+  updateInventory(item: IEntity, count: number) {
+    item.CreationCost.forEach(e =>
+      this.getEntityByName(e.Name).Quantity -= e.Quantity * count
+    );
+  }
+
+
+  getPossibleConstructionQty(item: IEntity): number {
+    const countArray = [];
+    item.CreationCost.forEach(entity => {
+      countArray.push((this.getEntityByName(entity.Name)?.Quantity ?? 0) / entity.Quantity);
+    });
+
+    return Math.min(...countArray);
+  }
 
 
 

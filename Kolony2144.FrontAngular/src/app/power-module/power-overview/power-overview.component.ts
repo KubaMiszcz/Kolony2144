@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Kolony } from 'src/app/models/Kolony';
-import { KolonyService } from 'src/app/services/kolony.service';
-import { CommonService } from 'src/app/services/common.service';
-import { ResourceName } from 'src/app/models/Resource';
-import { IAsset, IEntity } from 'src/app/models/Entity';
-import { PowerService } from '../power.service';
 import { AssetService } from 'src/app/assets-module/asset.service';
-import { SharedService } from 'src/app/services/shared.service';
+import { IEntity } from 'src/app/models/Entity';
 import { GenericTypesEnum } from 'src/app/models/enums/Types.enum';
+import { ResourceName } from 'src/app/models/Resource';
+import { CommonService } from 'src/app/services/common.service';
+import { KolonyService } from 'src/app/services/kolony.service';
+import { SharedService } from 'src/app/services/shared.service';
+import { PowerService } from '../power.service';
 
 @Component({
   selector: 'app-power-overview',
@@ -19,10 +18,8 @@ export class PowerOverviewComponent implements OnInit {
   producingItemsTableRows: any[] = [];
 
   constructor(
-    private kolonyService: KolonyService,
     private commonService: CommonService,
     private sharedService: SharedService,
-    private assetService: AssetService,
     private powerService: PowerService,
   ) {
   }
