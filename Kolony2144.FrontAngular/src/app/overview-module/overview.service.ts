@@ -45,11 +45,6 @@ export class OverviewService {
 
 
   UpdateNews() {
-    let resource: IEntity;
-    let consumption: number;
-    let production: number;
-    let msg: string;
-
     // fix move it to proper services like in construction
     // future inne newsy
     // przy okazji
@@ -60,7 +55,7 @@ export class OverviewService {
     this.AddNews('Welcome in new month. Current time is ' + this.kolonyService.Kolony.Age.toFixed(1) + ' of New Era');
 
     // news about ship
-    this.AddNews(this.tradeService.tradeAnnouncement);
+    this.AddNews(this.tradeService.getTradeAnnouncement());
 
     this.AddNews('');
     this.AddNews(' ======================== Monthly report ========================');

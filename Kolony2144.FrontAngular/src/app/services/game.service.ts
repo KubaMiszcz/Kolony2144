@@ -9,6 +9,7 @@ import { DataProviderService } from './data-provider.service';
 import { EntityService } from './entity.service';
 import { KolonyService } from './kolony.service';
 import { SharedService } from './shared.service';
+import { IEntity } from '../models/Entity';
 
 
 @Injectable({
@@ -61,30 +62,28 @@ export class GameService {
 
 
       // CONSTRUCTION
-      // fix move report to the end
-      // fix rearrange genrating and content of report and order
-      this.overviewService.ConstructionReport = this.proceedConstructionQueue();
 
 
       // PRODUCTION MACHINES
       // todo production
+      // this.overviewService.ConstructionReport = this.proceedQueue(this.entityService.constructionQueue);
 
 
       // TRADE news
       this.tradeService.PrepareIncomingShip();
-      this.tradeService.SetTradeAnnouncement();
+
 
       this.overviewService.UpdateNews();
-
       this.router.navigate(['/start']);
     }, 200);
   }
 
 
 
-  proceedConstructionQueue(): string[] {
+
+  proceedQueue(queue: IEntity[]): string[] {
     const report = [];
-    for (const constructedItem of this.entityService.constructionQueue) {
+    for (const constructedItem of queue) {
       const maxCount = this.entityService.getPossibleConstructionQty(constructedItem);
 
       const countToAdd = Math.min(maxCount, constructedItem.Quantity);
@@ -120,7 +119,7 @@ export class GameService {
     }
 
     // info dont do this earlier due to not change iterable list
-    this.entityService.constructionQueue = this.entityService.constructionQueue.filter(e => e.Quantity > 0);
+    queue = queue.filter(e => e.Quantity > 0);
 
     return report;
   }

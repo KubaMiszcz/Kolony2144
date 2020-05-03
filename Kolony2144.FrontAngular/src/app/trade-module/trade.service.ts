@@ -16,7 +16,6 @@ import { ITradeableEntity } from './../models/Entity';
   providedIn: 'root'
 })
 export class TradeService {
-  tradeAnnouncement = '';
   tradeableCargo: ITradeableEntity[] = [];
   isShipLanded: boolean;
   landingProbability = 0.99;
@@ -79,17 +78,18 @@ export class TradeService {
   }
 
 
-  SetTradeAnnouncement() {
+  getTradeAnnouncement(): string {
     if (this.isShipLanded) {
       const ship = this.landedShip;
       // Cargo Ship 'VARG-1230' owned by companyName on route from originPlanetName to destinationPlanetName is landed.
-      this.tradeAnnouncement = 'Cargo Ship \'' + ship.Name + '-' + ship.Size
+
+      return 'Cargo Ship \'' + ship.Name + '-' + ship.Size
         + '\' owned by company \'' + ship.CompanyName
         + '\' on route from planet \'' + ship.OriginPlanetName
         + '\' to \'' + ship.DestinationPlanetName + '\' is landed.';
-    } else {
-      this.tradeAnnouncement = 'There is no Space Cargo Ship landed.';
     }
+
+    return 'There is no Space Cargo Ship landed.';
   }
 
 
