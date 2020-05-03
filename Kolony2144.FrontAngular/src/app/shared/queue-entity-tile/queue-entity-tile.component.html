@@ -3,12 +3,16 @@
   <div class="card-body p-1 m-auto">
     <div class="d-flex">
       <div class="asset-icon" [ngStyle]="{'background-image': 'url('+ imgUrl +')'}">
-        <p class="asset-icon-content">{{entity.Quantity}}</p>
-        <!-- todo little progerss bar with finished percentage -->
+        <p class="asset-icon-content">{{remainPcs | number:'1.0-0' }}</p><br>
       </div>
-
     </div>
-
   </div>
-  <!-- <progressbar [value]="60" [max]="100" [type]="'success'" class="progress" style="height: 1em;" [striped]="true" [animate]="true"> </progressbar> -->
+
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [ngStyle]="{'width': percentProgress+'%'}"
+      aria-valuenow="percentProgress" aria-valuemin="0" aria-valuemax="100">{{percentProgress}}%</div>
+    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" [ngStyle]="{'width': (100-percentProgress)+'%'}"
+      aria-valuenow="100-percentProgress" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+
 </div>

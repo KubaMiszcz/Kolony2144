@@ -39,7 +39,7 @@ export class BuildingsOverviewComponent implements OnInit {
 
     entities.forEach(r => {
       const list = type === GenericTypesEnum.Consuming ? r.MaintenanceCost : r.PassiveIncome;
-      const perUnitUsage = this.sharedService.findItemInListByName(list, resourceName).Quantity;
+      const perUnitUsage = this.sharedService.findItemInListByName(list, resourceName)?.Quantity ?? 0;
       res.push([
         r.Name,
         r.Tags,

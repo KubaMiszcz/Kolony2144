@@ -34,12 +34,18 @@ export class OverviewService {
     this.News.push(val);
   }
 
+  AddNewsList(val: string[]) {
+    this.News.push(...val);
+  }
+
+
   UpdateNews() {
     let resource: IEntity;
     let consumption: number;
     let production: number;
     let msg: string;
 
+    // fix move it to proper services like in construction
     // future inne newsy
     // przy okazji
     // stalo sie jakies wydarzenie - piraci trzesieni ziemi itp
@@ -56,7 +62,7 @@ export class OverviewService {
 
     // news about cash
     resource = this.entityService.getEntityByName(ResourceName.Cash);
-    consumption = this.entityService.getEntityConsumptionQtyByName(resource.Name);
+    consumption = this.entityService.getTotalEntityConsumptionQtyByName(resource.Name);
     if (resource.Quantity < 0) {
       this.AddNews('!!! CASH RUNS OUT, BAILIFF IS COMING TO KOLONY !!!');
     }
@@ -66,7 +72,7 @@ export class OverviewService {
 
     // news about food
     resource = this.entityService.getEntityByName(ResourceName.Food);
-    consumption = this.entityService.getEntityConsumptionQtyByName(resource.Name);
+    consumption = this.entityService.getTotalEntityConsumptionQtyByName(resource.Name);
     if (resource.Quantity < 0) {
       this.AddNews('!!! HUNGER IN KOLONY !!!');
     }
@@ -76,8 +82,8 @@ export class OverviewService {
 
     // news about power
     resource = this.entityService.getEntityByName(ResourceName.Energy);
-    consumption = this.powerService.getEnergyUsage();
-    production = this.powerService.getEnergyProduction();
+    consumption = this.powerService.totalEnergyUsage;
+    production = this.powerService.totalEnergyProduction;
     if (consumption > production) {
       msg = '!!! ' + (((consumption / production) * 100) - 100).toFixed(1) + '%  OVERLOADED !!!';
       this.AddNews(msg);
@@ -87,7 +93,6 @@ export class OverviewService {
       + ' (' + ((consumption / production) * 100).toFixed(1) + '%) of total ' + production + resource.UoM;
     this.AddNews(msg);
 
-    this.AddNews(' ==============================================================');
   }
 
 }

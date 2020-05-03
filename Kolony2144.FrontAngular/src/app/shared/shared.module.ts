@@ -14,7 +14,7 @@ import { PlayerNotesComponent } from './player-notes/player-notes.component';
     TileWithTableComponent,
     ProductionEntityTileComponent,
     QueueEntityTileComponent,
-    PlayerNotesComponent
+    PlayerNotesComponent,
   ],
   imports: [
     CommonModule,
@@ -30,7 +30,7 @@ import { PlayerNotesComponent } from './player-notes/player-notes.component';
     TileWithTableComponent,
     ProductionEntityTileComponent,
     QueueEntityTileComponent,
-    PlayerNotesComponent
+    PlayerNotesComponent,
   ]
 })
 export class SharedModule { }

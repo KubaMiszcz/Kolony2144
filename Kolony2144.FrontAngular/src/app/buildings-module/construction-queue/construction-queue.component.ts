@@ -1,3 +1,4 @@
+import { ISimplifiedEntity } from './../../models/Entity';
 import { Component, OnInit } from '@angular/core';
 import { IEntity } from 'src/app/models/Entity';
 import { KolonyService } from 'src/app/services/kolony.service';
@@ -21,8 +22,9 @@ export class ConstructionQueueComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.entityService.ProductionQueueIsUpdatedEmitter.subscribe(() =>
-      this.productionQueue = this.entityService.productionQueue);
+    this.productionQueue = this.entityService.constructionQueue;
+    this.entityService.constructionQueueIsUpdatedEmitter.subscribe(() =>
+      this.productionQueue = this.entityService.constructionQueue);
   }
 
   removeItemFromProductionQueue(item: IEntity) {
@@ -30,3 +32,4 @@ export class ConstructionQueueComponent implements OnInit {
   }
 
 }
+

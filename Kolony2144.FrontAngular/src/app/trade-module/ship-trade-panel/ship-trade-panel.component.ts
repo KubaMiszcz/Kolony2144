@@ -72,30 +72,48 @@ export class ShipTradePanelComponent implements OnInit {
     return row.QtyOnTable;
   }
 
+  // doTransaction2(row: ITradePanelData) {
+  //   // todo check buy if no cash etc
+  //   row.QtyOnTable = this.getCheckedMinMaxQtyOnTable(row);
+  //   row.ShipQty -= row.QtyOnTable;
+
+  //   // add if doesnt exist in kolony
+  //   let asset = this.assetService.getAssetByName(row.Name);
+  //   if (!asset) {
+  //     // todo create new isnatnce of all assets list in trade service
+  //     const newAsset = this.dataProviderService.getEntityByName(row.Name); // get from all
+  //     // fixit _____________________________________________________vvvvvvv
+  //     asset = this.assetService.addNewAssetToInventory(newAsset as IAsset, row.QtyOnTable, row.AVGBuyPrice); // get newly added from kolony assets
+  //   }
+
+  //   if (row.Type === TransactionTypeEnum.Buy) {
+  //     row.KolonyQty += row.QtyOnTable;
+  //   } else {
+  //     row.KolonyQty -= row.QtyOnTable;
+  //   }
+
+  //   this.tradeService.proceedTransaction(row.Type, asset, row.QtyOnTable, row.ShipPrice);
+  //   row.AVGBuyPrice = this.assetService.getAssetByName(row.Name).Price;
+
+  //   this.updateMaxTableQty(row);
+  //   // this.tableQty.nativeElement.value = 0;
+  // }
+
+
   doTransaction(row: ITradePanelData) {
     // todo check buy if no cash etc
     row.QtyOnTable = this.getCheckedMinMaxQtyOnTable(row);
-    row.ShipQty -= row.QtyOnTable;
 
-    // add if doesnt exist in kolony
-    let asset = this.assetService.getAssetByName(row.Name);
-    if (!asset) {
-      // todo create new isnatnce of all assets list in trade service
-      const newAsset = this.dataProviderService.getEntityByName(row.Name); // get from all
-      // fixit _____________________________________________________vvvvvvv
-      asset = this.assetService.addNewAssetToInventoryDEPR(newAsset as IAsset); // get newly added from kolony assets
-    }
-
-    let factor = 0;
-    if (row.Type === TransactionTypeEnum.Buy) {
-      factor = 1;
-    } else {
-      factor = -1;
-    }
-
-    row.KolonyQty += (factor * row.QtyOnTable);
-    this.tradeService.proceedTransaction(row.Type, asset, (factor * row.QtyOnTable), row.ShipPrice);
+    this.tradeService.proceedTransaction(row.Type, row.Name, row.QtyOnTable, row.ShipPrice);
     row.AVGBuyPrice = this.assetService.getAssetByName(row.Name).Price;
+
+    if (row.Type === TransactionTypeEnum.Buy) {
+      row.KolonyQty += row.QtyOnTable;
+      row.ShipQty -= row.QtyOnTable;
+    } else {
+      row.KolonyQty -= row.QtyOnTable;
+      row.ShipQty += row.QtyOnTable;
+    }
 
     this.updateMaxTableQty(row);
     // this.tableQty.nativeElement.value = 0;

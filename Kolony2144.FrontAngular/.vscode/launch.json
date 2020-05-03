@@ -12,7 +12,7 @@
       "webRoot": "${workspaceFolder}",
       // "disableNetworkCache": true,
       // "sourceMaps": true,
-      "timeout": 1000,
+      "timeout": 4000,
       // "trace": "verbose",
       // "userDataDir": false,
       // "targetTypes": [

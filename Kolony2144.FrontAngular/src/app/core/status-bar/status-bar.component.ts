@@ -34,11 +34,9 @@ export class StatusBarComponent implements OnInit {
   ngOnInit() {
     this.updateStatusBarData();
 
-    this.gameService.IsTurnComputingEndedSubject.subscribe(s => {
-      if (s) {
-        this.updateStatusBarData();
-      }
-    });
+    this.kolonyService.KolonyStateUpdatedSubject.subscribe(() =>
+      this.updateStatusBarData()
+    );
 
   }
 
@@ -46,8 +44,8 @@ export class StatusBarComponent implements OnInit {
     this.Age = this.kolonyService.Kolony.Age;
     this.Name = this.kolonyService.Kolony.Name;
     this.Cash = this.financeService.Cash;
-    this.energyProduction = this.powerService.getEnergyProduction();
-    this.energyUsage = this.powerService.getEnergyUsage();
+    this.energyProduction = this.powerService.totalEnergyProduction;
+    this.energyUsage = this.powerService.totalEnergyUsage;
   }
 
   nextTurn() {
