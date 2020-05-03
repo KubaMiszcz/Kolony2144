@@ -10,7 +10,7 @@ pipeline {
       steps {
         echo 'npm install'
         dir('Kolony2144.FrontAngular') {
-          // sh 'npm install'
+          sh 'npm install'
         }
       }
     }
