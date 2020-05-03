@@ -1,4 +1,7 @@
 export enum PlanetNames {
+  Namek = 'Namek',
+  Radom = 'Radom',
+  LV426 = 'LV-426',
   Zelnoyama = 'Zelnoyama',
   Galrutis = 'Galrutis',
   Ameon = 'Ameon',

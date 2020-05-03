@@ -18,6 +18,8 @@ export interface IEntityModel {
 
 export interface IEntity extends IEntityModel, ISimplifiedEntity {
   Quantity: number;
+  // future IsTurnedOff:boolean
+  // future MaintainPriority:number
 }
 
 

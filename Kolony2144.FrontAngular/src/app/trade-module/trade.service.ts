@@ -103,7 +103,9 @@ export class TradeService {
       ship.Name = this.commonService.getRandomValueFromEnum(Object.values(CargoShipNames));
       ship.CompanyName = this.commonService.getRandomValueFromEnum(Object.values(CompanyNames));
       ship.OriginPlanetName = this.commonService.getRandomValueFromEnum(Object.values(PlanetNames));
-      ship.DestinationPlanetName = this.commonService.getRandomValueFromEnum(Object.values(PlanetNames));
+      do {
+        ship.DestinationPlanetName = this.commonService.getRandomValueFromEnum(Object.values(PlanetNames));
+      } while (ship.OriginPlanetName === ship.DestinationPlanetName);
       ship.Cargo = this.generateShipCargo(ship.Size);
       this.landedShip = ship;
     }
