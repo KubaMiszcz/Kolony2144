@@ -42,7 +42,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.kW,
-    Quantity: 0
+    Quantity: 1
   },
   {
     Name: ResourceName.BasicWorkUnit,
@@ -53,7 +53,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.WU,
-    Quantity: 0
+    Quantity: 1
   },
   {
     Name: ResourceName.AdvancedWorkUnit,
@@ -64,7 +64,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.WU,
-    Quantity: 0
+    Quantity: 1
   },
   {
     Name: ResourceName.StorageSpace,
@@ -75,7 +75,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.m3,
-    Quantity: 0
+    Quantity: 1
   },
   {
     Name: ResourceName.LivingSpace,
@@ -86,7 +86,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.m3,
-    Quantity: 0
+    Quantity: 1
   },
   {
     Name: ResourceName.PlanetSpace,

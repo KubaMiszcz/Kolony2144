@@ -167,7 +167,7 @@ export const AllBuildings: IBuildingFullModel[] = [
       { Name: ResourceName.AdvancedWorkUnit, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 1
+    Quantity: 0
   },
   {
     Name: BuildingNames.CargoBay,

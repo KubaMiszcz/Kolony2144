@@ -7,14 +7,15 @@ import { ResourceName } from '../models/Resource';
 import { UoMsEnum } from '../models/enums/UoMs.enum';
 import { DataProviderService } from './data-provider.service';
 import { BehaviorSubject } from 'rxjs';
+import { isNgTemplate } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntityService {
   allKolonyEntitiesList: IEntity[] = [];
-  productionQueue: IEntity[] = [];
-  ProductionQueueIsUpdatedEmitter = new EventEmitter<boolean>();
+  constructionQueue: IEntity[] = [];
+  constructionQueueIsUpdatedEmitter = new EventEmitter<boolean>();
 
   constructor(
     private commonService: CommonService,
@@ -23,6 +24,10 @@ export class EntityService {
     private kolonyService: KolonyService
   ) {
     this.allKolonyEntitiesList = this.kolonyService.AllKolonyEntities;
+
+    this.kolonyService.KolonyStateUpdatedSubject.subscribe(data => {
+      this.allKolonyEntitiesList = this.kolonyService.AllKolonyEntities;
+    });
   }
 
   getEntityByName(name: string): IEntity {
@@ -32,38 +37,57 @@ export class EntityService {
 
 
   /**
-  * returns consumed qty of named entity by all kolony assets buildings etc
+  * returns total consumed qty of named entity by ALL kolony assets buildings etc
   *@param entityName name of consumed entity
   */
-  getEntityConsumptionQtyByName(entityName: string): number {
-    const cosnumedAsset = this.getEntityByName(entityName);
+  getTotalEntityConsumptionQtyByName(entityName: string): number {
+    return this.getTotalEntityConsumptionQtyByNameFromList(entityName, this.allKolonyEntitiesList);
+  }
+
+  /**
+  * returns total consumed qty of named entity by kolony assets IN LIST buildings etc
+  *@param entityName name of consumed entity
+  */
+  getTotalEntityConsumptionQtyByNameFromList(entityName: string, list: IEntity[]): number {
+    const consumedEntity = this.getEntityByName(entityName);
     let consumedQty = 0;
-    this.allKolonyEntitiesList.forEach(asset => {
-      const consumedItem = asset.MaintenanceCost.find(item => item.Name === cosnumedAsset.Name);
-      if (consumedItem) {
-        consumedQty += (asset.Quantity * consumedItem.Quantity);
-      }
+    list.forEach(entity => {
+      const consumedItemQuantity = entity.MaintenanceCost.find(item => item.Name === consumedEntity.Name)?.Quantity ?? 0;
+      consumedQty += (entity.Quantity * consumedItemQuantity);
     });
 
     return consumedQty;
   }
 
+
   /**
-  * returns produced qty of named entity by all kolony assets buildings etc
+  * returns total produced qty of named entity by kolony assets IN LIST buildings etc
   *@param entityName name of produced entity
   */
-  getEntityProductionQtyByName(assetName: string): number {
-    const producedAsset = this.getEntityByName(assetName);
+  getTotalEntityProductionQtyByName(entityName: string): number {
+    return this.getTotalEntityProductionQtyByNameFromList(entityName, this.allKolonyEntitiesList);
+  }
+
+
+  /**
+  * returns total produced qty of named entity by ALL kolony assets buildings etc
+  *@param entityName name of produced entity
+  */
+  getTotalEntityProductionQtyByNameFromList(entityName: string, list: IEntity[]): number {
+    const producedAsset = this.getEntityByName(entityName);
     let producedQty = 0;
-    this.allKolonyEntitiesList.forEach(asset => {
-      const producedItem = asset.PassiveIncome.find(item => item.Name === producedAsset.Name);
-      if (producedItem) {
-        producedQty += (asset.Quantity * producedItem.Quantity);
-      }
+    list.forEach(asset => {
+      const producedItemQuantity = asset.PassiveIncome.find(item => item.Name === producedAsset.Name)?.Quantity ?? 0;
+      producedQty += (asset.Quantity * producedItemQuantity);
+
     });
 
     return producedQty;
   }
+
+
+
+
 
 
   getEntitiesByConsumedAssetName(consumedAssetName: ResourceName): IEntity[] {
@@ -159,25 +183,39 @@ export class EntityService {
 
 
   addItemToProductionQueue(entity: IEntity) {
-    this.productionQueue.push(entity);
-    this.UpdateInventoryDueToProducedItem(entity, entity.Quantity);
-    this.ProductionQueueIsUpdatedEmitter.emit(true);
+    this.constructionQueue.push(entity);
+    // this.UpdateInventoryDueToProducedItem(entity, entity.Quantity);
+    this.constructionQueueIsUpdatedEmitter.emit(true);
   }
 
   removeItemFromProductionQueue(entity: IEntity) {
-    const idx = this.productionQueue.indexOf(entity);
-    this.productionQueue.splice(idx, 1);
-    this.UpdateInventoryDueToProducedItem(entity, -1 * entity.Quantity);
-    this.ProductionQueueIsUpdatedEmitter.emit(true);
+    const idx = this.constructionQueue.indexOf(entity);
+    this.constructionQueue.splice(idx, 1);
+    // this.UpdateInventoryDueToProducedItem(entity, -1 * entity.Quantity);
+    this.constructionQueueIsUpdatedEmitter.emit(true);
   }
 
-  UpdateInventoryDueToProducedItem(addedEntity: IEntity, qty: number) {
-    addedEntity.CreationCost.forEach(r => {
-      this.getEntityByName(r.Name).Quantity -= (r.Quantity * qty);
+
+
+
+
+
+
+  updateInventoryDueToProduceEntity(addedEntity: IEntity, qty: number) {
+    addedEntity.CreationCost.forEach(e => {
+      this.getEntityByName(e.Name).Quantity -= (e.Quantity * qty);
     });
   }
 
 
+  getPossibleConstructionQty(item: IEntity): number {
+    const countArray = [];
+    item.CreationCost.forEach(entity => {
+      countArray.push((this.getEntityByName(entity.Name)?.Quantity ?? 0) / entity.Quantity);
+    });
+
+    return Math.min(...countArray);
+  }
 
 
 

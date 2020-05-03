@@ -46,10 +46,10 @@ export class CommonService {
 
 
 
-  Round(val: number, precision: number): number {
+  Round(value: number, precision: number = 0): number {
     const base = Math.pow(10, precision);
 
-    return Math.round((val * base)) / base;
+    return Math.round((value * base)) / base;
   }
 
 
@@ -72,8 +72,27 @@ export class CommonService {
   }
 
 
+
+  ConvertToPercents(value: number, precision: number = 0) {
+    return this.Round(value * 100, precision);
+  }
+
+
+
+
+
+  removeItemFromList(list: any[], index: number) {
+    if (index > -1) {
+      list.splice(index, 1);
+    }
+  }
+
   cloneObject<T>(object: T): T {
     return JSON.parse(JSON.stringify(object)) as T;
   }
+
+
+
+
 
 }

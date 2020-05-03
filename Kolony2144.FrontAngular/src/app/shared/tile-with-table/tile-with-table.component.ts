@@ -11,7 +11,7 @@ export class TileWithTableComponent implements OnInit {
   @Input() caption = '';
   @Input() header: any[] = [];
   @Input() rows: any[][] = [];
-  @Input() footer: any[] = [];
+  // @Input() footer: any[] = [];
 
   constructor() {
   }

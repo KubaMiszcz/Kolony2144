@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
 import { AssetService } from '../assets-module/asset.service';
-import { IEntity } from '../models/Entity';
-import { ResourceName } from '../models/Resource';
 import { OverviewService } from '../overview-module/overview.service';
 import { PowerService } from '../power-module/power.service';
 import { TradeService } from '../trade-module/trade.service';
@@ -18,7 +15,6 @@ import { SharedService } from './shared.service';
   providedIn: 'root'
 })
 export class GameService {
-  IsTurnComputingEndedSubject = new Subject<boolean>();
 
   constructor(
     private router: Router,
@@ -31,7 +27,9 @@ export class GameService {
     private overviewService: OverviewService,
     private powerService: PowerService,
     private tradeService: TradeService
-  ) { }
+  ) {
+    this.nextTurn();
+  }
 
 
 
@@ -41,31 +39,28 @@ export class GameService {
   nextTurn() {
     console.log('nexturn');
     this.router.navigate(['/loading-screen']);
-    this.IsTurnComputingEndedSubject.next(false);
     setTimeout(() => {
 
-      // ##########################################
-      // #region TURN ENDS
+      // #REGION TURN ENDS
+      this.overviewService.clearNews();
       // update inventory after production
 
       // update production queue, and assets array
       // this.productionService.produceAssetsInQueue(production);
 
       // update construction queue, and assets array
-      // this.productionService.produceAssetsInQueue();
-
-      // #ENDREGION
-      // ##########################################
-
-
-      {
-        console.log('newMonthBegins');
-        this.kolonyService.Kolony.Age += 0.1;
-        this.overviewService.clearNews();
-      }
-
+      // fix move report to the end
+      // fix rearrange genrating and content of report and order
+      this.overviewService.AddNewsList(['', ' ======================  Construction Report  ======================']);
+      const constructionReport = this.proceedConstructionQueue();
+      this.overviewService.AddNewsList(constructionReport); // todo make production service and move it there, get production report
+      this.overviewService.AddNewsList([' ==============================================================', '']);
 
       // ##########################################
+      console.log('newMonthBegins');
+      this.kolonyService.Kolony.Age += 0.1;
+      // ##########################################
+
       // #REGION NEW TURN BEGINS
       this.assetService.ClearVolatileAssets();
       this.entityService.UpdateInventoryDueToMaintenanceCost();
@@ -75,22 +70,72 @@ export class GameService {
       this.tradeService.PrepareIncomingShip();
       this.tradeService.SetTradeAnnouncement();
 
-
-      //   //UPDATE powerstatus with newly produced assets
-      //   this.powerService.updatePowerStatus();
-
-      // ##########################################
-
-
-      // this.tradeService.setTradeAnnouncement(); console.log('setTradeAnnouncement');
-      // this.kolonyService.setTradeAnnouncement();
-      // this.isTurnComputing.next(false);
-
       this.overviewService.UpdateNews();
-      this.IsTurnComputingEndedSubject.next(true);
+      this.overviewService.AddNewsList(constructionReport);
       this.router.navigate(['/start']);
     }, 200);
   }
+
+
+
+  proceedConstructionQueue(): string[] {
+    const report = [];
+    for (const constructedItem of this.entityService.constructionQueue) {
+      const maxCount = this.entityService.getPossibleConstructionQty(constructedItem);
+
+      const countToAdd = Math.min(maxCount, constructedItem.Quantity);
+      if (countToAdd === 0) {
+        // no resources - info
+        report.push('budowa wstrzymana, zabraklo surowcow do budowy' + constructedItem.Name + ' jakiego surka/ow?');
+        break;
+      }
+      this.entityService.updateInventoryDueToProduceEntity(constructedItem, countToAdd);
+      this.kolonyService.updateGenericLists();
+
+      const nextQty = constructedItem.Quantity - countToAdd;
+      const itemToAdd = Math.floor(Math.ceil(constructedItem.Quantity) - nextQty);
+      constructedItem.Quantity = nextQty;
+
+      if (itemToAdd > 0) {
+        let itemInKolony = this.entityService.getEntityByName(constructedItem.Name);
+        if (!itemInKolony) {
+          itemInKolony = this.kolonyService.createNewEntityInKolony(constructedItem);
+        }
+        itemInKolony.Quantity += itemToAdd;
+        report.push('ukonczono ' + itemToAdd + 'pcs of ' + constructedItem.Name);
+      }
+
+      if (constructedItem.Quantity <= 0) {
+        // this.commonService.removeItemFromList(this.entityService.constructionQueue, this.entityService.constructionQueue.indexOf(constructedItem));
+        report.push('zakonczono budowe ' + constructedItem.Name);
+      } else {
+        const remainPcs = Math.ceil(constructedItem.Quantity);
+        const currentProgress = remainPcs - constructedItem.Quantity;
+        const currentProgressPercentage = this.commonService.ConvertToPercents(currentProgress / remainPcs, 1);
+        report.push('ukonczono ' + currentProgressPercentage + '% z pozstaloych ' + remainPcs + 'pcs of ' + constructedItem.Name);
+        break; // stop proceeding queue (maybe is it cool if we can build next possible builidngs in queue?)
+      }
+    }
+    this.entityService.constructionQueue = this.entityService.constructionQueue.filter(e => e.Quantity > 0);
+
+    return report;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,17 +1,11 @@
-import { BuildingService } from './../buildings-module/building.service';
 import { Injectable } from '@angular/core';
-import { IAsset, IEntity } from '../models/Entity';
 import { AssetService } from '../assets-module/asset.service';
+import { IEntity } from '../models/Entity';
 import { ResourceName } from '../models/Resource';
-import { GameService } from '../services/game.service';
-import { KolonyService } from '../services/kolony.service';
-import { OverviewService } from '../overview-module/overview.service';
 import { CommonService } from '../services/common.service';
-import { TradeService } from '../trade-module/trade.service';
-import { WikiService } from '../wiki-module/wiki.service';
-import { BehaviorSubject } from 'rxjs';
-import { SharedService } from '../services/shared.service';
 import { EntityService } from '../services/entity.service';
+import { KolonyService } from '../services/kolony.service';
+import { SharedService } from '../services/shared.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +23,14 @@ export class FinanceService {
   ) {
     this.cashConsumers = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.Cash);
     this.Cash = this.entityService.getEntityByName(ResourceName.Cash);
+    this.kolonyService.KolonyStateUpdatedSubject.subscribe(data => {
+      this.cashConsumers = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.Cash);
+      this.Cash = this.entityService.getEntityByName(ResourceName.Cash);
+    });
+  }
+
+  get totalCashConsumption() {
+    return this.entityService.getTotalEntityConsumptionQtyByName(ResourceName.Cash);
   }
 
 }

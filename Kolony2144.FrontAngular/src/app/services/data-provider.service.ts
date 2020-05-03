@@ -64,6 +64,10 @@ export class DataProviderService {
     return this.sharedService.findItemInListByName(this.ALL_ENTITIES_LIST, name);
   }
 
+  getAssetByName(name: string): IAsset {
+    return this.sharedService.findItemInListByName(this.ALL_ASSETS_LIST, name);
+  }
+
 
   fillDataFromSavedState() {
     this.PlayerNotes = sessionStorage.getItem('savedState');

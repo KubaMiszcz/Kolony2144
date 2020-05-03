@@ -17,7 +17,7 @@ import { UoMsEnum } from 'src/app/models/enums/UoMs.enum';
 export class ProductionEntityTileComponent implements OnInit {
   @Input() entity: IEntity;
   productionQty = 1;
-  maxProductionQty = 1;
+  maxProductionQty = 1000;
   productionCostRows: IproductionCostRow[] = [];
   imgUrl: string;
 
@@ -32,31 +32,30 @@ export class ProductionEntityTileComponent implements OnInit {
   ngOnInit() {
     this.imgUrl = this.wikiService.getImgUrlByName(this.entity.Name);
     this.fillStockQtyRows();
-    this.updateMaxProductionQty();
+    // this.updateMaxProductionQty();
 
-    this.entityService.ProductionQueueIsUpdatedEmitter.subscribe(() => {
-      this.updateStockRows();
-      this.updateMaxProductionQty();
+    this.entityService.constructionQueueIsUpdatedEmitter.subscribe(() => {
+      // this.updateStockRows();
+      // this.updateMaxProductionQty();
     });
 
     // this.updateCosts();
   }
 
   updateMaxProductionQty() {
-    this.maxProductionQty = this.entityService.getMaxProducedQty(this.entity);
+    // this.maxProductionQty = this.entityService.getMaxProducedQty(this.entity);
   }
 
 
 
 
-  updateCosts() {
+  updateTotalConstructionCosts() {
     this.productionCostRows.forEach(i => {
       i.TotalQty = i.QtyPerUnit * this.productionQty;
     });
   }
 
   onQtyChange(event: number) {
-    console.log('onChange', event, this.productionQty);
     if (event > this.maxProductionQty) {
       this.productionQty = this.maxProductionQty;
     } else if (event <= 1) {
@@ -64,7 +63,7 @@ export class ProductionEntityTileComponent implements OnInit {
     } else {
       this.productionQty = event;
     }
-    this.updateCosts();
+    this.updateTotalConstructionCosts();
   }
 
   quickAdd(val: number) {
@@ -74,13 +73,13 @@ export class ProductionEntityTileComponent implements OnInit {
     } else if (this.productionQty > this.maxProductionQty) {
       this.productionQty = this.maxProductionQty;
     }
-    this.updateCosts();
+    this.updateTotalConstructionCosts();
   }
 
   updateStockRows() {
-    this.productionCostRows.forEach(i => {
-      i.StockQty = this.entityService.getEntityByName(i.Name).Quantity;
-    });
+    // this.productionCostRows.forEach(i => {
+    //   i.StockQty = this.entityService.getEntityByName(i.Name).Quantity;
+    // });
   }
 
   addItemToProductionQueue() {
@@ -89,9 +88,9 @@ export class ProductionEntityTileComponent implements OnInit {
       entityToAdd.Quantity = this.productionQty;
       this.entityService.addItemToProductionQueue(entityToAdd);
       this.productionQty = 1;
-      this.updateCosts();
-      this.updateStockRows();
-      this.maxProductionQty = this.entityService.getMaxProducedQty(this.entity);
+      this.updateTotalConstructionCosts();
+      // this.updateStockRows();
+      // this.maxProductionQty = this.entityService.getMaxProducedQty(this.entity);
     }
   }
 

@@ -25,5 +25,18 @@ export class WarehouseService {
   ) {
     this.storedItems = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.StorageSpace);
     this.storageProviders = this.entityService.getEntitiesByProducedAssetNameFromList(ResourceName.StorageSpace);
+
+    this.kolonyService.KolonyStateUpdatedSubject.subscribe(data => {
+      this.storedItems = this.entityService.getEntitiesByConsumedAssetNameFromList(ResourceName.StorageSpace);
+      this.storageProviders = this.entityService.getEntitiesByProducedAssetNameFromList(ResourceName.StorageSpace);
+    });
+  }
+
+  get totalStorageCapacity(): number {
+    return this.entityService.getTotalEntityProductionQtyByName(ResourceName.StorageSpace);
+  }
+
+  get totalStorageUsage(): number {
+    return this.entityService.getTotalEntityConsumptionQtyByName(ResourceName.StorageSpace);
   }
 }

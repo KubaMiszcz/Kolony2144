@@ -1,7 +1,7 @@
 <div class="card m-2 ">
   <h4 class="card-header d-flex justify-content-end">
     <span> {{entity.Name}}</span>
-    <span class="ml-auto" [ngClass]="{'negative-red': (maxProductionQty > 0) && (productionQty > maxProductionQty)}">(max:{{maxProductionQty}})</span>
+    <!-- <span class="ml-auto" [ngClass]="{'negative-red': (maxProductionQty > 0) && (productionQty > maxProductionQty)}">(max:{{maxProductionQty}})</span> -->
   </h4>
   <div class="card-body p-1">
     <div class="d-flex">
@@ -53,9 +53,9 @@
       <tbody>
         <tr *ngFor="let item of productionCostRows">
           <td class="px-1 ">{{item.Name }}</td>
-          <td class="px-1 col-numbers">{{item.QtyPerUnit}}</td>
-          <td class="px-1 col-numbers">{{item.TotalQty }}</td>
-          <td class="px-1 col-numbers" [ngClass]="{'negative-red': item.TotalQty > item.StockQty}">{{item.StockQty  }}</td>
+          <td class="px-1 col-numbers">{{item.QtyPerUnit | number:'1.0-1'}}</td>
+          <td class="px-1 col-numbers">{{item.TotalQty  | number:'1.0-1'}}</td>
+          <td class="px-1 col-numbers" [ngClass]="{'negative-red': item.TotalQty > item.StockQty}">{{item.StockQty  | number:'1.0-1' }}</td>
           <td class="px-1 ">{{item.UoM}}</td>
         </tr>
       </tbody>

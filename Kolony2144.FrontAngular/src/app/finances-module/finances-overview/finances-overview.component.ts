@@ -1,13 +1,10 @@
-import { FinanceService } from './../finance.service';
-import { AssetService } from '../../assets-module/asset.service';
-import { CommonService } from 'src/app/services/common.service';
-import { SharedModule } from './../../shared/shared.module';
 import { Component, OnInit } from '@angular/core';
-import { Kolony } from 'src/app/models/Kolony';
-import { KolonyService } from 'src/app/services/kolony.service';
+import { IEntity } from 'src/app/models/Entity';
+import { GenericTypesEnum } from 'src/app/models/enums/Types.enum';
 import { ResourceName } from 'src/app/models/Resource';
-import { IAsset, IEntity } from 'src/app/models/Entity';
+import { CommonService } from 'src/app/services/common.service';
 import { SharedService } from 'src/app/services/shared.service';
+import { FinanceService } from '../finance.service';
 
 @Component({
   selector: 'app-finances-overview',
@@ -16,39 +13,49 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class FinancesOverviewComponent implements OnInit {
   financeItemsTableRows: any[] = [];
+  cashConsumers: IEntity[] = [];
 
   constructor(
-    private kolonyService: KolonyService,
     private commonService: CommonService,
     private sharedService: SharedService,
     private financeService: FinanceService,
   ) { }
 
   ngOnInit(): void {
-    // fix switch to new version of this method
-    this.fillAssetListDEPR(this.financeService.cashConsumers);
+    this.cashConsumers = this.financeService.cashConsumers;
+
+    this.financeItemsTableRows = this.fillSummaryTableRows(
+      this.cashConsumers,
+      ResourceName.Cash,
+      GenericTypesEnum.Consuming,
+      this.financeService.totalCashConsumption
+    );
   }
 
-  fillAssetListDEPR(resources: IEntity[]) {
-    const res: any[] = [
-      ['name', 'type', 'per unit', 'qty', 'total']
+  fillSummaryTableRows(entities: IEntity[], resourceName: ResourceName, type: GenericTypesEnum, referenceQty: number) {
+    const res: any[][] = [
+      ['name', 'type', 'per unit', 'qty', resourceName + ' total', '%']
     ];
 
-    resources.forEach(r => {
-      const perUnitUsage = this.sharedService.findItemInListByName(r.MaintenanceCost, ResourceName.Cash).Quantity;
+    entities.forEach(r => {
+      const list = type === GenericTypesEnum.Consuming ? r.MaintenanceCost : r.PassiveIncome;
+      const perUnitUsage = this.sharedService.findItemInListByName(list, resourceName)?.Quantity ?? 0;
+      const usage = (r.Quantity * perUnitUsage) / referenceQty;
       res.push([
         r.Name,
         r.Type,
         perUnitUsage,
         r.Quantity,
-        r.Quantity * perUnitUsage
+        r.Quantity * perUnitUsage,
+        this.commonService.ConvertToPercents(usage, 1) + '%'
       ]);
     });
 
-    const colNo = res[0].indexOf('total');
-    res.push(['', '', '', 'Total', this.commonService.sumColumnOftable(res.slice(1), colNo)]);
+    res.push(['', '', '', 'Total',
+      this.commonService.sumColumnOftableByHeader(res, resourceName + ' total')]);
 
-    this.financeItemsTableRows = res;
+
+    return res;
   }
 
 }

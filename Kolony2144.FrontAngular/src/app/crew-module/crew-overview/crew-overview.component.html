@@ -15,6 +15,40 @@
       <span>razem wytwarzaja xxxWU advancedWU</span>
     </div>
 
+
+    <div class="card-body p-1 row">
+      <div class="col">
+        <app-tile-with-table [caption]="'cashConsumptionList'" [header]="cashConsumptionList[0]" [rows]="cashConsumptionList.slice(1)">
+        </app-tile-with-table>
+      </div>
+      <div class="col">
+        <app-tile-with-table [caption]="'food consumption summary'" [header]="foodConsumptionList[0]" [rows]="foodConsumptionList.slice(1)">
+        </app-tile-with-table>
+      </div>
+    </div>
+
+
+    <div class="card-body p-1 row">
+      <div class="col">
+        <app-tile-with-table [caption]="'basicWorkUnitProductionList'" [header]="basicWorkUnitProductionList[0]"
+          [rows]="basicWorkUnitProductionList.slice(1)">
+        </app-tile-with-table>
+      </div>
+      <div class="col">
+        <app-tile-with-table [caption]="'advancedWorkUnitProductionList'" [header]="advancedWorkUnitProductionList[0]"
+          [rows]="advancedWorkUnitProductionList.slice(1)">
+        </app-tile-with-table>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
     <!-- <hr> -->
     <!-- <div class="alert alert-warning alert-dismissible fade show m-2" role="alert">
     <strong>Holy guacamole!</strong> You should check in on some of those fields below.
@@ -25,16 +59,6 @@
     <!-- <hr> -->
 
 
-    <div class="card-body p-1">
-      <app-tile-with-table [caption]="'Crew Total Summary'" [header]="totalHeader" [rows]="totalList" [footer]="totalFooter">
-      </app-tile-with-table>
-    </div>
-
-
-    <div class="card-body p-1">
-      <app-tile-with-table [caption]="'Crew per unit Summary'" [header]="perUnitHeader" [rows]="perUnitList" [footer]="perUnitFooter">
-      </app-tile-with-table>
-    </div>
 
 
   </div>
