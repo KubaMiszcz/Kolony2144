@@ -40,7 +40,22 @@ export class CrewService {
       .reduce((acc, next) => acc + next);
   }
 
+  get totalFoodConsumption(): number {
+    return this.entityService.getTotalEntityConsumptionQtyByName(ResourceName.Food);
+  }
 
 
+  getMonthlyReport(): string[] {
+    const report = [];
+    const resource = this.entityService.getEntityByName(ResourceName.Food);
+    const consumption = this.totalFoodConsumption;
+    if (resource.Quantity < 0) {
+      report.push('!!! HUNGER IN KOLONY !!!');
+    }
+    report.push(resource.Name + ' consumption: ' + consumption + resource.UoM
+      + ', ' + resource.Name + ' is enough for ' + (Math.floor(resource.Quantity / consumption)) + ' months');
+
+    return report;
+  }
 
 }

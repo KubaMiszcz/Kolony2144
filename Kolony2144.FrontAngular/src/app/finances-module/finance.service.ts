@@ -33,5 +33,18 @@ export class FinanceService {
     return this.entityService.getTotalEntityConsumptionQtyByName(ResourceName.Cash);
   }
 
+  getMonthlyReport(): string[] {
+    const report = [];
+    const consumption = this.entityService.getTotalEntityConsumptionQtyByName(this.Cash.Name);
+    if (this.Cash.Quantity < 0) {
+      report.push('!!! CASH RUNS OUT, BAILIFF IS COMING TO KOLONY !!!');
+    }
+    report.push('Expenses: ' + consumption + this.Cash.UoM
+      + ', ' + this.Cash.Name + ' is enough for ' + (Math.floor(this.Cash.Quantity / consumption)) + ' months');
+
+    return report;
+  }
+
+
 }
 

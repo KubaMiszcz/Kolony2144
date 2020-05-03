@@ -1,3 +1,5 @@
+import { CrewService } from './../crew-module/crew.service';
+import { FinanceService } from './../finances-module/finance.service';
 import { Injectable } from '@angular/core';
 import { IEntity } from '../models/Entity';
 import { ResourceName } from '../models/Resource';
@@ -14,6 +16,7 @@ import { PowerService } from '../power-module/power.service';
 })
 export class OverviewService {
   News: string[] = ['Greetings Commandir, welcome in your new kolony'];
+  ConstructionReport: string[] = [];
 
   constructor(
     private commonService: CommonService,
@@ -22,7 +25,9 @@ export class OverviewService {
     private entityService: EntityService,
     private kolonyService: KolonyService,
     private tradeService: TradeService,
-    private powerService: PowerService
+    private financeService: FinanceService,
+    private powerService: PowerService,
+    private crewService: CrewService
   ) { }
 
 
@@ -61,38 +66,23 @@ export class OverviewService {
     this.AddNews(' ======================== Monthly report ========================');
 
     // news about cash
-    resource = this.entityService.getEntityByName(ResourceName.Cash);
-    consumption = this.entityService.getTotalEntityConsumptionQtyByName(resource.Name);
-    if (resource.Quantity < 0) {
-      this.AddNews('!!! CASH RUNS OUT, BAILIFF IS COMING TO KOLONY !!!');
-    }
-    msg = 'Expenses: ' + consumption + resource.UoM
-      + ', ' + resource.Name + ' is enough for ' + (Math.floor(resource.Quantity / consumption)) + ' months';
-    this.AddNews(msg);
+    this.AddNewsList(this.financeService.getMonthlyReport());
 
     // news about food
-    resource = this.entityService.getEntityByName(ResourceName.Food);
-    consumption = this.entityService.getTotalEntityConsumptionQtyByName(resource.Name);
-    if (resource.Quantity < 0) {
-      this.AddNews('!!! HUNGER IN KOLONY !!!');
-    }
-    msg = resource.Name + ' consumption: ' + consumption + resource.UoM
-      + ', ' + resource.Name + ' is enough for ' + (Math.floor(resource.Quantity / consumption)) + ' months';
-    this.AddNews(msg);
+    this.AddNewsList(this.crewService.getMonthlyReport());
 
     // news about power
-    resource = this.entityService.getEntityByName(ResourceName.Energy);
-    consumption = this.powerService.totalEnergyUsage;
-    production = this.powerService.totalEnergyProduction;
-    if (consumption > production) {
-      msg = '!!! ' + (((consumption / production) * 100) - 100).toFixed(1) + '%  OVERLOADED !!!';
-      this.AddNews(msg);
-    }
-    // Your kolony Energy usage 6200kW is 120 % of total production 6000kW
-    msg = resource.Name + ' usage: ' + consumption + resource.UoM
-      + ' (' + ((consumption / production) * 100).toFixed(1) + '%) of total ' + production + resource.UoM;
-    this.AddNews(msg);
+    this.AddNewsList(this.powerService.getMonthlyReport());
 
+
+    // construction report
+    if (this.ConstructionReport.length > 0) {
+      this.AddNewsList(['', ' ======================  Construction Report  ======================']);
+      this.AddNewsList(this.ConstructionReport);
+    }
+
+
+    this.AddNewsList([' ==============================================================', '']);
   }
 
 }

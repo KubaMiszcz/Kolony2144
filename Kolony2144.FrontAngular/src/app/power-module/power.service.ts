@@ -37,8 +37,25 @@ export class PowerService {
     return this.entityService.getTotalEntityProductionQtyByName(ResourceName.Energy);
   }
 
-
   get totalEnergyUsage(): number {
     return this.entityService.getTotalEntityConsumptionQtyByName(ResourceName.Energy);
   }
+
+
+  getMonthlyReport(): string[] {
+    const report = [];
+    const resource = this.entityService.getEntityByName(ResourceName.Energy);
+    const consumption = this.totalEnergyUsage;
+    const production = this.totalEnergyProduction;
+    if (consumption > production) {
+      report.push('!!! ' + (((consumption / production) * 100) - 100).toFixed(1) + '%  OVERLOADED !!!');
+    }
+    // Your kolony Energy usage 6200kW is 120 % of total production 6000kW
+    report.push(resource.Name + ' usage: ' + consumption + resource.UoM
+      + ' (' + ((consumption / production) * 100).toFixed(1) + '%) of total ' + production + resource.UoM);
+
+    return report;
+  }
+
+
 }

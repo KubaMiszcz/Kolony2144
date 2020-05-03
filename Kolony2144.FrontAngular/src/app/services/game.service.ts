@@ -15,6 +15,8 @@ import { SharedService } from './shared.service';
   providedIn: 'root'
 })
 export class GameService {
+  productionReport: string[] = [];
+
 
   constructor(
     private router: Router,
@@ -40,38 +42,40 @@ export class GameService {
     console.log('nexturn');
     this.router.navigate(['/loading-screen']);
     setTimeout(() => {
-
-      // #REGION TURN ENDS
-      this.overviewService.clearNews();
-      // update inventory after production
-
-      // update production queue, and assets array
-      // this.productionService.produceAssetsInQueue(production);
-
-      // update construction queue, and assets array
-      // fix move report to the end
-      // fix rearrange genrating and content of report and order
-      this.overviewService.AddNewsList(['', ' ======================  Construction Report  ======================']);
-      const constructionReport = this.proceedConstructionQueue();
-      this.overviewService.AddNewsList(constructionReport); // todo make production service and move it there, get production report
-      this.overviewService.AddNewsList([' ==============================================================', '']);
-
-      // ##########################################
-      console.log('newMonthBegins');
       this.kolonyService.Kolony.Age += 0.1;
-      // ##########################################
-
-      // #REGION NEW TURN BEGINS
+      console.log('newMonthBegins: ', this.kolonyService.Kolony.Age);
+      this.overviewService.clearNews();
       this.assetService.ClearVolatileAssets();
+
+
+      // MAINTENANCE
       this.entityService.UpdateInventoryDueToMaintenanceCost();
+
+
+      // MINING
       // todo MINING       // this.MiningService.mining
+
+
+      // Passive income
       this.entityService.UpdateInventoryDueToPassiveProducedItems();
 
+
+      // CONSTRUCTION
+      // fix move report to the end
+      // fix rearrange genrating and content of report and order
+      this.overviewService.ConstructionReport = this.proceedConstructionQueue();
+
+
+      // PRODUCTION MACHINES
+      // todo production
+
+
+      // TRADE news
       this.tradeService.PrepareIncomingShip();
       this.tradeService.SetTradeAnnouncement();
 
       this.overviewService.UpdateNews();
-      this.overviewService.AddNewsList(constructionReport);
+
       this.router.navigate(['/start']);
     }, 200);
   }
@@ -85,7 +89,6 @@ export class GameService {
 
       const countToAdd = Math.min(maxCount, constructedItem.Quantity);
       if (countToAdd === 0) {
-        // no resources - info
         report.push('budowa wstrzymana, zabraklo surowcow do budowy' + constructedItem.Name + ' jakiego surka/ow?');
         break;
       }
@@ -106,7 +109,6 @@ export class GameService {
       }
 
       if (constructedItem.Quantity <= 0) {
-        // this.commonService.removeItemFromList(this.entityService.constructionQueue, this.entityService.constructionQueue.indexOf(constructedItem));
         report.push('zakonczono budowe ' + constructedItem.Name);
       } else {
         const remainPcs = Math.ceil(constructedItem.Quantity);
@@ -116,6 +118,8 @@ export class GameService {
         break; // stop proceeding queue (maybe is it cool if we can build next possible builidngs in queue?)
       }
     }
+
+    // info dont do this earlier due to not change iterable list
     this.entityService.constructionQueue = this.entityService.constructionQueue.filter(e => e.Quantity > 0);
 
     return report;
