@@ -24,20 +24,20 @@
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-resources" role="tab" aria-controls="nav-resources"
               aria-selected="true">Resources</a>
-            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-crew" role="tab" aria-controls="nav-crew"
+            <a class="nav-item nav-link" id="nav-crew-tab" data-toggle="tab" href="#nav-crew" role="tab" aria-controls="nav-crew"
               aria-selected="false">Crew</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#navnav-machines" role="tab" aria-controls="navnav-machines"
+            <a class="nav-item nav-link" id="nav-machines-tab" data-toggle="tab" href="#nav-machines" role="tab" aria-controls="nav-machines"
               aria-selected="false">Machines</a>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade show active" id="nav-resources" role="tabpanel" aria-labelledby="nav-home-tab">
+          <div class="tab-pane fade show active" id="nav-resources" role="tabpanel" aria-labelledby="nav-resources-tab">
             <app-ship-trade-panel [tradePanelData]="resourcesTradePanelValues"></app-ship-trade-panel>
           </div>
-          <div class="tab-pane fade" id="nav-crew" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <div class="tab-pane fade" id="nav-crew" role="tabpanel" aria-labelledby="nav-crew-tab">
             <app-ship-trade-panel [tradePanelData]="crewTradePanelValues"></app-ship-trade-panel>
           </div>
-          <div class="tab-pane fade" id="navnav-machines" role="tabpanel" aria-labelledby="nav-contact-tab">
+          <div class="tab-pane fade" id="nav-machines" role="tabpanel" aria-labelledby="nav-machines-tab">
             <app-ship-trade-panel [tradePanelData]="machinesTradePanelValues"></app-ship-trade-panel>
           </div>
         </div>
@@ -50,5 +50,4 @@
 
   </div>
 
-  <app-player-notes></app-player-notes>
 </div>

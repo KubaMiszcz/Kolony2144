@@ -15,14 +15,23 @@ import { GenericTypesEnum } from './../../models/enums/Types.enum';
 export class WarehouseOverviewComponent implements OnInit {
   storedItemsTableRows: any[] = [];
   storageProvidersItemsTableRows: any[] = [];
+  totalStorageUsagePercent: number;
 
   constructor(
     private commonService: CommonService,
     private sharedService: SharedService,
     private warehouseService: WarehouseService,
+    private kolonyService: KolonyService
   ) { }
 
   ngOnInit(): void {
+    this.totalStorageUsagePercent = this.commonService.ConvertToPercents(this.warehouseService.totalStorageUsage / this.warehouseService.totalStorageCapacity, 1);
+
+    this.kolonyService.KolonyStateUpdatedSubject.subscribe(() => {
+      this.totalStorageUsagePercent = this.commonService.ConvertToPercents(this.warehouseService.totalStorageUsage / this.warehouseService.totalStorageCapacity, 1);
+    });
+
+
     this.storedItemsTableRows = this.fillSummaryTableRows(
       this.warehouseService.storedItems,
       ResourceName.StorageSpace,

@@ -1,9 +1,20 @@
 <div class="card m-2 ">
   <h4 class="card-header "> Construction Queue</h4>
   <div class="card-body p-1">
-    <div *ngIf="productionQueue.length" class="d-flex flex-wrap production-queue">
-      <app-queue-entity-tile *ngFor="let item of productionQueue" [entity]="item" (click)="removeItemFromProductionQueue(item)">
-      </app-queue-entity-tile>
-    </div>
+
+    <ng-container *ngIf="productionQueue.length>0; else queueIsEmpty">
+      <div class="d-flex flex-wrap production-queue">
+        <app-queue-entity-tile *ngFor="let item of productionQueue" [entity]="item" (click)="removeItemFromProductionQueue(item)">
+        </app-queue-entity-tile>
+      </div>
+    </ng-container>
+    <ng-template #queueIsEmpty>
+      <div class="d-flex flex-wrap production-queue">
+        <p>queue is empty</p>
+      </div>
+    </ng-template>
+
+
+
   </div>
 </div>

@@ -2,6 +2,13 @@
 
   <div class="card m-2">
     <h4 class="card-header "> Warehouse Overview</h4>
+    <div class="progress mx-3 mt-1">
+      <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [ngStyle]="{'width': totalStorageUsagePercent+'%'}"
+        aria-valuenow="percentProgress" aria-valuemin="0" aria-valuemax="100">{{totalStorageUsagePercent}}%</div>
+      <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" [ngStyle]="{'width': (100-totalStorageUsagePercent)+'%'}"
+        aria-valuenow="100-percentProgress" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
     <div class="card-body p-1">
       <app-tile-with-table [caption]="'co mi zzera miejsce w magazynach'" [header]="storedItemsTableRows[0]" [rows]="storedItemsTableRows.slice(1)">
       </app-tile-with-table>
@@ -15,5 +22,4 @@
 
 
 
-  <app-player-notes></app-player-notes>
 </div>
