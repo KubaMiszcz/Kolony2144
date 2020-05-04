@@ -62,6 +62,7 @@ export class GameService {
 
 
       // CONSTRUCTION
+      this.overviewService.ConstructionReport = this.proceedQueue(this.entityService.constructionQueue);
 
 
       // PRODUCTION MACHINES
@@ -84,13 +85,17 @@ export class GameService {
   proceedQueue(queue: IEntity[]): string[] {
     const report = [];
     for (const constructedItem of queue) {
-      const maxCount = this.entityService.getPossibleConstructionQty(constructedItem);
+      // const maxCount = this.entityService.getPossibleConstructionQty(constructedItem);
+      const maxCounts = this.entityService.getPossibleConstructionQties(constructedItem);
 
-      const countToAdd = Math.min(maxCount, constructedItem.Quantity);
-      if (countToAdd === 0) {
-        report.push('budowa wstrzymana, zabraklo surowcow do budowy' + constructedItem.Name + ' jakiego surka/ow?');
+      if (maxCounts.some(e => e.qty <= 0)) {
+        const missedResources = maxCounts.filter(e => e.qty <= 0).map(e => e.name);
+        report.push('budowa wstrzymana, zabraklo surowcow do budowy: ' + missedResources);
         break;
       }
+
+      const countToAdd = maxCounts.reduce((acc, e) => acc.qty <= e.qty ? acc : e).qty;
+
       this.entityService.updateInventoryDueToProduceEntity(constructedItem, countToAdd);
       this.kolonyService.updateGenericLists();
 

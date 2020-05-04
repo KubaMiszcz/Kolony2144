@@ -6,8 +6,6 @@ import { KolonyService } from './kolony.service';
 import { ResourceName } from '../models/Resource';
 import { UoMsEnum } from '../models/enums/UoMs.enum';
 import { DataProviderService } from './data-provider.service';
-import { BehaviorSubject } from 'rxjs';
-import { isNgTemplate } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -215,6 +213,19 @@ export class EntityService {
     });
 
     return Math.min(...countArray);
+  }
+
+  getPossibleConstructionQties(item: IEntity): { name: string; qty: number }[] {
+    const countArray: { name: string; qty: number }[] = [];
+    item.CreationCost.forEach(entity => {
+      // countArray.push((this.getEntityByName(entity.Name)?.Quantity ?? 0) / entity.Quantity);
+      countArray.push({
+        name: entity.Name,
+        qty: (this.getEntityByName(entity.Name)?.Quantity ?? 0) / entity.Quantity
+      });
+    });
+
+    return countArray;
   }
 
 
