@@ -1,5 +1,5 @@
 import { IEntity, IWikiEntity, IAsset, ITradeableEntity } from './Entity';
-import { EntityTypesEnum, GenericTypesEnum, MachineTypesEnum } from './enums/Types.enum';
+import { EntityTypesEnum, GenericTypesEnum, MachineTypesEnum, PrioritiesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
 
@@ -53,7 +53,9 @@ export const AllMachines: IMachineFullModel[] = [
       { Name: ResourceName.Energy, Quantity: 100 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 10
+    Quantity: 10,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: MachinesNames.TeslaCoil,
@@ -73,7 +75,9 @@ export const AllMachines: IMachineFullModel[] = [
     PassiveIncome: [
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 5
+    Quantity: 5,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: MachinesNames.StorageContainer,
@@ -95,7 +99,9 @@ export const AllMachines: IMachineFullModel[] = [
       { Name: ResourceName.StorageSpace, Quantity: 10 * 3 * 3 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 5
+    Quantity: 5,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: MachinesNames.CoalOreExtractor,
@@ -117,6 +123,8 @@ export const AllMachines: IMachineFullModel[] = [
       { Name: ResourceName.Coal, Quantity: 200 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 2
+    Quantity: 2,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   }
 ];

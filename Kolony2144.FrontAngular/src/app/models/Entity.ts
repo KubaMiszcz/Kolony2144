@@ -1,5 +1,5 @@
 import { UoMsEnum } from './enums/UoMs.enum';
-import { EntityTypesEnum } from './enums/Types.enum';
+import { EntityTypesEnum, PrioritiesEnum } from './enums/Types.enum';
 import { IDeserializable } from '../core/interfaces/deserializable';
 import { IBuilding } from './Building';
 
@@ -18,12 +18,12 @@ export interface IEntityModel {
 
 export interface IEntity extends IEntityModel, ISimplifiedEntity {
   Quantity: number;
-  // future IsTurnedOff:boolean
-  // future MaintainPriority:number
+  OfflineQuantity: number;
+  MaintainPriority: PrioritiesEnum;
 }
 
 
-export interface IAsset extends IEntityModel, ISimplifiedEntity {
+export interface IAsset extends IEntity, ISimplifiedEntity {
   Price: number; // info dont move it to Ienity, Ibuilding doesnt need price but inherits from enity
 }
 
@@ -46,6 +46,8 @@ export class Asset implements IAsset, IDeserializable {
   PassiveIncome: ISimplifiedEntity[];
   UoM: UoMsEnum;
   Quantity: number;
+  OfflineQuantity: number;
+  MaintainPriority: PrioritiesEnum;
 
   Deserialize(input: any): this {
     Object.assign(this, input);

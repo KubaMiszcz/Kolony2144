@@ -15,6 +15,12 @@ export enum GenericTypesEnum {
   Producing = 'Producing',
 }
 
+export enum PrioritiesEnum {
+  Low,
+  High,
+  Medium
+}
+
 
 export enum CommonTypesEnum {
   PowerSource = 'Power source',

@@ -1,5 +1,5 @@
 import { IEntity, IWikiEntity, IAsset, ITradeableEntity } from './Entity';
-import { EntityTypesEnum, GenericTypesEnum, ResourceTypesEnum } from './enums/Types.enum';
+import { EntityTypesEnum, GenericTypesEnum, ResourceTypesEnum, PrioritiesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 
 export enum ResourceName {
@@ -42,7 +42,9 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.kW,
-    Quantity: 1
+    Quantity: 1,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: ResourceName.BasicWorkUnit,
@@ -53,7 +55,9 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.WU,
-    Quantity: 1
+    Quantity: 1,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: ResourceName.AdvancedWorkUnit,
@@ -64,7 +68,9 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.WU,
-    Quantity: 1
+    Quantity: 1,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: ResourceName.StorageSpace,
@@ -75,7 +81,9 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.m3,
-    Quantity: 1
+    Quantity: 1,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: ResourceName.LivingSpace,
@@ -86,7 +94,9 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.m3,
-    Quantity: 1
+    Quantity: 1,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: ResourceName.PlanetSpace,
@@ -97,7 +107,9 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.m2,
-    Quantity: 10000
+    Quantity: 10000,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   }
 ];
 
@@ -117,7 +129,9 @@ export const AllResources: IResourceFullModel[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.SB,
-    Quantity: 100000
+    Quantity: 100000,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: ResourceName.Food,
@@ -133,7 +147,9 @@ export const AllResources: IResourceFullModel[] = [
     ],
     PassiveIncome: [],
     UoM: UoMsEnum.t,
-    Quantity: 100
+    Quantity: 100,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: ResourceName.Stone,
@@ -149,7 +165,9 @@ export const AllResources: IResourceFullModel[] = [
     ],
     PassiveIncome: [],
     UoM: UoMsEnum.t,
-    Quantity: 1000
+    Quantity: 1000,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: ResourceName.Steel,
@@ -165,7 +183,9 @@ export const AllResources: IResourceFullModel[] = [
     ],
     PassiveIncome: [],
     UoM: UoMsEnum.t,
-    Quantity: 1000
+    Quantity: 1000,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: ResourceName.Coal,
@@ -181,7 +201,9 @@ export const AllResources: IResourceFullModel[] = [
     ],
     PassiveIncome: [],
     UoM: UoMsEnum.t,
-    Quantity: 1000
+    Quantity: 1000,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: ResourceName.Diesel,
@@ -197,7 +219,9 @@ export const AllResources: IResourceFullModel[] = [
     ],
     PassiveIncome: [],
     UoM: UoMsEnum.m3,
-    Quantity: 1000
+    Quantity: 1000,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: ResourceName.Diamonds,
@@ -213,6 +237,8 @@ export const AllResources: IResourceFullModel[] = [
     ],
     PassiveIncome: [],
     UoM: UoMsEnum.pcs,
-    Quantity: 0
+    Quantity: 0,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   }
 ];

@@ -1,6 +1,6 @@
 import { IDeserializable } from '../core/interfaces/deserializable';
 import { IEntity, ISimplifiedEntity, IWikiEntity } from './Entity';
-import { EntityTypesEnum, BuildingTypesEnum } from './enums/Types.enum';
+import { EntityTypesEnum, BuildingTypesEnum, PrioritiesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
 
@@ -25,6 +25,8 @@ export interface IBuildingFullModel extends IBuilding, IWikiEntity {
 export class Building implements IBuilding, IDeserializable {
   Tags: string[];
   Quantity: number;
+  OfflineQuantity: number;
+  MaintainPriority: PrioritiesEnum;
   Name: string;
   Type: EntityTypesEnum;
   SubType: string;
@@ -61,7 +63,9 @@ export const AllBuildings: IBuildingFullModel[] = [
       { Name: ResourceName.LivingSpace, Quantity: 20 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 10
+    Quantity: 10,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.Low
   },
   {
     Name: BuildingNames.Warehouse,
@@ -82,7 +86,9 @@ export const AllBuildings: IBuildingFullModel[] = [
       { Name: ResourceName.StorageSpace, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 10
+    Quantity: 10,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.Low
   },
   {
     Name: BuildingNames.SolarPanel,
@@ -103,7 +109,9 @@ export const AllBuildings: IBuildingFullModel[] = [
       { Name: ResourceName.Energy, Quantity: 100 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 20
+    Quantity: 20,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: BuildingNames.CoalPowerPlant,
@@ -124,7 +132,9 @@ export const AllBuildings: IBuildingFullModel[] = [
       { Name: ResourceName.Energy, Quantity: 1000 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 1
+    Quantity: 1,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.High
   },
   {
     Name: BuildingNames.Workshop,
@@ -145,7 +155,9 @@ export const AllBuildings: IBuildingFullModel[] = [
       { Name: ResourceName.BasicWorkUnit, Quantity: 100 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 1
+    Quantity: 1,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.Low
   },
   {
     Name: BuildingNames.Factory,
@@ -167,7 +179,9 @@ export const AllBuildings: IBuildingFullModel[] = [
       { Name: ResourceName.AdvancedWorkUnit, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 0
+    Quantity: 0,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.Low
   },
   {
     Name: BuildingNames.CargoBay,
@@ -187,6 +201,8 @@ export const AllBuildings: IBuildingFullModel[] = [
     PassiveIncome: [
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 10
+    Quantity: 10,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.Low
   }
 ];

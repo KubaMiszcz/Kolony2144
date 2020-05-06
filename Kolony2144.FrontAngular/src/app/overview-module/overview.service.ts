@@ -17,6 +17,7 @@ import { PowerService } from '../power-module/power.service';
 export class OverviewService {
   News: string[] = ['Greetings Commandir, welcome in your new kolony'];
   ConstructionReport: string[] = [];
+  MaintenanceReport: string[] = [];
 
   constructor(
     private commonService: CommonService,
@@ -74,6 +75,11 @@ export class OverviewService {
     if (this.ConstructionReport.length > 0) {
       this.AddNewsList(['', ' ======================  Construction Report  ======================']);
       this.AddNewsList(this.ConstructionReport);
+    }
+
+    if (this.MaintenanceReport.length > 0) {
+      this.AddNewsList(['', ' ======================  Maintenance Report  ======================']);
+      this.AddNewsList(this.MaintenanceReport);
     }
 
 

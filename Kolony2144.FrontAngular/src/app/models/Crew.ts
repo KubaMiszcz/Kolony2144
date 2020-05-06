@@ -1,5 +1,5 @@
 import { IEntity, IWikiEntity, IAsset, ITradeableEntity } from './Entity';
-import { EntityTypesEnum, CrewTypesEnum, GenericTypesEnum } from './enums/Types.enum';
+import { EntityTypesEnum, CrewTypesEnum, GenericTypesEnum, PrioritiesEnum } from './enums/Types.enum';
 import { UoMsEnum } from './enums/UoMs.enum';
 import { ResourceName } from './Resource';
 
@@ -34,7 +34,9 @@ export const AllCrew: ICrewFullModel[] = [
       { Name: ResourceName.BasicWorkUnit, Quantity: 2 },
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 200
+    Quantity: 200,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.Low
   },
   {
     Name: CrewNames.Technician,
@@ -54,7 +56,9 @@ export const AllCrew: ICrewFullModel[] = [
       { Name: ResourceName.AdvancedWorkUnit, Quantity: 1 },
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 5
+    Quantity: 5,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.Low
   },
   {
     Name: CrewNames.Engineer,
@@ -74,7 +78,9 @@ export const AllCrew: ICrewFullModel[] = [
       { Name: ResourceName.AdvancedWorkUnit, Quantity: 3 },
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 0
+    Quantity: 0,
+    OfflineQuantity: 0,
+    MaintainPriority: PrioritiesEnum.Low
   }
 ];
 
