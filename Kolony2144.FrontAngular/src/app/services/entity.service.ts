@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { IEntity } from '../models/Entity';
+import { IEntity, ISimplifiedEntity } from '../models/Entity';
 import { CommonService } from './common.service';
 import { SharedService } from './shared.service';
 import { KolonyService } from './kolony.service';
@@ -13,6 +13,7 @@ import { DataProviderService } from './data-provider.service';
 export class EntityService {
   allKolonyEntitiesList: IEntity[] = [];
   constructionQueue: IEntity[] = [];
+  productionQueue: IEntity[] = [];
   constructionQueueIsUpdatedEmitter = new EventEmitter<boolean>();
 
   constructor(
@@ -77,7 +78,6 @@ export class EntityService {
     list.forEach(asset => {
       const producedItemQuantity = asset.PassiveIncome.find(item => item.Name === producedAsset.Name)?.Quantity ?? 0;
       producedQty += (asset.Quantity * producedItemQuantity);
-
     });
 
     return producedQty;
@@ -135,19 +135,32 @@ export class EntityService {
   }
 
 
-  UpdateInventoryDueToMaintenanceCost() {
-    this.allKolonyEntitiesList.forEach(entity => {
+  UpdateInventoryDueToMaintenanceCost(list: IEntity[]): any[] {
+    const report = [];
+    list.forEach(entity => {
+      const maxCount = this.getMaxOnlineEntityDueToLackOfMaintenance(entity);
+      let diffPlus = 0;
+
+      if (maxCount.length > 0) {
+        diffPlus = maxCount[0]?.Quantity - entity.Quantity;
+      }
+
+      if (diffPlus !== 0) {
+        entity.Quantity += diffPlus;
+        entity.OfflineQuantity -= diffPlus;
+
+        if (entity.OfflineQuantity > 0) {
+          const missedItems = maxCount.map(m => m.Name);
+          report.push('offline ' + entity.OfflineQuantity + 'pcs of ' + entity.Name + ' due to lack of ' + missedItems);
+        }
+      }
+
       entity.MaintenanceCost.forEach(consumedItem => {
         try {
-          const item = this.sharedService.findItemInListByName(this.allKolonyEntitiesList, consumedItem.Name);
-          // !! fix what if  asset isnt exist in inventory? yyy??? error? 0?? omit?
-          // if (!item) {
-          //   const newItem = this.gameStaticDataContainerService.getEntityByName(consumedItem.Name);
-          //   item = this.commonService.cloneObject(newItem);
-          //   this. addNewEntity.ad;
-          // } else {
-          // }
-          item.Quantity -= (consumedItem.Quantity * entity.Quantity);
+          const item = this.getEntityByName(consumedItem.Name);
+          if (!!item) {
+            item.Quantity -= (consumedItem.Quantity * entity.Quantity);
+          }
         } catch (error) {
           console.error('==========================================================');
           console.error('consumed item in entity not in global initial lists', error);
@@ -155,16 +168,54 @@ export class EntityService {
         }
       });
     });
+
+    return report;
   }
 
+  getMaxOnlineEntityDueToLackOfMaintenance(entity: IEntity): ISimplifiedEntity[] {
+    // if (entity.MaintenanceCost.length < 1) {
+    //   return [null];
+    // }
+    let maxCounts: ISimplifiedEntity[] = [];
+    const totalCount = entity.Quantity + entity.OfflineQuantity;
+    entity.MaintenanceCost.forEach(r => {
+      const availableQty = this.getEntityByName(r.Name)?.Quantity ?? 0;
+      const maxCount = Math.floor(availableQty / r.Quantity);
+      maxCounts.push({ Name: r.Name, Quantity: maxCount > totalCount ? totalCount : maxCount });
+    });
+
+    maxCounts = maxCounts.sort((a, b) => a.Quantity - b.Quantity);
+
+    return maxCounts.filter(m => m.Quantity === maxCounts[0]?.Quantity);
+  }
+
+
+
+
+
+
+
+
+
+
   UpdateInventoryDueToPassiveProducedItems() {
+    const report = [];
     this.allKolonyEntitiesList.forEach(entity => {
       entity.PassiveIncome.forEach(producedItem => {
-        // fix what if  asset isnt exist in inventory? add new asset to list
-        this.sharedService
-          .findItemInListByName(this.allKolonyEntitiesList, producedItem.Name).Quantity += (producedItem.Quantity * entity.Quantity);
+        if (entity.Quantity > 0) {
+          const kolonyItem = this.getEntityByName(producedItem.Name);
+
+          if (!kolonyItem) {
+            this.kolonyService.createNewEntityInKolony(this.dataProviderService.getEntityByName(producedItem.Name));
+          }
+
+          kolonyItem.Quantity += producedItem.Quantity * entity.Quantity;
+          report.push('produced ' + kolonyItem.Quantity + 'pcs of ' + kolonyItem.Name);
+        }
       });
     });
+
+    return report;
   }
 
 

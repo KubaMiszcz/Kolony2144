@@ -10,14 +10,16 @@ import { EntityService } from './entity.service';
 import { KolonyService } from './kolony.service';
 import { SharedService } from './shared.service';
 import { IEntity } from '../models/Entity';
+import { ResourceName } from '../models/Resource';
+import { IKolony } from '../models/Kolony';
+import { EntityTypesEnum } from '../models/enums/Types.enum';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  productionReport: string[] = [];
-
+  kolony: IKolony;
 
   constructor(
     private router: Router,
@@ -31,7 +33,10 @@ export class GameService {
     private powerService: PowerService,
     private tradeService: TradeService
   ) {
-    this.nextTurn();
+    this.kolony = kolonyService.Kolony;
+    this.assetService.ClearVolatileAssets();
+    this.overviewService.PassiveProductionReport = this.entityService.UpdateInventoryDueToPassiveProducedItems();
+    this.entityService.getEntityByName(ResourceName.PlanetSpace).Quantity = 1000000;
   }
 
 
@@ -43,22 +48,25 @@ export class GameService {
     console.log('nexturn');
     this.router.navigate(['/loading-screen']);
     setTimeout(() => {
+      // MAINTENANCE
+      this.overviewService.MaintenanceReport = this.entityService.UpdateInventoryDueToMaintenanceCost(this.entityService.allKolonyEntitiesList);
+
       this.kolonyService.Kolony.Age += 0.1;
       console.log('newMonthBegins: ', this.kolonyService.Kolony.Age);
       this.overviewService.clearNews();
       this.assetService.ClearVolatileAssets();
 
+      // !!! fixit d
+      this.entityService.getEntityByName(ResourceName.PlanetSpace).Quantity = 1000000;
 
-      // MAINTENANCE
-      this.entityService.UpdateInventoryDueToMaintenanceCost();
+      // Passive income
+      // fix split into buidings crew machines etc
+      this.overviewService.PassiveProductionReport = this.entityService.UpdateInventoryDueToPassiveProducedItems();
 
 
       // MINING
       // todo MINING       // this.MiningService.mining
 
-
-      // Passive income
-      this.entityService.UpdateInventoryDueToPassiveProducedItems();
 
 
       // CONSTRUCTION
@@ -67,7 +75,7 @@ export class GameService {
 
       // PRODUCTION MACHINES
       // todo production
-      // this.overviewService.ConstructionReport = this.proceedQueue(this.entityService.constructionQueue);
+      this.overviewService.ProductionReport = this.proceedQueue(this.entityService.productionQueue);
 
 
       // TRADE news

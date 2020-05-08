@@ -16,8 +16,10 @@ import { PowerService } from '../power-module/power.service';
 })
 export class OverviewService {
   News: string[] = ['Greetings Commandir, welcome in your new kolony'];
-  ConstructionReport: string[] = [];
   MaintenanceReport: string[] = [];
+  ConstructionReport: string[] = [];
+  PassiveProductionReport: string[] = [];
+  ProductionReport: string[] = [];
 
   constructor(
     private commonService: CommonService,
@@ -44,7 +46,6 @@ export class OverviewService {
     this.News.push(...val);
   }
 
-
   UpdateNews() {
     // fix move it to proper services like in construction
     // future inne newsy
@@ -70,18 +71,27 @@ export class OverviewService {
     // news about power
     this.AddNewsList(this.powerService.getMonthlyReport());
 
-
-    // construction report
-    if (this.ConstructionReport.length > 0) {
-      this.AddNewsList(['', ' ======================  Construction Report  ======================']);
-      this.AddNewsList(this.ConstructionReport);
-    }
-
+    // MaintenanceReport report
     if (this.MaintenanceReport.length > 0) {
       this.AddNewsList(['', ' ======================  Maintenance Report  ======================']);
       this.AddNewsList(this.MaintenanceReport);
     }
 
+    // construction report
+    if (this.PassiveProductionReport.length > 0) {
+      this.AddNewsList(['', ' ======================  PassiveProduction Report  ======================']);
+      this.AddNewsList(this.ConstructionReport);
+    }
+
+    if (this.ConstructionReport.length > 0) {
+      this.AddNewsList(['', ' ======================  Construction Report  ======================']);
+      this.AddNewsList(this.ConstructionReport);
+    }
+
+    if (this.ProductionReport.length > 0) {
+      this.AddNewsList(['', ' ======================  Production Report  ======================']);
+      this.AddNewsList(this.ProductionReport);
+    }
 
     this.AddNewsList([' ==============================================================', '']);
   }
