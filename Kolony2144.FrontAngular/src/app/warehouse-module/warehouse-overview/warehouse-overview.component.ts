@@ -69,7 +69,7 @@ export class WarehouseOverviewComponent implements OnInit {
     });
 
     res.push(['', '', '', 'Total',
-      this.commonService.sumColumnOftableByHeader(res, resourceName + ' total')]);
+      this.commonService.sumColumnOftableByHeader(res, resourceName + ' total'), '']);
 
 
     return res;
