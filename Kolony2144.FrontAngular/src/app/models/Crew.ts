@@ -34,7 +34,7 @@ export const AllCrew: ICrewFullModel[] = [
       { Name: ResourceName.BasicWorkUnit, Quantity: 2 },
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 200,
+    Quantity: 1000,
     OfflineQuantity: 0,
     MaintainPriority: PrioritiesEnum.Low
   },

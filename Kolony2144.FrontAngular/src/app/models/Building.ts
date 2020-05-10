@@ -63,7 +63,7 @@ export const AllBuildings: IBuildingFullModel[] = [
       { Name: ResourceName.LivingSpace, Quantity: 20 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 10,
+    Quantity: 20,
     OfflineQuantity: 0,
     MaintainPriority: PrioritiesEnum.Low
   },
@@ -86,7 +86,7 @@ export const AllBuildings: IBuildingFullModel[] = [
       { Name: ResourceName.StorageSpace, Quantity: 500 }
     ],
     UoM: UoMsEnum.pcs,
-    Quantity: 10,
+    Quantity: 500,
     OfflineQuantity: 0,
     MaintainPriority: PrioritiesEnum.Low
   },

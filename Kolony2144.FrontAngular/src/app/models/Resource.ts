@@ -107,7 +107,7 @@ export const AllVolatileResources: IVolatileResourceFullModel[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.m2,
-    Quantity: 10000,
+    Quantity: 1000000,
     OfflineQuantity: 0,
     MaintainPriority: PrioritiesEnum.High
   }
@@ -129,7 +129,7 @@ export const AllResources: IResourceFullModel[] = [
     MaintenanceCost: [],
     PassiveIncome: [],
     UoM: UoMsEnum.SB,
-    Quantity: 100000,
+    Quantity: 200000,
     OfflineQuantity: 0,
     MaintainPriority: PrioritiesEnum.High
   },
@@ -147,7 +147,7 @@ export const AllResources: IResourceFullModel[] = [
     ],
     PassiveIncome: [],
     UoM: UoMsEnum.t,
-    Quantity: 100,
+    Quantity: 10000,
     OfflineQuantity: 0,
     MaintainPriority: PrioritiesEnum.High
   },
@@ -201,7 +201,7 @@ export const AllResources: IResourceFullModel[] = [
     ],
     PassiveIncome: [],
     UoM: UoMsEnum.t,
-    Quantity: 1000,
+    Quantity: 10000,
     OfflineQuantity: 0,
     MaintainPriority: PrioritiesEnum.High
   },
@@ -219,7 +219,7 @@ export const AllResources: IResourceFullModel[] = [
     ],
     PassiveIncome: [],
     UoM: UoMsEnum.m3,
-    Quantity: 1000,
+    Quantity: 10000,
     OfflineQuantity: 0,
     MaintainPriority: PrioritiesEnum.High
   },
