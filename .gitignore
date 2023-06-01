@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 package-lock.json
+Kolony2144.FrontAngular/.angular/*
