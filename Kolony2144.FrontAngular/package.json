@@ -30,7 +30,7 @@
     "@ngtools/webpack": "^9.1.0",
     "@popperjs/core": "^2.2.1",
     "ajv": "^6.12.3",
-    "bootstrap": "^4.4.1",
+    "bootstrap": "^5.0.0",
     "core-js": "^3.6.4",
     "hammerjs": "^2.0.8",
     "install": "^0.13.0",
