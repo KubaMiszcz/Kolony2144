@@ -14,7 +14,7 @@
     "@angular/animations": "^9.1.0",
     "@angular/cdk": "^21.0.1",
     "@angular/common": "^22.1.1",
-    "@angular/compiler": "^20.3.27",
+    "@angular/compiler": "^20.3.28",
     "@angular/core": "^11.0.5",
     "@angular/forms": "^22.1.0",
     "@angular/localize": "^22.1.6",
